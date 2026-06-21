@@ -15,14 +15,8 @@ from __future__ import annotations
 import hashlib
 import random
 
+from vta.data.ligands import load_ligands
 from vta.state import VTAState
-
-# Stand-in ligand set. The 5 named compounds are real nucleoside-analog RdRp
-# inhibitors used as POSITIVE CONTROLS — in Phase 2 (real docking) they must rank
-# in the top decile, or the pipeline is mis-calibrated. The rest are placeholders
-# for a real ChEMBL antiviral query.
-POSITIVE_CONTROLS = ["remdesivir", "favipiravir", "ribavirin", "sofosbuvir", "molnupiravir"]
-MOCK_LIGANDS = POSITIVE_CONTROLS + [f"chembl_{i:04d}" for i in range(95)]   # 100 total
 
 _TOP_POCKETS = 3
 
@@ -33,11 +27,19 @@ def _seed(*parts: str) -> int:
 
 
 def docking_node_mock(state: VTAState) -> VTAState:
+    """Mock docking over the REAL ligand library (Phase-2 ChEMBL data), mock scores.
+
+    Ligand IDENTITY is now real (ChEMBL id + name + SMILES from `load_ligands`), so
+    Phase 2 only has to replace the fabricated dG/rmsd with real AutoDock Vina output
+    — the records already carry the SMILES that real ligand prep needs.
+    """
+    ligands = load_ligands()
     results = []
     for protein, plist in (state.get("pockets") or {}).items():
         for pocket in plist[:_TOP_POCKETS]:
-            for lig in MOCK_LIGANDS:
-                rng = random.Random(_seed(state["run_id"], protein, str(pocket["id"]), lig))
+            for lig in ligands:
+                rng = random.Random(
+                    _seed(state["run_id"], protein, str(pocket["id"]), lig["chembl_id"]))
                 dG = round(rng.uniform(-9.0, -5.0), 2)
                 rmsd = round(rng.uniform(0.5, 3.0), 2)
                 heavy_atoms = rng.randint(20, 45)
@@ -45,7 +47,10 @@ def docking_node_mock(state: VTAState) -> VTAState:
                 results.append({
                     "protein": protein,
                     "pocket": pocket["id"],
-                    "ligand": lig,
+                    "ligand": lig["name"],
+                    "ligand_id": lig["chembl_id"],
+                    "smiles": lig["smiles"],
+                    "positive_control": lig["positive_control"],
                     "dG": dG,
                     "rmsd": rmsd,
                     "le": le,
@@ -53,6 +58,8 @@ def docking_node_mock(state: VTAState) -> VTAState:
                     "conservation": pocket["conservation"],
                 })
     state["docking_results"] = results
-    state["audit_trail"].append(f"[MOCK] Docking: {len(results)} ligand-pocket pairs")
-    state["versions"]["docking"] = "MOCK-vina-shaped"
+    state["audit_trail"].append(
+        f"[MOCK] Docking: {len(results)} pairs over {len(ligands)} real ligands")
+    state["versions"]["docking"] = "MOCK-vina-shaped over ChEMBL ligands"
+    state["versions"]["ligands"] = f"ChEMBL x{len(ligands)}"
     return state

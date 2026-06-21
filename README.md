@@ -25,16 +25,20 @@ classify → route_by_confidence ─┬─ proceed/flag → structure → pocket
 | Classify node (real TaxonAgent) | ✅ |
 | Confidence router (proceed / flag / defer) | ✅ |
 | Structure node — experimental-first + ESMFold (≤400 aa) + chain extraction | ✅ real |
-| Pockets / docking | ⚠️ mocked (real-shaped) — Phase 2 |
+| Ligand library — real ChEMBL compounds (`vta/data/ligands.py`) | ✅ real (Phase 2a) |
+| Pocket detection / docking scores | ⚠️ mocked (real-shaped) — Phase 2 |
 | Ranking (composite score) | ✅ real |
 | End-to-end on real TiLV genome | ✅ proven |
 
 ## What's real vs mocked
 
 - **Real:** classification, contract + schema validation, confidence routing,
-  structure folding (experimental PDB / ESMFold), ranking, audit trail.
-- **Mocked (Phase 2):** FPocket pocket detection, AutoDock Vina docking, ChEMBL
-  ligand library. Mocks return real-shaped data so the swap is invisible downstream.
+  structure folding (experimental PDB / ESMFold), **ligand library (ChEMBL: real
+  ChEMBL ids + SMILES, cached to `vta/data/ligands_chembl.json`)**, ranking, audit
+  trail.
+- **Mocked (Phase 2):** FPocket pocket detection, AutoDock Vina docking *scores*.
+  Mocks return real-shaped data over the real ligands, so the swap is invisible
+  downstream — Phase 2 only replaces the fabricated ΔG with real Vina output.
 
 ## Run
 
