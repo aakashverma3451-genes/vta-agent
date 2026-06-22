@@ -26,9 +26,21 @@ classify → route_by_confidence ─┬─ proceed/flag → structure → pocket
 | Confidence router (proceed / flag / defer) | ✅ |
 | Structure node — experimental-first + ESMFold (≤400 aa) + chain extraction | ✅ real |
 | Ligand library — real ChEMBL compounds (`vta/data/ligands.py`) | ✅ real (Phase 2a) |
-| Pocket detection / docking scores | ⚠️ mocked (real-shaped) — Phase 2 |
+| Pocket detection — real FPocket (`vta/nodes/pockets.py`) | ✅ real (Phase 2b) |
+| Docking scores | ⚠️ mocked (real-shaped) — Phase 2c |
 | Ranking (composite score) | ✅ real |
 | End-to-end on real TiLV genome | ✅ proven |
+
+### FPocket setup
+The node auto-detects fpocket via `FPOCKET_BIN` or `fpocket` on PATH; if absent it
+degrades to the mock. On Apple Silicon there's no conda/brew binary — build from
+source with `ARCH = MACOSXARM64` in the makefile, then:
+```bash
+export FPOCKET_BIN=/path/to/fpocket-src/bin/fpocket
+```
+Note: `conservation` is not produced by fpocket (needs an MSA) — currently a neutral
+placeholder. And druggability is low on an isolated apo polymerase subunit, which is
+expected; active-site validation against the bound complex is a Phase-2 follow-up.
 
 ## What's real vs mocked
 
