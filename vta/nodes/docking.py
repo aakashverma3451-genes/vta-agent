@@ -22,6 +22,8 @@ import random
 import re
 import shutil
 import subprocess
+import sys
+from pathlib import Path
 
 from vta.data.ligands import load_ligands
 from vta.state import VTAState
@@ -97,13 +99,21 @@ def _prep_ligand(lig: dict, cache_dir: str) -> str | None:
 
 
 def _prep_receptor(pdb_path: str, out_prefix: str) -> str | None:
-    """Protein PDB → PDBQT via Meeko's mk_prepare_receptor CLI."""
+    """Protein PDB → PDBQT via Meeko's mk_prepare_receptor CLI.
+
+    Uses sys.executable + the tool that ships beside it, so this works without the
+    venv being on PATH — required for the autonomous `vta run` (no PATH setup).
+    """
     pdbqt = f"{out_prefix}.pdbqt"
     if os.path.exists(pdbqt):
         return pdbqt
-    tool = shutil.which("mk_prepare_receptor.py") or "mk_prepare_receptor.py"
-    r = subprocess.run(
-        ["python", tool, "--read_pdb", pdb_path, "-o", out_prefix, "-p",
+    bindir = Path(sys.executable).parent
+    tool = (shutil.which("mk_prepare_receptor.py")
+            or (str(bindir / "mk_prepare_receptor.py")
+                if (bindir / "mk_prepare_receptor.py").exists()
+                else "mk_prepare_receptor.py"))
+    subprocess.run(
+        [sys.executable, tool, "--read_pdb", pdb_path, "-o", out_prefix, "-p",
          "--allow_bad_res", "--default_altloc", "A"],
         capture_output=True, timeout=600,
     )

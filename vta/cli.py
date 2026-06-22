@@ -49,8 +49,11 @@ def _summary(state: dict) -> None:
             star = " *" if r.get("positive_control") else "  "
             print(f"   {i}.{star} {r.get('ligand'):<18} "
                   f"dG={r.get('dG')}  LE={r.get('le')}  score={r.get('score')}")
+    elif state.get("route") == "defer":
+        print("\n  No leads — confidence too low, deferred to a human expert.")
     else:
-        print("\n  No leads — deferred to a human expert.")
+        print("\n  No leads — proceeded but docking produced no ranked candidates "
+              "(see audit trail).")
     rep = next((l for l in state.get("audit_trail", []) if l.startswith("Report:")), None)
     if rep:
         print(f"\n  {rep}")
