@@ -34,6 +34,9 @@ def test_render_proceed_has_all_sections():
     assert "experimental PDB 8PSO:B" in html
     assert "Ribavirin" in html and "★ control" in html      # control highlighted
     assert 'class="ctrl"' in html                            # control row styled
+    assert 'class="bar"' in html                             # score visual bar
+    assert "ligand efficiency" in html                       # scoring methodology note
+    assert "0.5 placeholder" in html                         # conservation footnote (all 0.5)
     assert "AutoDock Vina 1.2.5" in html
     assert "<details>" in html and "Router: PROCEED" in html  # collapsible audit
 

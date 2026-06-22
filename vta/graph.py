@@ -18,6 +18,7 @@ from vta.nodes.classify import classify_node
 from vta.nodes.docking import docking_node
 from vta.nodes.pockets import pockets_node
 from vta.nodes.rank import rank_node
+from vta.nodes.report import report_node
 from vta.nodes.router import (
     DEFER_NODE,
     STRUCTURE_NODE,
@@ -30,12 +31,13 @@ from vta.state import VTAState
 
 
 def build_app():
-    """Compile the Phase-1 graph: classify → route → (full chain | defer) → END.
+    """Compile the full graph: classify → route → (chain | defer) → report → END.
 
-    Proceed path:  structure(REAL) → pockets(mock) → dock(mock) → rank(real) → END
-    Defer path:    defer → END
-    structure_node is the real experimental-first/ESMFold folder (Task 2.1); the
-    pockets/dock nodes remain mocked until Phase 2.
+    Proceed path:  structure → pockets → dock → rank ─┐
+    Defer path:    defer ────────────────────────────┴─▶ report → END
+
+    Both paths end at report_node, so every run emits a self-contained HTML report
+    (a deferred run's report shows the classification + defer reason, no leads).
     """
     g = StateGraph(VTAState)
 
@@ -46,6 +48,7 @@ def build_app():
     g.add_node("dock", docking_node)
     g.add_node("rank", rank_node)
     g.add_node(DEFER_NODE, defer_node)
+    g.add_node("report", report_node)
 
     g.set_entry_point("classify")
     g.add_edge("classify", "router")
@@ -57,7 +60,8 @@ def build_app():
     g.add_edge(STRUCTURE_NODE, "pockets")
     g.add_edge("pockets", "dock")
     g.add_edge("dock", "rank")
-    g.add_edge("rank", END)
-    g.add_edge(DEFER_NODE, END)
+    g.add_edge("rank", "report")
+    g.add_edge(DEFER_NODE, "report")
+    g.add_edge("report", END)
 
     return g.compile()

@@ -42,6 +42,11 @@ th { background:#eef2f4; color:var(--mute); font-weight:600; text-transform:uppe
 td.num { text-align:right; font-variant-numeric:tabular-nums; }
 tr.ctrl { background:var(--ctrl); }
 .tag { font-size:11px; font-weight:700; color:var(--green); }
+.scorecell { display:flex; align-items:center; justify-content:flex-end; gap:8px; }
+.bar { background:var(--line); border-radius:4px; height:8px; width:64px; flex:0 0 auto; }
+.bar > span { display:block; height:100%; background:var(--green); border-radius:4px; }
+.note { color:var(--mute); font-size:13px; margin:10px 2px 0; }
+.note b { color:var(--ink); }
 details { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:0 18px; }
 summary { cursor:pointer; padding:14px 0; font-weight:600; }
 pre { font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace; white-space:pre-wrap;
@@ -102,6 +107,8 @@ def _leads(state: VTAState) -> str:
     leads = state.get("lead_candidates") or []
     if not leads:
         return '<p class="empty">No lead candidates — run was deferred to a human expert.</p>'
+    scores = [r.get("score") or 0 for r in leads]
+    smax = max(scores) or 1
     head = ("<tr><th>#</th><th>Ligand</th><th>ChEMBL</th><th>Protein</th>"
             "<th class='num'>ΔG</th><th class='num'>LE</th>"
             "<th class='num'>cons</th><th class='num'>score</th></tr>")
@@ -109,6 +116,9 @@ def _leads(state: VTAState) -> str:
     for i, r in enumerate(leads, 1):
         ctrl = r.get("positive_control")
         tag = ' <span class="tag">★ control</span>' if ctrl else ""
+        pct = round(100 * (r.get("score") or 0) / smax)
+        bar = (f'<div class="scorecell">{_esc(r.get("score"))}'
+               f'<div class="bar"><span style="width:{pct}%"></span></div></div>')
         rows.append(
             f'<tr class="{"ctrl" if ctrl else ""}"><td class="num">{i}</td>'
             f'<td>{_esc(r.get("ligand"))}{tag}</td>'
@@ -117,9 +127,19 @@ def _leads(state: VTAState) -> str:
             f'<td class="num">{_esc(r.get("dG"))}</td>'
             f'<td class="num">{_esc(r.get("le"))}</td>'
             f'<td class="num">{_esc(r.get("conservation"))}</td>'
-            f'<td class="num">{_esc(r.get("score"))}</td></tr>'
+            f'<td class="num">{bar}</td></tr>'
         )
-    return f"<table>{head}{''.join(rows)}</table>"
+    notes = [
+        '<p class="note"><b>Ranking:</b> leads are scored by <b>ligand efficiency</b> '
+        '(binding energy per heavy atom), not raw ΔG. A compact, efficient binder can '
+        'therefore outrank a larger molecule with a stronger absolute ΔG — and large '
+        'prodrugs (whose active metabolite is smaller) rank conservatively. This is the '
+        'standard medicinal-chemistry correction for docking\'s size bias.</p>'
+    ]
+    if all((r.get("conservation") == 0.5) for r in leads):
+        notes.append('<p class="note"><b>Conservation:</b> shown as a 0.5 placeholder — '
+                     'MSA-based pocket conservation is planned (a 10% term in the score).</p>')
+    return f"<table>{head}{''.join(rows)}</table>{''.join(notes)}"
 
 
 def _audit(state: VTAState) -> str:
