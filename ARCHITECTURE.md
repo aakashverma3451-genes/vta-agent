@@ -157,23 +157,32 @@ The output is the contract dict from §2.
                        └────────┬─────────┘               │   a human    │            │
                                 ▼                          └──────┬───────┘            │
                        ┌──────────────────┐                       │                    │
-                       │ pockets_node     │  MOCK (FPocket-shaped)│                    │
+                       │ pockets_node     │  REAL (active site /  │                    │
+                       │                  │       FPocket)        │                    │
                        └────────┬─────────┘                       │                    │
                                 ▼                                 │                    │
                        ┌──────────────────┐                       │                    │
-                       │ docking_node     │  MOCK (Vina-shaped)   │                    │
+                       │ docking_node     │  REAL (AutoDock Vina) │                    │
                        └────────┬─────────┘                       │                    │
                                 ▼                                 │                    │
                        ┌──────────────────┐                       │                    │
-                       │ rank_node        │  REAL logic           │                    │
-                       │ → top-20 leads   │                       │                    │
+                       │ rank_node        │  REAL (LE-led)        │                    │
                        └────────┬─────────┘                       │                    │
-                                ▼                                 ▼                    ▼
-                               END  ◀──────────────────────────  END  ──────────  audit_trail
+                                ▼                                 │                    │
+                       ┌──────────────────┐                       │                    │
+                       │ admet_node       │  REAL (ADMET-AI)      │                    │
+                       └────────┬─────────┘                       │                    │
+                                ▼                                 ▼                    │
+                       ┌──────────────────┐               ┌──────────────┐            │
+                       │ report_node      │◀──────────────│ defer path   │            │
+                       │ → HTML report    │               └──────────────┘            │
+                       └────────┬─────────┘                                            │
+                                ▼                                                      ▼
+                               END  ──────────────────────────────────────────  audit_trail
 ```
 
-**Legend:** **REAL** = built/working code · **MOCK** = returns *real-shaped* fake
-data now, swapped for the real tool in Phase 2.
+**Legend:** every node above is **REAL** in the default `vta run`; each auto-detects
+its tool and degrades to a labelled fallback only if the tool is absent.
 
 **Explanation (node by node):**
 
@@ -197,20 +206,24 @@ data now, swapped for the real tool in Phase 2.
   otherwise fold with ESMFold and compute **mean pLDDT** (per-residue confidence).
   Experimental structures carry `mean_plddt = None` meaning *trusted ground truth*,
   not "missing."
-- **`pockets_node`** (MOCK) — returns FPocket-shaped pocket records (druggability,
-  volume, center). Mocked now; real FPocket in Phase 2.
-- **`docking_node`** (MOCK) — returns AutoDock-Vina-shaped records
-  (`ligand, pocket, dG, rmsd, le`). Mocked now; real Vina + ligand prep in Phase 2.
-- **`rank_node`** (REAL) — the scientific-judgment step, built for real now: a
-  weighted composite score over docking ΔG, RMSD, ligand efficiency, and pocket
-  conservation → top-20 lead candidates.
+- **`pockets_node`** (REAL) — **experimental-first**: if the protein has a known
+  substrate-marked catalytic site (`EXPERIMENTAL_ACTIVE_SITE`, e.g. PB1's NTP site from
+  8PSO's bound CTP), dock there; else run real **FPocket**; else a real-shaped mock.
+- **`docking_node`** (REAL) — real **AutoDock Vina**: SMILES→3D (RDKit)→PDBQT (Meeko),
+  receptor→PDBQT, dock at the pocket center → ΔG. Degrades to a mock when the engine is
+  absent. Operates over a **real ChEMBL ligand library**.
+- **`rank_node`** (REAL) — **LE-led** composite (ligand efficiency 0.55 / ΔG 0.35 /
+  conservation 0.10), which removes docking's size bias so known inhibitors rank top
+  (validated by `scripts/validate_controls.py`).
+- **`admet_node`** (REAL, opt-in) — annotates each lead with ADMET-AI predictions
+  (hERG / oral bioavailability / solubility). Annotation only — does not change ranking.
 - **`defer_node`** — the honest exit when confidence is too low to proceed.
 
-**Why mock the biology but build the logic?** Folding and docking are the slow,
-fragile, expensive steps — but their *output shapes* are trivial to fake
-convincingly. By building the ranking, routing, and reporting against real-shaped
-fakes now, the Phase 2 swap-in of real FPocket/Vina is invisible to everything
-downstream. *Mock the expensive; prove the contracts.*
+**Auto-detect + graceful fallback.** Each real node discovers its tool
+(`vta.toolconfig`: env → PATH → local build) and degrades to a labelled fallback if
+absent. This is what lets the pipeline run **autonomously** (no human setup) while CI
+stays hermetic (tools forced off in fixtures). *Real where the tool exists; honest
+fallback where it doesn't.*
 
 ---
 
@@ -226,10 +239,12 @@ composable and the run auditable.
   classify_node  ▶  + taxon_result, extracted_proteins,
                      classification_confidence, classification_basis, versions
   router         ▶  + route ("proceed" | "flag" | "defer")
-  structure_node ▶  + structures {PB1: {pdb_path, mean_plddt}}
-  pockets_node   ▶  + pockets    {PB1: [{druggability, …}]}          (mock)
-  docking_node   ▶  + docking_results [{ligand, dG, rmsd, …}]        (mock)
-  rank_node      ▶  + lead_candidates (top-20)
+  structure_node ▶  + structures {PB1: {pdb_path, mean_plddt, method, source}}
+  pockets_node   ▶  + pockets    {PB1: [{center, druggability, …}]}  (active site / FPocket)
+  docking_node   ▶  + docking_results [{ligand, ligand_id, smiles, dG, le, …}]  (real Vina)
+  rank_node      ▶  + lead_candidates (top-20, LE-led)
+  admet_node     ▶  + lead.admet {herg, oral, solubility}, admet_flag
+  report_node    ▶  + writes outputs/{run_id}_report.html
   every node     ▶  + audit_trail[...]   ← the running, ordered decision log
 ```
 
@@ -237,54 +252,61 @@ The **`audit_trail`** is the auditability thesis made concrete. After a run you 
 read every decision in order, e.g.:
 
 ```
-TaxonAgent: Tilapinevirus / Tilapia lake virus @ 87.3% (KG ICTV-VMR-MSL40)
-Router: 87.3% aa identity in [85,95) -> PROCEED w/ FLAG
-Structure[PB1]: using EXPERIMENTAL 8PSO
-Structure[PB2]: ESMFold, mean pLDDT 84.1
-[MOCK] Pockets[PB1]: 3 found, top druggability 0.82
-[MOCK] Docking: 900 ligand-pocket pairs
-Ranking: top lead remdesivir score 0.91 (dG -8.4, conservation 0.91)
+TaxonAgent: Tilapinevirus / Tilapinevirus tilapiae @ 100.0% (KG ICTV-VMR-MSL40)
+Router: 100.0% aa identity >= 95 -> PROCEED
+Structure[PB1]: EXPERIMENTAL 8PSO chain B (pLDDT=None = trusted ground truth)
+ActiveSite[PB1]: experimental catalytic site 8PSO:F (bound CTP, NTP site)
+Vina: 8 real docks over 9 ligands (AutoDock Vina 1.2.5, seed 42)
+Ranking: top lead Ribavirin score 0.6 (LE-led)
+ADMET: annotated 8 leads (0 hERG-flagged); top lead Ribavirin hERG=0.018, oral=0.735
+Report: wrote outputs/amnoonviridae_1_report.html
 ```
 
 ---
 
-## 6. Phase 1 vs Phase 2 — what's real, what's mocked
+## 6. Autonomous operation
 
-| Step               | Phase 1 (now)                          | Phase 2 (swap-in)                              |
-|--------------------|----------------------------------------|------------------------------------------------|
-| Classification     | **REAL** — TaxonAgent                   | unchanged                                      |
-| Contract + schema  | **REAL** — validated at the seam        | unchanged                                      |
-| Confidence router  | **REAL** — 3-way, basis-aware           | unchanged                                      |
-| Structure folding  | **REAL** — ESMFold + experimental PDB   | + low-pLDDT handling, chain extraction         |
-| Pocket detection   | **MOCK** — FPocket-shaped               | real FPocket (validate vs known TiLV site)     |
-| Docking            | **MOCK** — Vina-shaped                  | real AutoDock Vina + RDKit/Meeko + ChEMBL      |
-| Ranking            | **REAL** — composite score              | unchanged                                      |
-| State / audit      | **REAL**                                | unchanged                                      |
+The whole pipeline runs from one command, no human setup:
 
-The payoff: the contract, router, ranking logic, state object, and audit trail are
-all built for real in Phase 1, so **Phase 2 is pure module-swapping, not
-architecture work.**
+```bash
+vta run path/to/genome.fasta      # or:  python -m vta run …
+```
+
+- **Self-configuring** — `vta.toolconfig` discovers fpocket/vina (env → PATH → local
+  build); TaxonAgent is auto-located. No env vars, no PYTHONPATH.
+- **Self-deciding** — the confidence router chooses proceed/flag/defer with no human
+  in the loop; low-confidence inputs are deferred, not guessed.
+- **Self-degrading** — any missing tool falls back to a labelled mock; the run never
+  crashes for want of a binary.
+
+Output: a printed lead summary + a self-contained `outputs/{run_id}_report.html`.
 
 ---
 
-## 7. Build status (this implementation)
+## 7. Build status — everything below is REAL (no mocks in the default run)
 
-| Artifact                          | File                          | Status        |
-|-----------------------------------|-------------------------------|---------------|
-| Shared state contract (`VTAState`)| `vta/state.py`                | ✅ built + verified |
-| Classify node                     | `vta/nodes/classify.py`       | ✅ built + verified |
-| Confidence router (node + edge)   | `vta/nodes/router.py`         | ✅ built + verified |
-| Stub nodes (structure / defer)    | `vta/nodes/stubs.py`          | ✅ built + verified |
-| Mock pockets (FPocket-shaped)     | `vta/nodes/pockets.py`        | ✅ built + verified |
-| Mock docking (Vina-shaped)        | `vta/nodes/docking.py`        | ✅ built + verified |
-| Ranking (REAL composite logic)    | `vta/nodes/rank.py`           | ✅ built + verified |
-| Real structure node (Task 2.1)    | `vta/nodes/structure.py`      | ✅ experimental-first + chain extraction + ceiling refusal |
-| Compiled graph (full Phase-1 chain)| `vta/graph.py`               | ✅ runs end-to-end → top-20 |
-| Acceptance + unit tests           | `tests/test_*.py`             | ✅ 11 passed |
+| Stage | File | Status |
+|-------|------|--------|
+| Shared state contract (`VTAState`) | `vta/state.py` | ✅ |
+| Classify (real TaxonAgent + schema) | `vta/nodes/classify.py` | ✅ |
+| Confidence router (node + pure edge) | `vta/nodes/router.py` | ✅ |
+| Structure — experimental-first / ESMFold (≤400 aa) / chain extraction | `vta/nodes/structure.py` | ✅ real |
+| Pockets — experimental active site / real FPocket | `vta/nodes/pockets.py` | ✅ real |
+| Ligand library — real ChEMBL (id + SMILES, cached) | `vta/data/ligands.py` | ✅ real |
+| Docking — real AutoDock Vina (RDKit/Meeko prep, seeded) | `vta/nodes/docking.py` | ✅ real |
+| Ranking — LE-led composite (validated vs controls) | `vta/nodes/rank.py` | ✅ real |
+| ADMET — drug-likeness/safety annotation (opt-in) | `vta/nodes/admet.py` | ✅ real |
+| HTML report (auto-emitted both paths) | `vta/report.py` | ✅ |
+| Autonomous CLI / packaging | `vta/cli.py`, `pyproject.toml` | ✅ `vta run` |
+| Validation gate (controls recover) | `scripts/validate_controls.py` | ✅ PASS |
+| Tests (hermetic) | `tests/` | ✅ 21 passed |
+
+The stub nodes (`vta/nodes/stubs.py`) remain only as the deferred-path exit and the
+graceful fallbacks; the default `vta run` uses real tools throughout.
 
 On the Module 1 side, the contract surface — `classify` / `classify_genome` /
 `validate_contract` / `VTA_CONTRACT_SCHEMA` — is exported from the `taxonagent`
-package root and covered by tests (suite: 259 passed, 2 skipped).
+package root and covered by its own suite (259 passed, 2 skipped).
 
 ---
 
