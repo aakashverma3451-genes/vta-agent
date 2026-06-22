@@ -51,6 +51,18 @@ def _prep_available() -> bool:
         return False
 
 
+def _heavy_atoms(smiles: str | None, default: int = 30) -> int:
+    """Real heavy-atom count from SMILES (for honest ligand efficiency)."""
+    if not smiles:
+        return default
+    try:
+        from rdkit import Chem
+        m = Chem.MolFromSmiles(smiles)
+        return m.GetNumHeavyAtoms() if m else default
+    except Exception:
+        return default
+
+
 def _prep_ligand(lig: dict, cache_dir: str) -> str | None:
     """SMILES → 3D (RDKit ETKDG) → PDBQT (Meeko). Cached by ChEMBL id."""
     if not lig.get("smiles"):
@@ -128,23 +140,33 @@ def _dock_real(state: VTAState, vina: str) -> VTAState:
             continue
         for pocket in plist[:_REAL_TOP_POCKETS]:
             for lig in ligands:
-                lig_pdbqt = _prep_ligand(lig, _LIG_CACHE)
-                if not lig_pdbqt:
-                    continue
-                out = os.path.join("structures",
-                                   f"{state['run_id']}_{protein}_{lig['chembl_id']}_p{pocket['id']}.pdbqt")
-                dG = _run_vina(vina, receptor, lig_pdbqt, pocket["center"], out)
-                if dG is None:
-                    continue
-                n_docked += 1
-                heavy = lig.get("heavy_atoms") or 30
-                results.append({
-                    "protein": protein, "pocket": pocket["id"],
-                    "ligand": lig["name"], "ligand_id": lig["chembl_id"],
-                    "smiles": lig["smiles"], "positive_control": lig["positive_control"],
-                    "dG": dG, "rmsd": 0.0, "le": round(dG / heavy, 3),
-                    "heavy_atoms": heavy, "conservation": pocket["conservation"],
-                })
+                # Per-ligand isolation: one bad SMILES / failed dock skips that ligand,
+                # it does NOT abort the whole real screen (which would fall back to mock).
+                try:
+                    lig_pdbqt = _prep_ligand(lig, _LIG_CACHE)
+                    if not lig_pdbqt:
+                        state["audit_trail"].append(
+                            f"Vina[{protein}]: {lig['name']} ligand prep failed; skipped")
+                        continue
+                    out = os.path.join("structures",
+                                       f"{state['run_id']}_{protein}_{lig['chembl_id']}_p{pocket['id']}.pdbqt")
+                    dG = _run_vina(vina, receptor, lig_pdbqt, pocket["center"], out)
+                    if dG is None:
+                        state["audit_trail"].append(
+                            f"Vina[{protein}]: {lig['name']} produced no pose; skipped")
+                        continue
+                    heavy = _heavy_atoms(lig.get("smiles"))
+                    results.append({
+                        "protein": protein, "pocket": pocket["id"],
+                        "ligand": lig["name"], "ligand_id": lig["chembl_id"],
+                        "smiles": lig["smiles"], "positive_control": lig["positive_control"],
+                        "dG": dG, "rmsd": 0.0, "le": round(dG / heavy, 3),
+                        "heavy_atoms": heavy, "conservation": pocket["conservation"],
+                    })
+                    n_docked += 1
+                except Exception as e:
+                    state["audit_trail"].append(
+                        f"Vina[{protein}]: {lig['name']} error ({type(e).__name__}: {e}); skipped")
     state["docking_results"] = results
     state["audit_trail"].append(f"Vina: {n_docked} real docks over {len(ligands)} ligands")
     state["versions"]["docking"] = "AutoDock Vina 1.2.5"
@@ -163,7 +185,7 @@ def _dock_mock(state: VTAState) -> VTAState:
                     _seed(state["run_id"], protein, str(pocket["id"]), lig["chembl_id"]))
                 dG = round(rng.uniform(-9.0, -5.0), 2)
                 rmsd = round(rng.uniform(0.5, 3.0), 2)
-                heavy = rng.randint(20, 45)
+                heavy = _heavy_atoms(lig.get("smiles"))
                 results.append({
                     "protein": protein, "pocket": pocket["id"],
                     "ligand": lig["name"], "ligand_id": lig["chembl_id"],
