@@ -19,3 +19,6 @@ structures/
 .idea/
 .vscode/
 *.swp
+
+# Generated HTML reports (regenerable via vta.report)
+outputs/*_report.html
