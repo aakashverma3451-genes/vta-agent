@@ -15,7 +15,7 @@ from __future__ import annotations
 from langgraph.graph import END, StateGraph
 
 from vta.nodes.classify import classify_node
-from vta.nodes.docking import docking_node_mock
+from vta.nodes.docking import docking_node
 from vta.nodes.pockets import pockets_node
 from vta.nodes.rank import rank_node
 from vta.nodes.router import (
@@ -43,7 +43,7 @@ def build_app():
     g.add_node("router", route_by_confidence)      # NODE: writes `route` (persists)
     g.add_node(STRUCTURE_NODE, structure_node)
     g.add_node("pockets", pockets_node)
-    g.add_node("dock", docking_node_mock)
+    g.add_node("dock", docking_node)
     g.add_node("rank", rank_node)
     g.add_node(DEFER_NODE, defer_node)
 

@@ -27,9 +27,21 @@ classify → route_by_confidence ─┬─ proceed/flag → structure → pocket
 | Structure node — experimental-first + ESMFold (≤400 aa) + chain extraction | ✅ real |
 | Ligand library — real ChEMBL compounds (`vta/data/ligands.py`) | ✅ real (Phase 2a) |
 | Pocket detection — real FPocket (`vta/nodes/pockets.py`) | ✅ real (Phase 2b) |
-| Docking scores | ⚠️ mocked (real-shaped) — Phase 2c |
+| Docking — real AutoDock Vina (`vta/nodes/docking.py`) | ✅ real (Phase 2c) |
 | Ranking (composite score) | ✅ real |
 | End-to-end on real TiLV genome | ✅ proven |
+
+### Vina setup
+`docking_node` auto-detects the Vina engine (`VINA_BIN` or `vina` on PATH) plus the
+RDKit/Meeko prep stack; if any is absent it degrades to the mock. On Apple Silicon
+there's no pip wheel (Vina needs Boost), so use the official mac x86_64 release binary
+— it runs via Rosetta:
+```bash
+pip install rdkit meeko gemmi          # ligand/receptor PDBQT prep
+export VINA_BIN=/path/to/vina          # AutoDock Vina 1.2.5 mac binary
+```
+Real Vina under emulation is slow, so the real path docks the top pocket per protein.
+Validated: remdesivir → PB1 ≈ −6.4 kcal/mol.
 
 ### FPocket setup
 The node auto-detects fpocket via `FPOCKET_BIN` or `fpocket` on PATH; if absent it

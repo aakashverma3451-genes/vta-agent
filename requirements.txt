@@ -1,0 +1,22 @@
+# VTA-Agent Python dependencies.
+# TaxonAgent (Module 1) is imported from ../taxonagent/src and brings its own deps.
+
+# Orchestration
+langgraph>=1.0
+langchain-core
+
+# Contract validation + HTTP (ChEMBL, RCSB, ESMFold)
+jsonschema
+requests
+
+# Phase 2c — docking ligand/receptor prep (real path)
+rdkit>=2024.0
+meeko>=0.5
+gemmi              # meeko receptor-prep dependency
+
+# Test
+pytest
+
+# --- External binaries (NOT pip-installable; see README) ---
+# fpocket  : pocket detection   -> FPOCKET_BIN or on PATH (build from source on arm64)
+# vina     : AutoDock Vina 1.2  -> VINA_BIN or on PATH (mac x86_64 binary runs via Rosetta)

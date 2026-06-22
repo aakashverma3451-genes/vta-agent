@@ -1,61 +1,175 @@
-"""docking_node (MOCK) — virtual screening, AutoDock-Vina-shaped output.
+"""docking_node — virtual screening.
 
-Plan Task 2.3 (the docking half). Mocked in Phase 1; real Vina + RDKit/Meeko ligand
-prep + ChEMBL queries in Phase 2. The fabricated records match real Vina output:
-binding free energy `dG` (~ -5 to -9 kcal/mol for plausible binders), pose `rmsd`,
-and ligand efficiency `le = dG / heavy_atoms`. The ranking node consumes this exact
-shape, so swapping in real Vina changes nothing downstream.
+Phase 2c: REAL AutoDock Vina when available, else a real-shaped MOCK.
 
-Determinism: scores are seeded from (run_id, protein, pocket, ligand), so a run is
-fully reproducible — the same auditability requirement that makes this whole
-pipeline defensible.
+`docking_node` auto-detects the Vina engine (`VINA_BIN` or `vina` on PATH) plus the
+RDKit/Meeko prep stack. If all are present it docks for real:
+
+    SMILES --RDKit 3D--> --Meeko--> ligand.pdbqt
+    receptor.pdb --Meeko mk_prepare_receptor--> receptor.pdbqt
+    vina --center (from FPocket pocket) --> best affinity (ΔG, kcal/mol)
+
+…otherwise it degrades to the deterministic mock (same don't-crash discipline as the
+other real nodes). Either way the records have the same shape, so ranking downstream
+is unchanged. Real Vina under x86 emulation is slow, so the real path docks the top
+pocket per protein (bounded), with prepped ligand PDBQTs cached across runs.
 """
 from __future__ import annotations
 
 import hashlib
+import os
 import random
+import re
+import shutil
+import subprocess
 
 from vta.data.ligands import load_ligands
 from vta.state import VTAState
 
-_TOP_POCKETS = 3
+_TOP_POCKETS_MOCK = 3
+_REAL_TOP_POCKETS = 1          # real Vina is expensive (emulated) → dock the top pocket
+_BOX = 22.0                    # docking box edge, Å
+_EXHAUSTIVENESS = 8
+_LIG_CACHE = "structures/.ligand_pdbqt"   # prepped ligands reused across runs
 
 
 def _seed(*parts: str) -> int:
-    h = hashlib.md5("|".join(parts).encode()).hexdigest()
-    return int(h[:8], 16)
+    return int(hashlib.md5("|".join(parts).encode()).hexdigest()[:8], 16)
 
 
-def docking_node_mock(state: VTAState) -> VTAState:
-    """Mock docking over the REAL ligand library (Phase-2 ChEMBL data), mock scores.
+# ── real Vina path ───────────────────────────────────────────────────────────
+def _vina_bin() -> str | None:
+    return os.environ.get("VINA_BIN") or shutil.which("vina")
 
-    Ligand IDENTITY is now real (ChEMBL id + name + SMILES from `load_ligands`), so
-    Phase 2 only has to replace the fabricated dG/rmsd with real AutoDock Vina output
-    — the records already carry the SMILES that real ligand prep needs.
-    """
+
+def _prep_available() -> bool:
+    try:
+        import meeko  # noqa: F401
+        import rdkit  # noqa: F401
+        return True
+    except Exception:
+        return False
+
+
+def _prep_ligand(lig: dict, cache_dir: str) -> str | None:
+    """SMILES → 3D (RDKit ETKDG) → PDBQT (Meeko). Cached by ChEMBL id."""
+    if not lig.get("smiles"):
+        return None
+    os.makedirs(cache_dir, exist_ok=True)
+    out = os.path.join(cache_dir, f"{lig['chembl_id']}.pdbqt")
+    if os.path.exists(out):
+        return out
+    from rdkit import Chem
+    from rdkit.Chem import AllChem
+    m = Chem.MolFromSmiles(lig["smiles"])
+    if m is None:
+        return None
+    m = Chem.AddHs(m)
+    if AllChem.EmbedMolecule(m, AllChem.ETKDGv3()) != 0:
+        return None
+    AllChem.MMFFOptimizeMolecule(m)
+    from meeko import MoleculePreparation
+    try:                                   # non-deprecated path (Meeko ≥0.5)
+        from meeko import PDBQTWriterLegacy
+        setups = MoleculePreparation().prepare(m)
+        pdbqt, ok, _ = PDBQTWriterLegacy.write_string(setups[0])
+        if not ok:
+            return None
+    except Exception:                      # older Meeko fallback
+        prep = MoleculePreparation(); prep.prepare(m)
+        pdbqt = prep.write_pdbqt_string()
+    with open(out, "w") as fh:
+        fh.write(pdbqt)
+    return out
+
+
+def _prep_receptor(pdb_path: str, out_prefix: str) -> str | None:
+    """Protein PDB → PDBQT via Meeko's mk_prepare_receptor CLI."""
+    pdbqt = f"{out_prefix}.pdbqt"
+    if os.path.exists(pdbqt):
+        return pdbqt
+    tool = shutil.which("mk_prepare_receptor.py") or "mk_prepare_receptor.py"
+    r = subprocess.run(
+        ["python", tool, "--read_pdb", pdb_path, "-o", out_prefix, "-p",
+         "--allow_bad_res", "--default_altloc", "A"],
+        capture_output=True, timeout=600,
+    )
+    return pdbqt if os.path.exists(pdbqt) else None
+
+
+def _run_vina(vina: str, receptor: str, ligand: str, center: list, out: str) -> float | None:
+    """Run Vina and return the best-mode affinity (kcal/mol), or None on failure."""
+    p = subprocess.run(
+        [vina, "--receptor", receptor, "--ligand", ligand,
+         "--center_x", str(center[0]), "--center_y", str(center[1]),
+         "--center_z", str(center[2]),
+         "--size_x", str(_BOX), "--size_y", str(_BOX), "--size_z", str(_BOX),
+         "--exhaustiveness", str(_EXHAUSTIVENESS), "--num_modes", "5", "--out", out],
+        capture_output=True, text=True, timeout=900,
+    )
+    for line in p.stdout.splitlines():
+        m = re.match(r"\s*1\s+(-?\d+\.\d+)", line)      # mode 1 = best
+        if m:
+            return float(m.group(1))
+    return None
+
+
+def _dock_real(state: VTAState, vina: str) -> VTAState:
+    ligands = load_ligands()
+    results, n_docked = [], 0
+    for protein, plist in (state.get("pockets") or {}).items():
+        struct = (state.get("structures") or {}).get(protein, {})
+        if not struct.get("pdb_path") or not plist:
+            continue
+        receptor = _prep_receptor(struct["pdb_path"],
+                                  os.path.join("structures", f"{state['run_id']}_{protein}_rec"))
+        if not receptor:
+            state["audit_trail"].append(f"Vina[{protein}]: receptor prep failed; skipped")
+            continue
+        for pocket in plist[:_REAL_TOP_POCKETS]:
+            for lig in ligands:
+                lig_pdbqt = _prep_ligand(lig, _LIG_CACHE)
+                if not lig_pdbqt:
+                    continue
+                out = os.path.join("structures",
+                                   f"{state['run_id']}_{protein}_{lig['chembl_id']}_p{pocket['id']}.pdbqt")
+                dG = _run_vina(vina, receptor, lig_pdbqt, pocket["center"], out)
+                if dG is None:
+                    continue
+                n_docked += 1
+                heavy = lig.get("heavy_atoms") or 30
+                results.append({
+                    "protein": protein, "pocket": pocket["id"],
+                    "ligand": lig["name"], "ligand_id": lig["chembl_id"],
+                    "smiles": lig["smiles"], "positive_control": lig["positive_control"],
+                    "dG": dG, "rmsd": 0.0, "le": round(dG / heavy, 3),
+                    "heavy_atoms": heavy, "conservation": pocket["conservation"],
+                })
+    state["docking_results"] = results
+    state["audit_trail"].append(f"Vina: {n_docked} real docks over {len(ligands)} ligands")
+    state["versions"]["docking"] = "AutoDock Vina 1.2.5"
+    state["versions"]["ligands"] = f"ChEMBL x{len(ligands)}"
+    return state
+
+
+# ── mock fallback (real ligands, fabricated scores) ──────────────────────────
+def _dock_mock(state: VTAState) -> VTAState:
     ligands = load_ligands()
     results = []
     for protein, plist in (state.get("pockets") or {}).items():
-        for pocket in plist[:_TOP_POCKETS]:
+        for pocket in plist[:_TOP_POCKETS_MOCK]:
             for lig in ligands:
                 rng = random.Random(
                     _seed(state["run_id"], protein, str(pocket["id"]), lig["chembl_id"]))
                 dG = round(rng.uniform(-9.0, -5.0), 2)
                 rmsd = round(rng.uniform(0.5, 3.0), 2)
-                heavy_atoms = rng.randint(20, 45)
-                le = round(dG / heavy_atoms, 3)
+                heavy = rng.randint(20, 45)
                 results.append({
-                    "protein": protein,
-                    "pocket": pocket["id"],
-                    "ligand": lig["name"],
-                    "ligand_id": lig["chembl_id"],
-                    "smiles": lig["smiles"],
-                    "positive_control": lig["positive_control"],
-                    "dG": dG,
-                    "rmsd": rmsd,
-                    "le": le,
-                    "heavy_atoms": heavy_atoms,
-                    "conservation": pocket["conservation"],
+                    "protein": protein, "pocket": pocket["id"],
+                    "ligand": lig["name"], "ligand_id": lig["chembl_id"],
+                    "smiles": lig["smiles"], "positive_control": lig["positive_control"],
+                    "dG": dG, "rmsd": rmsd, "le": round(dG / heavy, 3),
+                    "heavy_atoms": heavy, "conservation": pocket["conservation"],
                 })
     state["docking_results"] = results
     state["audit_trail"].append(
@@ -63,3 +177,19 @@ def docking_node_mock(state: VTAState) -> VTAState:
     state["versions"]["docking"] = "MOCK-vina-shaped over ChEMBL ligands"
     state["versions"]["ligands"] = f"ChEMBL x{len(ligands)}"
     return state
+
+
+# ── node ─────────────────────────────────────────────────────────────────────
+def docking_node(state: VTAState) -> VTAState:
+    """Real Vina if engine + prep stack available, else mock."""
+    vina = _vina_bin()
+    if vina and _prep_available():
+        try:
+            return _dock_real(state, vina)
+        except Exception as e:
+            state["audit_trail"].append(f"Vina: WARNING real docking failed ({e}); mock")
+    return _dock_mock(state)
+
+
+# back-compat alias used by the graph / tests
+docking_node_mock = docking_node
