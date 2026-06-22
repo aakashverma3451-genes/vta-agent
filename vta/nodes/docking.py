@@ -116,7 +116,8 @@ def _run_vina(vina: str, receptor: str, ligand: str, center: list, out: str) -> 
          "--center_x", str(center[0]), "--center_y", str(center[1]),
          "--center_z", str(center[2]),
          "--size_x", str(_BOX), "--size_y", str(_BOX), "--size_z", str(_BOX),
-         "--exhaustiveness", str(_EXHAUSTIVENESS), "--num_modes", "5", "--out", out],
+         "--exhaustiveness", str(_EXHAUSTIVENESS), "--num_modes", "5",
+         "--seed", "42", "--out", out],   # fixed seed → reproducible ΔG
         capture_output=True, text=True, timeout=900,
     )
     for line in p.stdout.splitlines():
