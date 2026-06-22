@@ -19,6 +19,9 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest"]
+# ADMET drug-likeness/safety annotation (pulls torch/chemprop — heavy, opt-in).
+# The admet_node auto-detects this and degrades gracefully if absent.
+admet = ["admet-ai>=2.0"]
 
 # `pip install -e .` exposes the autonomous entry point:  vta run <genome.fasta>
 [project.scripts]

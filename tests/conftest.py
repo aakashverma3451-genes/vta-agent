@@ -45,6 +45,7 @@ def mock_structure_net(monkeypatch):
     non-deterministic). Forcing the binaries to None keeps the suite hermetic; the
     real path is exercised separately by scripts/validate_controls.py.
     """
+    import vta.nodes.admet as admet
     import vta.nodes.docking as docking
     import vta.nodes.pockets as pockets
     import vta.nodes.structure as structure
@@ -53,4 +54,5 @@ def mock_structure_net(monkeypatch):
     monkeypatch.setattr(structure, "fold_esmfold", lambda seq: fake_esmfold_pdb())
     monkeypatch.setattr(pockets, "_fpocket_bin", lambda: None)
     monkeypatch.setattr(docking, "_vina_bin", lambda: None)
+    monkeypatch.setattr(admet, "_admet_available", lambda: False)  # don't load torch in CI
     return structure

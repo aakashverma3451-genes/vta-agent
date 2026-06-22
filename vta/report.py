@@ -47,6 +47,7 @@ tr.ctrl { background:var(--ctrl); }
 .bar > span { display:block; height:100%; background:var(--green); border-radius:4px; }
 .note { color:var(--mute); font-size:13px; margin:10px 2px 0; }
 .note b { color:var(--ink); }
+td.risk { color:var(--red); font-weight:600; }
 details { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:0 18px; }
 summary { cursor:pointer; padding:14px 0; font-weight:600; }
 pre { font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace; white-space:pre-wrap;
@@ -109,9 +110,12 @@ def _leads(state: VTAState) -> str:
         return '<p class="empty">No lead candidates — run was deferred to a human expert.</p>'
     scores = [r.get("score") or 0 for r in leads]
     smax = max(scores) or 1
-    head = ("<tr><th>#</th><th>Ligand</th><th>ChEMBL</th><th>Protein</th>"
-            "<th class='num'>ΔG</th><th class='num'>LE</th>"
-            "<th class='num'>cons</th><th class='num'>score</th></tr>")
+    has_admet = any(r.get("admet") for r in leads)
+    admet_head = ("<th class='num'>hERG</th><th class='num'>oral</th>"
+                  "<th class='num'>solub</th>") if has_admet else ""
+    head = (f"<tr><th>#</th><th>Ligand</th><th>ChEMBL</th><th>Protein</th>"
+            f"<th class='num'>ΔG</th><th class='num'>LE</th>"
+            f"<th class='num'>cons</th><th class='num'>score</th>{admet_head}</tr>")
     rows = []
     for i, r in enumerate(leads, 1):
         ctrl = r.get("positive_control")
@@ -119,6 +123,14 @@ def _leads(state: VTAState) -> str:
         pct = round(100 * (r.get("score") or 0) / smax)
         bar = (f'<div class="scorecell">{_esc(r.get("score"))}'
                f'<div class="bar"><span style="width:{pct}%"></span></div></div>')
+        admet_cells = ""
+        if has_admet:
+            a = r.get("admet") or {}
+            herg = a.get("herg")
+            herg_cls = "num risk" if (herg is not None and herg > 0.5) else "num"
+            admet_cells = (f'<td class="{herg_cls}">{_esc(herg)}</td>'
+                           f'<td class="num">{_esc(a.get("oral"))}</td>'
+                           f'<td class="num">{_esc(a.get("solubility"))}</td>')
         rows.append(
             f'<tr class="{"ctrl" if ctrl else ""}"><td class="num">{i}</td>'
             f'<td>{_esc(r.get("ligand"))}{tag}</td>'
@@ -127,7 +139,7 @@ def _leads(state: VTAState) -> str:
             f'<td class="num">{_esc(r.get("dG"))}</td>'
             f'<td class="num">{_esc(r.get("le"))}</td>'
             f'<td class="num">{_esc(r.get("conservation"))}</td>'
-            f'<td class="num">{bar}</td></tr>'
+            f'<td class="num">{bar}</td>{admet_cells}</tr>'
         )
     notes = [
         '<p class="note"><b>Ranking:</b> leads are scored by <b>ligand efficiency</b> '
@@ -139,6 +151,11 @@ def _leads(state: VTAState) -> str:
     if all((r.get("conservation") == 0.5) for r in leads):
         notes.append('<p class="note"><b>Conservation:</b> shown as a 0.5 placeholder — '
                      'MSA-based pocket conservation is planned (a 10% term in the score).</p>')
+    if has_admet:
+        notes.append('<p class="note"><b>ADMET</b> (ADMET-AI): hERG = cardiotoxicity '
+                     'probability (lower better; red = >0.5 risk), oral = predicted oral '
+                     'bioavailability, solub = aqueous solubility (log mol/L). Annotation '
+                     'only — does not affect ranking.</p>')
     return f"<table>{head}{''.join(rows)}</table>{''.join(notes)}"
 
 

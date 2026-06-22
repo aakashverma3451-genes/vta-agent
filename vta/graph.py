@@ -17,6 +17,7 @@ from langgraph.graph import END, StateGraph
 from vta.nodes.classify import classify_node
 from vta.nodes.docking import docking_node
 from vta.nodes.pockets import pockets_node
+from vta.nodes.admet import admet_node
 from vta.nodes.rank import rank_node
 from vta.nodes.report import report_node
 from vta.nodes.router import (
@@ -33,8 +34,8 @@ from vta.state import VTAState
 def build_app():
     """Compile the full graph: classify → route → (chain | defer) → report → END.
 
-    Proceed path:  structure → pockets → dock → rank ─┐
-    Defer path:    defer ────────────────────────────┴─▶ report → END
+    Proceed path:  structure → pockets → dock → rank → admet ─┐
+    Defer path:    defer ────────────────────────────────────┴─▶ report → END
 
     Both paths end at report_node, so every run emits a self-contained HTML report
     (a deferred run's report shows the classification + defer reason, no leads).
@@ -47,6 +48,7 @@ def build_app():
     g.add_node("pockets", pockets_node)
     g.add_node("dock", docking_node)
     g.add_node("rank", rank_node)
+    g.add_node("admet", admet_node)
     g.add_node(DEFER_NODE, defer_node)
     g.add_node("report", report_node)
 
@@ -60,7 +62,8 @@ def build_app():
     g.add_edge(STRUCTURE_NODE, "pockets")
     g.add_edge("pockets", "dock")
     g.add_edge("dock", "rank")
-    g.add_edge("rank", "report")
+    g.add_edge("rank", "admet")        # autonomous drug-likeness/safety annotation
+    g.add_edge("admet", "report")
     g.add_edge(DEFER_NODE, "report")
     g.add_edge("report", END)
 
