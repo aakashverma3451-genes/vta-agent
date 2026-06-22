@@ -30,6 +30,17 @@ _TOP_KEEP = 3
 # conservation isn't computed yet (needs an MSA); neutral so ranking stays balanced.
 _CONSERVATION_PLACEHOLDER = 0.5
 
+# Known catalytic/active sites, taken from the BOUND SUBSTRATE in the experimental
+# structure — the box center where the relevant inhibitors actually act. This is
+# "experimental-first for pockets": a substrate-marked active site beats a blind
+# FPocket scan, exactly as a solved structure beats a prediction. Coordinates are in
+# the experimental structure's frame (same frame as the chain we extract).
+#   PB1: centroid of the bound CTP nucleotide (8PSO chain F) — the +1 NTP site, where
+#        nucleotide-analog RdRp inhibitors (remdesivir, sofosbuvir, …) are incorporated.
+EXPERIMENTAL_ACTIVE_SITE = {
+    "PB1": {"center": [135.56, 115.60, 123.66], "source": "8PSO:F (bound CTP, NTP site)"},
+}
+
 
 # ── real FPocket ─────────────────────────────────────────────────────────────
 def _fpocket_bin() -> str | None:
@@ -128,6 +139,19 @@ def pockets_node(state: VTAState) -> VTAState:
         pdb = struct.get("pdb_path")
         if not pdb:
             state["audit_trail"].append(f"Pockets[{name}]: skipped (no structure)")
+            continue
+        # Experimental-first: dock the substrate-marked catalytic site if we know it.
+        if name in EXPERIMENTAL_ACTIVE_SITE:
+            site = EXPERIMENTAL_ACTIVE_SITE[name]
+            pockets[name] = [{
+                "id": 1, "center": site["center"], "volume": None,
+                "druggability": 1.0, "conservation": _CONSERVATION_PLACEHOLDER,
+                "method": "experimental_active_site", "source": site["source"],
+            }]
+            used_real = True
+            state["audit_trail"].append(
+                f"ActiveSite[{name}]: experimental catalytic site {site['source']} "
+                f"@ {site['center']}")
             continue
         if fpocket:
             try:
