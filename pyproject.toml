@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vta-agent"
+version = "0.1.0"
+description = "Autonomous viral target assessment — genome to ranked drug leads"
+requires-python = ">=3.10"
+dependencies = [
+    "langgraph>=1.0",
+    "langchain-core",
+    "jsonschema",
+    "requests",
+    "rdkit>=2024.0",
+    "meeko>=0.5",
+    "gemmi",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+# `pip install -e .` exposes the autonomous entry point:  vta run <genome.fasta>
+[project.scripts]
+vta = "vta.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["vta*"]
+
+# External binaries are NOT pip deps — fpocket / vina are auto-discovered by
+# vta.toolconfig (env var -> PATH -> local build). See README.

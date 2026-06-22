@@ -44,7 +44,8 @@ EXPERIMENTAL_ACTIVE_SITE = {
 
 # ── real FPocket ─────────────────────────────────────────────────────────────
 def _fpocket_bin() -> str | None:
-    return os.environ.get("FPOCKET_BIN") or shutil.which("fpocket")
+    from vta.toolconfig import find_tool
+    return find_tool("fpocket", "FPOCKET_BIN")
 
 
 def _parse_info(info_path: str) -> dict[int, dict]:

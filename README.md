@@ -64,10 +64,23 @@ expected; active-site validation against the bound complex is a Phase-2 follow-u
   Mocks return real-shaped data over the real ligands, so the swap is invisible
   downstream — Phase 2 only replaces the fabricated ΔG with real Vina output.
 
-## Run
+## Run it autonomously
+
+One command takes a genome to ranked drug leads — no env vars, no PYTHONPATH. Tools
+(fpocket, vina) self-discover via `vta.toolconfig`; TaxonAgent is located automatically.
 
 ```bash
-# uses TaxonAgent's environment (it carries the classifier + deps)
+pip install -e .                      # exposes the `vta` command
+vta run path/to/genome.fasta          # classify -> fold -> dock -> rank -> report
+# or without installing:
+python -m vta run path/to/genome.fasta
+```
+
+The confidence router decides **proceed / flag / defer** on its own. Output: a printed
+summary of the top leads + a self-contained HTML report in `outputs/`.
+
+Tests:
+```bash
 PYTHONPATH=.:../taxonagent/src ../taxonagent/venv/bin/python -m pytest tests/ -q
 ```
 

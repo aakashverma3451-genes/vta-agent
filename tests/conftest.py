@@ -38,9 +38,19 @@ def fake_esmfold_pdb(plddt: float = 85.0, n_res: int = 50) -> str:
 
 @pytest.fixture
 def mock_structure_net(monkeypatch):
-    """Patch both network seams in vta.nodes.structure."""
+    """Patch the structure network seams AND force pockets/docking to the mock path.
+
+    Tool auto-discovery (vta.toolconfig) now finds the locally-built fpocket/vina, so
+    without this a graph test would run real FPocket + real Vina (slow, networked,
+    non-deterministic). Forcing the binaries to None keeps the suite hermetic; the
+    real path is exercised separately by scripts/validate_controls.py.
+    """
+    import vta.nodes.docking as docking
+    import vta.nodes.pockets as pockets
     import vta.nodes.structure as structure
 
     monkeypatch.setattr(structure, "fetch_rcsb_pdb", lambda pdb_id: fake_complex_pdb())
     monkeypatch.setattr(structure, "fold_esmfold", lambda seq: fake_esmfold_pdb())
+    monkeypatch.setattr(pockets, "_fpocket_bin", lambda: None)
+    monkeypatch.setattr(docking, "_vina_bin", lambda: None)
     return structure

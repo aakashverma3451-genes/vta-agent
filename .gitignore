@@ -22,3 +22,7 @@ structures/
 
 # Generated HTML reports (regenerable via vta.report)
 outputs/*_report.html
+
+# Packaging / run artifacts
+*.egg-info/
+vta_run.log

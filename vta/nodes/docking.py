@@ -39,7 +39,8 @@ def _seed(*parts: str) -> int:
 
 # ── real Vina path ───────────────────────────────────────────────────────────
 def _vina_bin() -> str | None:
-    return os.environ.get("VINA_BIN") or shutil.which("vina")
+    from vta.toolconfig import find_tool
+    return find_tool("vina", "VINA_BIN")
 
 
 def _prep_available() -> bool:
