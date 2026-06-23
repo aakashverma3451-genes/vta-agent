@@ -80,6 +80,57 @@ DO NOT ship the regression — flag the research lead; `rank.py WEIGHTS["conserv
 = 0.10` is the recalibration knob. The report's "all 0.5 → planned" note must disappear
 on the real path.
 
+### SPEC #2 — prmtop handoff: make MM-GBSA runnable (md_simulate emits an Amber topology)  [UNCLAIMED]
+**Goal.** `md_analyze`'s MM-GBSA is wired and reads `result["parm"]`, but `md_simulate`
+never emits one — so production MM-GBSA can't run. Close the handoff: have `md_simulate`
+write a complex Amber topology and add its path to each completed result.
+
+**Tool (grounded).** ParmEd bridges OpenMM→Amber: `parmed.openmm.load_topology(topology,
+system, xyz=positions)` → `Structure`, then `.save("complex.prmtop")` + `.save(
+"complex.inpcrd")`. ParmEd natively translates an OpenMM System to Amber prmtop/inpcrd
+(parmed.github.io/ParmEd → amber package). Needs the PARAMETERISED system (forces set).
+
+**Design — `vta/nodes/md_simulate.py` ONLY.** Add `_check_parmed()` seam. After the
+production run, for each completed sim: ParmEd-save `<run_dir>/complex.prmtop` (+inpcrd),
+set `result["parm"] = <prmtop path>`. Graceful: ParmEd absent OR save throws → omit
+`parm` (md_analyze already prints the honest "no prmtop" note — DON'T duplicate it).
+Keep the existing OpenMM-absent skip untouched. Do NOT edit md_analyze.
+
+**Files.** `vta/nodes/md_simulate.py`, tests in `tests/test_md.py`. **Disjoint from
+SPEC #1 and #3** — no shared files. (md_simulate isn't in the default graph, so no
+conftest/graph edits.)
+
+**Tests (hermetic).** Monkeypatch the system build + `_check_parmed`/ParmEd save:
+assert a completed `result` carries `parm` when ParmEd present; omitted when absent.
+Then feed that result to `md_analyze._compute_mmgbsa` with a stubbed `_run_mmgbsa_tool`
+→ confirm it no longer returns the "no Amber topology" note.
+
+**Acceptance.** Full suite green + new tests. No validation-gate impact (MD is opt-in,
+not in the default-graph gate). Note in DONE that production MM-GBSA on a GPU host now
+has its topology.
+
+### SPEC #3 — refresh the ARCHITECTURE diagram to match the real graph  [UNCLAIMED]
+**Goal.** `ARCHITECTURE.md` A.2 state-machine (and A.1/A.3) are stale: they show
+`structure → pockets → dock → rank`, label `pockets`/`dock` as MOCK (both are REAL
+auto-discovered tools now), and omit `proteinttt`, `rescore`, `boltzina`, `admet`, the
+MD phase, and (pending #1) `conservation`. A half-fix is worse than honest-stale, so do
+the WHOLE pass.
+
+**Design — `ARCHITECTURE.md` ONLY (docs, no code/tests).** Make the diagram nodes+edges
+EXACTLY match `build_app()` in `vta/graph.py` HEAD: classify → router → structure →
+proteinttt → pockets → dock → rescore → boltzina → rank → admet → report, plus the
+opt-in MD phase (md_select → md_simulate → md_analyze → md_rerank). Update the
+green/orange legend: drop "mock" for pockets/dock; represent the honest real-vs-labelled-
+fallback reality instead. Refresh A.3 state-growth to include the fields added since
+(structures/proteinttt, rescore/boltzina annotations, admet, md_*).
+
+**Files.** `ARCHITECTURE.md` only. **Disjoint from #1 and #2.**
+
+**Sequencing.** Soft-depends on SPEC #1: if conservation has merged, include the
+`conservation` node; if not, add it with a "(pending SPEC #1)" note and finalise once #1
+lands. Acceptance: every node/edge in the diagram exists in `graph.py`; no node labelled
+mock that auto-discovers a real tool.
+
 ## DONE / HANDOFF
 - **[DB task FINISHED — session-a]** New `vta/data/pubchem.py` (PUG-REST name→SMILES);
   wired as a fallback in `ligands.py` so a ChEMBL miss is recovered from PubChem, not
