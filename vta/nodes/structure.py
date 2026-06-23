@@ -141,6 +141,16 @@ def fetch_alphafold(uniprot: str) -> str:
     return r.text
 
 
+def resolve_uniprot(query: str) -> str | None:
+    """Best-effort UniProt accession for a free-text protein query, or None.
+
+    Thin seam over `vta.data.uniprot` so tests can monkeypatch it (and so an offline
+    run with no cache simply returns None and falls through to the next fold method).
+    """
+    from vta.data.uniprot import resolve_accession
+    return resolve_accession(query)
+
+
 # ── pure helpers ─────────────────────────────────────────────────────────────
 def _uniprot_accession(prot: dict) -> str | None:
     """The protein's UniProt accession under any of the keys upstream may use."""
@@ -179,6 +189,18 @@ def structure_node(state: VTAState) -> VTAState:
         path = os.path.join(_OUT_DIR, f"{state['run_id']}_{name}.pdb")
         rec = {"pdb_path": None, "mean_plddt": None, "method": None, "source": None}
 
+        # Accession for the AlphaFold-DB fallback: an explicit field first, else a
+        # best-effort UniProt lookup from an opt-in free-text query — only worth it for
+        # the large orphan proteins that exceed the ESMFold ceiling.
+        acc = _uniprot_accession(prot)
+        if (acc is None and prot.get("uniprot_query")
+                and name not in EXPERIMENTAL_PDB and n > ESMFOLD_API_MAX_AA):
+            acc = resolve_uniprot(prot["uniprot_query"])
+            if acc:
+                state["audit_trail"].append(
+                    f"Structure[{name}]: resolved UniProt {acc} from query "
+                    f"'{prot['uniprot_query']}'")
+
         if name in EXPERIMENTAL_PDB:
             pdb_id, chain = EXPERIMENTAL_PDB[name]
             try:
@@ -213,10 +235,9 @@ def structure_node(state: VTAState) -> VTAState:
                 state["audit_trail"].append(
                     f"Structure[{name}]: WARNING ESMFold failed ({e}); no structure")
 
-        elif _uniprot_accession(prot):
+        elif acc:
             # > ESMFold ceiling but we have a UniProt accession — AlphaFold DB has no
             # length cap and serves a curated model (preferred over a local fold).
-            acc = _uniprot_accession(prot)
             try:
                 pdb_text = fetch_alphafold(acc)
                 plddt = mean_plddt(pdb_text)

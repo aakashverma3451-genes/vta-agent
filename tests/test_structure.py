@@ -97,6 +97,31 @@ def test_alphafold_used_for_large_protein_with_accession(monkeypatch, tmp_path):
     assert any("AlphaFold DB P03428" in line for line in out["audit_trail"])
 
 
+def test_uniprot_query_resolves_accession_then_alphafold(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    # >400 aa, no explicit accession, but an opt-in free-text query -> resolve via
+    # UniProt, then fold via AlphaFold DB. Resolver + AlphaFold are both seams.
+    monkeypatch.setattr(S, "resolve_uniprot", lambda q: "P03431")
+    monkeypatch.setattr(S, "fetch_alphafold", lambda acc: fake_esmfold_pdb(plddt=88.0))
+    st = _state({"NSP12": {"sequence": "M" * 600,    # novel name, not in EXPERIMENTAL_PDB
+                           "uniprot_query": "NSP12 SARS-CoV-2 RdRp"}})
+    out = S.structure_node(st)
+    rec = out["structures"]["NSP12"]
+    assert rec["method"] == "alphafold"
+    assert rec["source"] == "AlphaFold DB:P03431"
+    assert any("resolved UniProt P03431" in line for line in out["audit_trail"])
+
+
+def test_uniprot_query_unresolved_falls_through_to_refuse(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    # Resolver finds nothing and no Boltz-2 -> honest refusal, no crash.
+    monkeypatch.setattr(S, "resolve_uniprot", lambda q: None)
+    monkeypatch.setattr(S, "_boltz2_bin", lambda: None)
+    st = _state({"NSP12": {"sequence": "M" * 600, "uniprot_query": "gibberish"}})
+    out = S.structure_node(st)
+    assert out["structures"]["NSP12"]["method"] == "refused_too_long"
+
+
 def test_alphafold_404_degrades_gracefully(monkeypatch, tmp_path):
     monkeypatch.chdir(tmp_path)
     def not_found(acc):

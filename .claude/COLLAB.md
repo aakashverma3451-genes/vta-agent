@@ -28,9 +28,17 @@ A non-blocking pre-commit hook reminds you to update this file (it never blocks)
 ---
 
 ## ACTIVE WORK
-- _(none — claim your task here)_
+- **[MM-GBSA task]** Full MM-GBSA binding energy in `vta/nodes/md_analyze.py`
+  (gmx_MMPBSA/MMPBSA.py auto-detect + graceful skip), tests in `tests/test_md.py`.
+  LOCKED: `vta/nodes/md_analyze.py`, `tests/test_md.py`. NOT touching Session A's
+  files (structure.py / uniprot.py / databases.py) nor graph.py / conftest.py.
 
 ## DONE / HANDOFF
+- **[UniProt resolver — session-a]** New `vta/data/uniprot.py` (accession resolution +
+  sequence fetch, seam+cache+offline fallback). Opt-in hook in `structure.py`: a
+  `uniprot_query` on a >400aa orphan protein resolves an accession → AlphaFold DB.
+  Registry marks `uniprot` INTEGRATED. +7 uniprot tests, +2 structure tests; full
+  suite 67 passed (7 pre-existing classify_genome failures unrelated). Committing now.
 - **[setup]** Created this whiteboard + project `CLAUDE.md` check-in rule.
 - **[structure stage]** AlphaFold DB fallback wired into `vta/nodes/structure.py`
   (>400aa proteins with a UniProt accession now fetch from AlphaFold DB ahead of
