@@ -12,15 +12,18 @@ through this file and through git. **This file is the live status board.**
    branch so the change is real, not just announced here.
 4. Keep ACTIVE WORK to what's truly in flight. Stale locks block your partner.
 
-## Branch discipline
-- Each session works on its **own branch** (e.g. `session-a`, `session-b`),
-  commits small and often, and rebases/merges to `main` when a unit is done.
-- Use `git fetch && git log --all --oneline -15` to see the other session's actual
-  commits — git is the source of truth; this file is just intent.
+## Branch discipline — git worktrees (each session = own folder)
+Two terminals in the SAME folder share one working tree and one HEAD, so plain
+`git checkout` can't isolate them. Each session instead has its own **worktree**:
 
-## Session ids
-- **Session A** — _claim your terminal here_
-- **Session B** — _claim your terminal here_
+- **Session A** → `/Users/dna/Desktop/vtaagent/vta-agent`            branch `session-a`
+- **Session B** → `/Users/dna/Desktop/vtaagent/vta-agent-session-b`  branch `session-b`
+
+Session B's terminal must `cd` into the `-session-b` folder. Commit small and often;
+merge to `main` when a unit is done. Use `git log --all --oneline -15` to see the
+other session's real commits — git is the source of truth; this file is just intent.
+
+A non-blocking pre-commit hook reminds you to update this file (it never blocks).
 
 ---
 
@@ -35,6 +38,12 @@ through this file and through git. **This file is the live status board.**
   `alphafold` INTEGRATED. Tests: `tests/test_structure.py` (+2), all 19 pass.
 - **[databases]** Added `docs/databases.md`, `vta/data/databases.py` registry, and
   `tests/test_databases.py` (7 pass). Uncommitted on `master` as of this writing.
+
+## CONTENDED FILES (heads up)
+- `vta/nodes/structure.py` — Session A added the AlphaFold-DB fallback; a Boltz-2
+  branch from the other terminal landed in the same file. Both are interleaved and
+  uncommitted. Whoever commits it should keep BOTH cascades (ESMFold → AlphaFold →
+  Boltz-2) and re-run `tests/test_structure.py`.
 
 ## BLOCKED / NEEDS DECISION
 - _(none)_
