@@ -42,6 +42,11 @@ A non-blocking pre-commit hook reminds you to update this file (it never blocks)
   full cascade ESMFold (≤400aa) → AlphaFold DB (>400aa w/ accession) → Boltz-2
   (>400aa local) → honest refuse. Added 4 Boltz-2 tests; `tests/test_structure.py`
   now 12/12, full suite 59/59. Committed on `session-a`.
+- **[§2.3 ProteinTTT — session-a]** New `vta/nodes/proteinttt.py`: refines
+  low-pLDDT (<70) ESMFold folds via test-time training; experimental/AlphaFold/
+  Boltz-2 left untouched; graceful skip w/o the `proteinttt` package (this box).
+  Wired `structure → proteinttt → pockets`. +6 tests; full suite 65/65. Committed
+  on `session-a`.
 
 ## CONTENDED FILES (heads up)
 - _(none — `structure.py` merge resolved; both cascades committed)_

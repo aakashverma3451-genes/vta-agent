@@ -3,7 +3,7 @@
 Two build modes controlled by `build_app(include_md=False)`:
 
   Phase A (default, fast):
-    classify → route → structure → pockets → dock → rescore → rank → admet → report
+    classify → route → structure → proteinttt → pockets → dock → rescore → rank → admet → report
 
   Phase B (opt-in, slow — requires OpenMM + MDAnalysis):
     …same up to admet… → md_select → md_simulate → md_analyze → md_rerank → report
@@ -18,6 +18,7 @@ from langgraph.graph import END, StateGraph
 from vta.nodes.classify import classify_node
 from vta.nodes.docking import docking_node
 from vta.nodes.pockets import pockets_node
+from vta.nodes.proteinttt import proteinttt_node
 from vta.nodes.admet import admet_node
 from vta.nodes.md_select import md_select_node
 from vta.nodes.md_simulate import md_simulate_node
@@ -53,6 +54,7 @@ def build_app(include_md: bool = False):
     g.add_node("classify", classify_node)
     g.add_node("router", route_by_confidence)
     g.add_node(STRUCTURE_NODE, structure_node)
+    g.add_node("proteinttt", proteinttt_node)  # refine low-pLDDT ESMFold folds (§2.3)
     g.add_node("pockets", pockets_node)
     g.add_node("dock", docking_node)
     g.add_node("rescore", rescore_node)    # GNINA CNN re-score (annotation-only)
@@ -68,7 +70,8 @@ def build_app(include_md: bool = False):
         STRUCTURE_NODE: STRUCTURE_NODE,
         DEFER_NODE: DEFER_NODE,
     })
-    g.add_edge(STRUCTURE_NODE, "pockets")
+    g.add_edge(STRUCTURE_NODE, "proteinttt")  # TTT refinement (skips w/o package)
+    g.add_edge("proteinttt", "pockets")
     g.add_edge("pockets", "dock")
     g.add_edge("dock", "rescore")      # GNINA CNN re-score (skips w/o gnina binary)
     g.add_edge("rescore", "boltzina")  # Boltzina DL affinity (skips w/o package)

@@ -49,6 +49,7 @@ def mock_structure_net(monkeypatch):
     import vta.nodes.boltzina as boltzina
     import vta.nodes.docking as docking
     import vta.nodes.pockets as pockets
+    import vta.nodes.proteinttt as proteinttt
     import vta.nodes.structure as structure
 
     monkeypatch.setattr(structure, "fetch_rcsb_pdb", lambda pdb_id: fake_complex_pdb())
@@ -58,5 +59,6 @@ def mock_structure_net(monkeypatch):
     monkeypatch.setattr(pockets, "_p2rank_bin", lambda: None)         # no Java in CI
     monkeypatch.setattr(docking, "_vina_bin", lambda: None)
     monkeypatch.setattr(boltzina, "_boltzina_available", lambda: False)  # no GPU in CI
+    monkeypatch.setattr(proteinttt, "_proteinttt_available", lambda: False)  # no GPU in CI
     monkeypatch.setattr(admet, "_admet_available", lambda: False)        # no torch in CI
     return structure
