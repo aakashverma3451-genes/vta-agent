@@ -23,6 +23,7 @@ from vta.nodes.md_select import md_select_node
 from vta.nodes.md_simulate import md_simulate_node
 from vta.nodes.md_analyze import md_analyze_node
 from vta.nodes.md_rerank import md_rerank_node
+from vta.nodes.boltzina import boltzina_node
 from vta.nodes.rank import rank_node
 from vta.nodes.rescore import rescore_node
 from vta.nodes.report import report_node
@@ -54,7 +55,8 @@ def build_app(include_md: bool = False):
     g.add_node(STRUCTURE_NODE, structure_node)
     g.add_node("pockets", pockets_node)
     g.add_node("dock", docking_node)
-    g.add_node("rescore", rescore_node)    # DL CNN re-score seam (annotation-only)
+    g.add_node("rescore", rescore_node)    # GNINA CNN re-score (annotation-only)
+    g.add_node("boltzina", boltzina_node)  # Boltzina DL affinity seam (annotation-only)
     g.add_node("rank", rank_node)
     g.add_node("admet", admet_node)
     g.add_node(DEFER_NODE, defer_node)
@@ -68,8 +70,9 @@ def build_app(include_md: bool = False):
     })
     g.add_edge(STRUCTURE_NODE, "pockets")
     g.add_edge("pockets", "dock")
-    g.add_edge("dock", "rescore")      # DL CNN re-score (skips w/o gnina binary)
-    g.add_edge("rescore", "rank")
+    g.add_edge("dock", "rescore")      # GNINA CNN re-score (skips w/o gnina binary)
+    g.add_edge("rescore", "boltzina")  # Boltzina DL affinity (skips w/o package)
+    g.add_edge("boltzina", "rank")
     g.add_edge("rank", "admet")
     g.add_edge(DEFER_NODE, "report")
     g.add_edge("report", END)

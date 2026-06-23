@@ -46,6 +46,7 @@ def mock_structure_net(monkeypatch):
     real path is exercised separately by scripts/validate_controls.py.
     """
     import vta.nodes.admet as admet
+    import vta.nodes.boltzina as boltzina
     import vta.nodes.docking as docking
     import vta.nodes.pockets as pockets
     import vta.nodes.structure as structure
@@ -53,7 +54,8 @@ def mock_structure_net(monkeypatch):
     monkeypatch.setattr(structure, "fetch_rcsb_pdb", lambda pdb_id: fake_complex_pdb())
     monkeypatch.setattr(structure, "fold_esmfold", lambda seq: fake_esmfold_pdb())
     monkeypatch.setattr(pockets, "_fpocket_bin", lambda: None)
-    monkeypatch.setattr(pockets, "_p2rank_bin", lambda: None)     # no Java in CI
+    monkeypatch.setattr(pockets, "_p2rank_bin", lambda: None)         # no Java in CI
     monkeypatch.setattr(docking, "_vina_bin", lambda: None)
-    monkeypatch.setattr(admet, "_admet_available", lambda: False)  # don't load torch in CI
+    monkeypatch.setattr(boltzina, "_boltzina_available", lambda: False)  # no GPU in CI
+    monkeypatch.setattr(admet, "_admet_available", lambda: False)        # no torch in CI
     return structure
