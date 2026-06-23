@@ -31,6 +31,12 @@ A non-blocking pre-commit hook reminds you to update this file (it never blocks)
 - _(none — claim your task here)_
 
 ## DONE / HANDOFF
+- **[DB task FINISHED — session-a]** New `vta/data/pubchem.py` (PUG-REST name→SMILES);
+  wired as a fallback in `ligands.py` so a ChEMBL miss is recovered from PubChem, not
+  dropped. SwissADME reclassified CATALOGUED (web form, no public API; ADMET is done
+  locally via admet_ai). Registry now 6 INTEGRATED / 0 PLANNED / 23 CATALOGUED — nothing
+  dangling. +6 pubchem tests, +2 registry tests; full suite 82 passed (7 pre-existing
+  classify_genome failures unrelated).
 - **[MM-GBSA — md_analyze]** Full MM-GBSA binding free energy (ΔTOTAL) in
   `vta/nodes/md_analyze.py`: gmx_MMPBSA→MMPBSA.py auto-detect, real
   FINAL_RESULTS_MMPBSA.dat parser, subprocess seam, graceful labelled skip when the

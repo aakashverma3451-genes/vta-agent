@@ -27,7 +27,7 @@ integrated today** vs. catalogued for future work; keep the two in sync.
 | Database | What it provides | Wired |
 |----------|------------------|:-----:|
 | **ChEMBL** | Bioactive molecules + measured activity (IC50, Ki) | ✅ `data/ligands.py` |
-| **PubChem** | 100M+ compounds, bioassays, properties | ◐ planned |
+| **PubChem** | 100M+ compounds; name→SMILES fallback for ChEMBL misses | ✅ `data/pubchem.py` |
 | **DrugBank** | Approved/experimental drugs + targets + pharmacology | — |
 | **ZINC / ZINC20 / ZINC22** | Purchasable compounds for VS (billions) | — |
 | **Enamine REAL** | Make-on-demand library (40B+) | — |
@@ -64,7 +64,7 @@ integrated today** vs. catalogued for future work; keep the two in sync.
 *(relevant to the ADMET annotation node)*
 | Database | What it provides | Wired |
 |----------|------------------|:-----:|
-| **SwissADME** | ADME + drug-likeness predictions | ◐ planned |
+| **SwissADME** | ADME + drug-likeness (web form, no public API) | — |
 | **admetSAR / ADMETlab** | ADMET + toxicity predictions | — |
 | **Tox21 / ToxCast** | High-throughput toxicity screening data | — |
 | **CTD** | Chemical–gene–disease interactions | — |

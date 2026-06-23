@@ -93,9 +93,10 @@ DATABASES: tuple[Database, ...] = (
              api="https://www.ebi.ac.uk/chembl/api/data/molecule",
              wired_in="vta.data.ligands"),
     Database("pubchem", "PubChem", Category.LIGAND,
-             "100M+ compounds, bioassays, computed properties",
-             "https://pubchem.ncbi.nlm.nih.gov", Status.PLANNED,
-             api="https://pubchem.ncbi.nlm.nih.gov/rest/pug"),
+             "100M+ compounds; name→SMILES fallback when ChEMBL misses",
+             "https://pubchem.ncbi.nlm.nih.gov", Status.INTEGRATED,
+             api="https://pubchem.ncbi.nlm.nih.gov/rest/pug",
+             wired_in="vta.data.pubchem"),
     Database("drugbank", "DrugBank", Category.LIGAND,
              "Approved/experimental drugs + targets + pharmacology",
              "https://www.drugbank.com", Status.CATALOGUED),
@@ -145,9 +146,11 @@ DATABASES: tuple[Database, ...] = (
              "https://www.guidetopharmacology.org", Status.CATALOGUED),
 
     # 6. ADMET ----------------------------------------------------------------
+    # SwissADME is a web form with NO public API; the pipeline does real ADMET locally
+    # via admet_ai (the `admet` node), so this stays catalogued, not faked as wired.
     Database("swissadme", "SwissADME", Category.ADMET,
-             "ADME + drug-likeness predictions",
-             "http://www.swissadme.ch", Status.PLANNED),
+             "ADME + drug-likeness (web form, no public API)",
+             "http://www.swissadme.ch", Status.CATALOGUED),
     Database("admetlab", "ADMETlab / admetSAR", Category.ADMET,
              "ADMET + toxicity predictions",
              "https://admetmesh.scbdd.com", Status.CATALOGUED),

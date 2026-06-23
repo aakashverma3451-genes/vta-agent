@@ -48,11 +48,23 @@ def test_only_integrated_entries_claim_a_module():
 
 
 def test_known_real_sources_are_integrated():
-    # These two are genuinely pulled from today; lock that in.
+    # These are genuinely pulled from today; lock that in.
     assert db.get("rcsb_pdb").status is Status.INTEGRATED
     assert db.get("chembl").status is Status.INTEGRATED
     assert db.get("chembl").wired_in == "vta.data.ligands"
     assert db.get("rcsb_pdb").wired_in == "vta.nodes.structure"
+    # PubChem + UniProt + AlphaFold completed the structure/ligand integration set.
+    assert db.get("pubchem").wired_in == "vta.data.pubchem"
+    assert db.get("uniprot").wired_in == "vta.data.uniprot"
+    assert db.get("alphafold").wired_in == "vta.nodes.structure"
+
+
+def test_database_task_finished_nothing_left_planned():
+    # The DB task is "done" when no source is left dangling in PLANNED — every entry
+    # is either genuinely wired (INTEGRATED) or honestly CATALOGUED (no API / future).
+    assert db.by_status(Status.PLANNED) == [], (
+        "PLANNED entries remain — finish wiring them or reclassify as CATALOGUED")
+    assert len(db.integrated()) >= 6
 
 
 def test_summary_mentions_integrated_sources():

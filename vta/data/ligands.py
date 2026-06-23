@@ -88,21 +88,46 @@ def _fetch_one(name: str, timeout: int = 20, retries: int = 5) -> Optional[dict]
     return None
 
 
+def _resolve_via_pubchem(name: str) -> Optional[dict]:
+    """PubChem fallback for a ChEMBL miss: recover SMILES so the compound isn't dropped.
+
+    Thin seam over `vta.data.pubchem` (monkeypatched in tests). Returns a ligand dict
+    shaped like a ChEMBL entry but sourced from PubChem, or None if PubChem misses too.
+    """
+    from vta.data.pubchem import resolve_smiles
+    hit = resolve_smiles(name)
+    if not hit:
+        return None
+    return {
+        "chembl_id": None,
+        "pubchem_cid": hit["cid"],
+        "name": name.title(),
+        "smiles": hit["smiles"],
+        "max_phase": None,                               # unknown from PubChem alone
+        "positive_control": name in POSITIVE_CONTROLS,
+        "source": "PubChem",
+    }
+
+
 def refresh_ligands_from_chembl(
     names=None, cache_path: str = _CACHE_PATH, delay: float = 0.5
 ) -> list[dict]:
-    """Fetch the curated set from ChEMBL and write the cache. NETWORK access.
+    """Fetch the curated set from ChEMBL (PubChem fallback) and write the cache. NETWORK.
 
     `delay` is a politeness pause between molecules to stay under ChEMBL's rate limit.
+    A name ChEMBL can't resolve is retried against PubChem before being recorded as
+    genuinely missing — so coverage gaps in one source don't silently drop a compound.
     """
     names = names or CURATED_ANTIVIRALS
     ligands, missing = [], []
     for name in names:
-        lig = _fetch_one(name)
+        lig = _fetch_one(name) or _resolve_via_pubchem(name)
         (ligands.append(lig) if lig else missing.append(name))
         time.sleep(delay)
+    sources = sorted({lig.get("source", "ChEMBL") for lig in ligands})
     with open(cache_path, "w") as fh:
-        json.dump({"source": "ChEMBL", "ligands": ligands, "missing": missing}, fh, indent=2)
+        json.dump({"source": "+".join(sources) or "ChEMBL",
+                   "ligands": ligands, "missing": missing}, fh, indent=2)
     return ligands
 
 
