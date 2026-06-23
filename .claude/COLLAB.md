@@ -28,12 +28,16 @@ A non-blocking pre-commit hook reminds you to update this file (it never blocks)
 ---
 
 ## ACTIVE WORK
-- **[MM-GBSA task]** Full MM-GBSA binding energy in `vta/nodes/md_analyze.py`
-  (gmx_MMPBSA/MMPBSA.py auto-detect + graceful skip), tests in `tests/test_md.py`.
-  LOCKED: `vta/nodes/md_analyze.py`, `tests/test_md.py`. NOT touching Session A's
-  files (structure.py / uniprot.py / databases.py) nor graph.py / conftest.py.
+- _(none — claim your task here)_
 
 ## DONE / HANDOFF
+- **[MM-GBSA — md_analyze]** Full MM-GBSA binding free energy (ΔTOTAL) in
+  `vta/nodes/md_analyze.py`: gmx_MMPBSA→MMPBSA.py auto-detect, real
+  FINAL_RESULTS_MMPBSA.dat parser, subprocess seam, graceful labelled skip when the
+  engine OR the Amber topology (prmtop) is absent. Annotation-only (NOT in md_rerank).
+  HANDOFF: md_simulate should emit a `parm`/`prmtop` (ParmEd) so production runs have
+  a topology — node already reads `result["parm"]`. +8 tests in `tests/test_md.py`
+  (parser + skip/missing-topology/compute/failure + node-level). Full suite 82 passed.
 - **[UniProt resolver — session-a]** New `vta/data/uniprot.py` (accession resolution +
   sequence fetch, seam+cache+offline fallback). Opt-in hook in `structure.py`: a
   `uniprot_query` on a >400aa orphan protein resolves an accession → AlphaFold DB.
