@@ -36,6 +36,9 @@ class VTAState(TypedDict, total=False):
     pockets: Optional[Dict[str, List[Dict]]]   # {protein: [{id, center, druggability, ...}]}
 
     # --- Module 3: docking (mocked in Phase 1) ----------------------------
+    # docking records may gain cnn_score/cnn_affinity from the DL-rescore seam
+    # (rescore_node, Phase 3b) when gnina is present — annotation-only, ranking
+    # is unchanged until the term is calibrated against the validation gate.
     docking_results: Optional[List[Dict]]      # [{ligand, pocket, dG, rmsd, le, ...}]
     lead_candidates: Optional[List[Dict]]      # top-N ranked
 

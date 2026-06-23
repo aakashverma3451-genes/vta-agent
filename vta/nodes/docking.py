@@ -174,6 +174,9 @@ def _dock_real(state: VTAState, vina: str) -> VTAState:
                         "smiles": lig["smiles"], "positive_control": lig["positive_control"],
                         "dG": dG, "rmsd": 0.0, "le": round(dG / heavy, 3),
                         "heavy_atoms": heavy, "conservation": pocket["conservation"],
+                        # saved pose + receptor let the DL-rescore seam (rescore_node)
+                        # re-score this pose later without re-docking.
+                        "pose_path": out, "receptor_path": receptor,
                     })
                     n_docked += 1
                 except Exception as e:
