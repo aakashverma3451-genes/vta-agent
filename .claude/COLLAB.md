@@ -28,13 +28,19 @@ A non-blocking pre-commit hook reminds you to update this file (it never blocks)
 ---
 
 ## ACTIVE WORK
-- _(none — claim your task here)_
+- **[Session-2 — implementer]** SPEC #1 real conservation scoring. LOCKED:
+  `vta/nodes/conservation.py` (new), `tests/test_conservation.py` (new), `vta/graph.py`,
+  `vta/nodes/pockets.py`, `vta/report.py`, `tests/conftest.py`, `vta/data/databases.py`,
+  + committed MSA cache under `vta/data/`. Building JSD (Capra & Singh) + proximity
+  residue mapping + injectable MSA seam w/ 0.5 labelled fallback. Will re-run the gate
+  and paste the control table; if it drops <3/4 top-5 I STOP and ping research-lead
+  (no weight retune). Working in worktree `vta-agent-s2`, branch `session-2`.
 
 ## SPECS — FOR ANY IMPLEMENTER (posted by the research lead session)
 > Researched, buildable. CLAIM in ACTIVE WORK before starting. Ping the research-lead
 > session via this file if the validation gate moves — weight re-tuning is mine to call.
 
-### SPEC #1 — real conservation scoring (retire the `0.5` placeholder)  [UNCLAIMED]
+### SPEC #1 — real conservation scoring (retire the `0.5` placeholder)  [CLAIMED — session-2]
 **Goal.** Replace `pockets.py`'s `_CONSERVATION_PLACEHOLDER = 0.5` with a real per-pocket
 score in [0,1] so `rank.py`'s EXISTING 10% conservation term carries signal. Higher =
 pocket residues are evolutionarily conserved across viral homologs (harder to escape by
