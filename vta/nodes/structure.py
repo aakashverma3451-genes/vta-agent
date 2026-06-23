@@ -213,8 +213,29 @@ def structure_node(state: VTAState) -> VTAState:
                 state["audit_trail"].append(
                     f"Structure[{name}]: WARNING ESMFold failed ({e}); no structure")
 
+        elif _uniprot_accession(prot):
+            # > ESMFold ceiling but we have a UniProt accession — AlphaFold DB has no
+            # length cap and serves a curated model (preferred over a local fold).
+            acc = _uniprot_accession(prot)
+            try:
+                pdb_text = fetch_alphafold(acc)
+                plddt = mean_plddt(pdb_text)
+                with open(path, "w") as fh:
+                    fh.write(pdb_text)
+                flag = " (LOW CONFIDENCE)" if plddt < 70 else ""
+                rec.update(pdb_path=path, mean_plddt=plddt, method="alphafold",
+                           source=f"AlphaFold DB:{acc}")
+                state["audit_trail"].append(
+                    f"Structure[{name}]: AlphaFold DB {acc} ({n} aa > ESMFold "
+                    f"ceiling), mean pLDDT {plddt}{flag}")
+            except Exception as e:  # 404 (no model) / network — degrade, don't crash
+                rec["method"] = "alphafold_failed"
+                state["audit_trail"].append(
+                    f"Structure[{name}]: WARNING AlphaFold DB fetch failed for "
+                    f"{acc} ({e}); no structure")
+
         elif _boltz2_bin():
-            # > ESMFold ceiling but Boltz-2 is available — try it.
+            # > ESMFold ceiling, no accession, but Boltz-2 is available — try it.
             try:
                 result = fold_boltz2(seq, name, _OUT_DIR)
                 if result:
@@ -236,16 +257,17 @@ def structure_node(state: VTAState) -> VTAState:
                     f"Structure[{name}]: WARNING Boltz-2 failed ({e}); no structure")
 
         else:
-            # > API ceiling, no Boltz-2 → refuse honestly.
+            # > API ceiling, no UniProt accession, no Boltz-2 → refuse honestly.
             rec["method"] = "refused_too_long"
             state["audit_trail"].append(
                 f"Structure[{name}]: REFUSED — {n} aa > ESMFold API ceiling "
-                f"({ESMFOLD_API_MAX_AA}); install boltz for large-protein folding")
+                f"({ESMFOLD_API_MAX_AA}) with no UniProt accession for AlphaFold DB; "
+                f"install boltz for large-protein folding")
 
         structures[name] = rec
 
     state["structures"] = structures
-    used = "esm2 (api.esmatlas.com, ≤400aa) + experimental PDB"
+    used = "esm2 (api.esmatlas.com, ≤400aa) + experimental PDB + AlphaFold DB (>400aa)"
     if _boltz2_bin():
         used += " + Boltz-2 (>400aa)"
     state["versions"]["esmfold"] = used

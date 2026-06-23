@@ -81,6 +81,34 @@ def test_experimental_fetch_failure_degrades_gracefully(monkeypatch, tmp_path):
     assert rec["pdb_path"] is None
 
 
+# ── AlphaFold DB cascade (>400 aa with a UniProt accession) ───────────────────
+def test_alphafold_used_for_large_protein_with_accession(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    # >400 aa, not in EXPERIMENTAL_PDB, but carries a UniProt accession -> AlphaFold DB
+    # (no length cap) instead of refusing. Boltz-2 is available but must NOT be used.
+    monkeypatch.setattr(S, "fetch_alphafold", lambda acc: fake_esmfold_pdb(plddt=91.0))
+    monkeypatch.setattr(S, "_boltz2_bin", lambda: "boltz")
+    st = _state({"PB2": {"sequence": "K" * 450, "uniprot": "P03428"}})
+    out = S.structure_node(st)
+    rec = out["structures"]["PB2"]
+    assert rec["method"] == "alphafold"
+    assert rec["mean_plddt"] == 91.0
+    assert rec["source"] == "AlphaFold DB:P03428"
+    assert any("AlphaFold DB P03428" in line for line in out["audit_trail"])
+
+
+def test_alphafold_404_degrades_gracefully(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    def not_found(acc):
+        raise RuntimeError("HTTP 404")
+    monkeypatch.setattr(S, "fetch_alphafold", not_found)
+    st = _state({"PB2": {"sequence": "K" * 450, "accession": "Q99999"}})
+    out = S.structure_node(st)                         # must NOT raise
+    rec = out["structures"]["PB2"]
+    assert rec["method"] == "alphafold_failed"
+    assert rec["pdb_path"] is None
+
+
 # ── Boltz-2 cascade ──────────────────────────────────────────────────────────
 def test_boltz2_used_for_large_protein_when_available(monkeypatch, tmp_path):
     monkeypatch.chdir(tmp_path)

@@ -37,13 +37,14 @@ A non-blocking pre-commit hook reminds you to update this file (it never blocks)
   local Boltz-2; graceful 404 degrade). Registry `vta/data/databases.py` marks
   `alphafold` INTEGRATED. Tests: `tests/test_structure.py` (+2), all 19 pass.
 - **[databases]** Added `docs/databases.md`, `vta/data/databases.py` registry, and
-  `tests/test_databases.py` (7 pass). Uncommitted on `master` as of this writing.
+  `tests/test_databases.py` (7 pass). Committed in `cac9492`.
+- **[structure merge — session-a]** RESOLVED the contended `structure.py`: kept the
+  full cascade ESMFold (≤400aa) → AlphaFold DB (>400aa w/ accession) → Boltz-2
+  (>400aa local) → honest refuse. Added 4 Boltz-2 tests; `tests/test_structure.py`
+  now 12/12, full suite 59/59. Committed on `session-a`.
 
 ## CONTENDED FILES (heads up)
-- `vta/nodes/structure.py` — Session A added the AlphaFold-DB fallback; a Boltz-2
-  branch from the other terminal landed in the same file. Both are interleaved and
-  uncommitted. Whoever commits it should keep BOTH cascades (ESMFold → AlphaFold →
-  Boltz-2) and re-run `tests/test_structure.py`.
+- _(none — `structure.py` merge resolved; both cascades committed)_
 
 ## BLOCKED / NEEDS DECISION
 - _(none)_
