@@ -53,6 +53,7 @@ def mock_structure_net(monkeypatch):
     monkeypatch.setattr(structure, "fetch_rcsb_pdb", lambda pdb_id: fake_complex_pdb())
     monkeypatch.setattr(structure, "fold_esmfold", lambda seq: fake_esmfold_pdb())
     monkeypatch.setattr(pockets, "_fpocket_bin", lambda: None)
+    monkeypatch.setattr(pockets, "_p2rank_bin", lambda: None)     # no Java in CI
     monkeypatch.setattr(docking, "_vina_bin", lambda: None)
     monkeypatch.setattr(admet, "_admet_available", lambda: False)  # don't load torch in CI
     return structure

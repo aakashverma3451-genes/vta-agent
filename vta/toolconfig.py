@@ -31,6 +31,15 @@ _LOCAL = {
         _WS / "tools" / "vina",
         _REPO / "tools" / "vina",
     ],
+    # P2Rank ships as a shell wrapper called `prank` inside its distribution dir.
+    "prank": [
+        _WS / "tools" / "p2rank" / "prank",
+        _REPO / "tools" / "p2rank" / "prank",
+    ],
+    "gnina": [
+        _WS / "tools" / "gnina",
+        _REPO / "tools" / "gnina",
+    ],
 }
 
 

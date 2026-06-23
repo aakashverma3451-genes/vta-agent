@@ -111,6 +111,67 @@ def _pockets_fpocket(name: str, pdb_path: str, fpocket: str) -> list[dict]:
     return pockets[:_TOP_KEEP]
 
 
+# ── P2Rank consensus (§3.1) ──────────────────────────────────────────────────
+def _p2rank_bin() -> str | None:
+    from vta.toolconfig import find_tool
+    return find_tool("prank", "P2RANK_BIN")
+
+
+def _parse_p2rank(csv_path: str) -> list[dict]:
+    """Parse P2Rank predictions CSV → [{rank, score, center}]."""
+    results = []
+    try:
+        with open(csv_path) as fh:
+            for line in fh:
+                line = line.strip()
+                if not line or line.startswith("name"):
+                    continue
+                parts = [p.strip() for p in line.split(",")]
+                if len(parts) < 9:
+                    continue
+                results.append({
+                    "rank": int(parts[1]),
+                    "score": float(parts[2]),
+                    "probability": float(parts[3]),
+                    "center": [round(float(parts[6]), 3),
+                               round(float(parts[7]), 3),
+                               round(float(parts[8]), 3)],
+                })
+    except Exception:
+        pass
+    return sorted(results, key=lambda r: r["rank"])
+
+
+def _pockets_p2rank(pdb_path: str, p2rank: str, workdir: str) -> list[dict]:
+    """Run P2Rank on a PDB; return parsed pocket list (may be empty on failure)."""
+    out = os.path.join(workdir, "p2rank_out")
+    subprocess.run(
+        [p2rank, "predict", "-f", pdb_path, "-o", out],
+        capture_output=True, timeout=300,
+    )
+    stem = os.path.splitext(os.path.basename(pdb_path))[0]
+    csv = os.path.join(out, f"{stem}.pdb_predictions.csv")
+    if not os.path.exists(csv):
+        return []
+    return _parse_p2rank(csv)
+
+
+def _dist(a: list, b: list) -> float:
+    return sum((x - y) ** 2 for x, y in zip(a, b)) ** 0.5
+
+
+def _add_p2rank_consensus(pockets: list[dict], p2rank_pockets: list[dict],
+                          threshold: float = 4.0) -> None:
+    """Annotate each FPocket pocket with consensus=True if P2Rank agrees (in-place)."""
+    for p in pockets:
+        c = p.get("center") or []
+        if not c or not p2rank_pockets:
+            p["consensus"] = False
+            continue
+        p["consensus"] = any(_dist(c, r["center"]) <= threshold
+                             for r in p2rank_pockets[:3])
+
+
 # ── mock fallback (real-shaped, deterministic) ───────────────────────────────
 def _seed(*parts: str) -> int:
     return int(hashlib.md5("|".join(parts).encode()).hexdigest()[:8], 16)
@@ -133,20 +194,28 @@ def _pockets_mock(run_id: str, name: str) -> list[dict]:
 
 # ── node ─────────────────────────────────────────────────────────────────────
 def pockets_node(state: VTAState) -> VTAState:
-    """Real FPocket if available, else mock. Skips proteins with no structure."""
+    """Real FPocket + P2Rank consensus if available, else mock.
+
+    P2Rank runs as a parallel consensus check alongside FPocket: if both tools
+    locate a pocket within 4 Å, that pocket gets consensus=True — a stronger
+    prior for the docking box. Experimental active sites skip both detectors
+    (they're ground truth) and get consensus=True by default.
+    """
     fpocket = _fpocket_bin()
+    p2rank = _p2rank_bin()
     pockets, used_real = {}, False
     for name, struct in (state.get("structures") or {}).items():
         pdb = struct.get("pdb_path")
         if not pdb:
             state["audit_trail"].append(f"Pockets[{name}]: skipped (no structure)")
             continue
-        # Experimental-first: dock the substrate-marked catalytic site if we know it.
+        # Experimental-first: known active site, consensus implicit.
         if name in EXPERIMENTAL_ACTIVE_SITE:
             site = EXPERIMENTAL_ACTIVE_SITE[name]
             pockets[name] = [{
                 "id": 1, "center": site["center"], "volume": None,
                 "druggability": 1.0, "conservation": _CONSERVATION_PLACEHOLDER,
+                "consensus": True, "detectors": ["experimental"],
                 "method": "experimental_active_site", "source": site["source"],
             }]
             used_real = True
@@ -158,6 +227,28 @@ def pockets_node(state: VTAState) -> VTAState:
             try:
                 plist = _pockets_fpocket(name, pdb, fpocket)
                 used_real = True
+                # P2Rank consensus: annotate each FPocket pocket.
+                detectors = ["fpocket"]
+                if p2rank:
+                    try:
+                        pr = _pockets_p2rank(pdb, p2rank,
+                                             os.path.dirname(os.path.abspath(pdb)))
+                        _add_p2rank_consensus(plist, pr)
+                        detectors.append("p2rank")
+                        n_con = sum(1 for p in plist if p.get("consensus"))
+                        state["audit_trail"].append(
+                            f"P2Rank[{name}]: {len(pr)} pockets → "
+                            f"{n_con}/{len(plist)} FPocket pockets have consensus")
+                    except Exception as e:
+                        state["audit_trail"].append(
+                            f"P2Rank[{name}]: WARNING failed ({e}); skipping consensus")
+                        for p in plist:
+                            p["consensus"] = False
+                else:
+                    for p in plist:
+                        p["consensus"] = False
+                for p in plist:
+                    p["detectors"] = detectors
                 pockets[name] = plist
                 state["audit_trail"].append(
                     f"FPocket[{name}]: {len(plist)} pockets, "
@@ -173,6 +264,8 @@ def pockets_node(state: VTAState) -> VTAState:
             f"top druggability {plist[0]['druggability']}")
     state["pockets"] = pockets
     state["versions"]["pockets"] = "fpocket" if used_real else "MOCK-fpocket-shaped"
+    if p2rank and used_real:
+        state["versions"]["pockets"] += "+p2rank"
     return state
 
 

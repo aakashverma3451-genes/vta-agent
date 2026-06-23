@@ -42,6 +42,13 @@ class VTAState(TypedDict, total=False):
     docking_results: Optional[List[Dict]]      # [{ligand, pocket, dG, rmsd, le, ...}]
     lead_candidates: Optional[List[Dict]]      # top-N ranked
 
+    # --- Phase 4: MD validation (opt-in, include_md=True) ----------------
+    # Pocket records gain consensus:bool + detectors:[str] from P2Rank (§3.1).
+    md_candidates: Optional[List[Dict]]         # top-N leads selected for MD
+    md_results: Optional[Dict[str, Dict]]       # {ligand: {trajectory, status, ...}}
+    md_analysis: Optional[Dict[str, Dict]]      # {ligand: {rmsd, contacts, mmgbsa, verdict}}
+    md_validated_leads: Optional[List[Dict]]    # md_rerank output (md_score, md_badge)
+
     # --- Cross-cutting: audit + reproducibility ---------------------------
     audit_trail: List[str]                     # every decision, appended in order
     versions: Dict[str, str]                   # tool versions, for reproducibility

@@ -48,6 +48,9 @@ tr.ctrl { background:var(--ctrl); }
 .note { color:var(--mute); font-size:13px; margin:10px 2px 0; }
 .note b { color:var(--ink); }
 td.risk { color:var(--red); font-weight:600; }
+.stable{color:var(--green);font-weight:600;}
+.moderate{color:var(--amber);font-weight:600;}
+.unstable{color:var(--red);font-weight:600;}
 details { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:0 18px; }
 summary { cursor:pointer; padding:14px 0; font-weight:600; }
 pre { font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace; white-space:pre-wrap;
@@ -159,6 +162,45 @@ def _leads(state: VTAState) -> str:
     return f"<table>{head}{''.join(rows)}</table>{''.join(notes)}"
 
 
+def _md_section(state: VTAState) -> str:
+    leads = state.get("md_validated_leads") or []
+    if not leads:
+        return ""
+    head = ("<tr><th>#</th><th>Ligand</th><th>MD Verdict</th>"
+            "<th class='num'>RMSD (Å)</th><th class='num'>MM-GBSA</th>"
+            "<th>Key contacts</th><th class='num'>MD score</th></tr>")
+    rows = []
+    for i, r in enumerate(leads, 1):
+        det = r.get("md_details") or {}
+        rmsd = (det.get("rmsd") or {}).get("mean_rmsd")
+        mmgbsa = ((det.get("mmgbsa") or {}).get("mean_binding_energy"))
+        contacts_raw = (det.get("contacts") or {}).get("top_contacts") or []
+        contacts = ", ".join(k for k, _ in contacts_raw[:4]) or "—"
+        badge = r.get("md_badge", "—")
+        if "STABLE" in badge:
+            badge_html = f'<span class="stable">✓ {_esc(badge)}</span>'
+        elif "MODERATE" in badge:
+            badge_html = f'<span class="moderate">~ {_esc(badge)}</span>'
+        elif "UNSTABLE" in badge:
+            badge_html = f'<span class="unstable">✗ {_esc(badge)}</span>'
+        else:
+            badge_html = _esc(badge)
+        rows.append(
+            f'<tr><td class="num">{i}</td><td>{_esc(r.get("ligand"))}</td>'
+            f'<td>{badge_html}</td>'
+            f'<td class="num">{_esc(rmsd) if rmsd is not None else "—"}</td>'
+            f'<td class="num">{_esc(mmgbsa) if mmgbsa is not None else "pending"}</td>'
+            f'<td>{_esc(contacts)}</td>'
+            f'<td class="num">{_esc(r.get("md_score"))}</td></tr>'
+        )
+    note = ('<p class="note"><b>MD validation</b> (OpenMM, 100 ns NPT, AMBER ff14SB + '
+            'OpenFF 2.0): RMSD is mean ligand RMSD after backbone alignment. '
+            'STABLE &lt;2 Å, MODERATE 2–4 Å, UNSTABLE &gt;4 Å (Yamaotsu &amp; '
+            'Hirono 2016). MM-GBSA is pending AmberTools integration.</p>')
+    return (f"<h2>MD-validated leads</h2>"
+            f"<table>{head}{''.join(rows)}</table>{note}")
+
+
 def _audit(state: VTAState) -> str:
     lines = state.get("audit_trail") or []
     body = _esc("\n".join(lines)) or "(empty)"
@@ -189,6 +231,7 @@ def render_report(state: VTAState) -> str:
         f"{_structures(state)}"
         "<h2>Lead candidates</h2>"
         f"{_leads(state)}"
+        f"{_md_section(state)}"
         "<h2>Provenance</h2>"
         f"{_audit(state)}"
         f"{_footer(state)}"
