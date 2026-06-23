@@ -40,6 +40,11 @@ _LOCAL = {
         _WS / "tools" / "gnina",
         _REPO / "tools" / "gnina",
     ],
+    # Boltz-2: pip install boltz installs a `boltz` CLI entry-point.
+    "boltz": [
+        _WS / "tools" / "boltz",
+        _REPO / "tools" / "boltz",
+    ],
 }
 
 

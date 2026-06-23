@@ -79,3 +79,51 @@ def test_experimental_fetch_failure_degrades_gracefully(monkeypatch, tmp_path):
     rec = out["structures"]["PB1"]
     assert rec["method"] == "experimental_failed"
     assert rec["pdb_path"] is None
+
+
+# ── Boltz-2 cascade ──────────────────────────────────────────────────────────
+def test_boltz2_used_for_large_protein_when_available(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(S, "_boltz2_bin", lambda: "boltz")
+    monkeypatch.setattr(S, "fold_boltz2",
+                        lambda seq, name, out_dir: (str(tmp_path / f"{name}.pdb"), 74.5))
+
+    st = _state({"PB2": {"sequence": "K" * 450}})  # >400 aa, no experimental chain
+    out = S.structure_node(st)
+    rec = out["structures"]["PB2"]
+    assert rec["method"] == "boltz2"
+    assert rec["mean_plddt"] == 74.5
+    assert rec["pdb_path"] is not None
+    assert any("Boltz-2" in l for l in out["audit_trail"])
+    assert "Boltz-2" in out["versions"]["esmfold"]
+
+
+def test_boltz2_failure_still_records_no_structure(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(S, "_boltz2_bin", lambda: "boltz")
+    monkeypatch.setattr(S, "fold_boltz2", lambda *a, **kw: None)  # returns None
+
+    st = _state({"PB2": {"sequence": "K" * 450}})
+    out = S.structure_node(st)
+    assert out["structures"]["PB2"]["method"] == "boltz2_failed"
+    assert out["structures"]["PB2"]["pdb_path"] is None
+
+
+def test_boltz2_not_used_when_absent(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(S, "_boltz2_bin", lambda: None)
+
+    st = _state({"PB2": {"sequence": "K" * 450}})
+    out = S.structure_node(st)
+    # Without Boltz-2 it should fall back to refused_too_long
+    assert out["structures"]["PB2"]["method"] == "refused_too_long"
+
+
+def test_esmfold_still_used_below_ceiling_even_when_boltz2_present(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(S, "_boltz2_bin", lambda: "boltz")
+    monkeypatch.setattr(S, "fold_esmfold", lambda seq: fake_esmfold_pdb(plddt=80.0))
+
+    st = _state({"NS1": {"sequence": "Q" * 120}})   # <400 aa → ESMFold wins
+    out = S.structure_node(st)
+    assert out["structures"]["NS1"]["method"] == "esmfold"

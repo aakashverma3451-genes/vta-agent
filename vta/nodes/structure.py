@@ -1,34 +1,35 @@
 """structure_node (REAL) — produce a 3D structure for each extracted protein.
 
-Plan Task 2.1. Decision order per protein, in priority order:
+Decision order per protein, in priority order:
 
   1. EXPERIMENTAL-FIRST. If the subunit has a solved cryo-EM chain, fetch that PDB
-     and extract THAT CHAIN (not the whole complex — see snag #2). A real 2.4 Å
-     structure beats any prediction. Experimental structures get mean_plddt = None,
-     meaning "trusted ground truth", NOT "low/missing" — Phase-2 docking must treat
-     None as trusted (snag #3).
+     and extract THAT CHAIN. A real 2.4 Å structure beats any prediction.
+     Experimental structures get mean_plddt = None ("trusted ground truth").
 
-  2. ESMFold FALLBACK. For a protein with no experimental chain AND length within the
-     public API's ceiling, fold via api.esmatlas.com and compute mean pLDDT.
+  2. ESMFold (≤400 aa). For proteins within the public API ceiling, fold via
+     api.esmatlas.com and compute mean pLDDT.
 
-  3. REFUSE (honestly). The api.esmatlas.com endpoint has a HARD 400-residue ceiling
-     (probed: 413 "Sequence is longer than 400" at 500 aa; 504 timeout at 400 aa).
-     PB1 (~500) / PB2 (~450) exceed it. Rather than crash, we record pdb_path=None
-     with a clear reason so the graph proceeds and Phase 2 (local GPU ESMFold or
-     chunking) picks it up.
+  3. Boltz-2 (>400 aa). For large orphan proteins that ESMFold refuses (e.g. PB2
+     at 450 aa, TiLV segments 5–10), try the `boltz` CLI (Passaro et al. 2025,
+     bioRxiv:2025.06.14.659707). Needs the `boltz` package + a GPU for production;
+     degrades to step 4 if absent. Output CIF is converted to PDB via gemmi so the
+     rest of the pipeline (FPocket, Vina) sees a standard PDB file.
 
-Chain-mapping note (from the actual 8PSO/8PT2 COMPND records): chain A = PA-like,
-chain B = "putative PB1", chain C = RdRp. There is NO chain explicitly labelled
-PB2, so PB2 has no confident experimental structure here and falls to the ESMFold
-path (which then refuses, being >400 aa). This nomenclature gap is real and flagged,
-not hidden.
+  4. REFUSE (honestly). No experimental chain, no folding tool available → record
+     pdb_path=None with a clear reason so the graph proceeds without crashing.
 
-Network I/O goes through `fetch_rcsb_pdb` / `fold_esmfold` so tests can monkeypatch
-them and stay offline.
+Chain-mapping note (8PSO COMPND): chain A = PA-like, chain B = putative PB1,
+chain C = RdRp. No chain explicitly labelled PB2 → PB2 falls to ESMFold (refuses
+at 450 aa) then Boltz-2 if installed.
+
+Network I/O goes through `fetch_rcsb_pdb` / `fold_esmfold` / `fold_boltz2` so
+tests can monkeypatch them and stay offline.
 """
 from __future__ import annotations
 
 import os
+import subprocess
+import tempfile
 
 import requests
 
@@ -45,6 +46,61 @@ EXPERIMENTAL_PDB = {
 }
 
 _OUT_DIR = "structures"
+
+
+# ── Boltz-2 helpers ──────────────────────────────────────────────────────────
+def _boltz2_bin() -> str | None:
+    from vta.toolconfig import find_tool
+    return find_tool("boltz", "BOLTZ2_BIN")
+
+
+def _cif_to_pdb(cif_path: str, pdb_path: str) -> bool:
+    """Convert Boltz-2 CIF output → PDB using gemmi (already a dep via meeko)."""
+    try:
+        import gemmi
+        st = gemmi.read_structure(cif_path)
+        st.write_pdb(pdb_path)
+        return os.path.exists(pdb_path)
+    except Exception:
+        return False
+
+
+def fold_boltz2(sequence: str, name: str, out_dir: str) -> tuple[str, float] | None:
+    """Fold a protein with Boltz-2 CLI; return (pdb_path, mean_plddt) or None.
+
+    Boltz-2 input is a YAML file specifying the sequence. Output is a CIF in
+    <out_dir>/predictions/<name>_model_0.cif which we convert to PDB via gemmi.
+    Requires the `boltz` CLI (pip install boltz) and ideally a CUDA GPU; will
+    run on CPU but is very slow (minutes per protein).
+    """
+    boltz = _boltz2_bin()
+    if not boltz:
+        return None
+    with tempfile.TemporaryDirectory() as tmpdir:
+        # Write YAML input — protein-only (no ligand for structure prediction).
+        yaml_path = os.path.join(tmpdir, f"{name}.yaml")
+        with open(yaml_path, "w") as fh:
+            fh.write(f"sequences:\n  - protein:\n      id: A\n      sequence: {sequence}\n")
+        result = subprocess.run(
+            [boltz, "predict", yaml_path, "--out_dir", out_dir,
+             "--cache", os.path.join(out_dir, ".boltz_cache")],
+            capture_output=True, text=True, timeout=1800,  # 30 min ceiling
+        )
+        if result.returncode != 0:
+            return None
+        # Boltz-2 writes: <out_dir>/predictions/<yaml_stem>/<name>_model_0.cif
+        import glob
+        cifs = glob.glob(os.path.join(out_dir, "predictions", "**", "*.cif"),
+                         recursive=True)
+        if not cifs:
+            return None
+        cif_path = cifs[0]
+        pdb_path = os.path.join(out_dir, f"{name}_boltz2.pdb")
+        if not _cif_to_pdb(cif_path, pdb_path):
+            return None
+        # Boltz-2 writes confidence (pLDDT) in B-factor column, same as ESMFold.
+        plddt = mean_plddt(open(pdb_path).read())
+        return pdb_path, plddt
 
 
 # ── injectable network seams (monkeypatched in tests) ────────────────────────
@@ -67,7 +123,28 @@ def fold_esmfold(sequence: str) -> str:
     return r.text
 
 
+def fetch_alphafold(uniprot: str) -> str:
+    """Fetch a predicted structure from AlphaFold DB by UniProt accession.
+
+    AlphaFold DB has NO length ceiling (unlike the public ESMFold API's 400-aa cap)
+    and returns a curated model with no local GPU needed, so it's the natural fill
+    for large subunits like PB1/PB2 that ESMFold refuses. Like ESMFold/Boltz-2 it
+    stores per-residue pLDDT in the B-factor column, so `mean_plddt` applies
+    unchanged. Raises on HTTP error (404 = AlphaFold has no model for this
+    accession). Catalogued in `vta.data.databases` as key "alphafold".
+    """
+    r = requests.get(
+        f"https://alphafold.ebi.ac.uk/files/AF-{uniprot}-F1-model_v4.pdb",
+        timeout=60,
+    )
+    r.raise_for_status()
+    return r.text
+
+
 # ── pure helpers ─────────────────────────────────────────────────────────────
+def _uniprot_accession(prot: dict) -> str | None:
+    """The protein's UniProt accession under any of the keys upstream may use."""
+    return prot.get("uniprot") or prot.get("uniprot_id") or prot.get("accession")
 def extract_chain(pdb_text: str, chain: str) -> str:
     """Keep only the atom records for `chain` — the fix for whole-complex reuse."""
     keep = []
@@ -136,15 +213,40 @@ def structure_node(state: VTAState) -> VTAState:
                 state["audit_trail"].append(
                     f"Structure[{name}]: WARNING ESMFold failed ({e}); no structure")
 
+        elif _boltz2_bin():
+            # > ESMFold ceiling but Boltz-2 is available — try it.
+            try:
+                result = fold_boltz2(seq, name, _OUT_DIR)
+                if result:
+                    b2_path, plddt = result
+                    flag = " (LOW CONFIDENCE)" if plddt < 70 else ""
+                    rec.update(pdb_path=b2_path, mean_plddt=plddt,
+                               method="boltz2", source="boltz predict (local)")
+                    state["audit_trail"].append(
+                        f"Structure[{name}]: Boltz-2, {n} aa, "
+                        f"mean pLDDT {plddt}{flag}")
+                else:
+                    rec["method"] = "boltz2_failed"
+                    state["audit_trail"].append(
+                        f"Structure[{name}]: WARNING Boltz-2 produced no output; "
+                        f"no structure")
+            except Exception as e:
+                rec["method"] = "boltz2_failed"
+                state["audit_trail"].append(
+                    f"Structure[{name}]: WARNING Boltz-2 failed ({e}); no structure")
+
         else:
-            # > API ceiling and no experimental chain → refuse honestly.
+            # > API ceiling, no Boltz-2 → refuse honestly.
             rec["method"] = "refused_too_long"
             state["audit_trail"].append(
                 f"Structure[{name}]: REFUSED — {n} aa > ESMFold API ceiling "
-                f"({ESMFOLD_API_MAX_AA}); needs local ESMFold/chunking (Phase 2)")
+                f"({ESMFOLD_API_MAX_AA}); install boltz for large-protein folding")
 
         structures[name] = rec
 
     state["structures"] = structures
-    state["versions"]["esmfold"] = "esm2 (api.esmatlas.com, <=400aa) + experimental PDB"
+    used = "esm2 (api.esmatlas.com, ≤400aa) + experimental PDB"
+    if _boltz2_bin():
+        used += " + Boltz-2 (>400aa)"
+    state["versions"]["esmfold"] = used
     return state
