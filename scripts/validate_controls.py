@@ -17,6 +17,7 @@ import json
 
 from vta.nodes.docking import docking_node
 from vta.nodes.conservation import conservation_node
+from vta.nodes.conservation_contacts import conservation_contacts_node
 from vta.nodes.pockets import pockets_node
 from vta.nodes.rank import rank_node
 from vta.nodes.structure import structure_node
@@ -32,6 +33,7 @@ def main() -> None:
     st = pockets_node(st)        # real: FPocket
     st = conservation_node(st)   # real: per-pocket JSD over committed homolog MSA (SPEC #1)
     st = docking_node(st)        # real: Vina over all cached ligands
+    st = conservation_contacts_node(st)  # real: ligand-contact-weighted JSD (SPEC #4)
     st = rank_node(st)
 
     rows = sorted(st["docking_results"], key=lambda r: r["score"], reverse=True)

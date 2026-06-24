@@ -17,6 +17,7 @@ from langgraph.graph import END, StateGraph
 
 from vta.nodes.classify import classify_node
 from vta.nodes.conservation import conservation_node
+from vta.nodes.conservation_contacts import conservation_contacts_node
 from vta.nodes.docking import docking_node
 from vta.nodes.pockets import pockets_node
 from vta.nodes.proteinttt import proteinttt_node
@@ -59,6 +60,7 @@ def build_app(include_md: bool = False):
     g.add_node("pockets", pockets_node)
     g.add_node("conservation", conservation_node)  # real per-pocket JSD conservation (§SPEC#1)
     g.add_node("dock", docking_node)
+    g.add_node("conservation_contacts", conservation_contacts_node)  # ligand-weighted JSD (§SPEC#4)
     g.add_node("rescore", rescore_node)    # GNINA CNN re-score (annotation-only)
     g.add_node("boltzina", boltzina_node)  # Boltzina DL affinity seam (annotation-only)
     g.add_node("rank", rank_node)
@@ -76,7 +78,8 @@ def build_app(include_md: bool = False):
     g.add_edge("proteinttt", "pockets")
     g.add_edge("pockets", "conservation")   # overwrite 0.5 placeholder w/ real JSD (skips w/o MSA)
     g.add_edge("conservation", "dock")
-    g.add_edge("dock", "rescore")      # GNINA CNN re-score (skips w/o gnina binary)
+    g.add_edge("dock", "conservation_contacts")   # ligand-contact-weight conservation (§SPEC#4)
+    g.add_edge("conservation_contacts", "rescore")  # GNINA CNN re-score (skips w/o gnina binary)
     g.add_edge("rescore", "boltzina")  # Boltzina DL affinity (skips w/o package)
     g.add_edge("boltzina", "rank")
     g.add_edge("rank", "admet")
