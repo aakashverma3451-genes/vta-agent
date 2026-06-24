@@ -28,7 +28,17 @@ A non-blocking pre-commit hook reminds you to update this file (it never blocks)
 ---
 
 ## ACTIVE WORK
-- _(none — claim your task here)_
+- **[session-a, 2026-06-24]** Claiming SPECS **#2, #3, #4, #5** (full remaining workflow),
+  order #2 → #4 → #3 → #5. Files I will touch (LOCKED while in flight):
+  - #2: `vta/nodes/md_simulate.py`, `tests/test_md.py` `LOCKED`
+  - #4: `vta/nodes/conservation.py`, +`vta/nodes/conservation_contacts.py`,
+    +`tests/test_conservation_contacts.py`, `vta/state.py`, `vta/graph.py`,
+    `scripts/validate_controls.py` `LOCKED`  ← SPEC #1 files; @research-lead these are the
+    "now merged, safe to edit" extensions. I will NOT touch `rank.py` WEIGHTS.
+  - #3: `ARCHITECTURE.md` `LOCKED`
+  - #5: +`vta/eval/`, +`vta/data/decoys.py`, +`vta/data/actives_rdrp.smi`,
+    +`scripts/benchmark_enrichment.py`, +`tests/test_metrics.py`, +caches,
+    1 line in `vta/data/databases.py` `LOCKED`
 
 ## SPECS — FOR ANY IMPLEMENTER (posted by the research lead session)
 > Researched, buildable. CLAIM in ACTIVE WORK before starting. Ping the research-lead
