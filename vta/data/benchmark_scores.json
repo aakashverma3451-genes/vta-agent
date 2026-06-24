@@ -1,53 +1,52 @@
 {
-  "_provenance": "REAL AutoDock Vina scores from scripts/validate_controls.py (committed outputs/validation_controls.json). Actives = nucleotide-analog RdRp inhibitors (positive_control); decoys = mechanism-distinct antivirals (protease/NS5A/cap-endonuclease) that do not bind the NTP site. Real scores, small N (gate set) \u2014 see SPEC #5 caveats.",
+  "_provenance": "REAL AutoDock Vina scores from scripts/validate_controls.py (committed outputs/validation_controls.json), CURRENT pipeline incl. SPEC #1 + #4 ligand-contact-weighted conservation. Actives = nucleotide-analog RdRp inhibitors; decoys = mechanism-distinct antivirals (protease/NS5A/cap-endonuclease) that do not bind the NTP site. Real scores, small N (gate set) \u2014 see SPEC #5 caveats.",
   "target": "TiLV PB1 (8PSO chain B), NTP site",
-  "scored_by": "rank_node composite (LE 0.55 / dG 0.35 / cons 0.10)",
   "entries": [
     {
       "name": "Ribavirin",
-      "score": 0.6,
+      "score": 0.635,
       "dG": -6.788,
       "positive_control": true
     },
     {
       "name": "Sofosbuvir",
-      "score": 0.5451,
+      "score": 0.5798,
       "dG": -8.514,
       "positive_control": true
     },
     {
       "name": "Lopinavir",
-      "score": 0.4982,
+      "score": 0.5324,
       "dG": -8.8,
       "positive_control": false
     },
     {
       "name": "Molnupiravir",
-      "score": 0.4095,
+      "score": 0.4448,
       "dG": -6.892,
       "positive_control": true
     },
     {
       "name": "Ledipasvir",
-      "score": 0.4,
+      "score": 0.4355,
       "dG": -8.891,
       "positive_control": false
     },
     {
       "name": "Remdesivir",
-      "score": 0.3842,
+      "score": 0.419,
       "dG": -8.09,
       "positive_control": true
     },
     {
       "name": "Nirmatrelvir",
-      "score": 0.3679,
+      "score": 0.4012,
       "dG": -7.664,
       "positive_control": false
     },
     {
       "name": "Baloxavir Marboxil",
-      "score": 0.3284,
+      "score": 0.3633,
       "dG": -7.742,
       "positive_control": false
     }

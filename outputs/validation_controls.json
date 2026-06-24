@@ -11,10 +11,10 @@
       "rmsd": 0.0,
       "le": -0.399,
       "heavy_atoms": 17,
-      "conservation": 0.5,
+      "conservation": 0.85,
       "pose_path": "structures/validation_PB1_CHEMBL1643_p1.pdbqt",
       "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.6
+      "score": 0.635
     },
     {
       "protein": "PB1",
@@ -27,10 +27,10 @@
       "rmsd": 0.0,
       "le": -0.236,
       "heavy_atoms": 36,
-      "conservation": 0.5,
+      "conservation": 0.847,
       "pose_path": "structures/validation_PB1_CHEMBL1259059_p1.pdbqt",
       "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.5451
+      "score": 0.5798
     },
     {
       "protein": "PB1",
@@ -43,10 +43,10 @@
       "rmsd": 0.0,
       "le": -0.191,
       "heavy_atoms": 46,
-      "conservation": 0.5,
+      "conservation": 0.842,
       "pose_path": "structures/validation_PB1_CHEMBL729_p1.pdbqt",
       "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.4982
+      "score": 0.5324
     },
     {
       "protein": "PB1",
@@ -59,10 +59,10 @@
       "rmsd": 0.0,
       "le": -0.3,
       "heavy_atoms": 23,
-      "conservation": 0.5,
+      "conservation": 0.853,
       "pose_path": "structures/validation_PB1_CHEMBL4650320_p1.pdbqt",
       "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.4095
+      "score": 0.4448
     },
     {
       "protein": "PB1",
@@ -75,10 +75,10 @@
       "rmsd": 0.0,
       "le": -0.137,
       "heavy_atoms": 65,
-      "conservation": 0.5,
+      "conservation": 0.855,
       "pose_path": "structures/validation_PB1_CHEMBL2374220_p1.pdbqt",
       "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.4
+      "score": 0.4355
     },
     {
       "protein": "PB1",
@@ -91,10 +91,10 @@
       "rmsd": 0.0,
       "le": -0.193,
       "heavy_atoms": 42,
-      "conservation": 0.5,
+      "conservation": 0.848,
       "pose_path": "structures/validation_PB1_CHEMBL4065616_p1.pdbqt",
       "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.3842
+      "score": 0.419
     },
     {
       "protein": "PB1",
@@ -107,10 +107,10 @@
       "rmsd": 0.0,
       "le": -0.219,
       "heavy_atoms": 35,
-      "conservation": 0.5,
+      "conservation": 0.833,
       "pose_path": "structures/validation_PB1_CHEMBL4802135_p1.pdbqt",
       "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.3679
+      "score": 0.4012
     },
     {
       "protein": "PB1",
@@ -123,10 +123,10 @@
       "rmsd": 0.0,
       "le": -0.194,
       "heavy_atoms": 40,
-      "conservation": 0.5,
+      "conservation": 0.849,
       "pose_path": "structures/validation_PB1_CHEMBL4297503_p1.pdbqt",
       "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.3284
+      "score": 0.3633
     }
   ],
   "controls_in_top": 3,

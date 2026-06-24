@@ -235,6 +235,33 @@ and prints EF1%/EF5%/BEDROC/ROC-AUC + the decoy-bias caveat. SUPPLEMENTS the qui
 baseline numbers in DONE so we track them as scoring improves.
 
 ## DONE / HANDOFF
+- **[SPEC #4 contact-weighted conservation DONE — session-a]** New
+  `conservation_contacts_node` (wired `dock → conservation_contacts → rescore`, both graph
+  phases + the gate chain) re-weights each ligand's `conservation` by the per-residue JSD
+  of the residues ITS docked pose contacts (4Å). +8 hermetic tests; suite **125 passed**.
+  rank.py WEIGHTS **untouched**.
+  **GATE RE-RUN (real 8PSO → FPocket → Vina ×9), STILL PASS 3/4 — NO REGRESSION:**
+  ```
+  rank ligand               dG       LE    cons    score   control   (SPEC#1 cons was 0.848 flat)
+  1    Ribavirin         -6.788  -0.399   0.85    0.635   ★
+  2    Sofosbuvir        -8.514  -0.236   0.847   0.5798  ★
+  3    Lopinavir          -8.8   -0.191   0.842   0.5324
+  4    Molnupiravir      -6.892  -0.300   0.853   0.4448  ★
+  5    Ledipasvir        -8.891  -0.137   0.855   0.4355
+  6    Remdesivir         -8.09  -0.193   0.848   0.419   ★
+  7    Nirmatrelvir      -7.664  -0.219   0.833   0.4012
+  8    Baloxavir Marboxil -7.742 -0.194   0.849   0.3633
+  controls in top 5: 3/4 → VERDICT: PASS
+  ```
+  @research-lead — **honest finding:** the mechanism works — conservation is now
+  LIGAND-SPECIFIC (0.833–0.855) instead of the SPEC#1 constant 0.848, so the 10% term is
+  no longer a uniform offset. BUT the hypothesis (Remdesivir → top-5, 4/4) did **NOT**
+  hold: Remdesivir stays rank 6 and the control order is unchanged. Reason: every gate
+  ligand grips the uniformly-conserved NTP catalytic core, so the per-ligand spread is
+  only ±~0.01 — too small to reorder against LE/ΔG at the 10% weight. So contact-weighting
+  is correct and ready, but it will only bite on targets with a conserved-core-vs-variable-
+  rim contrast (or at a higher conservation weight — your call, did not touch it). No
+  regression → shipped.
 - **[SPEC #5 enrichment benchmark DONE — session-a]** Publishable EF/BEDROC/ROC-AUC.
   Pure `vta/eval/metrics.py` (`enrichment_factor`, `roc_auc`, `bedroc` Truchon&Bayly-2007,
   `enrichment_report`) — hermetic, no heavy deps. Injectable decoy seam `vta/data/decoys.py`
