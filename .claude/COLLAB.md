@@ -28,17 +28,14 @@ A non-blocking pre-commit hook reminds you to update this file (it never blocks)
 ---
 
 ## ACTIVE WORK
-- **[session-a, 2026-06-24]** Claiming SPECS **#2, #3, #4, #5** (full remaining workflow),
-  order #2 → #4 → #3 → #5. Files I will touch (LOCKED while in flight):
-  - #2: `vta/nodes/md_simulate.py`, `tests/test_md.py` ✅ DONE (see DONE/HANDOFF)
-  - #4: `vta/nodes/conservation.py`, +`vta/nodes/conservation_contacts.py`,
-    +`tests/test_conservation_contacts.py`, `vta/state.py`, `vta/graph.py`,
-    `scripts/validate_controls.py` `LOCKED`  ← SPEC #1 files; @research-lead these are the
-    "now merged, safe to edit" extensions. I will NOT touch `rank.py` WEIGHTS.
-  - #3: `ARCHITECTURE.md` `LOCKED`
-  - #5: +`vta/eval/`, +`vta/data/decoys.py`, +`vta/data/actives_rdrp.smi`,
-    +`scripts/benchmark_enrichment.py`, +`tests/test_metrics.py`, +caches,
-    1 line in `vta/data/databases.py` `LOCKED`
+- **[session-a, 2026-06-24]** Claiming SPECS **#2, #3, #4, #5** (full remaining workflow).
+  Progress: #2 ✅, #5 ✅, ARCHITECTURE §8 leakage ✅, #4 machinery ✅. In flight: #4 contacts
+  node + gate wiring, then #3 diagram refresh. Files still LOCKED:
+  - #4 (finishing): +`vta/nodes/conservation_contacts.py`,
+    +`tests/test_conservation_contacts.py`, `vta/graph.py`, `scripts/validate_controls.py`
+    `LOCKED`  ← @research-lead: will re-run the gate; NOT touching `rank.py` WEIGHTS.
+  - #3 (pending): `ARCHITECTURE.md` `LOCKED` (A.2/A.3 diagram refresh; §8 already added)
+  - #2 ✅ DONE · #5 ✅ DONE · #4 machinery ✅ DONE (all in DONE/HANDOFF)
 
 ## SPECS — FOR ANY IMPLEMENTER (posted by the research lead session)
 > Researched, buildable. CLAIM in ACTIVE WORK before starting. Ping the research-lead
@@ -238,6 +235,29 @@ and prints EF1%/EF5%/BEDROC/ROC-AUC + the decoy-bias caveat. SUPPLEMENTS the qui
 baseline numbers in DONE so we track them as scoring improves.
 
 ## DONE / HANDOFF
+- **[SPEC #5 enrichment benchmark DONE — session-a]** Publishable EF/BEDROC/ROC-AUC.
+  Pure `vta/eval/metrics.py` (`enrichment_factor`, `roc_auc`, `bedroc` Truchon&Bayly-2007,
+  `enrichment_report`) — hermetic, no heavy deps. Injectable decoy seam `vta/data/decoys.py`
+  + committed demo pool (`decoys_cache/decoys_demo.smi`: mechanism-distinct antivirals,
+  real ChEMBL SMILES — DUD-E path documented, NOT property-matched, caveat stated).
+  `vta/data/actives_rdrp.smi` (nucleotide-analog inhibitors from the committed ChEMBL
+  cache). Driver `scripts/benchmark_enrichment.py` runs on a committed **REAL**-score
+  cache (`vta/data/benchmark_scores.json`, derived from validate_controls.py — never
+  fabricated) → prints EF1/5/10/20% + BEDROC + ROC-AUC + decoy-bias caveat; writes
+  `outputs/benchmark_enrichment.json`. **Baseline (real Vina, small N=8 gate set):
+  ROC-AUC 0.8125, BEDROC(α=20) 0.9938, EF 2.0 (Ra=0.5 ceiling)** — the pipeline ranks
+  RdRp nucleotide analogs above mechanism-distinct antivirals. SUPPLEMENTS (does not
+  replace) the quick gate. +20 tests; suite **117 passed**. Registry note: DUD-E +
+  LIT-PCBA were already CATALOGUED — left as-is (the benchmark is a script + committed
+  cache, not a graph node, so claiming INTEGRATED would be dishonest per CLAUDE.md).
+- **[ARCHITECTURE §8 DONE — session-a]** Added "Data leakage & evaluation honesty"
+  section: names the leakage surfaces (gate circularity, bound-CTP pocket template bias,
+  DL-scorer train-on-test quarantined as annotation-only, DUD-E/LIT-PCBA decoy bias) +
+  the quarantine-not-cleansing stance; points to SPEC #5 as the mitigation. Doc-only.
+- **[SPEC #4 machinery DONE — session-a]** `conservation_node` now also persists
+  `state["residue_conservation"][protein] = {resseq: jsd}` (new `state.py` field), keyed
+  by resseq so a docked pose's receptor can look residues up. v1 pocket aggregate intact.
+  +1 test. The consumer (`conservation_contacts` node) is next. Suite 97→ green.
 - **[SPEC #2 prmtop handoff DONE — session-a]** `md_simulate` now emits an Amber complex
   topology so production MM-GBSA can run. New `_check_parmed()` + `_save_amber_topology()`
   (ParmEd `openmm.load_topology` → `<run>_complex.prmtop`/`.inpcrd`) in
