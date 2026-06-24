@@ -34,6 +34,10 @@ class VTAState(TypedDict, total=False):
 
     # --- Module 2b: pockets (Phase 2; mocked now) -------------------------
     pockets: Optional[Dict[str, List[Dict]]]   # {protein: [{id, center, druggability, ...}]}
+    # Per-residue conservation (JSD) keyed by resseq, written by conservation_node
+    # alongside the pocket aggregate. conservation_contacts_node (SPEC #4) reads it to
+    # weight each ligand by the conservation of the residues ITS pose contacts.
+    residue_conservation: Optional[Dict[str, Dict]]  # {protein: {resseq: jsd}}
 
     # --- Module 3: docking (mocked in Phase 1) ----------------------------
     # docking records may gain cnn_score/cnn_affinity from the DL-rescore seam
