@@ -27,7 +27,8 @@ from vta.state import VTAState
 
 _N_POCKETS = 3
 _TOP_KEEP = 3
-# conservation isn't computed yet (needs an MSA); neutral so ranking stays balanced.
+# Neutral seed for conservation; the downstream `conservation` node (SPEC #1) overwrites
+# this with a real per-pocket JSD score when a homolog MSA is available, else it stays 0.5.
 _CONSERVATION_PLACEHOLDER = 0.5
 
 # Known catalytic/active sites, taken from the BOUND SUBSTRATE in the experimental

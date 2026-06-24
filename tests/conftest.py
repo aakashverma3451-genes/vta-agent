@@ -47,6 +47,7 @@ def mock_structure_net(monkeypatch):
     """
     import vta.nodes.admet as admet
     import vta.nodes.boltzina as boltzina
+    import vta.nodes.conservation as conservation
     import vta.nodes.docking as docking
     import vta.nodes.pockets as pockets
     import vta.nodes.proteinttt as proteinttt
@@ -61,4 +62,6 @@ def mock_structure_net(monkeypatch):
     monkeypatch.setattr(boltzina, "_boltzina_available", lambda: False)  # no GPU in CI
     monkeypatch.setattr(proteinttt, "_proteinttt_available", lambda: False)  # no GPU in CI
     monkeypatch.setattr(admet, "_admet_available", lambda: False)        # no torch in CI
+    monkeypatch.setattr(conservation, "fetch_homolog_msa",
+                        lambda seq, taxon=None: None)   # no MSA in CI → labelled 0.5
     return structure

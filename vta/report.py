@@ -153,7 +153,12 @@ def _leads(state: VTAState) -> str:
     ]
     if all((r.get("conservation") == 0.5) for r in leads):
         notes.append('<p class="note"><b>Conservation:</b> shown as a 0.5 placeholder — '
-                     'MSA-based pocket conservation is planned (a 10% term in the score).</p>')
+                     'no homolog MSA was available, so the real JSD score (a 10% term in '
+                     'the score) fell back to neutral for this run.</p>')
+    else:
+        notes.append('<p class="note"><b>Conservation:</b> real per-pocket Jensen–Shannon '
+                     'divergence vs background (Capra &amp; Singh 2007) over a homolog MSA; '
+                     'higher = more evolutionarily conserved (a 10% term in the score).</p>')
     if has_admet:
         notes.append('<p class="note"><b>ADMET</b> (ADMET-AI): hERG = cardiotoxicity '
                      'probability (lower better; red = >0.5 risk), oral = predicted oral '

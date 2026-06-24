@@ -85,6 +85,11 @@ DATABASES: tuple[Database, ...] = (
     Database("opm", "OPM", Category.STRUCTURE,
              "Orientations of Proteins in Membranes",
              "https://opm.phar.umich.edu", Status.CATALOGUED),
+    Database("homolog_msa", "Homolog MSA (NCBI/UniProt + MAFFT)", Category.STRUCTURE,
+             "Viral homolog alignments → per-pocket JSD conservation (SPEC #1)",
+             "https://mafft.cbrc.jp/alignment/software/", Status.INTEGRATED,
+             api="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/",
+             wired_in="vta.data.msa"),
 
     # 2. Ligand libraries -----------------------------------------------------
     Database("chembl", "ChEMBL", Category.LIGAND,
