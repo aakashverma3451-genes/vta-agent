@@ -339,6 +339,62 @@ structural biology before Phase 2 docks PB2.
 
 ---
 
+## 8. Data leakage & evaluation honesty
+
+For a virtual-screening pipeline the failure mode that silently inflates results is not
+a crashed node — it is **data leakage**: information from the answer sneaking into the
+prediction, so the numbers look great and generalise to nothing. There is **no single
+"anti-leakage" node**; leakage is a cross-cutting concern that lives at specific points
+in the graph. We name them explicitly here rather than letting a reviewer find them.
+
+```mermaid
+flowchart TD
+    pockets["pockets<br/>⚠ box = 8PSO bound-CTP site"]:::leak --> conservation["conservation<br/>(MSA row0 = target — standard, not leakage)"]:::ok
+    conservation --> dock["dock — Vina (physics, no training)"]:::ok
+    dock --> rescore["rescore — GNINA CNN<br/>⚠ trained on PDBBind/CrossDocked"]:::leak
+    rescore --> boltzina["boltzina — Boltz-2<br/>⚠ trained on the PDB"]:::leak
+    boltzina --> rank["rank — LE-led<br/>DL terms NOT folded in → leakage quarantined"]:::ok
+    rank -.audited by.-> gate["validate_controls.py<br/>⚠ controls = KNOWN inhibitors (circular sanity check)"]:::leak
+    rank -.benchmarked by.-> bench["enrichment benchmark (SPEC #5)<br/>property-matched decoys + DUD-E/LIT-PCBA caveat<br/>= the real mitigation"]:::fix
+    classDef ok fill:#d5f5e3,stroke:#1e8449,color:#000;
+    classDef leak fill:#fadbd8,stroke:#c0392b,color:#000;
+    classDef fix fill:#d6eaf8,stroke:#2471a3,color:#000,stroke-dasharray:5 3;
+```
+
+**The leakage surfaces, ranked by how much they can fool you:**
+
+1. **Evaluation circularity — the validation gate (highest).** `scripts/
+   validate_controls.py` asks *"do the known RdRp inhibitors rank top?"* The controls are
+   chosen **because** they are known actives, so a PASS is a sanity check, **not** held-out
+   evidence. It is the fast pre-commit guard, not a benchmark — which is exactly why SPEC
+   #5 exists.
+2. **Pocket-definition leakage (high, subtle).** The docking box is centered on the
+   **8PSO bound-CTP / NTP site** (`pockets.py` experimental active site). Defining the box
+   from a co-crystallised *nucleotide* biases docking toward *nucleoside analogs* — which
+   are the very controls. Part of the gate's PASS is template bias, not pure
+   discrimination. Honest, but it must be stated.
+3. **DL-scorer train-on-test (high *potential*, currently quarantined).** GNINA's CNN
+   (PDBBind/CrossDocked) and Boltzina/Boltz-2 (the PDB) were very likely trained on
+   complexes overlapping these targets/ligands. The deliberate defense is that both are
+   **annotation-only** — `rank.py` does **not** fold `cnn_*`/Boltzina into the score — so
+   their leakage **cannot contaminate ranking today**. The moment that term is blended in,
+   this becomes the dominant risk and the gate must be re-validated on held-out data first.
+4. **Benchmark/decoy bias (the SPEC #5 concern itself).** DUD-E has documented analog bias
+   that inflates scores; even LIT-PCBA had leakage found in a 2025 audit. The enrichment
+   benchmark must therefore **print the decoy-bias caveat** in its own output and not
+   over-claim.
+5. **Not leakage:** the conservation MSA carrying the target as row 0 is standard — JSD is
+   computed against a fixed background distribution, not against held-out homologs.
+
+**The architecture's stance today is *quarantine, not cleansing*:** keep every learned or
+biased signal annotation-only until it is validated against held-out data. The real
+mitigation — a retrospective **enrichment benchmark** with property-matched decoys and an
+explicit decoy-bias caveat — is SPEC #5 (`vta/eval/metrics.py` + `scripts/
+benchmark_enrichment.py`), the honest-evaluation layer that turns "controls recover" into
+EF1%/BEDROC/ROC-AUC numbers a reviewer accepts.
+
+---
+
 ## Appendix A — Mermaid diagrams (GitHub / IDE-rendered)
 
 The ASCII diagrams above render anywhere (terminals, plain text). These Mermaid
