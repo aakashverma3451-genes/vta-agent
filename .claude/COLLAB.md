@@ -183,6 +183,50 @@ conserved catalytic core) UP — Remdesivir may recover into the top-5 → 4/4. 
 before/after control table. If it instead REGRESSES the gate, stop and ping the research
 lead — do not retune weights solo.
 
+### SPEC #5 — retrospective enrichment benchmark (publishable EF / BEDROC / ROC-AUC)  [UNCLAIMED — independent track; after #2/#3/#4 or hand to a new session]
+**Why.** `scripts/validate_controls.py` is a 9-ligand SANITY check ("do 3/4 known
+inhibitors land top-5") — not a benchmark. A paper needs enrichment statistics: dock a
+curated active set + property-matched decoys into the PB1 NTP site and quantify how well
+the pipeline separates actives from decoys. Turns "controls recover" into numbers a
+reviewer accepts, and gives a baseline to track as scoring improves (#4, DL rescore).
+
+**Grounded.** Property-matched decoys per DUD-E (Mysinger et al. 2012, *J Med Chem*
+doi:10.1021/jm300687e): ~50 decoys/active matched on MW/logP/HBD/HBA/rot-bonds/net-charge
+but topologically DISSIMILAR (so separation isn't trivial). Metrics: lead with **EF1%**
+and **BEDROC** (α=20; Truchon & Bayly 2007) — early recognition is what VS cares about;
+report **ROC-AUC** too but note it over-weights the irrelevant tail for VS. HONESTY: DUD-E
+has documented analog/decoy bias that inflates scores; LIT-PCBA (Tran-Nguyen 2020,
+doi:10.1021/acs.jcim.0c00155) is the "unbiased" alternative (a 2025 audit found leakage
+even there). State the decoy-bias caveat in the output — DON'T over-claim.
+
+**Design.**
+  1. **Pure metrics module** `vta/eval/metrics.py` (new): `enrichment_factor(labels, frac)`,
+     `roc_auc(scores, labels)`, `bedroc(labels, alpha=20)` — pure, no heavy deps, fully
+     hermetic-testable.
+  2. **Decoy seam (injectable + cached):** `vta/data/decoys.py` → `fetch_decoys(
+     active_smiles, n=50) -> list[str]` (DUD-E generate / LUDe / property-matched ZINC).
+     COMMIT a decoy cache so the benchmark reproduces offline; no decoys → labelled skip.
+  3. **Curated actives:** `vta/data/actives_rdrp.smi` (new) — known RdRp inhibitors
+     (remdesivir, sofosbuvir, molnupiravir, ribavirin, favipiravir, …) w/ provenance;
+     pull canonical SMILES via the existing ChEMBL/PubChem seams.
+  4. **Driver** `scripts/benchmark_enrichment.py` (new, sibling of validate_controls.py):
+     run the REAL chain over actives+decoys, rank by score, compute EF1%/EF5%/BEDROC/
+     ROC-AUC, write `outputs/benchmark_enrichment.json` + a table. Commit a docking-score
+     cache so it reproduces without hours of Vina.
+
+**Files.** +`vta/eval/__init__.py`, +`vta/eval/metrics.py`, +`vta/data/decoys.py`,
++`vta/data/actives_rdrp.smi`, +decoy/score caches, +`scripts/benchmark_enrichment.py`,
++`tests/test_metrics.py`, 1-line register in `vta/data/databases.py`. **Disjoint from
+#2/#3/#4** — all new files (databases.py is a single additive line).
+
+**Tests (hermetic).** Pure metrics on toy rankings: perfect → ROC-AUC=1.0, BEDROC→1, EF
+at ceiling; random/interleaved → EF≈1, AUC≈0.5; actives-last → AUC≈0. No docking in tests.
+
+**Acceptance.** Metrics tests green; `benchmark_enrichment.py` runs on the committed cache
+and prints EF1%/EF5%/BEDROC/ROC-AUC + the decoy-bias caveat. SUPPLEMENTS the quick gate
+(`validate_controls.py` stays the fast pre-commit check) — do NOT replace it. Record the
+baseline numbers in DONE so we track them as scoring improves.
+
 ## DONE / HANDOFF
 - **[SPEC #1 conservation DONE — session-2]** Real per-pocket JSD conservation
   (Capra & Singh 2007) replaces the 0.5 placeholder. New `vta/nodes/conservation.py`
