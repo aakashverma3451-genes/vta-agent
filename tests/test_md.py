@@ -56,6 +56,78 @@ def test_simulate_noop_when_no_candidates(monkeypatch):
     assert out["md_results"] == {}
 
 
+def _stub_simulate(monkeypatch, tmp_path):
+    """Force the OpenMM run hermetic: skip rdkit/openmm, return a completed result.
+
+    Stubs every heavy seam so md_simulate_node runs without OpenMM/RDKit/ParmEd and
+    we can assert on the prmtop handoff alone (SPEC #2).
+    """
+    monkeypatch.setattr(md_simulate, "_check_openmm", lambda: True)
+    monkeypatch.setattr(md_simulate, "_smiles_to_sdf", lambda smi, out: True)
+    monkeypatch.setattr(md_simulate, "_build_system",
+                        lambda pdb, sdf: ("SYS", "TOP", "POS"))
+    monkeypatch.setattr(
+        md_simulate, "_run_simulation",
+        lambda s, t, p, d, rid: {"trajectory": f"{d}/{rid}.dcd", "energy_log": "e.csv",
+                                 "final_pdb": "f.pdb", "duration_ns": 100.0,
+                                 "status": "completed"})
+    st = new_state("x", "run1")
+    st["structures"] = {"PB1": {"pdb_path": str(tmp_path / "rec.pdb")}}
+    st["md_candidates"] = [{"ligand": "Riba", "protein": "PB1",
+                            "smiles": "C1=NC2=NC=NC2=N1"}]
+    return st
+
+
+def test_simulate_emits_prmtop_when_parmed_present(monkeypatch, tmp_path):
+    # ParmEd present + topology save succeeds → completed result carries `parm`.
+    st = _stub_simulate(monkeypatch, tmp_path)
+    monkeypatch.setattr(md_simulate, "_check_parmed", lambda: True)
+    monkeypatch.setattr(md_simulate, "_save_amber_topology",
+                        lambda s, t, p, d, rid: f"{d}/{rid}_complex.prmtop")
+    out = md_simulate.md_simulate_node(st)
+    res = out["md_results"]["Riba"]
+    assert res["status"] == "completed"
+    assert res["parm"].endswith("Riba_PB1_complex.prmtop")
+    assert any("+ prmtop" in l for l in out["audit_trail"])
+
+
+def test_simulate_omits_prmtop_when_parmed_absent(monkeypatch, tmp_path):
+    # ParmEd absent → no `parm` key; MD still completes on RMSD/contacts.
+    st = _stub_simulate(monkeypatch, tmp_path)
+    monkeypatch.setattr(md_simulate, "_check_parmed", lambda: False)
+    out = md_simulate.md_simulate_node(st)
+    res = out["md_results"]["Riba"]
+    assert res["status"] == "completed"
+    assert "parm" not in res
+
+
+def test_simulate_omits_prmtop_when_save_fails(monkeypatch, tmp_path):
+    # ParmEd present but the save throws/returns None → omit `parm` (no crash, no note).
+    st = _stub_simulate(monkeypatch, tmp_path)
+    monkeypatch.setattr(md_simulate, "_check_parmed", lambda: True)
+    monkeypatch.setattr(md_simulate, "_save_amber_topology",
+                        lambda s, t, p, d, rid: None)
+    out = md_simulate.md_simulate_node(st)
+    assert "parm" not in out["md_results"]["Riba"]
+
+
+def test_prmtop_handoff_unblocks_mmgbsa(monkeypatch, tmp_path):
+    # End-to-end of the handoff: md_simulate's `parm` feeds md_analyze._compute_mmgbsa,
+    # which must no longer return the "no Amber topology" note.
+    st = _stub_simulate(monkeypatch, tmp_path)
+    monkeypatch.setattr(md_simulate, "_check_parmed", lambda: True)
+    monkeypatch.setattr(md_simulate, "_save_amber_topology",
+                        lambda s, t, p, d, rid: f"{d}/{rid}_complex.prmtop")
+    out = md_simulate.md_simulate_node(st)
+    res = out["md_results"]["Riba"]
+
+    monkeypatch.setattr(md_analyze, "_mmgbsa_bin", lambda: "gmx_MMPBSA")
+    monkeypatch.setattr(md_analyze, "_run_mmgbsa_tool", lambda b, p, t, d: _SAMPLE_DAT)
+    mm = md_analyze._compute_mmgbsa(res, str(tmp_path))
+    assert mm["mean_binding_energy"] == -28.45
+    assert "no Amber topology" not in mm.get("note", "")
+
+
 # ── md_analyze ─────────────────────────────────────────────────────────────────
 def test_analyze_skips_gracefully_no_mdanalysis(monkeypatch):
     monkeypatch.setattr(md_analyze, "_check_mdanalysis", lambda: False)

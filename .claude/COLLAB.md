@@ -30,7 +30,7 @@ A non-blocking pre-commit hook reminds you to update this file (it never blocks)
 ## ACTIVE WORK
 - **[session-a, 2026-06-24]** Claiming SPECS **#2, #3, #4, #5** (full remaining workflow),
   order #2 → #4 → #3 → #5. Files I will touch (LOCKED while in flight):
-  - #2: `vta/nodes/md_simulate.py`, `tests/test_md.py` `LOCKED`
+  - #2: `vta/nodes/md_simulate.py`, `tests/test_md.py` ✅ DONE (see DONE/HANDOFF)
   - #4: `vta/nodes/conservation.py`, +`vta/nodes/conservation_contacts.py`,
     +`tests/test_conservation_contacts.py`, `vta/state.py`, `vta/graph.py`,
     `scripts/validate_controls.py` `LOCKED`  ← SPEC #1 files; @research-lead these are the
@@ -238,6 +238,16 @@ and prints EF1%/EF5%/BEDROC/ROC-AUC + the decoy-bias caveat. SUPPLEMENTS the qui
 baseline numbers in DONE so we track them as scoring improves.
 
 ## DONE / HANDOFF
+- **[SPEC #2 prmtop handoff DONE — session-a]** `md_simulate` now emits an Amber complex
+  topology so production MM-GBSA can run. New `_check_parmed()` + `_save_amber_topology()`
+  (ParmEd `openmm.load_topology` → `<run>_complex.prmtop`/`.inpcrd`) in
+  `vta/nodes/md_simulate.py`; each completed sim gets `result["parm"]`. Graceful: ParmEd
+  absent OR save fails → `parm` omitted (md_analyze keeps printing its own honest "no
+  topology" note — not duplicated). md_analyze untouched. +4 hermetic tests in
+  `tests/test_md.py` incl. an end-to-end one proving the `parm` unblocks
+  `_compute_mmgbsa` (drops the "no Amber topology" note). Full suite **96 passed** (7
+  pre-existing unrelated `classify_genome` failures). No validation-gate impact (MD is
+  opt-in). Production MM-GBSA on a GPU host now has its topology.
 - **[SPEC #1 conservation DONE — session-2]** Real per-pocket JSD conservation
   (Capra & Singh 2007) replaces the 0.5 placeholder. New `vta/nodes/conservation.py`
   (JSD vs Robinson background + 6Å proximity, observed-order mapping → numbering-hazard
