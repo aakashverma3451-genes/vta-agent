@@ -131,6 +131,58 @@ fallback reality instead. Refresh A.3 state-growth to include the fields added s
 lands. Acceptance: every node/edge in the diagram exists in `graph.py`; no node labelled
 mock that auto-discovers a real tool.
 
+### SPEC #4 — conservation v2: ligand-CONTACT-weighted (make the term actually discriminate)  [UNCLAIMED — needs #1 (done); do after #2/#3]
+**Why (lead finding, verified).** SPEC #1 is correct but **inert for single-target
+ranking**: conservation is a per-POCKET scalar, so every ligand in the same pocket gets
+the SAME value (gate showed `cons=0.848` for all 9). In `rank.py` that's a constant
+`0.10 × 0.848` added to every score — a uniform offset that CANNOT reorder. I verified it:
+post-#1 ranking is byte-identical to the 0.5 baseline (+0.0348 on every row). So the 10%
+term does nothing in the case the gate + today's single-target screens actually hit. v2
+makes it ligand-specific so it discriminates.
+
+**Idea (grounded).** Score each ligand on the conservation of the residues ITS DOCKED
+POSE contacts, not the whole pocket. A ligand gripping the conserved catalytic core
+(mutation-resistant, durable) outscores one touching a variable rim. Same evidence base:
+per-residue JSD (Capra & Singh 2007) + the resistance rationale + conservation-weighted
+interaction fingerprints for viral RdRp (PMC7640976).
+
+**Design.**
+  1. **Persist the per-residue map.** Extend `vta/nodes/conservation.py` (SPEC #1, now
+     merged — safe to edit) to also write `state["residue_conservation"][protein] =
+     {resid: jsd}` (new `state.py` field) alongside the existing pocket aggregate. Keep
+     v1 behaviour intact.
+  2. **Post-dock contact score (per record).** New `vta/nodes/conservation_contacts.py`,
+     wired `dock → conservation_contacts → rescore`. For each docking record WITH a saved
+     pose (real Vina sets `pose_path`+`receptor_path`; rescore already uses them): parse
+     ligand atoms, find protein residues with any atom within R=4 Å of any ligand atom
+     (same contact def as `md_analyze._contacts_analysis`), look up their JSD in
+     `residue_conservation`, set `r["conservation"] = mean(JSD over contacts)`.
+     ⚠ resid keys must match between the pose receptor and the SPEC#1 map (both derive
+     from the same structure PDB — assert/test this).
+  3. **Fallback (honest).** No saved pose (mock docking) OR no residue map (no MSA) →
+     leave the v1 pocket-level `conservation` as-is + audit `[skip] contact-conservation:
+     no pose` . So mock stays on the pocket value; real Vina gets per-ligand values.
+  4. **rank.py unchanged** — it already reads `r["conservation"]`; v2 just makes that
+     value ligand-specific, so the existing 10% term finally reorders.
+
+**Files.** `vta/nodes/conservation.py` (extend), +`vta/nodes/conservation_contacts.py`,
++`tests/test_conservation_contacts.py`, `vta/state.py` (+`residue_conservation`),
+`vta/graph.py` (insert node), `conftest.py` (node is hermetic via empty
+`residue_conservation`/no poses — verify graph tests still pass). docking.py already
+saves poses — DO NOT change it.
+
+**Tests (hermetic).** contact score on a toy pose: ligand near high-JSD residues → high,
+near low-JSD → low, and TWO ligands in one pocket touching different residues get
+DIFFERENT scores (the whole point); no-pose record → keeps pocket value + label; resid
+key-match test.
+
+**ACCEPTANCE (MANDATORY — ranking term).** Full suite + new tests green; RE-RUN
+`scripts/validate_controls.py`. Controls MUST still pass (≥3/4). **Testable hypothesis to
+report:** contact-weighting should push the nucleoside-analog controls (which grip the
+conserved catalytic core) UP — Remdesivir may recover into the top-5 → 4/4. Paste the
+before/after control table. If it instead REGRESSES the gate, stop and ping the research
+lead — do not retune weights solo.
+
 ## DONE / HANDOFF
 - **[SPEC #1 conservation DONE — session-2]** Real per-pocket JSD conservation
   (Capra & Singh 2007) replaces the 0.5 placeholder. New `vta/nodes/conservation.py`
