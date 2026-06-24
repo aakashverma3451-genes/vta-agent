@@ -1,0 +1,12 @@
+# decoys_demo.smi — DEMONSTRATION decoy pool for the enrichment benchmark (SPEC #5).
+# ⚠ NOT a DUD-E property-matched set. These are mechanism-distinct APPROVED ANTIVIRALS
+# (HIV/HCV protease, NS5A, neuraminidase, cap-endonuclease inhibitors) that do NOT bind
+# the RdRp NTP site — a reasonable "presumed-inactive" decoy set for THIS pocket, with
+# real/correct SMILES (committed in ligands_chembl.json). For a rigorous benchmark,
+# replace via fetch_decoys' DUD-E / LUDe / property-matched-ZINC path. Format:
+# `SMILES  name  CHEMBL_id`.
+COC(=O)N[C@H](C(=O)N1CC2(CC2)C[C@H]1c1nc(-c2ccc3c(c2)C(F)(F)c2cc(-c4ccc5[nH]c([C@@H]6[C@H]7CC[C@H](C7)N6C(=O)[C@@H](NC(=O)OC)C(C)C)nc5c4)ccc2-3)c[nH]1)C(C)C	Ledipasvir	CHEMBL2374220
+COC(=O)OCOc1c2n(ccc1=O)N([C@@H]1c3ccccc3SCc3c1ccc(F)c3F)[C@@H]1COCCN1C2=O	Baloxavir_Marboxil	CHEMBL4297503
+CCC(CC)[C@H](NC(C)=O)[C@@H]1[C@H](O)[C@@H](C(=O)O)C[C@H]1NC(=N)N	Peramivir	CHEMBL3989402
+CC(C)(C)[C@H](NC(=O)C(F)(F)F)C(=O)N1C[C@H]2[C@@H]([C@H]1C(=O)N[C@H](C#N)C[C@@H]1CCNC1=O)C2(C)C	Nirmatrelvir	CHEMBL4802135
+Cc1cccc(C)c1OCC(=O)N[C@@H](Cc1ccccc1)[C@@H](O)C[C@H](Cc1ccccc1)NC(=O)[C@H](C(C)C)N1CCCNC1=O	Lopinavir	CHEMBL729

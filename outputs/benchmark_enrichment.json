@@ -1,0 +1,65 @@
+{
+  "n": 8,
+  "n_actives": 4,
+  "n_decoys": 4,
+  "roc_auc": 0.8125,
+  "bedroc": 0.9938,
+  "ef": {
+    "EF1%": 2.0,
+    "EF5%": 2.0,
+    "EF10%": 2.0,
+    "EF20%": 2.0
+  },
+  "ranking": [
+    {
+      "rank": 1,
+      "name": "Ribavirin",
+      "score": 0.6,
+      "label": "active"
+    },
+    {
+      "rank": 2,
+      "name": "Sofosbuvir",
+      "score": 0.5451,
+      "label": "active"
+    },
+    {
+      "rank": 3,
+      "name": "Lopinavir",
+      "score": 0.4982,
+      "label": "decoy"
+    },
+    {
+      "rank": 4,
+      "name": "Molnupiravir",
+      "score": 0.4095,
+      "label": "active"
+    },
+    {
+      "rank": 5,
+      "name": "Ledipasvir",
+      "score": 0.4,
+      "label": "decoy"
+    },
+    {
+      "rank": 6,
+      "name": "Remdesivir",
+      "score": 0.3842,
+      "label": "active"
+    },
+    {
+      "rank": 7,
+      "name": "Nirmatrelvir",
+      "score": 0.3679,
+      "label": "decoy"
+    },
+    {
+      "rank": 8,
+      "name": "Baloxavir Marboxil",
+      "score": 0.3284,
+      "label": "decoy"
+    }
+  ],
+  "_provenance": "REAL AutoDock Vina scores from scripts/validate_controls.py (committed outputs/validation_controls.json). Actives = nucleotide-analog RdRp inhibitors (positive_control); decoys = mechanism-distinct antivirals (protease/NS5A/cap-endonuclease) that do not bind the NTP site. Real scores, small N (gate set) \u2014 see SPEC #5 caveats.",
+  "_caveat": "CAVEAT (read before quoting): small N (gate set); decoys are mechanism-distinct antivirals, NOT DUD-E property-matched. DUD-E has analog bias that inflates scores (LIT-PCBA is the less-biased alternative; a 2025 audit found leakage even there). This is a demonstration/baseline \u2014 see ARCHITECTURE.md \u00a78."
+}
