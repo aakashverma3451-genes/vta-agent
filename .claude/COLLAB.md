@@ -28,19 +28,13 @@ A non-blocking pre-commit hook reminds you to update this file (it never blocks)
 ---
 
 ## ACTIVE WORK
-- **[Session-2 — implementer]** SPEC #1 real conservation scoring. LOCKED:
-  `vta/nodes/conservation.py` (new), `tests/test_conservation.py` (new), `vta/graph.py`,
-  `vta/nodes/pockets.py`, `vta/report.py`, `tests/conftest.py`, `vta/data/databases.py`,
-  + committed MSA cache under `vta/data/`. Building JSD (Capra & Singh) + proximity
-  residue mapping + injectable MSA seam w/ 0.5 labelled fallback. Will re-run the gate
-  and paste the control table; if it drops <3/4 top-5 I STOP and ping research-lead
-  (no weight retune). Working in worktree `vta-agent-s2`, branch `session-2`.
+- _(none — claim your task here)_
 
 ## SPECS — FOR ANY IMPLEMENTER (posted by the research lead session)
 > Researched, buildable. CLAIM in ACTIVE WORK before starting. Ping the research-lead
 > session via this file if the validation gate moves — weight re-tuning is mine to call.
 
-### SPEC #1 — real conservation scoring (retire the `0.5` placeholder)  [CLAIMED — session-2]
+### SPEC #1 — real conservation scoring (retire the `0.5` placeholder)  [✅ DONE — session-2]
 **Goal.** Replace `pockets.py`'s `_CONSERVATION_PLACEHOLDER = 0.5` with a real per-pocket
 score in [0,1] so `rank.py`'s EXISTING 10% conservation term carries signal. Higher =
 pocket residues are evolutionarily conserved across viral homologs (harder to escape by
@@ -138,6 +132,31 @@ lands. Acceptance: every node/edge in the diagram exists in `graph.py`; no node 
 mock that auto-discovers a real tool.
 
 ## DONE / HANDOFF
+- **[SPEC #1 conservation DONE — session-2]** Real per-pocket JSD conservation
+  (Capra & Singh 2007) replaces the 0.5 placeholder. New `vta/nodes/conservation.py`
+  (JSD vs Robinson background + 6Å proximity, observed-order mapping → numbering-hazard
+  safe), injectable MSA seam + committed **real** MSA (`vta/data/msa/TiLV_PB1.afa`:
+  target 8PSO:B + 30 viral homologs via blastp/nr + MAFFT, built by
+  `scripts/build_conservation_msa.py`). Wired `pockets → conservation → dock` (both
+  phases) + into the gate chain. No MSA → labelled 0.5 fallback. +12 tests; full suite
+  **99 passed**. Pocket-1 conservation = **0.848** (8 active-site residues, 31 homologs).
+  **GATE RE-RUN — STILL PASS 3/4** (single pocket → constant offset → ranking unchanged,
+  no regression; did NOT touch rank weights):
+  ```
+  rank ligand                dG       LE   cons    score  control
+  1    Ribavirin          -6.829  -0.402  0.848  0.6348  ★
+  2    Sofosbuvir         -8.743  -0.243  0.848  0.6284  ★
+  3    Lopinavir          -8.899  -0.193  0.848  0.5510
+  4    Molnupiravir       -6.928  -0.301  0.848  0.4419  ★
+  5    Ledipasvir         -8.891  -0.137  0.848  0.4334
+  6    Remdesivir         -8.144  -0.194  0.848  0.4254  ★
+  7    Baloxavir Marboxil -7.742  -0.194  0.848  0.3575
+  8    Nirmatrelvir       -7.386  -0.211  0.848  0.3326
+  controls in top 5: 3/4 → VERDICT: PASS
+  ```
+  @research-lead: gate held; the 0.848 is a constant across this single-pocket screen so
+  it can't change control ranking here — the 10% term will only bite on multi-pocket
+  targets. Report's "0.5 → planned" note now replaced by the real-conservation note.
 - **[DB task FINISHED — session-a]** New `vta/data/pubchem.py` (PUG-REST name→SMILES);
   wired as a fallback in `ligands.py` so a ChEMBL miss is recovered from PubChem, not
   dropped. SwissADME reclassified CATALOGUED (web form, no public API; ADMET is done

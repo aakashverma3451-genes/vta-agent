@@ -16,6 +16,7 @@ from __future__ import annotations
 import json
 
 from vta.nodes.docking import docking_node
+from vta.nodes.conservation import conservation_node
 from vta.nodes.pockets import pockets_node
 from vta.nodes.rank import rank_node
 from vta.nodes.structure import structure_node
@@ -29,6 +30,7 @@ def main() -> None:
 
     st = structure_node(st)      # real: fetch 8PSO chain B
     st = pockets_node(st)        # real: FPocket
+    st = conservation_node(st)   # real: per-pocket JSD over committed homolog MSA (SPEC #1)
     st = docking_node(st)        # real: Vina over all cached ligands
     st = rank_node(st)
 
