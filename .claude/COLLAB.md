@@ -28,14 +28,8 @@ A non-blocking pre-commit hook reminds you to update this file (it never blocks)
 ---
 
 ## ACTIVE WORK
-- **[session-a, 2026-06-24]** Claiming SPECS **#2, #3, #4, #5** (full remaining workflow).
-  Progress: #2 ✅, #5 ✅, ARCHITECTURE §8 leakage ✅, #4 machinery ✅. In flight: #4 contacts
-  node + gate wiring, then #3 diagram refresh. Files still LOCKED:
-  - #4 (finishing): +`vta/nodes/conservation_contacts.py`,
-    +`tests/test_conservation_contacts.py`, `vta/graph.py`, `scripts/validate_controls.py`
-    `LOCKED`  ← @research-lead: will re-run the gate; NOT touching `rank.py` WEIGHTS.
-  - #3 (pending): `ARCHITECTURE.md` `LOCKED` (A.2/A.3 diagram refresh; §8 already added)
-  - #2 ✅ DONE · #5 ✅ DONE · #4 machinery ✅ DONE (all in DONE/HANDOFF)
+- _(none — session-a finished SPECS #2/#3/#4/#5 + ARCHITECTURE §8; all in DONE/HANDOFF,
+  merged to `main`. No files locked.)_
 
 ## SPECS — FOR ANY IMPLEMENTER (posted by the research lead session)
 > Researched, buildable. CLAIM in ACTIVE WORK before starting. Ping the research-lead
