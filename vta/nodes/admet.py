@@ -15,6 +15,7 @@ still runs.
 """
 from __future__ import annotations
 
+from vta.admet.providers import ADMETAIProvider
 from vta.state import VTAState
 
 # raw ADMET-AI endpoint -> (friendly key, "higher better"?, risk threshold)
@@ -27,11 +28,7 @@ _HERG_RISK = 0.5
 
 
 def _admet_available() -> bool:
-    try:
-        import admet_ai  # noqa: F401
-        return True
-    except Exception:
-        return False
+    return ADMETAIProvider().available()
 
 
 def _row_value(preds, i, smiles, key):
@@ -55,17 +52,24 @@ def admet_node(state: VTAState) -> VTAState:
         state["audit_trail"].append("[skip] ADMET: admet-ai not installed")
         return state
 
-    from admet_ai import ADMETModel
-    model = ADMETModel()
+    provider = ADMETAIProvider()
     smiles = [l.get("smiles") or "" for l in leads]
-    preds = model.predict(smiles)
+    preds = provider.predict(smiles)
 
     flagged = 0
     for i, lead in enumerate(leads):
-        admet = {}
-        for raw, (nice, _hi) in _ENDPOINTS.items():
-            v = _row_value(preds, i, smiles[i], raw)
-            admet[nice] = round(v, 3) if v is not None else None
+        admet = {k: preds[i].get(k) for k in ("herg", "oral", "solubility")}
+        admet.update({
+            "cyp_ddi_risk": None,
+            "mitochondrial_toxicity": None,
+            "dili": None,
+            "ames_genotoxicity": None,
+            "permeability": None,
+            "microsomal_clearance": None,
+            "plasma_protein_binding": None,
+            "applicability_domain": preds[i].get("applicability_domain", "unknown"),
+            "endpoint_status": "core_admet_ai_only; antiviral endpoints require provider",
+        })
         herg = admet.get("herg")
         lead["admet"] = admet
         lead["admet_flag"] = "hERG risk" if (herg is not None and herg > _HERG_RISK) else ""
@@ -73,7 +77,7 @@ def admet_node(state: VTAState) -> VTAState:
             flagged += 1
 
     top = leads[0]
-    state["versions"]["admet"] = "ADMET-AI (Chemprop)"
+    state["versions"]["admet"] = "ADMET-AI (Chemprop) + antiviral endpoint contract"
     state["audit_trail"].append(
         f"ADMET: annotated {len(leads)} leads ({flagged} hERG-flagged); "
         f"top lead {top.get('ligand')} hERG={top.get('admet', {}).get('herg')}, "

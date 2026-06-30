@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from vta.eval.metrics import (
-    bedroc, enrichment_factor, enrichment_report, roc_auc,
+    bedroc, bootstrap_enrichment_report, enrichment_factor, enrichment_report, roc_auc,
 )
 
 # 100 compounds, 10 actives (Ra = 0.1 → EF ceiling = 1/Ra = 10).
@@ -114,6 +114,16 @@ def test_report_inverted_is_zero_auc():
     rep = enrichment_report(_entries([0.1, 0.2], [0.8, 0.9]))
     assert rep["roc_auc"] == 0.0
     assert rep["bedroc"] < 0.1
+
+
+def test_bootstrap_enrichment_report_is_deterministic():
+    entries = _entries([0.9, 0.7], [0.8, 0.1])
+    a = bootstrap_enrichment_report(entries, n_resamples=50, seed=7)
+    b = bootstrap_enrichment_report(entries, n_resamples=50, seed=7)
+    assert a == b
+    assert set(a["bootstrap"]) == {"bedroc", "log_auc", "roc_auc", "EF1%"}
+    assert len(a["bootstrap"]["bedroc"]["ci95"]) == 2
+    assert a["n_effective"] > 0
 
 
 # ── decoy seam (committed cache) ──────────────────────────────────────────────

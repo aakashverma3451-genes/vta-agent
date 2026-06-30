@@ -10,8 +10,7 @@ reproducible without network:
     4. MAFFT-align (target first → row 0), write vta/data/msa/TiLV_PB1.afa.
 
 Run from the worktree:
-    PYTHONPATH=.:../taxonagent/src ../taxonagent/venv/bin/python \
-        scripts/build_conservation_msa.py
+    python scripts/build_conservation_msa.py
 """
 from __future__ import annotations
 

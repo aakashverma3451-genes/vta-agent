@@ -25,6 +25,7 @@ float-keyed dict). `conservation` is already 0–1 and used directly.
 """
 from __future__ import annotations
 
+from vta.provenance import score_provenance
 from vta.state import VTAState
 
 # LE-led to remove docking size bias — see module docstring / validation gate.
@@ -62,6 +63,16 @@ def rank_node(state: VTAState) -> VTAState:
             + WEIGHTS["conservation"] * r["conservation"],
             4,
         )
+        r["score_provenance"] = score_provenance(
+            "VTA rank_node", "LE-led composite v1", inputs={
+                "weights": WEIGHTS,
+                "ligand": r.get("ligand"),
+                "protein": r.get("protein"),
+                "pocket": r.get("pocket"),
+                "dG": r.get("dG"),
+                "le": r.get("le"),
+                "conservation": r.get("conservation"),
+            })
 
     top = sorted(rows, key=lambda r: r["score"], reverse=True)[:TOP_N]
     state["lead_candidates"] = top

@@ -1,0 +1,35 @@
+name: vta
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - fastapi
+  - pydantic
+  - networkx
+  - langchain-core
+  - requests
+  - jsonschema
+  - rdkit
+  - biopython
+  - openmm
+  - mdanalysis
+  - parmed
+  - pytest
+  - coverage
+  - pip:
+      - langgraph>=1.0
+      - meeko>=0.5
+      - gemmi
+      - neo4j
+      - qdrant-client
+      - psycopg[binary]
+      - openai
+      - anthropic
+      - transformers
+      - taxonagent
+      # Optional production add-ons:
+      # - admet-ai>=2.0
+      # - boltzina
+      # - proteinttt

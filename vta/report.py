@@ -1,19 +1,11 @@
-"""vta.report — render a final VTAState into a self-contained HTML report.
-
-One file, inline CSS, no JS framework (the audit trail uses native <details>). Built
-for a 30-second read: classification + confidence badge, how each protein was
-structured, the ranked leads, and a collapsible audit trail.
-
-`render_report(state) -> str` is pure (unit-testable, no I/O); `write_report` is the
-thin wrapper that writes outputs/{run_id}_report.html — the same split discipline as
-classify()/build_contract().
-"""
+"""Render a final VTAState into a self-contained HTML report."""
 from __future__ import annotations
 
 import html
 import os
 from typing import Any
 
+from vta.report_extra import footer_provenance, scientific_status
 from vta.state import VTAState
 
 _CSS = """
@@ -114,11 +106,13 @@ def _leads(state: VTAState) -> str:
     scores = [r.get("score") or 0 for r in leads]
     smax = max(scores) or 1
     has_admet = any(r.get("admet") for r in leads)
+    has_chem = any(r.get("active_species") or r.get("chemistry_flags") for r in leads)
     admet_head = ("<th class='num'>hERG</th><th class='num'>oral</th>"
                   "<th class='num'>solub</th>") if has_admet else ""
+    chem_head = "<th>Active species</th><th>Flags</th>" if has_chem else ""
     head = (f"<tr><th>#</th><th>Ligand</th><th>ChEMBL</th><th>Protein</th>"
             f"<th class='num'>ΔG</th><th class='num'>LE</th>"
-            f"<th class='num'>cons</th><th class='num'>score</th>{admet_head}</tr>")
+            f"<th class='num'>cons</th><th class='num'>score</th>{chem_head}{admet_head}</tr>")
     rows = []
     for i, r in enumerate(leads, 1):
         ctrl = r.get("positive_control")
@@ -127,6 +121,27 @@ def _leads(state: VTAState) -> str:
         bar = (f'<div class="scorecell">{_esc(r.get("score"))}'
                f'<div class="bar"><span style="width:{pct}%"></span></div></div>')
         admet_cells = ""
+        chem_cells = ""
+        if has_chem:
+            species = r.get("active_species") or {}
+            flags = r.get("chemistry_flags") or {}
+            source = r.get("species_source")
+            active_label = species.get("active_form")
+            if source and source != "parent":
+                active_label = f"{active_label} ({source})"
+            flag_names = []
+            if flags.get("pains"):
+                flag_names.append("PAINS")
+            if flags.get("brenk"):
+                flag_names.append("Brenk")
+            if flags.get("aggregator"):
+                flag_names.append("aggregator")
+            if flags.get("beyond_ro5"):
+                flag_names.append("bRo5")
+            chem_cells = (
+                f'<td>{_esc(active_label)}</td>'
+                f'<td>{_esc(", ".join(flag_names) or "—")}</td>'
+            )
         if has_admet:
             a = r.get("admet") or {}
             herg = a.get("herg")
@@ -142,7 +157,7 @@ def _leads(state: VTAState) -> str:
             f'<td class="num">{_esc(r.get("dG"))}</td>'
             f'<td class="num">{_esc(r.get("le"))}</td>'
             f'<td class="num">{_esc(r.get("conservation"))}</td>'
-            f'<td class="num">{bar}</td>{admet_cells}</tr>'
+            f'<td class="num">{bar}</td>{chem_cells}{admet_cells}</tr>'
         )
     notes = [
         '<p class="note"><b>Ranking:</b> leads are scored by <b>ligand efficiency</b> '
@@ -164,6 +179,11 @@ def _leads(state: VTAState) -> str:
                      'probability (lower better; red = >0.5 risk), oral = predicted oral '
                      'bioavailability, solub = aqueous solubility (log mol/L). Annotation '
                      'only — does not affect ranking.</p>')
+    if has_chem:
+        notes.append('<p class="note"><b>Chemistry flags</b>: active-species/prodrug '
+                     'annotations and PAINS/Brenk/aggregator/Ro5-style flags are '
+                     'annotation-only. Parent prodrugs are not mechanistic proof of RdRp '
+                     'inhibition unless the active species is modelled.</p>')
     return f"<table>{head}{''.join(rows)}</table>{''.join(notes)}"
 
 
@@ -206,6 +226,29 @@ def _md_section(state: VTAState) -> str:
             f"<table>{head}{''.join(rows)}</table>{note}")
 
 
+def _fep_section(state: VTAState) -> str:
+    leads = state.get("fep_validated_leads") or []
+    if not leads:
+        return ""
+    head = ("<tr><th>#</th><th>Ligand</th><th>Status</th>"
+            "<th class='num'>ΔG</th><th class='num'>Error</th><th>Method</th></tr>")
+    results = state.get("fep_results") or {}
+    rows = []
+    for i, lead in enumerate(leads, 1):
+        result = results.get(lead.get("ligand"), {})
+        rows.append(
+            f'<tr><td class="num">{i}</td><td>{_esc(lead.get("ligand"))}</td>'
+            f'<td>{_esc(lead.get("fep_badge") or result.get("status"))}</td>'
+            f'<td class="num">{_esc(lead.get("fep_delta_g"))}</td>'
+            f'<td class="num">{_esc(lead.get("fep_error"))}</td>'
+            f'<td>{_esc(result.get("method") or result.get("reason"))}</td></tr>'
+        )
+    note = ('<p class="note"><b>FEP / ABFE</b>: optional final validation over the '
+            'top MD-vetted leads. Values are shown only when an external ABFE runner '
+            'is available; skipped rows are explicit and do not affect ranking.</p>')
+    return f"<h2>FEP validation</h2><table>{head}{''.join(rows)}</table>{note}"
+
+
 def _audit(state: VTAState) -> str:
     lines = state.get("audit_trail") or []
     body = _esc("\n".join(lines)) or "(empty)"
@@ -219,7 +262,7 @@ def _footer(state: VTAState) -> str:
     parts.append(f"taxonagent={_esc(tr.get('taxonagent_version'))}")
     parts.append(f"kg={_esc(tr.get('kg_version'))}")
     return (f'<p class="foot">run {_esc(state.get("run_id"))} &nbsp;·&nbsp; '
-            f'{" · ".join(parts)}</p>')
+            f'{" · ".join(parts)}</p>{footer_provenance(state, _esc)}')
 
 
 def render_report(state: VTAState) -> str:
@@ -236,7 +279,9 @@ def render_report(state: VTAState) -> str:
         f"{_structures(state)}"
         "<h2>Lead candidates</h2>"
         f"{_leads(state)}"
+        f"{scientific_status(state, _esc)}"
         f"{_md_section(state)}"
+        f"{_fep_section(state)}"
         "<h2>Provenance</h2>"
         f"{_audit(state)}"
         f"{_footer(state)}"

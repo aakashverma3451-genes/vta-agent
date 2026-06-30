@@ -8,8 +8,7 @@ suspect and must be debugged before trusting the pipeline.
 
 Requires: FPOCKET_BIN, VINA_BIN, network (RCSB), and the rdkit/meeko prep stack.
 Run from the vta-agent dir:
-    FPOCKET_BIN=... VINA_BIN=... PYTHONPATH=.:../taxonagent/src \
-        ../taxonagent/venv/bin/python scripts/validate_controls.py
+    FPOCKET_BIN=... VINA_BIN=... python scripts/validate_controls.py
 """
 from __future__ import annotations
 

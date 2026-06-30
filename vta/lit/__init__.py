@@ -1,0 +1,1 @@
+"""Literature intelligence contracts."""

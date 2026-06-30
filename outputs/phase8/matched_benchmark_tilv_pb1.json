@@ -1,0 +1,3291 @@
+{
+  "target": "TiLV PB1 8PSO chain B",
+  "decoy_set": "vta/data/decoys_cache/phase8_tilv_pb1_chembl_matched.smi",
+  "decoy_quality": "real ChEMBL property-matched presumed decoys; underpowered",
+  "benchmark": {
+    "n": 54,
+    "n_actives": 4,
+    "n_decoys": 50,
+    "roc_auc": 0.785,
+    "bedroc": 0.4062,
+    "log_auc": 0.3883,
+    "ef": {
+      "EF1%": 13.5,
+      "EF5%": 4.5,
+      "EF10%": 2.7,
+      "EF20%": 1.2273
+    },
+    "ranking": [
+      {
+        "rank": 1,
+        "name": "Ribavirin",
+        "score": 0.7334,
+        "label": "active"
+      },
+      {
+        "rank": 2,
+        "name": "TAZOBACTAM",
+        "score": 0.6994,
+        "label": "decoy"
+      },
+      {
+        "rank": 3,
+        "name": "CHEMBL6301",
+        "score": 0.6916,
+        "label": "decoy"
+      },
+      {
+        "rank": 4,
+        "name": "CHEMBL6220",
+        "score": 0.6513,
+        "label": "decoy"
+      },
+      {
+        "rank": 5,
+        "name": "CHEMBL267627",
+        "score": 0.6195,
+        "label": "decoy"
+      },
+      {
+        "rank": 6,
+        "name": "CHEMBL268629",
+        "score": 0.6055,
+        "label": "decoy"
+      },
+      {
+        "rank": 7,
+        "name": "CHEMBL6281",
+        "score": 0.6041,
+        "label": "decoy"
+      },
+      {
+        "rank": 8,
+        "name": "CHEMBL6639",
+        "score": 0.588,
+        "label": "decoy"
+      },
+      {
+        "rank": 9,
+        "name": "CHEMBL6311",
+        "score": 0.5867,
+        "label": "decoy"
+      },
+      {
+        "rank": 10,
+        "name": "CHEMBL6261",
+        "score": 0.5846,
+        "label": "decoy"
+      },
+      {
+        "rank": 11,
+        "name": "CHEMBL414012",
+        "score": 0.5638,
+        "label": "decoy"
+      },
+      {
+        "rank": 12,
+        "name": "CHEMBL6608",
+        "score": 0.5481,
+        "label": "decoy"
+      },
+      {
+        "rank": 13,
+        "name": "CHEMBL267863",
+        "score": 0.5477,
+        "label": "decoy"
+      },
+      {
+        "rank": 14,
+        "name": "Sofosbuvir",
+        "score": 0.536,
+        "label": "active"
+      },
+      {
+        "rank": 15,
+        "name": "Molnupiravir",
+        "score": 0.5192,
+        "label": "active"
+      },
+      {
+        "rank": 16,
+        "name": "CHEMBL6309",
+        "score": 0.498,
+        "label": "decoy"
+      },
+      {
+        "rank": 17,
+        "name": "CHEMBL6221",
+        "score": 0.4889,
+        "label": "decoy"
+      },
+      {
+        "rank": 18,
+        "name": "CHEMBL267626",
+        "score": 0.4634,
+        "label": "decoy"
+      },
+      {
+        "rank": 19,
+        "name": "CHEMBL6286",
+        "score": 0.4489,
+        "label": "decoy"
+      },
+      {
+        "rank": 20,
+        "name": "EPIRUBICIN",
+        "score": 0.4103,
+        "label": "decoy"
+      },
+      {
+        "rank": 21,
+        "name": "CHEMBL6219",
+        "score": 0.4033,
+        "label": "decoy"
+      },
+      {
+        "rank": 22,
+        "name": "CHEMBL266223",
+        "score": 0.4024,
+        "label": "decoy"
+      },
+      {
+        "rank": 23,
+        "name": "Remdesivir",
+        "score": 0.3958,
+        "label": "active"
+      },
+      {
+        "rank": 24,
+        "name": "CHEMBL6302",
+        "score": 0.3863,
+        "label": "decoy"
+      },
+      {
+        "rank": 25,
+        "name": "CHEMBL6997",
+        "score": 0.385,
+        "label": "decoy"
+      },
+      {
+        "rank": 26,
+        "name": "CHEMBL7520",
+        "score": 0.3829,
+        "label": "decoy"
+      },
+      {
+        "rank": 27,
+        "name": "CHEMBL7753",
+        "score": 0.3762,
+        "label": "decoy"
+      },
+      {
+        "rank": 28,
+        "name": "CHEMBL6290",
+        "score": 0.3736,
+        "label": "decoy"
+      },
+      {
+        "rank": 29,
+        "name": "CHEMBL269134",
+        "score": 0.3541,
+        "label": "decoy"
+      },
+      {
+        "rank": 30,
+        "name": "CHEMBL414696",
+        "score": 0.3533,
+        "label": "decoy"
+      },
+      {
+        "rank": 31,
+        "name": "CHEMBL266802",
+        "score": 0.3372,
+        "label": "decoy"
+      },
+      {
+        "rank": 32,
+        "name": "CHEMBL268597",
+        "score": 0.334,
+        "label": "decoy"
+      },
+      {
+        "rank": 33,
+        "name": "CHEMBL266089",
+        "score": 0.3284,
+        "label": "decoy"
+      },
+      {
+        "rank": 34,
+        "name": "CHEMBL266886",
+        "score": 0.3262,
+        "label": "decoy"
+      },
+      {
+        "rank": 35,
+        "name": "CHEMBL6343",
+        "score": 0.3213,
+        "label": "decoy"
+      },
+      {
+        "rank": 36,
+        "name": "CHEMBL265773",
+        "score": 0.3212,
+        "label": "decoy"
+      },
+      {
+        "rank": 37,
+        "name": "CHEMBL441173",
+        "score": 0.3193,
+        "label": "decoy"
+      },
+      {
+        "rank": 38,
+        "name": "CHEMBL415299",
+        "score": 0.3187,
+        "label": "decoy"
+      },
+      {
+        "rank": 39,
+        "name": "CHEMBL268823",
+        "score": 0.3062,
+        "label": "decoy"
+      },
+      {
+        "rank": 40,
+        "name": "CHEMBL258053",
+        "score": 0.302,
+        "label": "decoy"
+      },
+      {
+        "rank": 41,
+        "name": "CHEMBL269132",
+        "score": 0.2968,
+        "label": "decoy"
+      },
+      {
+        "rank": 42,
+        "name": "CHEMBL266448",
+        "score": 0.2909,
+        "label": "decoy"
+      },
+      {
+        "rank": 43,
+        "name": "CHEMBL204022",
+        "score": 0.2819,
+        "label": "decoy"
+      },
+      {
+        "rank": 44,
+        "name": "CHEMBL269133",
+        "score": 0.2806,
+        "label": "decoy"
+      },
+      {
+        "rank": 45,
+        "name": "CHEMBL7034",
+        "score": 0.2716,
+        "label": "decoy"
+      },
+      {
+        "rank": 46,
+        "name": "CHEMBL6217",
+        "score": 0.2586,
+        "label": "decoy"
+      },
+      {
+        "rank": 47,
+        "name": "CHEMBL380444",
+        "score": 0.254,
+        "label": "decoy"
+      },
+      {
+        "rank": 48,
+        "name": "CHEMBL6359",
+        "score": 0.2472,
+        "label": "decoy"
+      },
+      {
+        "rank": 49,
+        "name": "CHEMBL6202",
+        "score": 0.2466,
+        "label": "decoy"
+      },
+      {
+        "rank": 50,
+        "name": "CHEMBL6341",
+        "score": 0.2355,
+        "label": "decoy"
+      },
+      {
+        "rank": 51,
+        "name": "PMS-601",
+        "score": 0.224,
+        "label": "decoy"
+      },
+      {
+        "rank": 52,
+        "name": "CHEMBL269131",
+        "score": 0.2087,
+        "label": "decoy"
+      },
+      {
+        "rank": 53,
+        "name": "CHEMBL6270",
+        "score": 0.1921,
+        "label": "decoy"
+      },
+      {
+        "rank": 54,
+        "name": "CHEMBL427616",
+        "score": 0.1267,
+        "label": "decoy"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "Ribavirin",
+      "ligand_id": "CHEMBL1643",
+      "smiles": "NC(=O)c1ncn([C@@H]2O[C@H](CO)[C@@H](O)[C@H]2O)n1",
+      "positive_control": true,
+      "dG": -6.788,
+      "rmsd": 0.0,
+      "le": -0.399,
+      "heavy_atoms": 17,
+      "conservation": 0.85,
+      "dock_smiles": "NC(=O)c1ncn([C@@H]2O[C@H](CO)[C@@H](O)[C@H]2O)n1",
+      "dock_species": "Ribavirin",
+      "species_source": "parent_surrogate",
+      "mechanistic_caveat": "Active form is known but no curated active-form SMILES is committed; parent structure was docked as a labelled surrogate.",
+      "active_species": {
+        "parent": "Ribavirin",
+        "parent_smiles": "NC(=O)c1ncn([C@@H]2O[C@H](CO)[C@@H](O)[C@H]2O)n1",
+        "prodrug": false,
+        "active_form": "Ribavirin triphosphate",
+        "active_form_smiles": null,
+        "mechanistic_note": "Nucleoside analog; triphosphate is the polymerase-relevant species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "885abd3c26895bf7"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL1643_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.7334,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "fe1b12087039e2d5"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "TAZOBACTAM",
+      "ligand_id": "CHEMBL404",
+      "smiles": "C[C@]1(Cn2ccnn2)[C@H](C(=O)O)N2C(=O)C[C@H]2S1(=O)=O",
+      "positive_control": false,
+      "dG": -7.264,
+      "rmsd": 0.0,
+      "le": -0.363,
+      "heavy_atoms": 20,
+      "conservation": 0.85,
+      "dock_smiles": "C[C@]1(Cn2ccnn2)[C@H](C(=O)O)N2C(=O)C[C@H]2S1(=O)=O",
+      "dock_species": "TAZOBACTAM",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "TAZOBACTAM",
+        "parent_smiles": "C[C@]1(Cn2ccnn2)[C@H](C(=O)O)N2C(=O)C[C@H]2S1(=O)=O",
+        "prodrug": false,
+        "active_form": "TAZOBACTAM",
+        "active_form_smiles": "C[C@]1(Cn2ccnn2)[C@H](C(=O)O)N2C(=O)C[C@H]2S1(=O)=O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "b54a0cb562176585"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL404_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.6994,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "1cb400c9598e62c3"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6301",
+      "ligand_id": "CHEMBL6301",
+      "smiles": "CC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@H]12",
+      "positive_control": false,
+      "dG": -7.412,
+      "rmsd": 0.0,
+      "le": -0.353,
+      "heavy_atoms": 21,
+      "conservation": 0.851,
+      "dock_smiles": "CC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@H]12",
+      "dock_species": "CHEMBL6301",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6301",
+        "parent_smiles": "CC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@H]12",
+        "prodrug": false,
+        "active_form": "CHEMBL6301",
+        "active_form_smiles": "CC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@H]12",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "07474fa790118bea"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6301_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.6916,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "718f6aec364c0092"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6220",
+      "ligand_id": "CHEMBL6220",
+      "smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(-c4ccccc4)nn3)[C@H]2S1(=O)=O",
+      "positive_control": false,
+      "dG": -8.165,
+      "rmsd": 0.0,
+      "le": -0.302,
+      "heavy_atoms": 27,
+      "conservation": 0.85,
+      "dock_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(-c4ccccc4)nn3)[C@H]2S1(=O)=O",
+      "dock_species": "CHEMBL6220",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6220",
+        "parent_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(-c4ccccc4)nn3)[C@H]2S1(=O)=O",
+        "prodrug": false,
+        "active_form": "CHEMBL6220",
+        "active_form_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(-c4ccccc4)nn3)[C@H]2S1(=O)=O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "ce8a5379d7c0178d"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6220_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.6513,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "448609f4eba5e77d"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL267627",
+      "ligand_id": "CHEMBL267627",
+      "smiles": "CON(C)C(=O)/C=C/CC1C(=O)N2[C@@H]1[S+]([O-])C(C)(C)[C@@H]2C(=O)O",
+      "positive_control": false,
+      "dG": -7.396,
+      "rmsd": 0.0,
+      "le": -0.322,
+      "heavy_atoms": 23,
+      "conservation": 0.85,
+      "dock_smiles": "CON(C)C(=O)/C=C/CC1C(=O)N2[C@@H]1[S+]([O-])C(C)(C)[C@@H]2C(=O)O",
+      "dock_species": "CHEMBL267627",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL267627",
+        "parent_smiles": "CON(C)C(=O)/C=C/CC1C(=O)N2[C@@H]1[S+]([O-])C(C)(C)[C@@H]2C(=O)O",
+        "prodrug": false,
+        "active_form": "CHEMBL267627",
+        "active_form_smiles": "CON(C)C(=O)/C=C/CC1C(=O)N2[C@@H]1[S+]([O-])C(C)(C)[C@@H]2C(=O)O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "6579e9f911104c13"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL267627_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.6195,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "1f4d30c5356a71d6"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL268629",
+      "ligand_id": "CHEMBL268629",
+      "smiles": "C#CCN(Cc1ccc2nc(C)nc(O)c2c1)c1ccc(C(=O)N[C@H](Cc2ccc([N+](=O)[O-])cc2)C(=O)O)cc1",
+      "positive_control": false,
+      "dG": -9.293,
+      "rmsd": 0.0,
+      "le": -0.232,
+      "heavy_atoms": 40,
+      "conservation": 0.85,
+      "dock_smiles": "C#CCN(Cc1ccc2nc(C)nc(O)c2c1)c1ccc(C(=O)N[C@H](Cc2ccc([N+](=O)[O-])cc2)C(=O)O)cc1",
+      "dock_species": "CHEMBL268629",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL268629",
+        "parent_smiles": "C#CCN(Cc1ccc2nc(C)nc(O)c2c1)c1ccc(C(=O)N[C@H](Cc2ccc([N+](=O)[O-])cc2)C(=O)O)cc1",
+        "prodrug": false,
+        "active_form": "CHEMBL268629",
+        "active_form_smiles": "C#CCN(Cc1ccc2nc(C)nc(O)c2c1)c1ccc(C(=O)N[C@H](Cc2ccc([N+](=O)[O-])cc2)C(=O)O)cc1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "332f8a00c528a6bb"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL268629_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.6055,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "a5b99c19b6872ad1"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6281",
+      "ligand_id": "CHEMBL6281",
+      "smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(-c4ccc(O)cc4)nn3)[C@H]2S1(=O)=O",
+      "positive_control": false,
+      "dG": -8.042,
+      "rmsd": 0.0,
+      "le": -0.287,
+      "heavy_atoms": 28,
+      "conservation": 0.843,
+      "dock_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(-c4ccc(O)cc4)nn3)[C@H]2S1(=O)=O",
+      "dock_species": "CHEMBL6281",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6281",
+        "parent_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(-c4ccc(O)cc4)nn3)[C@H]2S1(=O)=O",
+        "prodrug": false,
+        "active_form": "CHEMBL6281",
+        "active_form_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(-c4ccc(O)cc4)nn3)[C@H]2S1(=O)=O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "e4fb488c52dad739"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6281_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.6041,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "c82c5890c11d7c78"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6639",
+      "ligand_id": "CHEMBL6639",
+      "smiles": "C#CCN(Cc1ccc2nc(C)nc(O)c2c1)c1ccc(C(=O)N[C@@H](C(=O)O)c2cccc(O)c2)cc1",
+      "positive_control": false,
+      "dG": -8.93,
+      "rmsd": 0.0,
+      "le": -0.241,
+      "heavy_atoms": 37,
+      "conservation": 0.835,
+      "dock_smiles": "C#CCN(Cc1ccc2nc(C)nc(O)c2c1)c1ccc(C(=O)N[C@@H](C(=O)O)c2cccc(O)c2)cc1",
+      "dock_species": "CHEMBL6639",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6639",
+        "parent_smiles": "C#CCN(Cc1ccc2nc(C)nc(O)c2c1)c1ccc(C(=O)N[C@@H](C(=O)O)c2cccc(O)c2)cc1",
+        "prodrug": false,
+        "active_form": "CHEMBL6639",
+        "active_form_smiles": "C#CCN(Cc1ccc2nc(C)nc(O)c2c1)c1ccc(C(=O)N[C@@H](C(=O)O)c2cccc(O)c2)cc1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "df9fcaf4cf946493"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6639_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.588,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "8c01c83304766471"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6311",
+      "ligand_id": "CHEMBL6311",
+      "smiles": "CC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@@H]12",
+      "positive_control": false,
+      "dG": -6.917,
+      "rmsd": 0.0,
+      "le": -0.329,
+      "heavy_atoms": 21,
+      "conservation": 0.844,
+      "dock_smiles": "CC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@@H]12",
+      "dock_species": "CHEMBL6311",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6311",
+        "parent_smiles": "CC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@@H]12",
+        "prodrug": false,
+        "active_form": "CHEMBL6311",
+        "active_form_smiles": "CC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@@H]12",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "81396ee6735cf3b7"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6311_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.5867,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "b4cb85c0d657c6a6"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6261",
+      "ligand_id": "CHEMBL6261",
+      "smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(CC4CCCN4)nn3)[C@H]2S1(=O)=O",
+      "positive_control": false,
+      "dG": -7.792,
+      "rmsd": 0.0,
+      "le": -0.289,
+      "heavy_atoms": 27,
+      "conservation": 0.853,
+      "dock_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(CC4CCCN4)nn3)[C@H]2S1(=O)=O",
+      "dock_species": "CHEMBL6261",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6261",
+        "parent_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(CC4CCCN4)nn3)[C@H]2S1(=O)=O",
+        "prodrug": false,
+        "active_form": "CHEMBL6261",
+        "active_form_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(CC4CCCN4)nn3)[C@H]2S1(=O)=O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "07db27a46f25f7ab"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6261_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.5846,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "71da057ceb64ef6c"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL414012",
+      "ligand_id": "CHEMBL414012",
+      "smiles": "C#CCN(Cc1cc2c(O)nc(C)nc2cc1C)c1ccc(C(=O)N[C@H](CCC(=O)O)C(=O)O)c(F)c1",
+      "positive_control": false,
+      "dG": -8.772,
+      "rmsd": 0.0,
+      "le": -0.237,
+      "heavy_atoms": 37,
+      "conservation": 0.843,
+      "dock_smiles": "C#CCN(Cc1cc2c(O)nc(C)nc2cc1C)c1ccc(C(=O)N[C@H](CCC(=O)O)C(=O)O)c(F)c1",
+      "dock_species": "CHEMBL414012",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL414012",
+        "parent_smiles": "C#CCN(Cc1cc2c(O)nc(C)nc2cc1C)c1ccc(C(=O)N[C@H](CCC(=O)O)C(=O)O)c(F)c1",
+        "prodrug": false,
+        "active_form": "CHEMBL414012",
+        "active_form_smiles": "C#CCN(Cc1cc2c(O)nc(C)nc2cc1C)c1ccc(C(=O)N[C@H](CCC(=O)O)C(=O)O)c(F)c1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "0c2a60dd48f732ea"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL414012_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.5638,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "dbacdfc359a0b0ca"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6608",
+      "ligand_id": "CHEMBL6608",
+      "smiles": "COc1cccc2c1C(=O)c1c(O)c3c(c(O)c1C2=O)C[C@@](O)(C(=O)CO)C[C@@H]3OC1CC(N)C(O)C(C)O1",
+      "positive_control": false,
+      "dG": -8.843,
+      "rmsd": 0.0,
+      "le": -0.227,
+      "heavy_atoms": 39,
+      "conservation": 0.842,
+      "dock_smiles": "COc1cccc2c1C(=O)c1c(O)c3c(c(O)c1C2=O)C[C@@](O)(C(=O)CO)C[C@@H]3OC1CC(N)C(O)C(C)O1",
+      "dock_species": "CHEMBL6608",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6608",
+        "parent_smiles": "COc1cccc2c1C(=O)c1c(O)c3c(c(O)c1C2=O)C[C@@](O)(C(=O)CO)C[C@@H]3OC1CC(N)C(O)C(C)O1",
+        "prodrug": false,
+        "active_form": "CHEMBL6608",
+        "active_form_smiles": "COc1cccc2c1C(=O)c1c(O)c3c(c(O)c1C2=O)C[C@@](O)(C(=O)CO)C[C@@H]3OC1CC(N)C(O)C(C)O1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "6b64054c5c8e061d"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6608_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.5481,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "f0dec21118be0e62"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL267863",
+      "ligand_id": "CHEMBL267863",
+      "smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(-c4ccc(N)cc4)nn3)[C@H]2S1(=O)=O",
+      "positive_control": false,
+      "dG": -7.719,
+      "rmsd": 0.0,
+      "le": -0.276,
+      "heavy_atoms": 28,
+      "conservation": 0.853,
+      "dock_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(-c4ccc(N)cc4)nn3)[C@H]2S1(=O)=O",
+      "dock_species": "CHEMBL267863",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL267863",
+        "parent_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(-c4ccc(N)cc4)nn3)[C@H]2S1(=O)=O",
+        "prodrug": false,
+        "active_form": "CHEMBL267863",
+        "active_form_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(-c4ccc(N)cc4)nn3)[C@H]2S1(=O)=O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "024572db0e9f3885"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL267863_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.5477,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "09a7be2b6b2477b3"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "Sofosbuvir",
+      "ligand_id": "CHEMBL1259059",
+      "smiles": "CC(C)OC(=O)[C@H](C)N[P@](=O)(OC[C@H]1O[C@@H](n2ccc(=O)[nH]c2=O)[C@](C)(F)[C@@H]1O)Oc1ccccc1",
+      "positive_control": true,
+      "dG": -8.514,
+      "rmsd": 0.0,
+      "le": -0.236,
+      "heavy_atoms": 36,
+      "conservation": 0.847,
+      "dock_smiles": "CC(C)OC(=O)[C@H](C)N[P@](=O)(OC[C@H]1O[C@@H](n2ccc(=O)[nH]c2=O)[C@](C)(F)[C@@H]1O)Oc1ccccc1",
+      "dock_species": "Sofosbuvir",
+      "species_source": "parent_surrogate",
+      "mechanistic_caveat": "Active form is known but no curated active-form SMILES is committed; parent structure was docked as a labelled surrogate.",
+      "active_species": {
+        "parent": "Sofosbuvir",
+        "parent_smiles": "CC(C)OC(=O)[C@H](C)N[P@](=O)(OC[C@H]1O[C@@H](n2ccc(=O)[nH]c2=O)[C@](C)(F)[C@@H]1O)Oc1ccccc1",
+        "prodrug": true,
+        "active_form": "Sofosbuvir triphosphate (GS-461203)",
+        "active_form_smiles": null,
+        "mechanistic_note": "Parent prodrug; NS5B/RdRp active species is triphosphate."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "c72a12c86916f44f"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL1259059_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.536,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "df3fe9aef50ec383"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "Molnupiravir",
+      "ligand_id": "CHEMBL4650320",
+      "smiles": "CC(C)C(=O)OC[C@H]1O[C@@H](n2cc/c(=N\\O)[nH]c2=O)[C@H](O)[C@@H]1O",
+      "positive_control": true,
+      "dG": -6.892,
+      "rmsd": 0.0,
+      "le": -0.3,
+      "heavy_atoms": 23,
+      "conservation": 0.853,
+      "dock_smiles": "CC(C)C(=O)OC[C@H]1O[C@@H](n2cc/c(=N\\O)[nH]c2=O)[C@H](O)[C@@H]1O",
+      "dock_species": "Molnupiravir",
+      "species_source": "parent_surrogate",
+      "mechanistic_caveat": "Active form is known but no curated active-form SMILES is committed; parent structure was docked as a labelled surrogate.",
+      "active_species": {
+        "parent": "Molnupiravir",
+        "parent_smiles": "CC(C)C(=O)OC[C@H]1O[C@@H](n2cc/c(=N\\O)[nH]c2=O)[C@H](O)[C@@H]1O",
+        "prodrug": true,
+        "active_form": "NHC triphosphate",
+        "active_form_smiles": null,
+        "mechanistic_note": "Prodrug of beta-D-N4-hydroxycytidine; active species is triphosphate."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "4761b7df9f89a611"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL4650320_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.5192,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "493a8cf4dbda073b"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6309",
+      "ligand_id": "CHEMBL6309",
+      "smiles": "COC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@H]12",
+      "positive_control": false,
+      "dG": -6.64,
+      "rmsd": 0.0,
+      "le": -0.302,
+      "heavy_atoms": 22,
+      "conservation": 0.849,
+      "dock_smiles": "COC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@H]12",
+      "dock_species": "CHEMBL6309",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6309",
+        "parent_smiles": "COC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@H]12",
+        "prodrug": false,
+        "active_form": "CHEMBL6309",
+        "active_form_smiles": "COC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@H]12",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "aff3d065b07b06ad"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6309_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.498,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "a67aa6c4fcb73696"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6221",
+      "ligand_id": "CHEMBL6221",
+      "smiles": "COC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@@H]12",
+      "positive_control": false,
+      "dG": -6.608,
+      "rmsd": 0.0,
+      "le": -0.3,
+      "heavy_atoms": 22,
+      "conservation": 0.836,
+      "dock_smiles": "COC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@@H]12",
+      "dock_species": "CHEMBL6221",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6221",
+        "parent_smiles": "COC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@@H]12",
+        "prodrug": false,
+        "active_form": "CHEMBL6221",
+        "active_form_smiles": "COC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@@H]12",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "544136cf3ee78997"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6221_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.4889,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "1ab49350cede134c"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL267626",
+      "ligand_id": "CHEMBL267626",
+      "smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)C(C/C=C/C#N)[C@@H]2S1(=O)=O",
+      "positive_control": false,
+      "dG": -6.165,
+      "rmsd": 0.0,
+      "le": -0.308,
+      "heavy_atoms": 20,
+      "conservation": 0.844,
+      "dock_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)C(C/C=C/C#N)[C@@H]2S1(=O)=O",
+      "dock_species": "CHEMBL267626",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL267626",
+        "parent_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)C(C/C=C/C#N)[C@@H]2S1(=O)=O",
+        "prodrug": false,
+        "active_form": "CHEMBL267626",
+        "active_form_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)C(C/C=C/C#N)[C@@H]2S1(=O)=O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "7c795df93247152b"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL267626_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.4634,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "3a950c7fa19b7afc"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6286",
+      "ligand_id": "CHEMBL6286",
+      "smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)C(C/C=C/C=O)[C@H]2S1(=O)=O",
+      "positive_control": false,
+      "dG": -6.091,
+      "rmsd": 0.0,
+      "le": -0.305,
+      "heavy_atoms": 20,
+      "conservation": 0.841,
+      "dock_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)C(C/C=C/C=O)[C@H]2S1(=O)=O",
+      "dock_species": "CHEMBL6286",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6286",
+        "parent_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)C(C/C=C/C=O)[C@H]2S1(=O)=O",
+        "prodrug": false,
+        "active_form": "CHEMBL6286",
+        "active_form_smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)C(C/C=C/C=O)[C@H]2S1(=O)=O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "81116229d409b709"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6286_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.4489,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "0d86d1b965ef0b0c"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "EPIRUBICIN",
+      "ligand_id": "CHEMBL417",
+      "smiles": "COc1cccc2c1C(=O)c1c(O)c3c(c(O)c1C2=O)C[C@@](O)(C(=O)CO)C[C@@H]3O[C@H]1C[C@H](N)[C@@H](O)[C@H](C)O1",
+      "positive_control": false,
+      "dG": -7.977,
+      "rmsd": 0.0,
+      "le": -0.205,
+      "heavy_atoms": 39,
+      "conservation": 0.834,
+      "dock_smiles": "COc1cccc2c1C(=O)c1c(O)c3c(c(O)c1C2=O)C[C@@](O)(C(=O)CO)C[C@@H]3O[C@H]1C[C@H](N)[C@@H](O)[C@H](C)O1",
+      "dock_species": "EPIRUBICIN",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "EPIRUBICIN",
+        "parent_smiles": "COc1cccc2c1C(=O)c1c(O)c3c(c(O)c1C2=O)C[C@@](O)(C(=O)CO)C[C@@H]3O[C@H]1C[C@H](N)[C@@H](O)[C@H](C)O1",
+        "prodrug": false,
+        "active_form": "EPIRUBICIN",
+        "active_form_smiles": "COc1cccc2c1C(=O)c1c(O)c3c(c(O)c1C2=O)C[C@@](O)(C(=O)CO)C[C@@H]3O[C@H]1C[C@H](N)[C@@H](O)[C@H](C)O1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "00e08956ab5dfc3d"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL417_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.4103,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "201045194ddbc14b"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6219",
+      "ligand_id": "CHEMBL6219",
+      "smiles": "COC(=O)/C=C/C(=O)Nc1ccc(/C=C/C(=O)N2CCN(c3nc(N)c4cc(OC)c(OC)cc4n3)CC2)cc1",
+      "positive_control": false,
+      "dG": -8.002,
+      "rmsd": 0.0,
+      "le": -0.2,
+      "heavy_atoms": 40,
+      "conservation": 0.852,
+      "dock_smiles": "COC(=O)/C=C/C(=O)Nc1ccc(/C=C/C(=O)N2CCN(c3nc(N)c4cc(OC)c(OC)cc4n3)CC2)cc1",
+      "dock_species": "CHEMBL6219",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6219",
+        "parent_smiles": "COC(=O)/C=C/C(=O)Nc1ccc(/C=C/C(=O)N2CCN(c3nc(N)c4cc(OC)c(OC)cc4n3)CC2)cc1",
+        "prodrug": false,
+        "active_form": "CHEMBL6219",
+        "active_form_smiles": "COC(=O)/C=C/C(=O)Nc1ccc(/C=C/C(=O)N2CCN(c3nc(N)c4cc(OC)c(OC)cc4n3)CC2)cc1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "f0e8783672dfd089"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6219_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.4033,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "13965a734e8095a1"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL266223",
+      "ligand_id": "CHEMBL266223",
+      "smiles": "COC(=O)/C=C/C(=O)Nc1ccc(CCCCC(=O)N2CCN(c3nc(N)c4cc(OC)c(OC)cc4n3)CC2)cc1",
+      "positive_control": false,
+      "dG": -8.137,
+      "rmsd": 0.0,
+      "le": -0.194,
+      "heavy_atoms": 42,
+      "conservation": 0.844,
+      "dock_smiles": "COC(=O)/C=C/C(=O)Nc1ccc(CCCCC(=O)N2CCN(c3nc(N)c4cc(OC)c(OC)cc4n3)CC2)cc1",
+      "dock_species": "CHEMBL266223",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL266223",
+        "parent_smiles": "COC(=O)/C=C/C(=O)Nc1ccc(CCCCC(=O)N2CCN(c3nc(N)c4cc(OC)c(OC)cc4n3)CC2)cc1",
+        "prodrug": false,
+        "active_form": "CHEMBL266223",
+        "active_form_smiles": "COC(=O)/C=C/C(=O)Nc1ccc(CCCCC(=O)N2CCN(c3nc(N)c4cc(OC)c(OC)cc4n3)CC2)cc1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "f0de17b98ee150ee"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL266223_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.4024,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "b1993c3a1d93877d"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "Remdesivir",
+      "ligand_id": "CHEMBL4065616",
+      "smiles": "CCC(CC)COC(=O)[C@H](C)N[P@](=O)(OC[C@H]1O[C@@](C#N)(c2ccc3c(N)ncnn23)[C@H](O)[C@@H]1O)Oc1ccccc1",
+      "positive_control": true,
+      "dG": -8.09,
+      "rmsd": 0.0,
+      "le": -0.193,
+      "heavy_atoms": 42,
+      "conservation": 0.848,
+      "dock_smiles": "CCC(CC)COC(=O)[C@H](C)N[P@](=O)(OC[C@H]1O[C@@](C#N)(c2ccc3c(N)ncnn23)[C@H](O)[C@@H]1O)Oc1ccccc1",
+      "dock_species": "Remdesivir",
+      "species_source": "parent_surrogate",
+      "mechanistic_caveat": "Active form is known but no curated active-form SMILES is committed; parent structure was docked as a labelled surrogate.",
+      "active_species": {
+        "parent": "Remdesivir",
+        "parent_smiles": "CCC(CC)COC(=O)[C@H](C)N[P@](=O)(OC[C@H]1O[C@@](C#N)(c2ccc3c(N)ncnn23)[C@H](O)[C@@H]1O)Oc1ccccc1",
+        "prodrug": true,
+        "active_form": "Remdesivir triphosphate (GS-443902)",
+        "active_form_smiles": null,
+        "mechanistic_note": "Parent prodrug; RdRp active species is intracellular triphosphate."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "421d7cfd1cc9adf6"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL4065616_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.3958,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "44226ff757f07412"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6302",
+      "ligand_id": "CHEMBL6302",
+      "smiles": "COc1cc2nc(N3CCN(/C(S)=N/c4ccc(NC(=S)N5CC5)cc4)CC3)nc(N)c2cc1OC",
+      "positive_control": false,
+      "dG": -7.589,
+      "rmsd": 0.0,
+      "le": -0.211,
+      "heavy_atoms": 36,
+      "conservation": 0.847,
+      "dock_smiles": "COc1cc2nc(N3CCN(/C(S)=N/c4ccc(NC(=S)N5CC5)cc4)CC3)nc(N)c2cc1OC",
+      "dock_species": "CHEMBL6302",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6302",
+        "parent_smiles": "COc1cc2nc(N3CCN(/C(S)=N/c4ccc(NC(=S)N5CC5)cc4)CC3)nc(N)c2cc1OC",
+        "prodrug": false,
+        "active_form": "CHEMBL6302",
+        "active_form_smiles": "COc1cc2nc(N3CCN(/C(S)=N/c4ccc(NC(=S)N5CC5)cc4)CC3)nc(N)c2cc1OC",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "28c076f5302b7a52"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6302_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.3863,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "6ceba61cac7f3750"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6997",
+      "ligand_id": "CHEMBL6997",
+      "smiles": "CSCC[C@H](NC(=O)Nc1cccc(C)c1)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "positive_control": false,
+      "dG": -7.738,
+      "rmsd": 0.0,
+      "le": -0.204,
+      "heavy_atoms": 38,
+      "conservation": 0.844,
+      "dock_smiles": "CSCC[C@H](NC(=O)Nc1cccc(C)c1)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "dock_species": "CHEMBL6997",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6997",
+        "parent_smiles": "CSCC[C@H](NC(=O)Nc1cccc(C)c1)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "prodrug": false,
+        "active_form": "CHEMBL6997",
+        "active_form_smiles": "CSCC[C@H](NC(=O)Nc1cccc(C)c1)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "eb4745f1d6353711"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6997_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.385,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "1170a8319b6bbbd7"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL7520",
+      "ligand_id": "CHEMBL7520",
+      "smiles": "CSCC[C@H](NC(=O)Nc1ccccc1)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "positive_control": false,
+      "dG": -7.656,
+      "rmsd": 0.0,
+      "le": -0.207,
+      "heavy_atoms": 37,
+      "conservation": 0.837,
+      "dock_smiles": "CSCC[C@H](NC(=O)Nc1ccccc1)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "dock_species": "CHEMBL7520",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL7520",
+        "parent_smiles": "CSCC[C@H](NC(=O)Nc1ccccc1)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "prodrug": false,
+        "active_form": "CHEMBL7520",
+        "active_form_smiles": "CSCC[C@H](NC(=O)Nc1ccccc1)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "c6caa567fb8f6739"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL7520_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.3829,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "c6372599bf8f5b97"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL7753",
+      "ligand_id": "CHEMBL7753",
+      "smiles": "COc1ccc(NC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)NC(Cc2ccccc2)C(=O)O)cc1",
+      "positive_control": false,
+      "dG": -7.761,
+      "rmsd": 0.0,
+      "le": -0.199,
+      "heavy_atoms": 39,
+      "conservation": 0.846,
+      "dock_smiles": "COc1ccc(NC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)NC(Cc2ccccc2)C(=O)O)cc1",
+      "dock_species": "CHEMBL7753",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL7753",
+        "parent_smiles": "COc1ccc(NC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)NC(Cc2ccccc2)C(=O)O)cc1",
+        "prodrug": false,
+        "active_form": "CHEMBL7753",
+        "active_form_smiles": "COc1ccc(NC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)NC(Cc2ccccc2)C(=O)O)cc1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "c67157cf9e1ab78e"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL7753_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.3762,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "d80ecbd346ff513c"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6290",
+      "ligand_id": "CHEMBL6290",
+      "smiles": "COc1cc2nc(N3CCN(C(=O)/C=C/c4ccc(Br)cc4)CC3)nc(N)c2cc1OC",
+      "positive_control": false,
+      "dG": -7.159,
+      "rmsd": 0.0,
+      "le": -0.224,
+      "heavy_atoms": 32,
+      "conservation": 0.856,
+      "dock_smiles": "COc1cc2nc(N3CCN(C(=O)/C=C/c4ccc(Br)cc4)CC3)nc(N)c2cc1OC",
+      "dock_species": "CHEMBL6290",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6290",
+        "parent_smiles": "COc1cc2nc(N3CCN(C(=O)/C=C/c4ccc(Br)cc4)CC3)nc(N)c2cc1OC",
+        "prodrug": false,
+        "active_form": "CHEMBL6290",
+        "active_form_smiles": "COc1cc2nc(N3CCN(C(=O)/C=C/c4ccc(Br)cc4)CC3)nc(N)c2cc1OC",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "e217cae474972b6a"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6290_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.3736,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "76ac2af425fe107c"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL269134",
+      "ligand_id": "CHEMBL269134",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NCC(C)(C)C)C2)cc(OC)c1OC",
+      "positive_control": false,
+      "dG": -7.946,
+      "rmsd": 0.0,
+      "le": -0.181,
+      "heavy_atoms": 44,
+      "conservation": 0.848,
+      "dock_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NCC(C)(C)C)C2)cc(OC)c1OC",
+      "dock_species": "CHEMBL269134",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL269134",
+        "parent_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NCC(C)(C)C)C2)cc(OC)c1OC",
+        "prodrug": false,
+        "active_form": "CHEMBL269134",
+        "active_form_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NCC(C)(C)C)C2)cc(OC)c1OC",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "81d5d69d0aa703fb"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL269134_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.3541,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "1778280274cad4ee"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL414696",
+      "ligand_id": "CHEMBL414696",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)COc3ccc(F)cc3)C2)cc(OC)c1OC",
+      "positive_control": false,
+      "dG": -8.121,
+      "rmsd": 0.0,
+      "le": -0.173,
+      "heavy_atoms": 47,
+      "conservation": 0.846,
+      "dock_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)COc3ccc(F)cc3)C2)cc(OC)c1OC",
+      "dock_species": "CHEMBL414696",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL414696",
+        "parent_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)COc3ccc(F)cc3)C2)cc(OC)c1OC",
+        "prodrug": false,
+        "active_form": "CHEMBL414696",
+        "active_form_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)COc3ccc(F)cc3)C2)cc(OC)c1OC",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "b241b2678c32296d"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL414696_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.3533,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "7d84a447bfed7924"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL266802",
+      "ligand_id": "CHEMBL266802",
+      "smiles": "CSCC[C@H](NC(=O)Nc1ccc(C)cc1)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "positive_control": false,
+      "dG": -7.449,
+      "rmsd": 0.0,
+      "le": -0.196,
+      "heavy_atoms": 38,
+      "conservation": 0.838,
+      "dock_smiles": "CSCC[C@H](NC(=O)Nc1ccc(C)cc1)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "dock_species": "CHEMBL266802",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL266802",
+        "parent_smiles": "CSCC[C@H](NC(=O)Nc1ccc(C)cc1)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "prodrug": false,
+        "active_form": "CHEMBL266802",
+        "active_form_smiles": "CSCC[C@H](NC(=O)Nc1ccc(C)cc1)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "06ae49159eb4eddc"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL266802_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.3372,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "7c89b34a09fe38fa"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL268597",
+      "ligand_id": "CHEMBL268597",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)C3CCCCC3)C2)cc(OC)c1OC",
+      "positive_control": false,
+      "dG": -7.818,
+      "rmsd": 0.0,
+      "le": -0.178,
+      "heavy_atoms": 44,
+      "conservation": 0.844,
+      "dock_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)C3CCCCC3)C2)cc(OC)c1OC",
+      "dock_species": "CHEMBL268597",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL268597",
+        "parent_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)C3CCCCC3)C2)cc(OC)c1OC",
+        "prodrug": false,
+        "active_form": "CHEMBL268597",
+        "active_form_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)C3CCCCC3)C2)cc(OC)c1OC",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "a7f674b0f968e635"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL268597_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.334,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "1a9c4fee3a36ec95"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL266089",
+      "ligand_id": "CHEMBL266089",
+      "smiles": "C=C(C)NC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "positive_control": false,
+      "dG": -7.086,
+      "rmsd": 0.0,
+      "le": -0.208,
+      "heavy_atoms": 34,
+      "conservation": 0.841,
+      "dock_smiles": "C=C(C)NC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "dock_species": "CHEMBL266089",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL266089",
+        "parent_smiles": "C=C(C)NC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "prodrug": false,
+        "active_form": "CHEMBL266089",
+        "active_form_smiles": "C=C(C)NC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "28521206a8703e76"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL266089_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.3284,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "fbc825f4485c6ead"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL266886",
+      "ligand_id": "CHEMBL266886",
+      "smiles": "CCC(C)(C)NC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "positive_control": false,
+      "dG": -7.767,
+      "rmsd": 0.0,
+      "le": -0.177,
+      "heavy_atoms": 44,
+      "conservation": 0.84,
+      "dock_smiles": "CCC(C)(C)NC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "dock_species": "CHEMBL266886",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL266886",
+        "parent_smiles": "CCC(C)(C)NC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "prodrug": false,
+        "active_form": "CHEMBL266886",
+        "active_form_smiles": "CCC(C)(C)NC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "27c3b88744c7e003"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL266886_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.3262,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "c350be4a2372b5da"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6343",
+      "ligand_id": "CHEMBL6343",
+      "smiles": "COc1cc2nc(N3CCN(C(=O)/C=C/c4ccc(NC(=O)CBr)cc4)CC3)nc(N)c2cc1OC",
+      "positive_control": false,
+      "dG": -7.195,
+      "rmsd": 0.0,
+      "le": -0.2,
+      "heavy_atoms": 36,
+      "conservation": 0.843,
+      "dock_smiles": "COc1cc2nc(N3CCN(C(=O)/C=C/c4ccc(NC(=O)CBr)cc4)CC3)nc(N)c2cc1OC",
+      "dock_species": "CHEMBL6343",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6343",
+        "parent_smiles": "COc1cc2nc(N3CCN(C(=O)/C=C/c4ccc(NC(=O)CBr)cc4)CC3)nc(N)c2cc1OC",
+        "prodrug": false,
+        "active_form": "CHEMBL6343",
+        "active_form_smiles": "COc1cc2nc(N3CCN(C(=O)/C=C/c4ccc(NC(=O)CBr)cc4)CC3)nc(N)c2cc1OC",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "61e16cc2b32e455a"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6343_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.3213,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "96c6673ff726cb20"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL265773",
+      "ligand_id": "CHEMBL265773",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)COc3ccc(Cl)cc3)C2)cc(OC)c1OC",
+      "positive_control": false,
+      "dG": -7.912,
+      "rmsd": 0.0,
+      "le": -0.168,
+      "heavy_atoms": 47,
+      "conservation": 0.849,
+      "dock_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)COc3ccc(Cl)cc3)C2)cc(OC)c1OC",
+      "dock_species": "CHEMBL265773",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL265773",
+        "parent_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)COc3ccc(Cl)cc3)C2)cc(OC)c1OC",
+        "prodrug": false,
+        "active_form": "CHEMBL265773",
+        "active_form_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)COc3ccc(Cl)cc3)C2)cc(OC)c1OC",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "104ad17eac68fa8e"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL265773_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.3212,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "6355e99b6196c756"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL441173",
+      "ligand_id": "CHEMBL441173",
+      "smiles": "CC1OC(OC2CCC3(C)C(CCC4C3CCC3(C)[C@@H](C5=CC(=O)OC5)C(OC=O)CC43O)C2)CC(O)C1O",
+      "positive_control": false,
+      "dG": -7.403,
+      "rmsd": 0.0,
+      "le": -0.19,
+      "heavy_atoms": 39,
+      "conservation": 0.841,
+      "dock_smiles": "CC1OC(OC2CCC3(C)C(CCC4C3CCC3(C)[C@@H](C5=CC(=O)OC5)C(OC=O)CC43O)C2)CC(O)C1O",
+      "dock_species": "CHEMBL441173",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL441173",
+        "parent_smiles": "CC1OC(OC2CCC3(C)C(CCC4C3CCC3(C)[C@@H](C5=CC(=O)OC5)C(OC=O)CC43O)C2)CC(O)C1O",
+        "prodrug": false,
+        "active_form": "CHEMBL441173",
+        "active_form_smiles": "CC1OC(OC2CCC3(C)C(CCC4C3CCC3(C)[C@@H](C5=CC(=O)OC5)C(OC=O)CC43O)C2)CC(O)C1O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "c82efc2a2f01d2c2"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL441173_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.3193,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "0196a7e8ed10d1ca"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL415299",
+      "ligand_id": "CHEMBL415299",
+      "smiles": "CSCC[C@H](NC(=O)NC(C)(C)C)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "positive_control": false,
+      "dG": -7.106,
+      "rmsd": 0.0,
+      "le": -0.203,
+      "heavy_atoms": 35,
+      "conservation": 0.838,
+      "dock_smiles": "CSCC[C@H](NC(=O)NC(C)(C)C)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "dock_species": "CHEMBL415299",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL415299",
+        "parent_smiles": "CSCC[C@H](NC(=O)NC(C)(C)C)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "prodrug": false,
+        "active_form": "CHEMBL415299",
+        "active_form_smiles": "CSCC[C@H](NC(=O)NC(C)(C)C)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "d944ab7134494f50"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL415299_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.3187,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "3a7c1daa890bd862"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL268823",
+      "ligand_id": "CHEMBL268823",
+      "smiles": "CSCC[C@H](NC(=O)NCC(C)C)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "positive_control": false,
+      "dG": -7.023,
+      "rmsd": 0.0,
+      "le": -0.201,
+      "heavy_atoms": 35,
+      "conservation": 0.842,
+      "dock_smiles": "CSCC[C@H](NC(=O)NCC(C)C)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "dock_species": "CHEMBL268823",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL268823",
+        "parent_smiles": "CSCC[C@H](NC(=O)NCC(C)C)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "prodrug": false,
+        "active_form": "CHEMBL268823",
+        "active_form_smiles": "CSCC[C@H](NC(=O)NCC(C)C)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "71b88e8282af9b1f"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL268823_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.3062,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "7e9edb487a23488e"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL258053",
+      "ligand_id": "CHEMBL258053",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NC(C)C(C)C)C2)cc(OC)c1OC",
+      "positive_control": false,
+      "dG": -7.617,
+      "rmsd": 0.0,
+      "le": -0.173,
+      "heavy_atoms": 44,
+      "conservation": 0.84,
+      "dock_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NC(C)C(C)C)C2)cc(OC)c1OC",
+      "dock_species": "CHEMBL258053",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL258053",
+        "parent_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NC(C)C(C)C)C2)cc(OC)c1OC",
+        "prodrug": false,
+        "active_form": "CHEMBL258053",
+        "active_form_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NC(C)C(C)C)C2)cc(OC)c1OC",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "da5b6d81736f3314"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL258053_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.302,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "60f787a766b12e5e"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL269132",
+      "ligand_id": "CHEMBL269132",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NC(C)CC(C)C)C2)cc(OC)c1OC",
+      "positive_control": false,
+      "dG": -7.629,
+      "rmsd": 0.0,
+      "le": -0.17,
+      "heavy_atoms": 45,
+      "conservation": 0.844,
+      "dock_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NC(C)CC(C)C)C2)cc(OC)c1OC",
+      "dock_species": "CHEMBL269132",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL269132",
+        "parent_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NC(C)CC(C)C)C2)cc(OC)c1OC",
+        "prodrug": false,
+        "active_form": "CHEMBL269132",
+        "active_form_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NC(C)CC(C)C)C2)cc(OC)c1OC",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "9fa6daaa632788ef"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL269132_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.2968,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "d688ecf22f656f0c"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL266448",
+      "ligand_id": "CHEMBL266448",
+      "smiles": "CCCNC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "positive_control": false,
+      "dG": -6.852,
+      "rmsd": 0.0,
+      "le": -0.202,
+      "heavy_atoms": 34,
+      "conservation": 0.838,
+      "dock_smiles": "CCCNC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "dock_species": "CHEMBL266448",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL266448",
+        "parent_smiles": "CCCNC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "prodrug": false,
+        "active_form": "CHEMBL266448",
+        "active_form_smiles": "CCCNC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "7b10c80ab57674f9"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL266448_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.2909,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "f1814c59f06931a0"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL204022",
+      "ligand_id": "CHEMBL204022",
+      "smiles": "CCC(C)CNC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "positive_control": false,
+      "dG": -7.478,
+      "rmsd": 0.0,
+      "le": -0.17,
+      "heavy_atoms": 44,
+      "conservation": 0.846,
+      "dock_smiles": "CCC(C)CNC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "dock_species": "CHEMBL204022",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL204022",
+        "parent_smiles": "CCC(C)CNC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "prodrug": false,
+        "active_form": "CHEMBL204022",
+        "active_form_smiles": "CCC(C)CNC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "391899d33354a75a"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL204022_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.2819,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "c806d17c37ae6286"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL269133",
+      "ligand_id": "CHEMBL269133",
+      "smiles": "CCCC(C)NC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "positive_control": false,
+      "dG": -7.473,
+      "rmsd": 0.0,
+      "le": -0.17,
+      "heavy_atoms": 44,
+      "conservation": 0.838,
+      "dock_smiles": "CCCC(C)NC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "dock_species": "CHEMBL269133",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL269133",
+        "parent_smiles": "CCCC(C)NC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "prodrug": false,
+        "active_form": "CHEMBL269133",
+        "active_form_smiles": "CCCC(C)NC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "94faef6a6368c4e6"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL269133_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.2806,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "2a3d86ee77b16e6b"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL7034",
+      "ligand_id": "CHEMBL7034",
+      "smiles": "CSCC[C@H](NC(=O)NC(C)C)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "positive_control": false,
+      "dG": -6.746,
+      "rmsd": 0.0,
+      "le": -0.198,
+      "heavy_atoms": 34,
+      "conservation": 0.842,
+      "dock_smiles": "CSCC[C@H](NC(=O)NC(C)C)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "dock_species": "CHEMBL7034",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL7034",
+        "parent_smiles": "CSCC[C@H](NC(=O)NC(C)C)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "prodrug": false,
+        "active_form": "CHEMBL7034",
+        "active_form_smiles": "CSCC[C@H](NC(=O)NC(C)C)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "442060dc60a5b7c7"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL7034_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.2716,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "e8f9c83e2b7e753a"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6217",
+      "ligand_id": "CHEMBL6217",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(C)=O)C2)cc(OC)c1OC",
+      "positive_control": false,
+      "dG": -7.011,
+      "rmsd": 0.0,
+      "le": -0.18,
+      "heavy_atoms": 39,
+      "conservation": 0.855,
+      "dock_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(C)=O)C2)cc(OC)c1OC",
+      "dock_species": "CHEMBL6217",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6217",
+        "parent_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(C)=O)C2)cc(OC)c1OC",
+        "prodrug": false,
+        "active_form": "CHEMBL6217",
+        "active_form_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(C)=O)C2)cc(OC)c1OC",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "4e1aa96fc912d589"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6217_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.2586,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "337e931813be1f37"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL380444",
+      "ligand_id": "CHEMBL380444",
+      "smiles": "CCC(CC)NC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "positive_control": false,
+      "dG": -7.293,
+      "rmsd": 0.0,
+      "le": -0.166,
+      "heavy_atoms": 44,
+      "conservation": 0.844,
+      "dock_smiles": "CCC(CC)NC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "dock_species": "CHEMBL380444",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL380444",
+        "parent_smiles": "CCC(CC)NC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "prodrug": false,
+        "active_form": "CHEMBL380444",
+        "active_form_smiles": "CCC(CC)NC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "27a1a0423f6f5396"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL380444_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.254,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "ffc5b6a9e4d698c3"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6359",
+      "ligand_id": "CHEMBL6359",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NC(C)(C)C)C2)cc(OC)c1OC",
+      "positive_control": false,
+      "dG": -7.2,
+      "rmsd": 0.0,
+      "le": -0.167,
+      "heavy_atoms": 43,
+      "conservation": 0.847,
+      "dock_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NC(C)(C)C)C2)cc(OC)c1OC",
+      "dock_species": "CHEMBL6359",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6359",
+        "parent_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NC(C)(C)C)C2)cc(OC)c1OC",
+        "prodrug": false,
+        "active_form": "CHEMBL6359",
+        "active_form_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NC(C)(C)C)C2)cc(OC)c1OC",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "72f5e5dd3b36ffe8"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6359_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.2472,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "ef2876b3036e9810"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6202",
+      "ligand_id": "CHEMBL6202",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NCCC(C)C)C2)cc(OC)c1OC",
+      "positive_control": false,
+      "dG": -7.239,
+      "rmsd": 0.0,
+      "le": -0.165,
+      "heavy_atoms": 44,
+      "conservation": 0.847,
+      "dock_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NCCC(C)C)C2)cc(OC)c1OC",
+      "dock_species": "CHEMBL6202",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6202",
+        "parent_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NCCC(C)C)C2)cc(OC)c1OC",
+        "prodrug": false,
+        "active_form": "CHEMBL6202",
+        "active_form_smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NCCC(C)C)C2)cc(OC)c1OC",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "284608c034032915"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6202_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.2466,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "0de9abec3d30fab6"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6341",
+      "ligand_id": "CHEMBL6341",
+      "smiles": "CCCC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "positive_control": false,
+      "dG": -6.998,
+      "rmsd": 0.0,
+      "le": -0.171,
+      "heavy_atoms": 41,
+      "conservation": 0.842,
+      "dock_smiles": "CCCC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "dock_species": "CHEMBL6341",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6341",
+        "parent_smiles": "CCCC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "prodrug": false,
+        "active_form": "CHEMBL6341",
+        "active_form_smiles": "CCCC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "66de39dde32b3b10"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6341_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.2355,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "d3ab7a93e8ddd1fb"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "PMS-601",
+      "ligand_id": "CHEMBL6322",
+      "smiles": "CCN(CC)C(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "positive_control": false,
+      "dG": -7.038,
+      "rmsd": 0.0,
+      "le": -0.164,
+      "heavy_atoms": 43,
+      "conservation": 0.846,
+      "dock_smiles": "CCN(CC)C(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "dock_species": "PMS-601",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "PMS-601",
+        "parent_smiles": "CCN(CC)C(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "prodrug": false,
+        "active_form": "PMS-601",
+        "active_form_smiles": "CCN(CC)C(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "484e5298024ee0dc"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6322_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.224,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "c1ba67033fb9e014"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL269131",
+      "ligand_id": "CHEMBL269131",
+      "smiles": "CCCN(CCC)C(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "positive_control": false,
+      "dG": -7.046,
+      "rmsd": 0.0,
+      "le": -0.157,
+      "heavy_atoms": 45,
+      "conservation": 0.844,
+      "dock_smiles": "CCCN(CCC)C(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "dock_species": "CHEMBL269131",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL269131",
+        "parent_smiles": "CCCN(CCC)C(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "prodrug": false,
+        "active_form": "CHEMBL269131",
+        "active_form_smiles": "CCCN(CCC)C(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "b6a8661eec68676b"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL269131_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.2087,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "4d7365ba0fc11c1a"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL6270",
+      "ligand_id": "CHEMBL6270",
+      "smiles": "CCC(CC)C(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "positive_control": false,
+      "dG": -6.833,
+      "rmsd": 0.0,
+      "le": -0.159,
+      "heavy_atoms": 43,
+      "conservation": 0.846,
+      "dock_smiles": "CCC(CC)C(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "dock_species": "CHEMBL6270",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL6270",
+        "parent_smiles": "CCC(CC)C(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "prodrug": false,
+        "active_form": "CHEMBL6270",
+        "active_form_smiles": "CCC(CC)C(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "396586816a105a85"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL6270_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.1921,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "c6a45922c3a19ebc"
+      }
+    },
+    {
+      "protein": "PB1",
+      "pocket": 1,
+      "ligand": "CHEMBL427616",
+      "ligand_id": "CHEMBL427616",
+      "smiles": "COc1ccc(S(=O)(=O)N2CC[C@H](C(=O)NO)N(S(=O)(=O)c3ccc(OC)cc3)CC2)cc1",
+      "positive_control": false,
+      "dG": -5.808,
+      "rmsd": 0.0,
+      "le": -0.176,
+      "heavy_atoms": 33,
+      "conservation": 0.835,
+      "dock_smiles": "COc1ccc(S(=O)(=O)N2CC[C@H](C(=O)NO)N(S(=O)(=O)c3ccc(OC)cc3)CC2)cc1",
+      "dock_species": "CHEMBL427616",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "CHEMBL427616",
+        "parent_smiles": "COc1ccc(S(=O)(=O)N2CC[C@H](C(=O)NO)N(S(=O)(=O)c3ccc(OC)cc3)CC2)cc1",
+        "prodrug": false,
+        "active_form": "CHEMBL427616",
+        "active_form_smiles": "COc1ccc(S(=O)(=O)N2CC[C@H](C(=O)NO)N(S(=O)(=O)c3ccc(OC)cc3)CC2)cc1",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "74aa5dc11986d579"
+      },
+      "pose_path": "structures/phase8_matched_benchmark_PB1_CHEMBL427616_p1_primary.pdbqt",
+      "receptor_path": "structures/phase8_matched_benchmark_PB1_primary_rec.pdbqt",
+      "score": 0.1267,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "c003d215cfb0d205"
+      }
+    }
+  ],
+  "leakage_audit": {
+    "status": "pass_no_overlap",
+    "overlap": [],
+    "n_training_targets": 0,
+    "n_eval_targets": 1,
+    "promotable": true
+  },
+  "audit_trail": [
+    "Structure[PB1]: EXPERIMENTAL 8PSO chain B (pLDDT=None = trusted ground truth)",
+    "ActiveSite[PB1]: experimental catalytic site 8PSO:F (bound CTP, NTP site) @ [135.56, 115.6, 123.66]",
+    "conservation[PB1] pocket 1: 0.848 (JSD over 8 residues within 6.0\u00c5, 31 homologs)",
+    "Vina[PB1]: CHEMBL268915 produced no pose; skipped",
+    "Vina[PB1]: CHEMBL265408 produced no pose; skipped",
+    "Vina: 54 real docks over 56 ligands",
+    "Docking species: 0 active-form substitutions, 4 parent surrogates",
+    "[skip] Metals: 1 pocket(s) lacked curated catalytic Mg/Mn coordinates",
+    "[skip] Ensemble docking: no receptor ensemble supplied",
+    "contact-conservation: ligand-weighted 54 poses (per-residue JSD over 4.0\u00c5 contacts; ranking now ligand-specific)",
+    "Ranking: top lead Ribavirin on PB1 score 0.7334 (dG -6.788, conservation 0.85)"
+  ],
+  "versions": {
+    "esmfold": "esm2 (api.esmatlas.com, \u2264400aa) + experimental PDB + AlphaFold DB (>400aa)",
+    "pockets": "fpocket",
+    "conservation": "JSD/Capra&Singh-2007 vs Robinson background, proximity 6\u00c5, MAFFT MSA",
+    "docking": "AutoDock Vina 1.2.5",
+    "ligands": "ChEMBL x56",
+    "docking_species": "curated active-species resolver",
+    "conservation_contacts": "ligand-contact-weighted JSD (4\u00c5)"
+  },
+  "verdict": "defensible demonstration; underpowered for publication",
+  "bootstrap": {
+    "point": {
+      "n": 54,
+      "n_actives": 4,
+      "n_decoys": 50,
+      "roc_auc": 0.785,
+      "bedroc": 0.4062,
+      "log_auc": 0.3883,
+      "ef": {
+        "EF1%": 13.5,
+        "EF5%": 4.5,
+        "EF10%": 2.7,
+        "EF20%": 1.2273
+      },
+      "ranking": [
+        {
+          "rank": 1,
+          "name": "Ribavirin",
+          "score": 0.7334,
+          "label": "active"
+        },
+        {
+          "rank": 2,
+          "name": "TAZOBACTAM",
+          "score": 0.6994,
+          "label": "decoy"
+        },
+        {
+          "rank": 3,
+          "name": "CHEMBL6301",
+          "score": 0.6916,
+          "label": "decoy"
+        },
+        {
+          "rank": 4,
+          "name": "CHEMBL6220",
+          "score": 0.6513,
+          "label": "decoy"
+        },
+        {
+          "rank": 5,
+          "name": "CHEMBL267627",
+          "score": 0.6195,
+          "label": "decoy"
+        },
+        {
+          "rank": 6,
+          "name": "CHEMBL268629",
+          "score": 0.6055,
+          "label": "decoy"
+        },
+        {
+          "rank": 7,
+          "name": "CHEMBL6281",
+          "score": 0.6041,
+          "label": "decoy"
+        },
+        {
+          "rank": 8,
+          "name": "CHEMBL6639",
+          "score": 0.588,
+          "label": "decoy"
+        },
+        {
+          "rank": 9,
+          "name": "CHEMBL6311",
+          "score": 0.5867,
+          "label": "decoy"
+        },
+        {
+          "rank": 10,
+          "name": "CHEMBL6261",
+          "score": 0.5846,
+          "label": "decoy"
+        },
+        {
+          "rank": 11,
+          "name": "CHEMBL414012",
+          "score": 0.5638,
+          "label": "decoy"
+        },
+        {
+          "rank": 12,
+          "name": "CHEMBL6608",
+          "score": 0.5481,
+          "label": "decoy"
+        },
+        {
+          "rank": 13,
+          "name": "CHEMBL267863",
+          "score": 0.5477,
+          "label": "decoy"
+        },
+        {
+          "rank": 14,
+          "name": "Sofosbuvir",
+          "score": 0.536,
+          "label": "active"
+        },
+        {
+          "rank": 15,
+          "name": "Molnupiravir",
+          "score": 0.5192,
+          "label": "active"
+        },
+        {
+          "rank": 16,
+          "name": "CHEMBL6309",
+          "score": 0.498,
+          "label": "decoy"
+        },
+        {
+          "rank": 17,
+          "name": "CHEMBL6221",
+          "score": 0.4889,
+          "label": "decoy"
+        },
+        {
+          "rank": 18,
+          "name": "CHEMBL267626",
+          "score": 0.4634,
+          "label": "decoy"
+        },
+        {
+          "rank": 19,
+          "name": "CHEMBL6286",
+          "score": 0.4489,
+          "label": "decoy"
+        },
+        {
+          "rank": 20,
+          "name": "EPIRUBICIN",
+          "score": 0.4103,
+          "label": "decoy"
+        },
+        {
+          "rank": 21,
+          "name": "CHEMBL6219",
+          "score": 0.4033,
+          "label": "decoy"
+        },
+        {
+          "rank": 22,
+          "name": "CHEMBL266223",
+          "score": 0.4024,
+          "label": "decoy"
+        },
+        {
+          "rank": 23,
+          "name": "Remdesivir",
+          "score": 0.3958,
+          "label": "active"
+        },
+        {
+          "rank": 24,
+          "name": "CHEMBL6302",
+          "score": 0.3863,
+          "label": "decoy"
+        },
+        {
+          "rank": 25,
+          "name": "CHEMBL6997",
+          "score": 0.385,
+          "label": "decoy"
+        },
+        {
+          "rank": 26,
+          "name": "CHEMBL7520",
+          "score": 0.3829,
+          "label": "decoy"
+        },
+        {
+          "rank": 27,
+          "name": "CHEMBL7753",
+          "score": 0.3762,
+          "label": "decoy"
+        },
+        {
+          "rank": 28,
+          "name": "CHEMBL6290",
+          "score": 0.3736,
+          "label": "decoy"
+        },
+        {
+          "rank": 29,
+          "name": "CHEMBL269134",
+          "score": 0.3541,
+          "label": "decoy"
+        },
+        {
+          "rank": 30,
+          "name": "CHEMBL414696",
+          "score": 0.3533,
+          "label": "decoy"
+        },
+        {
+          "rank": 31,
+          "name": "CHEMBL266802",
+          "score": 0.3372,
+          "label": "decoy"
+        },
+        {
+          "rank": 32,
+          "name": "CHEMBL268597",
+          "score": 0.334,
+          "label": "decoy"
+        },
+        {
+          "rank": 33,
+          "name": "CHEMBL266089",
+          "score": 0.3284,
+          "label": "decoy"
+        },
+        {
+          "rank": 34,
+          "name": "CHEMBL266886",
+          "score": 0.3262,
+          "label": "decoy"
+        },
+        {
+          "rank": 35,
+          "name": "CHEMBL6343",
+          "score": 0.3213,
+          "label": "decoy"
+        },
+        {
+          "rank": 36,
+          "name": "CHEMBL265773",
+          "score": 0.3212,
+          "label": "decoy"
+        },
+        {
+          "rank": 37,
+          "name": "CHEMBL441173",
+          "score": 0.3193,
+          "label": "decoy"
+        },
+        {
+          "rank": 38,
+          "name": "CHEMBL415299",
+          "score": 0.3187,
+          "label": "decoy"
+        },
+        {
+          "rank": 39,
+          "name": "CHEMBL268823",
+          "score": 0.3062,
+          "label": "decoy"
+        },
+        {
+          "rank": 40,
+          "name": "CHEMBL258053",
+          "score": 0.302,
+          "label": "decoy"
+        },
+        {
+          "rank": 41,
+          "name": "CHEMBL269132",
+          "score": 0.2968,
+          "label": "decoy"
+        },
+        {
+          "rank": 42,
+          "name": "CHEMBL266448",
+          "score": 0.2909,
+          "label": "decoy"
+        },
+        {
+          "rank": 43,
+          "name": "CHEMBL204022",
+          "score": 0.2819,
+          "label": "decoy"
+        },
+        {
+          "rank": 44,
+          "name": "CHEMBL269133",
+          "score": 0.2806,
+          "label": "decoy"
+        },
+        {
+          "rank": 45,
+          "name": "CHEMBL7034",
+          "score": 0.2716,
+          "label": "decoy"
+        },
+        {
+          "rank": 46,
+          "name": "CHEMBL6217",
+          "score": 0.2586,
+          "label": "decoy"
+        },
+        {
+          "rank": 47,
+          "name": "CHEMBL380444",
+          "score": 0.254,
+          "label": "decoy"
+        },
+        {
+          "rank": 48,
+          "name": "CHEMBL6359",
+          "score": 0.2472,
+          "label": "decoy"
+        },
+        {
+          "rank": 49,
+          "name": "CHEMBL6202",
+          "score": 0.2466,
+          "label": "decoy"
+        },
+        {
+          "rank": 50,
+          "name": "CHEMBL6341",
+          "score": 0.2355,
+          "label": "decoy"
+        },
+        {
+          "rank": 51,
+          "name": "PMS-601",
+          "score": 0.224,
+          "label": "decoy"
+        },
+        {
+          "rank": 52,
+          "name": "CHEMBL269131",
+          "score": 0.2087,
+          "label": "decoy"
+        },
+        {
+          "rank": 53,
+          "name": "CHEMBL6270",
+          "score": 0.1921,
+          "label": "decoy"
+        },
+        {
+          "rank": 54,
+          "name": "CHEMBL427616",
+          "score": 0.1267,
+          "label": "decoy"
+        }
+      ]
+    },
+    "bootstrap": {
+      "bedroc": {
+        "median": 0.4062,
+        "ci95": [
+          0.0009,
+          1.0
+        ]
+      },
+      "log_auc": {
+        "median": 0.3877,
+        "ci95": [
+          0.1327,
+          1.0
+        ]
+      },
+      "roc_auc": {
+        "median": 0.7921,
+        "ci95": [
+          0.5976,
+          1.0
+        ]
+      },
+      "EF1%": {
+        "median": 9.0,
+        "ci95": [
+          0.0,
+          39.825
+        ]
+      }
+    },
+    "n_resamples": 1000,
+    "n_effective": 982,
+    "skipped": 18,
+    "seed": 42
+  }
+}

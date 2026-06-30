@@ -41,6 +41,30 @@ def test_cli_main_run_returns_zero(monkeypatch, tmp_path, mock_structure_net):
     assert cli.main(["run", _fasta(tmp_path)]) == 0
 
 
+def test_cli_passes_optional_validation_flags(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    seen = {}
+
+    class App:
+        def invoke(self, state):
+            return {
+                **state,
+                "taxon_result": {"species": "S", "genus": "G"},
+                "classification_confidence": 99.0,
+                "route": "proceed",
+                "lead_candidates": [],
+            }
+
+    def fake_build_app(include_md=False, include_fep=False):
+        seen["include_md"] = include_md
+        seen["include_fep"] = include_fep
+        return App()
+
+    monkeypatch.setattr("vta.graph.build_app", fake_build_app)
+    assert cli.main(["run", _fasta(tmp_path), "--include-fep"]) == 0
+    assert seen == {"include_md": False, "include_fep": True}
+
+
 def test_cli_no_command_prints_help(capsys):
     assert cli.main([]) == 1
     assert "Autonomous viral target assessment" in capsys.readouterr().out

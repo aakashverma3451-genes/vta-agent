@@ -1,0 +1,22 @@
+{
+  "target": "SARS-CoV-2 Mpro (3CLpro), non-covalent",
+  "structure": "7L11 chain A",
+  "status": "blocked_receptor_prep",
+  "blocker": "AutoDock Vina is installed, but Meeko 0.7.1 receptor preparation fails deterministically on the Mpro chain (mk_prepare_receptor raises 'update_H_positions: Updated 1 H positions but deleted N' for every Mpro PDB tried: 6Y2E, 6M03, 7K3T, 7TLL, 7L10, 6W63, 7RFW, 7VH8, 7L11, 5R8T, 7BB2). The same code path preps the TiLV 8PSO receptor successfully, so the engine and pipeline are intact; the failure is Meeko-vs-Mpro specific. No fallback receptor prep tool (OpenBabel / reduce / ADFR) is installed.",
+  "what_is_ready": {
+    "dataset": "vta/data/mpro/mpro_dataset.json",
+    "stratified": "vta/data/mpro/mpro_stratified.json",
+    "active_site_wiring": "EXPERIMENTAL_PDB/EXPERIMENTAL_ACTIVE_SITE += MPRO (7L11:A)",
+    "selected_actives": 50,
+    "selected_inactives": 50,
+    "binding_mode": "non_covalent actives only (covalent held out)",
+    "control_set": "experimentally measured Moonshot inactives",
+    "selection_seed": 17
+  },
+  "next_step": "Provide a working receptor-prep path (OpenBabel fallback seam, or a Meeko version without this bug), then re-run scripts/run_mpro_benchmark.py to produce the powered, CI-bearing enrichment number. No mock/fabricated number is emitted.",
+  "receptor_prep_audit": [
+    "Vina[MPRO]: receptor prep failed; skipped",
+    "[skip] Ensemble docking: no receptor ensemble supplied"
+  ],
+  "verdict": "blocked \u2014 powered benchmark not yet runnable; no number claimed"
+}

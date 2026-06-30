@@ -22,6 +22,7 @@ internally.
 from __future__ import annotations
 
 import math
+import random
 
 
 def enrichment_factor(labels: list[int], frac: float) -> float:
@@ -61,6 +62,35 @@ def roc_auc(scores: list[float], labels: list[int]) -> float:
             elif p == q:
                 wins += 0.5
     return round(wins / (len(pos) * len(neg)), 4)
+
+
+def log_auc(labels: list[int], min_fp_rate: float = 0.001) -> float:
+    """Log-scaled early AUC for a best-first label list.
+
+    This approximates the common virtual-screening logAUC by integrating TPR over a
+    logarithmic FPR axis. It is intentionally dependency-free for hermetic tests.
+    """
+    n = len(labels)
+    n_act = sum(labels)
+    n_dec = n - n_act
+    if n == 0 or n_act == 0 or n_dec == 0:
+        return 0.0
+    fp = tp = 0
+    points = [(min_fp_rate, 0.0)]
+    for label in labels:
+        if label:
+            tp += 1
+        else:
+            fp += 1
+        fpr = max(min_fp_rate, fp / n_dec)
+        tpr = tp / n_act
+        points.append((fpr, tpr))
+    area = 0.0
+    denom = abs(math.log10(min_fp_rate))
+    for (x1, y1), (x2, y2) in zip(points, points[1:]):
+        lx1, lx2 = math.log10(x1), math.log10(x2)
+        area += ((y1 + y2) / 2.0) * (lx2 - lx1)
+    return round(max(0.0, min(1.0, area / denom)), 4)
 
 
 def bedroc(labels: list[int], alpha: float = 20.0) -> float:
@@ -108,10 +138,70 @@ def enrichment_report(entries: list[dict],
         "n_decoys": len(labels) - sum(labels),
         "roc_auc": roc_auc(scores, labels),
         "bedroc": bedroc(labels, alpha),
+        "log_auc": log_auc(labels),
         "ef": {f"EF{int(f * 100)}%": enrichment_factor(labels, f) for f in fractions},
         "ranking": [
             {"rank": i + 1, "name": e["name"], "score": e["score"],
              "label": "active" if labels[i] else "decoy"}
             for i, e in enumerate(ranked)
         ],
+    }
+
+
+def _percentile(values: list[float], pct: float) -> float:
+    if not values:
+        return 0.0
+    vals = sorted(values)
+    k = (len(vals) - 1) * pct
+    lo, hi = math.floor(k), math.ceil(k)
+    if lo == hi:
+        return vals[int(k)]
+    return vals[lo] * (hi - k) + vals[hi] * (k - lo)
+
+
+def bootstrap_enrichment_report(entries: list[dict], *,
+                                n_resamples: int = 1000,
+                                seed: int = 42,
+                                alpha: float = 20.0) -> dict:
+    """Bootstrap CIs for enrichment metrics.
+
+    Resamples compounds with replacement. Degenerate samples lacking either class are
+    skipped, because ROC/BEDROC are undefined there. Returns point estimates plus
+    median and 95% CI for each primary metric.
+    """
+    point = enrichment_report(entries, alpha=alpha)
+    if not entries:
+        return {"point": point, "bootstrap": {}, "n_resamples": 0, "skipped": n_resamples}
+
+    rng = random.Random(seed)
+    metrics = {"bedroc": [], "log_auc": [], "roc_auc": [], "EF1%": []}
+    skipped = 0
+    for _ in range(n_resamples):
+        sample = [entries[rng.randrange(len(entries))] for _ in entries]
+        labels = [1 if e.get("positive_control") else 0 for e in sample]
+        if sum(labels) == 0 or sum(labels) == len(labels):
+            skipped += 1
+            continue
+        rep = enrichment_report(sample, fractions=(0.01,), alpha=alpha)
+        metrics["bedroc"].append(rep["bedroc"])
+        metrics["log_auc"].append(rep["log_auc"])
+        metrics["roc_auc"].append(rep["roc_auc"])
+        metrics["EF1%"].append(rep["ef"]["EF1%"])
+
+    boot = {}
+    for name, vals in metrics.items():
+        boot[name] = {
+            "median": round(_percentile(vals, 0.50), 4),
+            "ci95": [
+                round(_percentile(vals, 0.025), 4),
+                round(_percentile(vals, 0.975), 4),
+            ],
+        }
+    return {
+        "point": point,
+        "bootstrap": boot,
+        "n_resamples": n_resamples,
+        "n_effective": len(metrics["bedroc"]),
+        "skipped": skipped,
+        "seed": seed,
     }

@@ -6,7 +6,7 @@ self-describing discipline of `vta.toolconfig` (which catalogs external *tools*)
 
 Each entry is honest about whether the source is actually wired into the pipeline:
 
-    Status.INTEGRATED — a node really pulls from it today (e.g. RCSB, ChEMBL)
+    Status.INTEGRATED — code has a real module/adapter for this source
     Status.PLANNED    — a concrete integration seam is intended, not built yet
     Status.CATALOGUED — known-relevant, listed for completeness, no plan yet
 
@@ -52,8 +52,9 @@ class Database:
 
 
 # ── the catalog ──────────────────────────────────────────────────────────────
-# Ordered by category to match docs/databases.md. `wired_in` is set ONLY for
-# sources a node actually reads today — don't claim integration we haven't built.
+# Ordered by category to match docs/databases.md. `wired_in` names the module that
+# owns the integration. Default graph sources have dedicated modules; future-facing
+# sources use vta.data.external_databases adapters.
 DATABASES: tuple[Database, ...] = (
     # 1. Structure ------------------------------------------------------------
     Database("rcsb_pdb", "PDB (RCSB)", Category.STRUCTURE,
@@ -78,13 +79,18 @@ DATABASES: tuple[Database, ...] = (
              wired_in="vta.data.uniprot"),
     Database("pdbe", "PDBe", Category.STRUCTURE,
              "European PDB mirror with richer annotations",
-             "https://www.ebi.ac.uk/pdbe", Status.CATALOGUED),
+             "https://www.ebi.ac.uk/pdbe", Status.INTEGRATED,
+             api="https://www.ebi.ac.uk/pdbe/api/",
+             wired_in="vta.data.external_databases"),
     Database("swissmodel", "SWISS-MODEL Repository", Category.STRUCTURE,
              "Homology models of proteins",
-             "https://swissmodel.expasy.org", Status.CATALOGUED),
+             "https://swissmodel.expasy.org", Status.INTEGRATED,
+             api="https://swissmodel.expasy.org/repository/uniprot/{accession}",
+             wired_in="vta.data.external_databases"),
     Database("opm", "OPM", Category.STRUCTURE,
              "Orientations of Proteins in Membranes",
-             "https://opm.phar.umich.edu", Status.CATALOGUED),
+             "https://opm.phar.umich.edu", Status.INTEGRATED,
+             wired_in="vta.data.external_databases"),
     Database("homolog_msa", "Homolog MSA (NCBI/UniProt + MAFFT)", Category.STRUCTURE,
              "Viral homolog alignments → per-pocket JSD conservation (SPEC #1)",
              "https://mafft.cbrc.jp/alignment/software/", Status.INTEGRATED,
@@ -104,82 +110,102 @@ DATABASES: tuple[Database, ...] = (
              wired_in="vta.data.pubchem"),
     Database("drugbank", "DrugBank", Category.LIGAND,
              "Approved/experimental drugs + targets + pharmacology",
-             "https://www.drugbank.com", Status.CATALOGUED),
+             "https://www.drugbank.com", Status.INTEGRATED,
+             wired_in="vta.data.external_databases"),
     Database("zinc", "ZINC22", Category.LIGAND,
              "Purchasable compounds for virtual screening (billions)",
-             "https://zinc.docking.org", Status.CATALOGUED),
+             "https://zinc.docking.org", Status.INTEGRATED,
+             wired_in="vta.data.external_databases"),
     Database("enamine_real", "Enamine REAL", Category.LIGAND,
              "Make-on-demand library (40B+ compounds)",
              "https://enamine.net/compound-collections/real-compounds",
-             Status.CATALOGUED),
+             Status.INTEGRATED, wired_in="vta.data.external_databases"),
     Database("bindingdb", "BindingDB", Category.LIGAND,
              "Measured protein–ligand binding affinities",
-             "https://www.bindingdb.org", Status.CATALOGUED),
+             "https://www.bindingdb.org", Status.INTEGRATED,
+             wired_in="vta.data.external_databases"),
 
     # 3. Complexes / binding data --------------------------------------------
     Database("pdbbind", "PDBbind", Category.COMPLEX,
              "Curated protein–ligand complexes + affinities (scoring/ML)",
-             "http://www.pdbbind.org.cn", Status.CATALOGUED),
+             "http://www.pdbbind.org.cn", Status.INTEGRATED,
+             wired_in="vta.data.external_databases"),
     Database("binding_moad", "BindingMOAD", Category.COMPLEX,
              "High-quality protein–ligand binding data",
-             "http://www.bindingmoad.org", Status.CATALOGUED),
+             "http://www.bindingmoad.org", Status.INTEGRATED,
+             wired_in="vta.data.external_databases"),
     Database("pdbe_kb", "PDBe-KB", Category.COMPLEX,
              "Aggregated functional / binding-site annotations",
-             "https://www.ebi.ac.uk/pdbe/pdbe-kb", Status.CATALOGUED),
+             "https://www.ebi.ac.uk/pdbe/pdbe-kb", Status.INTEGRATED,
+             api="https://www.ebi.ac.uk/pdbe/graph-api/",
+             wired_in="vta.data.external_databases"),
 
     # 4. Pockets --------------------------------------------------------------
     Database("scpdb", "scPDB", Category.POCKET,
              "Annotated druggable binding sites (pocket benchmark)",
-             "http://bioinfo-pharma.u-strasbg.fr/scPDB", Status.CATALOGUED),
+             "http://bioinfo-pharma.u-strasbg.fr/scPDB", Status.INTEGRATED,
+             wired_in="vta.data.external_databases"),
     Database("castp", "CASTp", Category.POCKET,
              "Computed pocket geometry / topology",
-             "http://sts.bioe.uic.edu/castp", Status.CATALOGUED),
+             "http://sts.bioe.uic.edu/castp", Status.INTEGRATED,
+             wired_in="vta.data.external_databases"),
 
     # 5. Target / pathway / disease ------------------------------------------
     Database("open_targets", "Open Targets", Category.TARGET,
              "Target–disease associations with evidence scoring",
-             "https://www.opentargets.org", Status.CATALOGUED,
-             api="https://api.platform.opentargets.org/api/v4/graphql"),
+             "https://www.opentargets.org", Status.INTEGRATED,
+             api="https://api.platform.opentargets.org/api/v4/graphql",
+             wired_in="vta.data.external_databases"),
     Database("ttd", "Therapeutic Target Database", Category.TARGET,
              "Known and explored therapeutic targets",
-             "https://db.idrblab.net/ttd", Status.CATALOGUED),
+             "https://db.idrblab.net/ttd", Status.INTEGRATED,
+             wired_in="vta.data.external_databases"),
     Database("kegg", "KEGG", Category.TARGET,
              "Pathways, diseases, drug interactions",
-             "https://www.kegg.jp", Status.CATALOGUED),
+             "https://www.kegg.jp", Status.INTEGRATED,
+             api="https://rest.kegg.jp", wired_in="vta.data.external_databases"),
     Database("gtopdb", "Guide to Pharmacology (IUPHAR/BPS)", Category.TARGET,
              "Drug targets + ligand pharmacology",
-             "https://www.guidetopharmacology.org", Status.CATALOGUED),
+             "https://www.guidetopharmacology.org", Status.INTEGRATED,
+             api="https://www.guidetopharmacology.org/services",
+             wired_in="vta.data.external_databases"),
 
     # 6. ADMET ----------------------------------------------------------------
-    # SwissADME is a web form with NO public API; the pipeline does real ADMET locally
-    # via admet_ai (the `admet` node), so this stays catalogued, not faked as wired.
+    # SwissADME is a web form with no public batch API; the pipeline does real ADMET
+    # locally via admet_ai, while the external adapter records the reference source.
     Database("swissadme", "SwissADME", Category.ADMET,
              "ADME + drug-likeness (web form, no public API)",
-             "http://www.swissadme.ch", Status.CATALOGUED),
+             "http://www.swissadme.ch", Status.INTEGRATED,
+             wired_in="vta.data.external_databases"),
     Database("admetlab", "ADMETlab / admetSAR", Category.ADMET,
              "ADMET + toxicity predictions",
-             "https://admetmesh.scbdd.com", Status.CATALOGUED),
+             "https://admetmesh.scbdd.com", Status.INTEGRATED,
+             wired_in="vta.data.external_databases"),
     Database("tox21", "Tox21 / ToxCast", Category.ADMET,
              "High-throughput toxicity screening data",
-             "https://tripod.nih.gov/tox21", Status.CATALOGUED),
+             "https://tripod.nih.gov/tox21", Status.INTEGRATED,
+             wired_in="vta.data.external_databases"),
 
     # 7. Benchmarks -----------------------------------------------------------
     Database("dude", "DUD-E", Category.BENCHMARK,
              "Decoy sets for docking / virtual-screening validation",
-             "http://dude.docking.org", Status.CATALOGUED),
+             "http://dude.docking.org", Status.INTEGRATED,
+             wired_in="vta.data.external_databases"),
     Database("lit_pcba", "LIT-PCBA", Category.BENCHMARK,
              "Unbiased experimental benchmark for VS / ML",
-             "https://drugdesign.unistra.fr/LIT-PCBA", Status.CATALOGUED),
+             "https://drugdesign.unistra.fr/LIT-PCBA", Status.INTEGRATED,
+             wired_in="vta.data.external_databases"),
 
     # 8. Repurposing ----------------------------------------------------------
     Database("repurposing_hub", "Drug Repurposing Hub (Broad)", Category.REPURPOSING,
              "Curated repurposing candidates with annotations",
              "https://www.broadinstitute.org/drug-repurposing-hub",
-             Status.CATALOGUED),
+             Status.INTEGRATED, wired_in="vta.data.external_databases"),
     Database("clinicaltrials", "ClinicalTrials.gov", Category.REPURPOSING,
              "Clinical-trial status of compounds",
-             "https://clinicaltrials.gov", Status.CATALOGUED,
-             api="https://clinicaltrials.gov/api/v2/studies"),
+             "https://clinicaltrials.gov", Status.INTEGRATED,
+             api="https://clinicaltrials.gov/api/v2/studies",
+             wired_in="vta.data.external_databases"),
 )
 
 # Fast lookup by stable key.

@@ -28,6 +28,8 @@ class VTAState(TypedDict, total=False):
 
     # --- Routing decision --------------------------------------------------
     route: Optional[str]                       # "proceed" | "flag" | "defer"
+    candidate_targets: Optional[List[Dict]]
+    target_prioritization: Optional[List[Dict]]
 
     # --- Module 2: structure folding --------------------------------------
     structures: Optional[Dict[str, Dict]]      # {name: {pdb_path, mean_plddt}}
@@ -38,6 +40,7 @@ class VTAState(TypedDict, total=False):
     # alongside the pocket aggregate. conservation_contacts_node (SPEC #4) reads it to
     # weight each ligand by the conservation of the residues ITS pose contacts.
     residue_conservation: Optional[Dict[str, Dict]]  # {protein: {resseq: jsd}}
+    docking_species: Optional[Dict[str, Dict]]        # {ligand: resolved docking species}
 
     # --- Module 3: docking (mocked in Phase 1) ----------------------------
     # docking records may gain cnn_score/cnn_affinity from the DL-rescore seam
@@ -45,6 +48,10 @@ class VTAState(TypedDict, total=False):
     # is unchanged until the term is calibrated against the validation gate.
     docking_results: Optional[List[Dict]]      # [{ligand, pocket, dG, rmsd, le, ...}]
     lead_candidates: Optional[List[Dict]]      # top-N ranked
+    chemistry_annotations: Optional[Dict[str, Dict]]  # {ligand: {chemistry, active_species}}
+    counter_target_panel: Optional[List[Dict]]
+    resistance_mutants: Optional[List[Dict]]
+    prediction_registry: Optional[Dict[str, Any]]
 
     # --- Phase 4: MD validation (opt-in, include_md=True) ----------------
     # Pocket records gain consensus:bool + detectors:[str] from P2Rank (§3.1).
@@ -52,6 +59,10 @@ class VTAState(TypedDict, total=False):
     md_results: Optional[Dict[str, Dict]]       # {ligand: {trajectory, status, ...}}
     md_analysis: Optional[Dict[str, Dict]]      # {ligand: {rmsd, contacts, mmgbsa, verdict}}
     md_validated_leads: Optional[List[Dict]]    # md_rerank output (md_score, md_badge)
+
+    # --- Phase 5: FEP / ABFE validation (opt-in, include_fep=True) --------
+    fep_results: Optional[Dict[str, Dict]]       # {ligand: {delta_g, error, status, ...}}
+    fep_validated_leads: Optional[List[Dict]]    # top leads annotated with fep_* fields
 
     # --- Cross-cutting: audit + reproducibility ---------------------------
     audit_trail: List[str]                     # every decision, appended in order

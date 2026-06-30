@@ -12,9 +12,40 @@
       "le": -0.399,
       "heavy_atoms": 17,
       "conservation": 0.85,
-      "pose_path": "structures/validation_PB1_CHEMBL1643_p1.pdbqt",
-      "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.635
+      "dock_smiles": "NC(=O)c1ncn([C@@H]2O[C@H](CO)[C@@H](O)[C@H]2O)n1",
+      "dock_species": "Ribavirin",
+      "species_source": "parent_surrogate",
+      "mechanistic_caveat": "Active form is known but no curated active-form SMILES is committed; parent structure was docked as a labelled surrogate.",
+      "active_species": {
+        "parent": "Ribavirin",
+        "parent_smiles": "NC(=O)c1ncn([C@@H]2O[C@H](CO)[C@@H](O)[C@H]2O)n1",
+        "prodrug": false,
+        "active_form": "Ribavirin triphosphate",
+        "active_form_smiles": null,
+        "mechanistic_note": "Nucleoside analog; triphosphate is the polymerase-relevant species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "885abd3c26895bf7"
+      },
+      "pose_path": "structures/validation_PB1_CHEMBL1643_p1_primary.pdbqt",
+      "receptor_path": "structures/validation_PB1_primary_rec.pdbqt",
+      "score": 0.635,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "fe1b12087039e2d5"
+      }
     },
     {
       "protein": "PB1",
@@ -28,9 +59,40 @@
       "le": -0.236,
       "heavy_atoms": 36,
       "conservation": 0.847,
-      "pose_path": "structures/validation_PB1_CHEMBL1259059_p1.pdbqt",
-      "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.5798
+      "dock_smiles": "CC(C)OC(=O)[C@H](C)N[P@](=O)(OC[C@H]1O[C@@H](n2ccc(=O)[nH]c2=O)[C@](C)(F)[C@@H]1O)Oc1ccccc1",
+      "dock_species": "Sofosbuvir",
+      "species_source": "parent_surrogate",
+      "mechanistic_caveat": "Active form is known but no curated active-form SMILES is committed; parent structure was docked as a labelled surrogate.",
+      "active_species": {
+        "parent": "Sofosbuvir",
+        "parent_smiles": "CC(C)OC(=O)[C@H](C)N[P@](=O)(OC[C@H]1O[C@@H](n2ccc(=O)[nH]c2=O)[C@](C)(F)[C@@H]1O)Oc1ccccc1",
+        "prodrug": true,
+        "active_form": "Sofosbuvir triphosphate (GS-461203)",
+        "active_form_smiles": null,
+        "mechanistic_note": "Parent prodrug; NS5B/RdRp active species is triphosphate."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "c72a12c86916f44f"
+      },
+      "pose_path": "structures/validation_PB1_CHEMBL1259059_p1_primary.pdbqt",
+      "receptor_path": "structures/validation_PB1_primary_rec.pdbqt",
+      "score": 0.5798,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "df3fe9aef50ec383"
+      }
     },
     {
       "protein": "PB1",
@@ -44,9 +106,40 @@
       "le": -0.191,
       "heavy_atoms": 46,
       "conservation": 0.842,
-      "pose_path": "structures/validation_PB1_CHEMBL729_p1.pdbqt",
-      "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.5324
+      "dock_smiles": "Cc1cccc(C)c1OCC(=O)N[C@@H](Cc1ccccc1)[C@@H](O)C[C@H](Cc1ccccc1)NC(=O)[C@H](C(C)C)N1CCCNC1=O",
+      "dock_species": "Lopinavir",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "Lopinavir",
+        "parent_smiles": "Cc1cccc(C)c1OCC(=O)N[C@@H](Cc1ccccc1)[C@@H](O)C[C@H](Cc1ccccc1)NC(=O)[C@H](C(C)C)N1CCCNC1=O",
+        "prodrug": false,
+        "active_form": "Lopinavir",
+        "active_form_smiles": "Cc1cccc(C)c1OCC(=O)N[C@@H](Cc1ccccc1)[C@@H](O)C[C@H](Cc1ccccc1)NC(=O)[C@H](C(C)C)N1CCCNC1=O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "d4ef13dc13d6a469"
+      },
+      "pose_path": "structures/validation_PB1_CHEMBL729_p1_primary.pdbqt",
+      "receptor_path": "structures/validation_PB1_primary_rec.pdbqt",
+      "score": 0.5324,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "5c1798c181e4435b"
+      }
     },
     {
       "protein": "PB1",
@@ -60,9 +153,40 @@
       "le": -0.3,
       "heavy_atoms": 23,
       "conservation": 0.853,
-      "pose_path": "structures/validation_PB1_CHEMBL4650320_p1.pdbqt",
-      "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.4448
+      "dock_smiles": "CC(C)C(=O)OC[C@H]1O[C@@H](n2cc/c(=N\\O)[nH]c2=O)[C@H](O)[C@@H]1O",
+      "dock_species": "Molnupiravir",
+      "species_source": "parent_surrogate",
+      "mechanistic_caveat": "Active form is known but no curated active-form SMILES is committed; parent structure was docked as a labelled surrogate.",
+      "active_species": {
+        "parent": "Molnupiravir",
+        "parent_smiles": "CC(C)C(=O)OC[C@H]1O[C@@H](n2cc/c(=N\\O)[nH]c2=O)[C@H](O)[C@@H]1O",
+        "prodrug": true,
+        "active_form": "NHC triphosphate",
+        "active_form_smiles": null,
+        "mechanistic_note": "Prodrug of beta-D-N4-hydroxycytidine; active species is triphosphate."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "4761b7df9f89a611"
+      },
+      "pose_path": "structures/validation_PB1_CHEMBL4650320_p1_primary.pdbqt",
+      "receptor_path": "structures/validation_PB1_primary_rec.pdbqt",
+      "score": 0.4448,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "493a8cf4dbda073b"
+      }
     },
     {
       "protein": "PB1",
@@ -76,9 +200,40 @@
       "le": -0.137,
       "heavy_atoms": 65,
       "conservation": 0.855,
-      "pose_path": "structures/validation_PB1_CHEMBL2374220_p1.pdbqt",
-      "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.4355
+      "dock_smiles": "COC(=O)N[C@H](C(=O)N1CC2(CC2)C[C@H]1c1nc(-c2ccc3c(c2)C(F)(F)c2cc(-c4ccc5[nH]c([C@@H]6[C@H]7CC[C@H](C7)N6C(=O)[C@@H](NC(=O)OC)C(C)C)nc5c4)ccc2-3)c[nH]1)C(C)C",
+      "dock_species": "Ledipasvir",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "Ledipasvir",
+        "parent_smiles": "COC(=O)N[C@H](C(=O)N1CC2(CC2)C[C@H]1c1nc(-c2ccc3c(c2)C(F)(F)c2cc(-c4ccc5[nH]c([C@@H]6[C@H]7CC[C@H](C7)N6C(=O)[C@@H](NC(=O)OC)C(C)C)nc5c4)ccc2-3)c[nH]1)C(C)C",
+        "prodrug": false,
+        "active_form": "Ledipasvir",
+        "active_form_smiles": "COC(=O)N[C@H](C(=O)N1CC2(CC2)C[C@H]1c1nc(-c2ccc3c(c2)C(F)(F)c2cc(-c4ccc5[nH]c([C@@H]6[C@H]7CC[C@H](C7)N6C(=O)[C@@H](NC(=O)OC)C(C)C)nc5c4)ccc2-3)c[nH]1)C(C)C",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "985922c4951499f5"
+      },
+      "pose_path": "structures/validation_PB1_CHEMBL2374220_p1_primary.pdbqt",
+      "receptor_path": "structures/validation_PB1_primary_rec.pdbqt",
+      "score": 0.4355,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "d682a55cb85d9a61"
+      }
     },
     {
       "protein": "PB1",
@@ -92,9 +247,40 @@
       "le": -0.193,
       "heavy_atoms": 42,
       "conservation": 0.848,
-      "pose_path": "structures/validation_PB1_CHEMBL4065616_p1.pdbqt",
-      "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.419
+      "dock_smiles": "CCC(CC)COC(=O)[C@H](C)N[P@](=O)(OC[C@H]1O[C@@](C#N)(c2ccc3c(N)ncnn23)[C@H](O)[C@@H]1O)Oc1ccccc1",
+      "dock_species": "Remdesivir",
+      "species_source": "parent_surrogate",
+      "mechanistic_caveat": "Active form is known but no curated active-form SMILES is committed; parent structure was docked as a labelled surrogate.",
+      "active_species": {
+        "parent": "Remdesivir",
+        "parent_smiles": "CCC(CC)COC(=O)[C@H](C)N[P@](=O)(OC[C@H]1O[C@@](C#N)(c2ccc3c(N)ncnn23)[C@H](O)[C@@H]1O)Oc1ccccc1",
+        "prodrug": true,
+        "active_form": "Remdesivir triphosphate (GS-443902)",
+        "active_form_smiles": null,
+        "mechanistic_note": "Parent prodrug; RdRp active species is intracellular triphosphate."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "421d7cfd1cc9adf6"
+      },
+      "pose_path": "structures/validation_PB1_CHEMBL4065616_p1_primary.pdbqt",
+      "receptor_path": "structures/validation_PB1_primary_rec.pdbqt",
+      "score": 0.419,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "44226ff757f07412"
+      }
     },
     {
       "protein": "PB1",
@@ -108,9 +294,40 @@
       "le": -0.219,
       "heavy_atoms": 35,
       "conservation": 0.833,
-      "pose_path": "structures/validation_PB1_CHEMBL4802135_p1.pdbqt",
-      "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.4012
+      "dock_smiles": "CC(C)(C)[C@H](NC(=O)C(F)(F)F)C(=O)N1C[C@H]2[C@@H]([C@H]1C(=O)N[C@H](C#N)C[C@@H]1CCNC1=O)C2(C)C",
+      "dock_species": "Nirmatrelvir",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "Nirmatrelvir",
+        "parent_smiles": "CC(C)(C)[C@H](NC(=O)C(F)(F)F)C(=O)N1C[C@H]2[C@@H]([C@H]1C(=O)N[C@H](C#N)C[C@@H]1CCNC1=O)C2(C)C",
+        "prodrug": false,
+        "active_form": "Nirmatrelvir",
+        "active_form_smiles": "CC(C)(C)[C@H](NC(=O)C(F)(F)F)C(=O)N1C[C@H]2[C@@H]([C@H]1C(=O)N[C@H](C#N)C[C@@H]1CCNC1=O)C2(C)C",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "aeb0af2f3ec12432"
+      },
+      "pose_path": "structures/validation_PB1_CHEMBL4802135_p1_primary.pdbqt",
+      "receptor_path": "structures/validation_PB1_primary_rec.pdbqt",
+      "score": 0.4012,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "43ddd643e2d5add8"
+      }
     },
     {
       "protein": "PB1",
@@ -124,9 +341,40 @@
       "le": -0.194,
       "heavy_atoms": 40,
       "conservation": 0.849,
-      "pose_path": "structures/validation_PB1_CHEMBL4297503_p1.pdbqt",
-      "receptor_path": "structures/validation_PB1_rec.pdbqt",
-      "score": 0.3633
+      "dock_smiles": "COC(=O)OCOc1c2n(ccc1=O)N([C@@H]1c3ccccc3SCc3c1ccc(F)c3F)[C@@H]1COCCN1C2=O",
+      "dock_species": "Baloxavir Marboxil",
+      "species_source": "parent",
+      "mechanistic_caveat": "",
+      "active_species": {
+        "parent": "Baloxavir Marboxil",
+        "parent_smiles": "COC(=O)OCOc1c2n(ccc1=O)N([C@@H]1c3ccccc3SCc3c1ccc(F)c3F)[C@@H]1COCCN1C2=O",
+        "prodrug": false,
+        "active_form": "Baloxavir Marboxil",
+        "active_form_smiles": "COC(=O)OCOc1c2n(ccc1=O)N([C@@H]1c3ccccc3SCc3c1ccc(F)c3F)[C@@H]1COCCN1C2=O",
+        "mechanistic_note": "No curated active-species transform; parent used as screening species."
+      },
+      "metal_model_status": "skipped_no_curated_metals",
+      "metal_model": {
+        "status": "skipped_no_curated_metals",
+        "metals": []
+      },
+      "ensemble_size": 1,
+      "ensemble_status": "single_receptor",
+      "ensemble_conformer": "primary",
+      "dG_provenance": {
+        "tool": "AutoDock Vina",
+        "version": "1.2.5",
+        "seed": 42,
+        "input_hash": "d44f740bc50f2684"
+      },
+      "pose_path": "structures/validation_PB1_CHEMBL4297503_p1_primary.pdbqt",
+      "receptor_path": "structures/validation_PB1_primary_rec.pdbqt",
+      "score": 0.3633,
+      "score_provenance": {
+        "tool": "VTA rank_node",
+        "version": "LE-led composite v1",
+        "input_hash": "aa232c5d490f4e16"
+      }
     }
   ],
   "controls_in_top": 3,

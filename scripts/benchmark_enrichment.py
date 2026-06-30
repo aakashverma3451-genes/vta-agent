@@ -18,7 +18,7 @@ there). Treat these numbers as a demonstration/baseline, not a published result 
 ARCHITECTURE.md §8 (Data leakage & evaluation honesty).
 
 Run from the vta-agent dir:
-    PYTHONPATH=.:../taxonagent/src ../taxonagent/venv/bin/python scripts/benchmark_enrichment.py
+    python scripts/benchmark_enrichment.py
 """
 from __future__ import annotations
 

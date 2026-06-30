@@ -43,6 +43,10 @@ ESMFOLD_API_MAX_AA = 400
 EXPERIMENTAL_PDB = {
     "PA":  ("8PSO", "A"),   # COMPND: "POLYMERASE ACIDIC PROTEIN (PA-LIKE)" — 316 res
     "PB1": ("8PSO", "B"),   # COMPND: "PUTATIVE PB1" — 515 res (matches ~500 aa ORF)
+    # SARS-CoV-2 main protease (Mpro / 3CLpro) — Phase 9C powered-benchmark target.
+    # 7L11 chain A: Mpro in complex with the NON-COVALENT Moonshot inhibitor XF1
+    # (compound 5); chain A is one protomer of the catalytic homodimer (~306 res).
+    "MPRO": ("7L11", "A"),
 }
 
 _OUT_DIR = "structures"

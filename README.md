@@ -141,15 +141,15 @@ Report → outputs/amnoonviridae_1_report.html
 ## Tests
 
 ```bash
-# from vta-agent/ with taxonagent on the path:
-PYTHONPATH=.:../taxonagent/src ../taxonagent/venv/bin/python -m pytest tests/ -q
-# → 25 passed
+# from vta-agent/ after `pip install -e .` and `pip install -e ../taxonagent`
+python -m pytest tests/ -q
+# → 143 passed
 ```
 
 ### Validation gate (requires real Vina + FPocket)
 
 ```bash
-PYTHONPATH=.:../taxonagent/src ../taxonagent/venv/bin/python scripts/validate_controls.py
+python scripts/validate_controls.py
 # VERDICT: PASS  (3/4 known RdRp inhibitors in top-5)
 ```
 

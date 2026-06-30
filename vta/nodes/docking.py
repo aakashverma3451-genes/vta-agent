@@ -1,18 +1,8 @@
-"""docking_node — virtual screening.
+"""docking_node — virtual screening with real Vina or deterministic fallback.
 
-Phase 2c: REAL AutoDock Vina when available, else a real-shaped MOCK.
-
-`docking_node` auto-detects the Vina engine (`VINA_BIN` or `vina` on PATH) plus the
-RDKit/Meeko prep stack. If all are present it docks for real:
-
-    SMILES --RDKit 3D--> --Meeko--> ligand.pdbqt
-    receptor.pdb --Meeko mk_prepare_receptor--> receptor.pdbqt
-    vina --center (from FPocket pocket) --> best affinity (ΔG, kcal/mol)
-
-…otherwise it degrades to the deterministic mock (same don't-crash discipline as the
-other real nodes). Either way the records have the same shape, so ranking downstream
-is unchanged. Real Vina under x86 emulation is slow, so the real path docks the top
-pocket per protein (bounded), with prepped ligand PDBQTs cached across runs.
+The node resolves active/prodrug docking species before ligand prep, uses real Vina
+when Vina plus RDKit/Meeko are available, and otherwise emits same-shaped mock rows.
+Ranking downstream is unchanged.
 """
 from __future__ import annotations
 
@@ -26,6 +16,8 @@ import sys
 from pathlib import Path
 
 from vta.data.ligands import load_ligands
+from vta.docking.seams import ensemble_conformers, ligand_for_docking, metal_model, species_fields
+from vta.provenance import score_provenance
 from vta.state import VTAState
 
 _TOP_POCKETS_MOCK = 3
@@ -71,7 +63,7 @@ def _prep_ligand(lig: dict, cache_dir: str) -> str | None:
     if not lig.get("smiles"):
         return None
     os.makedirs(cache_dir, exist_ok=True)
-    out = os.path.join(cache_dir, f"{lig['chembl_id']}.pdbqt")
+    out = os.path.join(cache_dir, f"{lig.get('dock_cache_id') or lig['chembl_id']}.pdbqt")
     if os.path.exists(out):
         return out
     from rdkit import Chem
@@ -141,42 +133,76 @@ def _run_vina(vina: str, receptor: str, ligand: str, center: list, out: str) -> 
 def _dock_real(state: VTAState, vina: str) -> VTAState:
     ligands = load_ligands()
     results, n_docked = [], 0
+    active_substitutions = parent_surrogates = metal_skips = ensemble_jobs = 0
     for protein, plist in (state.get("pockets") or {}).items():
         struct = (state.get("structures") or {}).get(protein, {})
         if not struct.get("pdb_path") or not plist:
             continue
-        receptor = _prep_receptor(struct["pdb_path"],
-                                  os.path.join("structures", f"{state['run_id']}_{protein}_rec"))
-        if not receptor:
+        conformers = ensemble_conformers(struct)
+        receptors = []
+        for conformer in conformers:
+            prefix = os.path.join("structures", f"{state['run_id']}_{protein}_{conformer['label']}_rec")
+            receptor = _prep_receptor(conformer["pdb_path"], prefix)
+            if receptor:
+                receptors.append({**conformer, "receptor": receptor})
+        if not receptors:
             state["audit_trail"].append(f"Vina[{protein}]: receptor prep failed; skipped")
             continue
+        if len(receptors) > 1:
+            ensemble_jobs += 1
         for pocket in plist[:_REAL_TOP_POCKETS]:
+            metal = metal_model(struct, pocket)
+            if metal["status"] != "curated":
+                metal_skips += 1
             for lig in ligands:
                 # Per-ligand isolation: one bad SMILES / failed dock skips that ligand,
                 # it does NOT abort the whole real screen (which would fall back to mock).
                 try:
-                    lig_pdbqt = _prep_ligand(lig, _LIG_CACHE)
+                    dock_lig, resolution = ligand_for_docking(lig)
+                    if resolution["uses_active_form"]:
+                        active_substitutions += 1
+                    elif resolution["species_source"] == "parent_surrogate":
+                        parent_surrogates += 1
+                    lig_pdbqt = _prep_ligand(dock_lig, _LIG_CACHE)
                     if not lig_pdbqt:
                         state["audit_trail"].append(
                             f"Vina[{protein}]: {lig['name']} ligand prep failed; skipped")
                         continue
-                    out = os.path.join("structures",
-                                       f"{state['run_id']}_{protein}_{lig['chembl_id']}_p{pocket['id']}.pdbqt")
-                    dG = _run_vina(vina, receptor, lig_pdbqt, pocket["center"], out)
+                    best = None
+                    for rec in receptors:
+                        out = os.path.join(
+                            "structures",
+                            f"{state['run_id']}_{protein}_{lig['chembl_id']}_p{pocket['id']}_{rec['label']}.pdbqt")
+                        dG = _run_vina(vina, rec["receptor"], lig_pdbqt, pocket["center"], out)
+                        if dG is not None and (best is None or dG < best["dG"]):
+                            best = {"dG": dG, "pose": out, "receptor": rec["receptor"],
+                                    "conformer": rec["label"]}
+                    dG = best["dG"] if best else None
                     if dG is None:
                         state["audit_trail"].append(
                             f"Vina[{protein}]: {lig['name']} produced no pose; skipped")
                         continue
-                    heavy = _heavy_atoms(lig.get("smiles"))
+                    heavy = _heavy_atoms(dock_lig.get("smiles"))
                     results.append({
                         "protein": protein, "pocket": pocket["id"],
                         "ligand": lig["name"], "ligand_id": lig["chembl_id"],
                         "smiles": lig["smiles"], "positive_control": lig["positive_control"],
                         "dG": dG, "rmsd": 0.0, "le": round(dG / heavy, 3),
                         "heavy_atoms": heavy, "conservation": pocket["conservation"],
+                        **species_fields(resolution, metal, len(receptors)),
+                        "ensemble_conformer": best["conformer"],
+                        "dG_provenance": score_provenance(
+                            "AutoDock Vina", "1.2.5", seed=42, inputs={
+                                "protein": protein, "pocket": pocket["id"],
+                                "ligand_id": lig["chembl_id"],
+                                "dock_species": resolution.get("dock_species"),
+                                "species_source": resolution.get("species_source"),
+                                "center": pocket["center"],
+                                "box": _BOX, "exhaustiveness": _EXHAUSTIVENESS,
+                            }),
                         # saved pose + receptor let the DL-rescore seam (rescore_node)
                         # re-score this pose later without re-docking.
-                        "pose_path": out, "receptor_path": receptor,
+                        "pose_path": best["pose"], "receptor_path": best["receptor"],
                     })
                     n_docked += 1
                 except Exception as e:
@@ -184,37 +210,79 @@ def _dock_real(state: VTAState, vina: str) -> VTAState:
                         f"Vina[{protein}]: {lig['name']} error ({type(e).__name__}: {e}); skipped")
     state["docking_results"] = results
     state["audit_trail"].append(f"Vina: {n_docked} real docks over {len(ligands)} ligands")
+    state["audit_trail"].append(
+        f"Docking species: {active_substitutions} active-form substitutions, "
+        f"{parent_surrogates} parent surrogates")
+    if metal_skips:
+        state["audit_trail"].append(
+            f"[skip] Metals: {metal_skips} pocket(s) lacked curated catalytic Mg/Mn coordinates")
+    if ensemble_jobs == 0:
+        state["audit_trail"].append("[skip] Ensemble docking: no receptor ensemble supplied")
+    else:
+        state["audit_trail"].append(f"Ensemble docking: used ensembles for {ensemble_jobs} protein(s)")
     state["versions"]["docking"] = "AutoDock Vina 1.2.5"
     state["versions"]["ligands"] = f"ChEMBL x{len(ligands)}"
+    state["versions"]["docking_species"] = "curated active-species resolver"
     return state
-
 
 # ── mock fallback (real ligands, fabricated scores) ──────────────────────────
 def _dock_mock(state: VTAState) -> VTAState:
     ligands = load_ligands()
     results = []
+    active_substitutions = parent_surrogates = metal_skips = ensemble_jobs = 0
     for protein, plist in (state.get("pockets") or {}).items():
+        struct = (state.get("structures") or {}).get(protein, {})
+        conformers = ensemble_conformers(struct)
+        ensemble_size = max(1, len(conformers))
+        if len(conformers) > 1:
+            ensemble_jobs += 1
         for pocket in plist[:_TOP_POCKETS_MOCK]:
+            metal = metal_model(struct, pocket)
+            if metal["status"] != "curated":
+                metal_skips += 1
             for lig in ligands:
+                dock_lig, resolution = ligand_for_docking(lig)
+                if resolution["uses_active_form"]:
+                    active_substitutions += 1
+                elif resolution["species_source"] == "parent_surrogate":
+                    parent_surrogates += 1
                 rng = random.Random(
                     _seed(state["run_id"], protein, str(pocket["id"]), lig["chembl_id"]))
                 dG = round(rng.uniform(-9.0, -5.0), 2)
                 rmsd = round(rng.uniform(0.5, 3.0), 2)
-                heavy = _heavy_atoms(lig.get("smiles"))
+                heavy = _heavy_atoms(dock_lig.get("smiles"))
                 results.append({
                     "protein": protein, "pocket": pocket["id"],
                     "ligand": lig["name"], "ligand_id": lig["chembl_id"],
                     "smiles": lig["smiles"], "positive_control": lig["positive_control"],
                     "dG": dG, "rmsd": rmsd, "le": round(dG / heavy, 3),
                     "heavy_atoms": heavy, "conservation": pocket["conservation"],
+                    **species_fields(resolution, metal, ensemble_size),
+                    "dG_provenance": score_provenance(
+                        "MOCK-vina-shaped", "deterministic", seed=_seed(
+                            state["run_id"], protein, str(pocket["id"]), lig["chembl_id"]),
+                        inputs={"protein": protein, "pocket": pocket["id"],
+                                "ligand_id": lig["chembl_id"],
+                                "dock_species": resolution.get("dock_species"),
+                                "species_source": resolution.get("species_source")}),
                 })
     state["docking_results"] = results
     state["audit_trail"].append(
         f"[MOCK] Docking: {len(results)} pairs over {len(ligands)} real ligands")
+    state["audit_trail"].append(
+        f"Docking species: {active_substitutions} active-form substitutions, "
+        f"{parent_surrogates} parent surrogates")
+    if metal_skips:
+        state["audit_trail"].append(
+            f"[skip] Metals: {metal_skips} pocket(s) lacked curated catalytic Mg/Mn coordinates")
+    if ensemble_jobs == 0:
+        state["audit_trail"].append("[skip] Ensemble docking: no receptor ensemble supplied")
+    else:
+        state["audit_trail"].append(f"Ensemble docking: detected ensembles for {ensemble_jobs} protein(s)")
     state["versions"]["docking"] = "MOCK-vina-shaped over ChEMBL ligands"
     state["versions"]["ligands"] = f"ChEMBL x{len(ligands)}"
+    state["versions"]["docking_species"] = "curated active-species resolver"
     return state
-
 
 # ── node ─────────────────────────────────────────────────────────────────────
 def docking_node(state: VTAState) -> VTAState:

@@ -1,0 +1,100 @@
+{
+  "point": {
+    "n": 8,
+    "n_actives": 4,
+    "n_decoys": 4,
+    "roc_auc": 0.8125,
+    "bedroc": 0.9938,
+    "log_auc": 0.5753,
+    "ef": {
+      "EF1%": 2.0,
+      "EF5%": 2.0,
+      "EF10%": 2.0,
+      "EF20%": 2.0
+    },
+    "ranking": [
+      {
+        "rank": 1,
+        "name": "Ribavirin",
+        "score": 0.635,
+        "label": "active"
+      },
+      {
+        "rank": 2,
+        "name": "Sofosbuvir",
+        "score": 0.5798,
+        "label": "active"
+      },
+      {
+        "rank": 3,
+        "name": "Lopinavir",
+        "score": 0.5324,
+        "label": "decoy"
+      },
+      {
+        "rank": 4,
+        "name": "Molnupiravir",
+        "score": 0.4448,
+        "label": "active"
+      },
+      {
+        "rank": 5,
+        "name": "Ledipasvir",
+        "score": 0.4355,
+        "label": "decoy"
+      },
+      {
+        "rank": 6,
+        "name": "Remdesivir",
+        "score": 0.419,
+        "label": "active"
+      },
+      {
+        "rank": 7,
+        "name": "Nirmatrelvir",
+        "score": 0.4012,
+        "label": "decoy"
+      },
+      {
+        "rank": 8,
+        "name": "Baloxavir Marboxil",
+        "score": 0.3633,
+        "label": "decoy"
+      }
+    ]
+  },
+  "bootstrap": {
+    "bedroc": {
+      "median": 0.9994,
+      "ci95": [
+        0.0062,
+        1.0
+      ]
+    },
+    "log_auc": {
+      "median": 0.6774,
+      "ci95": [
+        0.1003,
+        1.0
+      ]
+    },
+    "roc_auc": {
+      "median": 0.8667,
+      "ci95": [
+        0.4,
+        1.0
+      ]
+    },
+    "EF1%": {
+      "median": 2.0,
+      "ci95": [
+        0.0,
+        4.0
+      ]
+    }
+  },
+  "n_resamples": 1000,
+  "n_effective": 993,
+  "skipped": 7,
+  "seed": 42
+}

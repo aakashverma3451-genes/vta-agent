@@ -276,7 +276,7 @@ vta run path/to/genome.fasta      # or:  python -m vta run …
 ```
 
 - **Self-configuring** — `vta.toolconfig` discovers fpocket/vina (env → PATH → local
-  build); TaxonAgent is auto-located. No env vars, no PYTHONPATH.
+  build); TaxonAgent is imported as an installed package. No runtime PYTHONPATH.
 - **Self-deciding** — the confidence router chooses proceed/flag/defer with no human
   in the loop; low-confidence inputs are deferred, not guessed.
 - **Self-degrading** — any missing tool falls back to a labelled mock; the run never

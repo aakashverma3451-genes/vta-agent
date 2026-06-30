@@ -1,0 +1,70 @@
+{
+  "run_id": "phase8_tilv_pb1",
+  "locked_at": "2026-06-29T11:29:46.154846+00:00",
+  "status": "locked",
+  "predictions": [
+    {
+      "rank": 1,
+      "ligand": "Ribavirin",
+      "ligand_id": "CHEMBL1643",
+      "score": 0.635,
+      "input_hash": "38f398344ae130ee"
+    },
+    {
+      "rank": 2,
+      "ligand": "Sofosbuvir",
+      "ligand_id": "CHEMBL1259059",
+      "score": 0.5798,
+      "input_hash": "a2e3ee482bd954b7"
+    },
+    {
+      "rank": 3,
+      "ligand": "Lopinavir",
+      "ligand_id": "CHEMBL729",
+      "score": 0.5324,
+      "input_hash": "98c1fa24c36e4f0e"
+    },
+    {
+      "rank": 4,
+      "ligand": "Molnupiravir",
+      "ligand_id": "CHEMBL4650320",
+      "score": 0.4448,
+      "input_hash": "ed731c6524094633"
+    },
+    {
+      "rank": 5,
+      "ligand": "Ledipasvir",
+      "ligand_id": "CHEMBL2374220",
+      "score": 0.4355,
+      "input_hash": "2432f84e3c233569"
+    },
+    {
+      "rank": 6,
+      "ligand": "Remdesivir",
+      "ligand_id": "CHEMBL4065616",
+      "score": 0.419,
+      "input_hash": "adee52feb3884fac"
+    },
+    {
+      "rank": 7,
+      "ligand": "Nirmatrelvir",
+      "ligand_id": "CHEMBL4802135",
+      "score": 0.4012,
+      "input_hash": "f09b37adfdf24d09"
+    },
+    {
+      "rank": 8,
+      "ligand": "Baloxavir Marboxil",
+      "ligand_id": "CHEMBL4297503",
+      "score": 0.3633,
+      "input_hash": "6005b4a06feffba2"
+    }
+  ],
+  "results": {},
+  "target": {
+    "name": "TiLV PB1",
+    "structure": "8PSO chain B",
+    "pocket": "NTP catalytic site",
+    "eval_target_id": "TiLV_PB1_8PSO_B"
+  }
+}
