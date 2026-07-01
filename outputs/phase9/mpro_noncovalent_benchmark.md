@@ -1,22 +1,30 @@
-# Phase 9C Benchmark: SARS-CoV-2 Mpro (non-covalent) — BLOCKED
+# Phase 9C Benchmark: SARS-CoV-2 Mpro (non-covalent)
 
-Status: **blocked_receptor_prep**.
-Verdict: blocked — powered benchmark not yet runnable; no number claimed.
+Target: SARS-CoV-2 Mpro (3CLpro), non-covalent. Structure: 7L11 chain A.
+Binding mode: non_covalent actives only (covalent held out).
+Control set: experimentally measured Moonshot inactives (real, not presumed decoys).
+Engine: AutoDock Vina (real Vina: True; receptor prep: openbabel_fallback).
+Verdict: powered benchmark — real measured inactives, informative CIs (not [0,1]); docking signal MODEST — ROC-AUC CI [0.4669, 0.6903] includes 0.5, EF1% ceiling-limited at 50/50.
 
-## Blocker
+## Primary metrics (point + bootstrap CI)
 
-AutoDock Vina is installed, but Meeko 0.7.1 receptor preparation fails deterministically on the Mpro chain (mk_prepare_receptor raises 'update_H_positions: Updated 1 H positions but deleted N' for every Mpro PDB tried: 6Y2E, 6M03, 7K3T, 7TLL, 7L10, 6W63, 7RFW, 7VH8, 7L11, 5R8T, 7BB2). The same code path preps the TiLV 8PSO receptor successfully, so the engine and pipeline are intact; the failure is Meeko-vs-Mpro specific. No fallback receptor prep tool (OpenBabel / reduce / ADFR) is installed.
+- N: 100 (50 actives / 50 inactives)
+- BEDROC(alpha=20): 0.6767 — median 0.6823, 95% CI [0.3574, 0.8933]
+- EF1%: 2.0 — median 1.9608, 95% CI [0.0, 2.439]
+- logAUC: 0.1994 — median 0.2056, 95% CI [0.137, 0.3012]
+- ROC-AUC: 0.5796 — median 0.5795, 95% CI [0.4669, 0.6903] (secondary)
+- CIs informative (not [0,1]): True
 
-## What is ready (no docking required)
+## Control-draw spread (robustness to inactive subsample)
 
-- Dataset: `vta/data/mpro/mpro_dataset.json`
-- Stratified (binding mode): `vta/data/mpro/mpro_stratified.json`
-- Selected non-covalent actives: 50
-- Selected measured inactives: 50
-- Active-site wiring: EXPERIMENTAL_PDB/EXPERIMENTAL_ACTIVE_SITE += MPRO (7L11:A)
+- bedroc: median 0.7177 (min 0.6889, max 0.8154)
+- EF1%: median 1.8 (min 1.8, max 1.8)
+- log_auc: median 0.1976 (min 0.1916, max 0.2283)
+- roc_auc: median 0.5795 (min 0.5745, max 0.593)
 
-## Next step
+## Leakage audit
 
-Provide a working receptor-prep path (OpenBabel fallback seam, or a Meeko version without this bug), then re-run scripts/run_mpro_benchmark.py to produce the powered, CI-bearing enrichment number. No mock/fabricated number is emitted.
+- Status: pass_no_overlap
+- Overlap: []
 
-No mock or fabricated enrichment number is reported for Mpro.
+Ranking weights unchanged. Consensus/DL outputs remain annotation-only.

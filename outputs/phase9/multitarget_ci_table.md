@@ -8,7 +8,7 @@ blocked — and the negatives are the scientific contribution, not a failure to 
 |---|---|---|---|---|---|---|---|---|
 | TiLV PB1 | RdRp NTP site (8PSO:B) | 4 | ChEMBL property-matched presumed decoys | 0.4062 [0.0009, 1.0] | 9.0 [0.0, 39.825] | 0.3877 [0.1327, 1.0] | 0.7921 [0.5976, 1.0] | underpowered demonstration |
 | HCV NS5B NI | catalytic active site (triphosphate) | 43 | property-matched decoys IMPOSSIBLE (24/43 actives recovered 0 decoys; 3.093/active) | n/a | n/a | n/a | n/a | **un-benchmarkable** (meta-finding) |
-| SARS-CoV-2 Mpro (non-covalent) | 3CLpro active site (7L11:A) | 1945 non-cov (avail.) | 930 measured Moonshot inactives (real) | blocked | blocked | blocked | blocked | **blocked: receptor prep** (dataset ready) |
+| SARS-CoV-2 Mpro (non-covalent) | 3CLpro active site (7L11:A) | 50 | measured Moonshot inactives | 0.6823 [0.3574, 0.8933] | 1.9608 [0.0, 2.439] | 0.2056 [0.137, 0.3012] | 0.5795 [0.4669, 0.6903] | powered benchmark — real measured inactives, informative CIs (not [0,1]); docking signal MODEST — ROC-AUC CI [0.4669, 0.6903] includes 0.5, EF1% ceiling-limited at 50/50 |
 
 ## Reading the table
 

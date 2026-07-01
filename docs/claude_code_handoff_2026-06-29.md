@@ -1,5 +1,8 @@
 # Claude Code Handoff — VTA-Agent Scientific Validation
 
+> **SUPERSEDED** by `docs/claude_code_handoff_2026-06-30.md` (Phase 9 complete: powered Mpro
+> benchmark, parent-vs-active-form 9D, frozen artifact 9E). This file is the Phase 9B snapshot.
+
 Date: 2026-06-29  
 Workspace: `/Users/dna/Desktop/vtaagent/vta-agent`
 

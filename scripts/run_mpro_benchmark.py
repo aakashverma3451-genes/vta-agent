@@ -137,8 +137,8 @@ def run(n_actives: int = 50, n_inactives: int = 50, seed: int = 17,
     rows = sorted(st["docking_results"], key=lambda r: (-(r["dG"]) if r.get("dG") is not None else -1e9),
                   reverse=True)
     entries = _entries(rows)
-    engines = sorted({(r.get("dG_provenance") or {}).get("engine") for r in rows})
-    real_vina = engines == ["AutoDock Vina"]
+    engines = sorted({(r.get("dG_provenance") or {}).get("tool") for r in rows if r.get("dG_provenance")})
+    real_vina = bool(engines) and all(e == "AutoDock Vina" for e in engines)
 
     # Honesty guard: if no real Vina pose was produced (e.g. the known Meeko 0.7.1 Mpro
     # receptor-prep failure), do NOT emit a fake/mock enrichment number. Write a blocked
@@ -151,6 +151,15 @@ def run(n_actives: int = 50, n_inactives: int = 50, seed: int = 17,
 
     n_actives_docked = sum(1 for e in entries if e["positive_control"])
     n_inactives_docked = sum(1 for e in entries if not e["positive_control"])
+    # Receptor prep provenance: detect the OpenBabel fallback REMARK in the receptor PDBQT.
+    receptor_prep = "meeko"
+    rec_path = next((r.get("receptor_path") for r in rows if r.get("receptor_path")), None)
+    if rec_path:
+        try:
+            if "OpenBabel fallback" in open(rec_path).readline():
+                receptor_prep = "openbabel_fallback"
+        except OSError:
+            receptor_prep = "unknown"
     ci_bedroc = (bootstrap.get("bootstrap", {}).get("bedroc", {}) or {}).get("ci95")
     informative = bool(ci_bedroc and (ci_bedroc[1] - ci_bedroc[0]) < 0.99)
 
@@ -168,6 +177,7 @@ def run(n_actives: int = 50, n_inactives: int = 50, seed: int = 17,
         "n_inactives_docked": n_inactives_docked,
         "engine": engines,
         "real_vina": real_vina,
+        "receptor_prep": receptor_prep,
         "scoring": "enrichment ranked by Vina affinity (score = -dG)",
         "benchmark": report,
         "bootstrap": bootstrap,
@@ -268,7 +278,7 @@ def _write_md(payload: dict) -> None:
         f"Binding mode: {payload['binding_mode']}.",
         f"Control set: {payload['control_set']}.",
         f"Engine: {', '.join(e for e in payload['engine'] if e)} "
-        f"(real Vina: {payload['real_vina']}).",
+        f"(real Vina: {payload['real_vina']}; receptor prep: {payload.get('receptor_prep')}).",
         f"Verdict: {payload['verdict']}.",
         "",
         "## Primary metrics (point + bootstrap CI)",

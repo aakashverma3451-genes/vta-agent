@@ -109,7 +109,50 @@ def _prep_receptor(pdb_path: str, out_prefix: str) -> str | None:
          "--allow_bad_res", "--default_altloc", "A"],
         capture_output=True, timeout=600,
     )
-    return pdbqt if os.path.exists(pdbqt) else None
+    if os.path.exists(pdbqt):
+        return pdbqt
+    # Meeko-first failed (e.g. the deterministic Meeko 0.7.1 Mpro residue-template H bug).
+    # Fall back to OpenBabel, which prepares a rigid receptor PDBQT from many structures
+    # Meeko refuses. Meeko remains primary, so structures it handles (e.g. TiLV 8PSO) are
+    # unaffected; the fallback only runs when Meeko produced nothing.
+    return _prep_receptor_obabel(pdb_path, pdbqt)
+
+
+def _prep_receptor_obabel(pdb_path: str, pdbqt: str) -> str | None:
+    """Fallback receptor prep via OpenBabel → rigid PDBQT (Gasteiger charges, AD4 types).
+
+    Strips HETATM (waters / co-crystal ligand / ions) so the rigid receptor excludes any
+    bound ligand, adds hydrogens, and writes a rigid (-xr) receptor PDBQT. A REMARK records
+    that the fallback was used so downstream provenance can report the prep method honestly.
+    """
+    try:
+        from openbabel import pybel
+    except Exception:
+        return None
+    protein = [ln for ln in open(pdb_path) if ln.startswith(("ATOM", "TER"))]
+    if not protein:
+        return None
+    tmp_pdb = f"{pdbqt}.receptor.pdb"
+    with open(tmp_pdb, "w") as fh:
+        fh.write("".join(protein))
+        fh.write("END\n")
+    try:
+        mol = next(pybel.readfile("pdb", tmp_pdb))
+    except Exception:
+        return None
+    try:
+        mol.addh()                       # add hydrogens for protonation
+        mol.write("pdbqt", pdbqt, opt={"r": True}, overwrite=True)  # -xr: rigid receptor
+    except Exception:
+        return None
+    if not os.path.exists(pdbqt) or os.path.getsize(pdbqt) == 0:
+        return None
+    # Tag provenance: mark the receptor as OpenBabel-prepared.
+    body = open(pdbqt).read()
+    with open(pdbqt, "w") as fh:
+        fh.write("REMARK VTA receptor prep: OpenBabel fallback (Meeko declined)\n")
+        fh.write(body)
+    return pdbqt
 
 
 def _run_vina(vina: str, receptor: str, ligand: str, center: list, out: str) -> float | None:

@@ -20,6 +20,7 @@ biopython
 rdkit>=2024.0
 meeko>=0.5
 gemmi              # meeko receptor-prep dependency
+openbabel-wheel    # fallback rigid-receptor PDBQT prep when Meeko declines (e.g. Mpro)
 
 # Module dependency
 taxonagent

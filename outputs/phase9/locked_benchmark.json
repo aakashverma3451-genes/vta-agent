@@ -1,0 +1,248 @@
+{
+  "artifact": "VTA-Agent frozen validation benchmark (Phase 9E)",
+  "frozen_at": "2026-06-30",
+  "policy": "Immutable: regenerate a NEW dated artifact rather than editing this one.",
+  "targets": [
+    {
+      "target": "TiLV PB1",
+      "structure": "8PSO chain B",
+      "control_set": "real ChEMBL property-matched presumed decoys; underpowered",
+      "metrics_ci": {
+        "BEDROC": {
+          "median": 0.4062,
+          "ci95": [
+            0.0009,
+            1.0
+          ]
+        },
+        "EF1%": {
+          "median": 9.0,
+          "ci95": [
+            0.0,
+            39.825
+          ]
+        },
+        "logAUC": {
+          "median": 0.3877,
+          "ci95": [
+            0.1327,
+            1.0
+          ]
+        },
+        "ROC_AUC": {
+          "median": 0.7921,
+          "ci95": [
+            0.5976,
+            1.0
+          ]
+        }
+      },
+      "grade": "underpowered demonstration (4 actives; CIs ~ [0,1])"
+    },
+    {
+      "target": "HCV NS5B NI (triphosphate)",
+      "structure": "n/a",
+      "control_set": "matched decoys IMPOSSIBLE (24/43 actives recovered 0 decoys)",
+      "metrics_ci": null,
+      "grade": "un-benchmarkable (nucleotide meta-finding)"
+    },
+    {
+      "target": "SARS-CoV-2 Mpro (non-covalent)",
+      "structure": "7L11 chain A",
+      "control_set": "experimentally measured Moonshot inactives (real, not presumed decoys)",
+      "binding_mode": "non_covalent actives only (covalent held out)",
+      "real_vina": true,
+      "receptor_prep": "openbabel_fallback",
+      "metrics_ci": {
+        "BEDROC": {
+          "median": 0.6823,
+          "ci95": [
+            0.3574,
+            0.8933
+          ]
+        },
+        "EF1%": {
+          "median": 1.9608,
+          "ci95": [
+            0.0,
+            2.439
+          ]
+        },
+        "logAUC": {
+          "median": 0.2056,
+          "ci95": [
+            0.137,
+            0.3012
+          ]
+        },
+        "ROC_AUC": {
+          "median": 0.5795,
+          "ci95": [
+            0.4669,
+            0.6903
+          ]
+        }
+      },
+      "verdict": "powered benchmark \u2014 real measured inactives, informative CIs (not [0,1]); docking signal MODEST \u2014 ROC-AUC CI [0.4669, 0.6903] includes 0.5, EF1% ceiling-limited at 50/50",
+      "splits": {
+        "seed": 17,
+        "n_actives": 50,
+        "n_inactives": 50,
+        "active_ids": [
+          "ADA-UCB-6c2cb422-1",
+          "ALP-POS-6d04362c-1",
+          "ALP-POS-6d96567b-2",
+          "ALP-POS-6f6ae286-5",
+          "ALP-POS-88a7a97e-13",
+          "ALP-POS-88a7a97e-16",
+          "ALP-POS-88a7a97e-17",
+          "ALP-POS-88a7a97e-48",
+          "ALP-POS-c59291d4-6",
+          "ALP-POS-ced8ea4d-16",
+          "ALP-POS-ecbed2ba-1",
+          "ALP-POS-f1807566-1",
+          "ALP-UNI-3735e77e-1",
+          "ALP-UNI-dbb9503d-2",
+          "BEN-DND-c852c98b-4",
+          "DAR-DIA-6a508060-2",
+          "EDG-MED-ba1ac7b9-11",
+          "EDJ-MED-611d11e7-4",
+          "EDJ-MED-8bb691af-4",
+          "EDJ-MED-b774e9fe-1",
+          "EDJ-MED-dd2a8363-2",
+          "EDJ-MED-e69ed63d-16",
+          "EDJ-MED-fa7708b3-3",
+          "LON-WEI-8f408cad-4",
+          "LUO-POS-868e8996-7",
+          "MAT-POS-14f31916-5",
+          "MAT-POS-1bed62cf-3",
+          "MAT-POS-24589f88-3",
+          "MAT-POS-4223bc15-18",
+          "MAT-POS-4223bc15-8",
+          "MAT-POS-853c0ffa-16",
+          "MAT-POS-86c60949-2",
+          "MAT-POS-90fd5f68-19",
+          "MAT-POS-b4d6b7fc-1",
+          "MAT-POS-e10a589d-1",
+          "MAT-POS-e119ab4f-3",
+          "MAT-POS-e6dd326d-5",
+          "MAT-POS-e6dd326d-6",
+          "MAT-POS-e9e99895-3",
+          "MIC-UNK-91acba05-1",
+          "MIC-UNK-91acba05-6",
+          "PET-UNK-2c6614b6-5",
+          "PET-UNK-e274cad4-6",
+          "RAL-THA-176e263b-4",
+          "RAL-THA-2d450e86-14",
+          "RAL-THA-2d450e86-6",
+          "RAL-THA-2d450e86-7",
+          "RAL-THA-8416115c-5",
+          "TAT-ENA-80bfd3e5-32",
+          "TAT-ENA-80bfd3e5-37"
+        ],
+        "inactive_ids": [
+          "AAR-RCN-9f0de475-1",
+          "ALP-POS-305f6ec3-19",
+          "ALP-POS-305f6ec3-22",
+          "ALP-POS-305f6ec3-36",
+          "ALP-POS-305f6ec3-51",
+          "ALP-POS-95f71980-15",
+          "ALP-POS-b0bc6a46-25",
+          "ALP-POS-c0c213c9-13",
+          "ALP-POS-c0c213c9-20",
+          "ALP-POS-c0c213c9-7",
+          "ALP-POS-ced8ea4d-21",
+          "ALP-POS-ced8ea4d-29",
+          "ALP-POS-ced8ea4d-45",
+          "ALP-POS-ced8ea4d-48",
+          "ALP-POS-ced8ea4d-5",
+          "ALP-POS-ced8ea4d-50",
+          "ALP-POS-ced8ea4d-63",
+          "ALP-POS-e980f4ea-22",
+          "ALP-POS-e980f4ea-24",
+          "ALP-POS-e980f4ea-54",
+          "ALP-POS-e980f4ea-61",
+          "ALP-UNI-fe744232-12",
+          "ALP-UNI-fe744232-3",
+          "ALP-UNI-fe744232-9",
+          "CHO-MSK-a31cca77-1",
+          "EDG-MED-0da5ad92-5",
+          "EDJ-MED-c3ea9889-8",
+          "EDJ-MED-c8e7a002-16",
+          "JAG-UCB-1d922829-5",
+          "JAG-UCB-52b62a6f-12",
+          "JAG-UCB-52b62a6f-5",
+          "JAG-UCB-c61058a9-45",
+          "JAR-KUA-41bd5a3d-7",
+          "JOH-UNI-0e1753c1-1",
+          "LON-WEI-8f408cad-8",
+          "LON-WEI-b2874fec-14",
+          "LON-WEI-b2874fec-23",
+          "LON-WEI-d1c9908a-3",
+          "LOR-NOR-c954e7ad-1",
+          "MAT-POS-bb423b95-6",
+          "MAT-POS-c74bc7b3-2",
+          "RED-RED-10c9212c-13",
+          "RED-RED-10c9212c-19",
+          "RED-RED-10c9212c-47",
+          "RED-RED-10c9212c-9",
+          "RUB-POS-1325a9ea-22",
+          "SHA-THE-408e7524-6",
+          "WIL-UNI-2a57d06c-10",
+          "WIL-UNI-2a57d06c-49",
+          "WIL-UNI-d4749f31-1"
+        ]
+      },
+      "grade": "powered (informative CIs); docking signal modest \u2014 reported honestly"
+    }
+  ],
+  "active_form_comparison_9d": {
+    "structure": "2XI3 chain A (GTP + catalytic Mg2+)",
+    "metal": {
+      "present": true,
+      "ion": "Mg2+",
+      "resnums": [
+        "1004",
+        "1005"
+      ],
+      "provenance": "experimental 2XI3 HETATM (curated, not fabricated)"
+    },
+    "triphosphate": {
+      "n_docked": 26,
+      "median_dG": -7.573,
+      "best_dG": -8.81,
+      "worst_dG": -6.925
+    },
+    "parent_or_prodrug": {
+      "n_docked": 17,
+      "median_dG": -7.469,
+      "best_dG": -7.897,
+      "worst_dG": -6.708
+    },
+    "median_dG_triphosphate_minus_parent": -0.104,
+    "tilv_active_form": {
+      "status": "labelled skip",
+      "reason": "TiLV PB1 controls have no curated triphosphate active-form SMILES (vta/chem/species.py active_form_smiles=None); not fabricated."
+    }
+  },
+  "gate_decision": "DO NOT PROMOTE (annotation-only); see outputs/phase9/gate_decision_mpro.md",
+  "references": {
+    "multitarget_table": "outputs/phase9/multitarget_ci_table.md",
+    "gate_decision": "outputs/phase9/gate_decision_mpro.md",
+    "mpro_benchmark": "outputs/phase9/mpro_noncovalent_benchmark.json",
+    "active_form_comparison": "outputs/phase9/phase9d_active_form_comparison.json"
+  },
+  "provenance": {
+    "actives_inactives": "COVID Moonshot (primary) + ChEMBL CHEMBL4523582 (Mpro); ChEMBL CHEMBL4296320 (HCV NS5B NI)",
+    "decoys": "Mpro uses experimentally measured inactives (no presumed decoys); TiLV uses ChEMBL property-matched presumed decoys",
+    "engine": "AutoDock Vina 1.2.5; receptor prep Meeko-first + OpenBabel fallback",
+    "metrics": "bootstrap >=1000 + multi-draw control spread; median + 95% CI"
+  },
+  "caveats": [
+    "Mpro benchmark design is publication-grade; rigid-Vina docking signal is modest (ROC-AUC CI crosses 0.5) and reported as-is.",
+    "HCV NS5B NI is un-benchmarkable by matched decoys (meta-finding).",
+    "TiLV PB1 is an underpowered demonstration.",
+    "No ranking term promoted."
+  ],
+  "content_hash": "c9e94855f28428b9"
+}

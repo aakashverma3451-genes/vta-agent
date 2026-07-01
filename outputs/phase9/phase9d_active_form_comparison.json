@@ -1,0 +1,353 @@
+{
+  "phase": "9D parent-vs-active-form",
+  "target": "HCV NS5B catalytic site",
+  "structure": "2XI3 chain A (GTP + catalytic Mg2+)",
+  "metal": {
+    "present": true,
+    "ion": "Mg2+",
+    "resnums": [
+      "1004",
+      "1005"
+    ],
+    "provenance": "experimental 2XI3 HETATM (curated, not fabricated)"
+  },
+  "box_center": [
+    9.451,
+    7.204,
+    11.876
+  ],
+  "box_center_source": "centroid of catalytic GDD aspartates 220/318/319 CA",
+  "scoring": "AutoDock Vina \u0394G (kcal/mol); ligands docked AS GIVEN (no species resolution)",
+  "n_actives": 43,
+  "triphosphate_active_form": {
+    "n_docked": 26,
+    "median_dG": -7.573,
+    "best_dG": -8.81,
+    "worst_dG": -6.925
+  },
+  "parent_or_prodrug": {
+    "n_docked": 17,
+    "median_dG": -7.469,
+    "best_dG": -7.897,
+    "worst_dG": -6.708
+  },
+  "median_dG_triphosphate_minus_parent": -0.104,
+  "matched_pair_sofosbuvir": {
+    "parent": {
+      "name": "SOFOSBUVIR",
+      "dG": -7.897
+    },
+    "active_form": {
+      "name": "GS-461203 (sofosbuvir triphosphate)",
+      "dG": -7.346
+    }
+  },
+  "tilv_active_form": {
+    "status": "labelled skip",
+    "reason": "TiLV PB1 controls have no curated triphosphate active-form SMILES (vta/chem/species.py active_form_smiles=None); not fabricated."
+  },
+  "interpretation": "More negative \u0394G = stronger predicted binding. If the triphosphate group docks markedly stronger than the parent/prodrug group at the metal-containing catalytic site, the poor parent recovery is substantially a prodrug-input artifact, not purely a scoring limitation. \u0394G is not enrichment: HCV NS5B NI is un-benchmarkable by matched decoys (Phase 9B-3 meta-finding), so this is a within-set score comparison, reported as such.",
+  "results": [
+    {
+      "molecule_chembl_id": "CHEMBL521487",
+      "pref_name": "CHEMBL521487",
+      "form": "triphosphate",
+      "dG": -7.526,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4127092",
+      "pref_name": "CHEMBL4127092",
+      "form": "triphosphate",
+      "dG": -7.463,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL1259059",
+      "pref_name": "SOFOSBUVIR",
+      "form": "parent_or_prodrug",
+      "dG": -7.897,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4125966",
+      "pref_name": "CHEMBL4125966",
+      "form": "triphosphate",
+      "dG": -7.557,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4641646",
+      "pref_name": "CHEMBL4641646",
+      "form": "triphosphate",
+      "dG": -7.732,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4215462",
+      "pref_name": "CHEMBL4215462",
+      "form": "triphosphate",
+      "dG": -8.072,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL486231",
+      "pref_name": "GS-461203",
+      "form": "triphosphate",
+      "dG": -7.346,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL1630001",
+      "pref_name": "PSI-352666",
+      "form": "triphosphate",
+      "dG": -8.336,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4555315",
+      "pref_name": "CHEMBL4555315",
+      "form": "triphosphate",
+      "dG": -7.264,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4127030",
+      "pref_name": "ADAFOSBUVIR 5'-TRIPHOSPHATE",
+      "form": "triphosphate",
+      "dG": -7.589,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4205249",
+      "pref_name": "CHEMBL4205249",
+      "form": "triphosphate",
+      "dG": -7.139,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4644488",
+      "pref_name": "CHEMBL4644488",
+      "form": "parent_or_prodrug",
+      "dG": -7.4,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL373691",
+      "pref_name": "PSI-6130-TP",
+      "form": "triphosphate",
+      "dG": -7.391,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4635006",
+      "pref_name": "CHEMBL4635006",
+      "form": "triphosphate",
+      "dG": -8.144,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4633686",
+      "pref_name": "CHEMBL4633686",
+      "form": "parent_or_prodrug",
+      "dG": -7.758,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4127921",
+      "pref_name": "CHEMBL4127921",
+      "form": "triphosphate",
+      "dG": -7.785,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4454742",
+      "pref_name": "CHEMBL4454742",
+      "form": "triphosphate",
+      "dG": -7.616,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4642954",
+      "pref_name": "CHEMBL4642954",
+      "form": "parent_or_prodrug",
+      "dG": -7.38,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL3422648",
+      "pref_name": "INX-09114",
+      "form": "triphosphate",
+      "dG": -8.095,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4204763",
+      "pref_name": "CHEMBL4204763",
+      "form": "triphosphate",
+      "dG": -7.298,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL3286448",
+      "pref_name": "CHEMBL3286448",
+      "form": "triphosphate",
+      "dG": -8.81,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4462484",
+      "pref_name": "CHEMBL4462484",
+      "form": "parent_or_prodrug",
+      "dG": -7.537,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4644867",
+      "pref_name": "CHEMBL4644867",
+      "form": "parent_or_prodrug",
+      "dG": -7.142,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4532929",
+      "pref_name": "CHEMBL4532929",
+      "form": "parent_or_prodrug",
+      "dG": -7.536,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4632867",
+      "pref_name": "CHEMBL4632867",
+      "form": "triphosphate",
+      "dG": -7.867,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4639840",
+      "pref_name": "CHEMBL4639840",
+      "form": "triphosphate",
+      "dG": -8.1,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4440367",
+      "pref_name": "CHEMBL4440367",
+      "form": "triphosphate",
+      "dG": -7.637,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4069349",
+      "pref_name": "4A-TP",
+      "form": "triphosphate",
+      "dG": -7.534,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4635910",
+      "pref_name": "CHEMBL4635910",
+      "form": "parent_or_prodrug",
+      "dG": -7.469,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4213075",
+      "pref_name": "CHEMBL4213075",
+      "form": "triphosphate",
+      "dG": -7.364,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4634173",
+      "pref_name": "CHEMBL4634173",
+      "form": "parent_or_prodrug",
+      "dG": -7.369,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4637964",
+      "pref_name": "CHEMBL4637964",
+      "form": "parent_or_prodrug",
+      "dG": -6.742,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4113906",
+      "pref_name": "CHEMBL4113906",
+      "form": "triphosphate",
+      "dG": -7.732,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL3954120",
+      "pref_name": "CHEMBL3954120",
+      "form": "parent_or_prodrug",
+      "dG": -7.345,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL3186678",
+      "pref_name": "CHEMBL3186678",
+      "form": "parent_or_prodrug",
+      "dG": -7.514,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4640222",
+      "pref_name": "CHEMBL4640222",
+      "form": "parent_or_prodrug",
+      "dG": -7.151,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4216962",
+      "pref_name": "CHEMBL4216962",
+      "form": "triphosphate",
+      "dG": -7.358,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL3908994",
+      "pref_name": "CHEMBL3908994",
+      "form": "parent_or_prodrug",
+      "dG": -7.806,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL3908470",
+      "pref_name": "CHEMBL3908470",
+      "form": "parent_or_prodrug",
+      "dG": -7.784,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL1950242",
+      "pref_name": "CHEMBL1950242",
+      "form": "parent_or_prodrug",
+      "dG": -7.618,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4522072",
+      "pref_name": "CHEMBL4522072",
+      "form": "triphosphate",
+      "dG": -6.925,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL3917174",
+      "pref_name": "CHEMBL3917174",
+      "form": "parent_or_prodrug",
+      "dG": -6.708,
+      "docked": true
+    },
+    {
+      "molecule_chembl_id": "CHEMBL4212616",
+      "pref_name": "CHEMBL4212616",
+      "form": "triphosphate",
+      "dG": -7.197,
+      "docked": true
+    }
+  ]
+}
