@@ -44,7 +44,6 @@ ENSEMBLE_CONFORMERS = [
 
 # Mpro catalytic site box — same as Phase 9 (XF1 centroid in 7L11:A)
 MPRO_CENTER = [-21.815, -4.216, -27.984]
-BOX_SIZE = 22.5
 VINA_EXHAUSTIVENESS = 8
 VINA_SEED = 42
 VINA_MODES = 5

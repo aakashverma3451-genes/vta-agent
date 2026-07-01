@@ -100,9 +100,10 @@ def build_table() -> str:
         "- **TiLV PB1**: a real docking run, but four actives make every CI span almost the",
         "  whole [0,1] range — a labelled demonstration, not an enrichment claim.",
         "- **HCV NS5B NI**: not assessable by matched-decoy enrichment at all (see meta-finding).",
-        "- **SARS-CoV-2 Mpro**: the intended powered target with real measured inactives; the",
-        "  dataset and active-site wiring are complete, but the headline number is blocked on a",
-        "  Meeko receptor-prep bug. No mock or fabricated number is reported in its place.",
+        "- **SARS-CoV-2 Mpro**: powered target with real measured inactives and OpenBabel",
+        "  receptor-prep (Meeko 0.7.1 declined for every Mpro chain; OpenBabel fallback used).",
+        "  Docking signal is MODEST — ROC-AUC CI crosses 0.5. Reported as-is, not inflated.",
+        "  See Phase 10 (`outputs/phase10/`) for ensemble conformer comparison.",
     ]
     return "\n".join(lines) + "\n"
 
