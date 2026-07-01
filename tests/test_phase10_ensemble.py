@@ -17,6 +17,13 @@ FAKE_PDB_CHAIN_A = (
     "END\n"
 )
 
+FAKE_PDB_WITH_DYAD = (
+    "ATOM      1  CA  HIS A  41      4.000   6.000   8.000  1.00 20.00           C\n"
+    "ATOM      2  CA  CYS A 145     10.000  12.000  14.000  1.00 20.00           C\n"
+    "TER\n"
+    "END\n"
+)
+
 
 def _phase9_rows():
     return [
@@ -133,6 +140,34 @@ def test_ranking_delta_improvement():
     assert b_delta["improved"] is True
 
 
+# ── _dyad_center ──────────────────────────────────────────────────────────────
+def test_dyad_center_returns_midpoint(tmp_path):
+    pdb = tmp_path / "test.pdb"
+    pdb.write_text(FAKE_PDB_WITH_DYAD)
+    center = p10._dyad_center(str(pdb), chain="A")
+    assert center is not None
+    assert center == pytest.approx([7.0, 9.0, 11.0])  # (4+10)/2, (6+12)/2, (8+14)/2
+
+
+def test_dyad_center_returns_none_when_residues_missing(tmp_path):
+    pdb = tmp_path / "test.pdb"
+    pdb.write_text(FAKE_PDB_CHAIN_A)  # res 1 and 2, not 41/145
+    center = p10._dyad_center(str(pdb), chain="A")
+    assert center is None
+
+
+def test_dyad_center_ignores_wrong_chain(tmp_path):
+    pdb = tmp_path / "test.pdb"
+    # His41 and Cys145 on chain B, not A
+    pdb.write_text(
+        "ATOM      1  CA  HIS B  41      4.000   6.000   8.000  1.00 20.00           C\n"
+        "ATOM      2  CA  CYS B 145     10.000  12.000  14.000  1.00 20.00           C\n"
+        "TER\nEND\n"
+    )
+    center = p10._dyad_center(str(pdb), chain="A")
+    assert center is None
+
+
 # ── fetch_and_prep_conformer (network + openbabel mocked) ─────────────────────
 def test_fetch_and_prep_conformer_full_pipeline(tmp_path, monkeypatch):
     """Full pipeline: fetch → extract chain → write PDB → OpenBabel prep → PDBQT."""
@@ -157,13 +192,15 @@ def test_fetch_and_prep_conformer_full_pipeline(tmp_path, monkeypatch):
     monkeypatch.setattr(p10, "_prep_receptor_obabel", fake_prep)
 
     conf = {"label": "test_apo", "pdb_id": "6Y2E", "chain": "A", "note": "test"}
-    result = p10.fetch_and_prep_conformer(conf)
-    assert result is not None
-    assert result.endswith(".pdbqt")
+    receptor, center = p10.fetch_and_prep_conformer(conf)
+    assert receptor is not None
+    assert receptor.endswith(".pdbqt")
     # PDB should contain only chain A atoms
     pdb_written = (tmp_path / "phase10_6Y2E_A.pdb").read_text()
     assert "ATOM" in pdb_written
     assert "ALA A" in pdb_written
+    # center falls back to MPRO_CENTER (no His41/Cys145 in FAKE_PDB_CHAIN_A)
+    assert center is not None
 
 
 def test_fetch_and_prep_conformer_reuses_cache(tmp_path, monkeypatch):
@@ -180,8 +217,8 @@ def test_fetch_and_prep_conformer_reuses_cache(tmp_path, monkeypatch):
     pdb_path.write_text(FAKE_PDB_CHAIN_A)
 
     conf = {"label": "6Y2E_apo", "pdb_id": "6Y2E", "chain": "A", "note": "test"}
-    result = p10.fetch_and_prep_conformer(conf)
-    assert result == str(pdbqt_path)
+    receptor, center = p10.fetch_and_prep_conformer(conf)
+    assert receptor == str(pdbqt_path)
     assert fetch_called == []  # network not called
 
 
@@ -189,8 +226,9 @@ def test_fetch_network_failure_returns_none(tmp_path, monkeypatch):
     monkeypatch.setattr(p10, "STRUCTURES_DIR", tmp_path)
     monkeypatch.setattr(p10, "_fetch_rcsb", lambda x: (_ for _ in ()).throw(OSError("timeout")))
     conf = {"label": "bad", "pdb_id": "XXXX", "chain": "A", "note": ""}
-    result = p10.fetch_and_prep_conformer(conf)
-    assert result is None
+    receptor, center = p10.fetch_and_prep_conformer(conf)
+    assert receptor is None
+    assert center is None
 
 
 # ── dock_compounds_against_receptor ──────────────────────────────────────────

@@ -5,14 +5,16 @@ Compares a 3-conformer receptor ensemble (7L11:A holo primary + 6Y2E:A apo +
 
 Design:
 - Phase 9 primary scores (7L11:A) are loaded from the existing JSON (no re-docking).
-- 6Y2E:A (apo Mpro, 1.75 Å) and 7K3T:A (Mpro + non-covalent Moonshot inhibitor)
+- 6Y2E:A (apo Mpro, Zhang 2020, 1.75 Å) and 7K3T:A (holo, Moonshot inhibitor)
   are fetched from RCSB and prepped via OpenBabel (same fallback as Phase 9).
 - Each of the 100 Phase 9 compounds is docked against the 2 new conformers using
   cached ligand PDBQTs from structures/.ligand_pdbqt/.
+- Box center is His41/Cys145 CA midpoint computed per conformer — different crystal
+  forms have different absolute coordinates; the 7L11 centroid cannot be reused.
 - Ensemble score per compound = minimum dG across all 3 (best predicted binding).
 - Enrichment computed with bootstrap CIs and compared to Phase 9 single-receptor.
 - Ranking delta: for each top-10 active in Phase 9, record its ensemble rank vs
-  single-structure rank (positive = improved, negative = worsened).
+  single-structure rank (positive = worsened, negative = improved).
 - If CI bands overlap: Phase 9 signal is stable w.r.t. conformational sampling.
 - Honest about failures: any compound that fails all 3 conformers gets dG=None and
   is excluded from enrichment (labelled skip, same policy as Phase 9).
@@ -22,10 +24,8 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import statistics
 from pathlib import Path
 
-import vta.nodes.docking as _docking_module
 from vta.eval.metrics import bootstrap_enrichment_report, enrichment_report
 from vta.nodes.docking import _LIG_CACHE, _run_vina
 from vta.nodes.structure import extract_chain, fetch_rcsb_pdb
@@ -36,13 +36,14 @@ from vta.toolconfig import find_tool
 # Ensemble 1: 6Y2E:A (apo Mpro, Zhang et al. 2020, 1.75 Å — open/apo conformation)
 # Ensemble 2: 7K3T:A (holo Mpro, Moonshot non-covalent inhibitor)
 ENSEMBLE_CONFORMERS = [
-    {"label": "6Y2E_apo",   "pdb_id": "6Y2E", "chain": "A",
+    {"label": "6Y2E_apo",  "pdb_id": "6Y2E", "chain": "A",
      "note": "apo Mpro, Zhang 2020, 1.75 Å — open S4-subpocket loop"},
-    {"label": "7K3T_holo",  "pdb_id": "7K3T", "chain": "A",
+    {"label": "7K3T_holo", "pdb_id": "7K3T", "chain": "A",
      "note": "Mpro + non-covalent Moonshot inhibitor, holo alternative"},
 ]
 
-# Mpro catalytic site box — same as Phase 9 (XF1 centroid in 7L11:A)
+# Phase 9 box center (XF1 centroid in 7L11:A) — fallback only; per-conformer centers
+# are computed from His41/Cys145 CA midpoint to handle different crystal frames.
 MPRO_CENTER = [-21.815, -4.216, -27.984]
 VINA_EXHAUSTIVENESS = 8
 VINA_SEED = 42
@@ -58,6 +59,34 @@ STRUCTURES_DIR = Path("structures")
 # ── network seam (monkeypatched in tests) ────────────────────────────────────
 def _fetch_rcsb(pdb_id: str) -> str:
     return fetch_rcsb_pdb(pdb_id)
+
+
+# ── box-center helper ─────────────────────────────────────────────────────────
+def _dyad_center(pdb_path: str, chain: str = "A") -> list[float] | None:
+    """His41 + Cys145 CA midpoint — per-conformer active-site center for Mpro.
+
+    Each PDB crystal structure lives in its own coordinate frame, so the 7L11
+    XF1 centroid cannot be reused for 6Y2E or 7K3T. His41 and Cys145 are
+    present in every Mpro structure; their CA midpoint reliably places the Vina
+    search box on the catalytic dyad regardless of crystal form.
+    """
+    his41 = cys145 = None
+    for ln in open(pdb_path):
+        if not ln.startswith("ATOM"):
+            continue
+        if ln[21] != chain:
+            continue
+        if ln[12:16].strip() != "CA":
+            continue
+        resnum = int(ln[22:26].strip())
+        xyz = [float(ln[30:38]), float(ln[38:46]), float(ln[46:54])]
+        if resnum == 41:
+            his41 = xyz
+        elif resnum == 145:
+            cys145 = xyz
+    if his41 and cys145:
+        return [round((his41[i] + cys145[i]) / 2, 3) for i in range(3)]
+    return None
 
 
 # ── receptor prep ─────────────────────────────────────────────────────────────
@@ -89,13 +118,18 @@ def _prep_receptor_obabel(pdb_path: str, pdbqt: str) -> str | None:
         return None
     body = open(pdbqt).read()
     with open(pdbqt, "w") as fh:
-        fh.write(f"REMARK VTA Phase 10 receptor prep: OpenBabel fallback\n")
+        fh.write("REMARK VTA Phase 10 receptor prep: OpenBabel fallback\n")
         fh.write(body)
     return pdbqt
 
 
-def fetch_and_prep_conformer(conf: dict) -> str | None:
-    """Fetch a PDB from RCSB, extract the chain, prep receptor PDBQT. Cached."""
+def fetch_and_prep_conformer(conf: dict) -> tuple[str | None, list[float] | None]:
+    """Fetch PDB, extract chain, prep PDBQT; return (receptor_path, box_center).
+
+    Box center is the His41/Cys145 CA midpoint in this structure's coordinate
+    frame — essential because different crystal structures have different absolute
+    coordinates (6Y2E active site differs from 7L11 by ~35 Å in raw PDB coords).
+    """
     pdb_id, chain, label = conf["pdb_id"], conf["chain"], conf["label"]
     STRUCTURES_DIR.mkdir(exist_ok=True)
     pdb_path = STRUCTURES_DIR / f"phase10_{pdb_id}_{chain}.pdb"
@@ -107,18 +141,23 @@ def fetch_and_prep_conformer(conf: dict) -> str | None:
             chain_pdb = extract_chain(raw, chain)
             if not chain_pdb.strip():
                 print(f"  [warn] no ATOM records for {pdb_id} chain {chain}")
-                return None
+                return None, None
             pdb_path.write_text(chain_pdb)
         except Exception as e:
             print(f"  [warn] RCSB fetch failed for {pdb_id}: {e}")
-            return None
+            return None, None
 
     result = _prep_receptor_obabel(str(pdb_path), str(pdbqt_path))
+    center = _dyad_center(str(pdb_path), chain)
+    if not center:
+        center = MPRO_CENTER
+        print(f"  [warn] His41/Cys145 not found in {pdb_id}:{chain} — using MPRO_CENTER fallback")
     if result:
-        print(f"  receptor ready: {pdbqt_path}")
+        print(f"  receptor ready: {pdbqt_path}  box_center: {center}")
     else:
         print(f"  [warn] receptor prep failed for {label} ({pdb_id}:{chain})")
-    return result
+        return None, None
+    return result, center
 
 
 # ── per-conformer docking ─────────────────────────────────────────────────────
@@ -127,8 +166,10 @@ def dock_compounds_against_receptor(
     receptor_pdbqt: str,
     conformer_label: str,
     vina_bin: str,
+    center: list[float] | None = None,
 ) -> dict[str, float | None]:
     """Dock all compounds against one receptor; return {compound_id: best_dG}."""
+    box_center = center if center is not None else MPRO_CENTER
     scores: dict[str, float | None] = {}
     n_ok = n_fail = 0
     for c in compounds:
@@ -139,7 +180,7 @@ def dock_compounds_against_receptor(
             n_fail += 1
             continue
         out_pose = str(STRUCTURES_DIR / f"phase10_{cid}_{conformer_label}.pdbqt")
-        dG = _run_vina(vina_bin, receptor_pdbqt, lig_pdbqt, MPRO_CENTER, out_pose)
+        dG = _run_vina(vina_bin, receptor_pdbqt, lig_pdbqt, box_center, out_pose)
         scores[cid] = dG
         if dG is not None:
             n_ok += 1
@@ -199,7 +240,7 @@ def _entries_from_rows(rows: list[dict], score_key: str = "ensemble_dG") -> list
 
 
 def _ranking_delta(phase9_rows: list[dict], ensemble_rows: list[dict]) -> list[dict]:
-    """For each top-10 Phase 9 active, report its ensemble rank vs single-structure rank."""
+    """For each top-10 Phase 9 active, report ensemble rank vs single-structure rank."""
     def rank_list(rows: list[dict], score_key: str) -> dict[str, int]:
         sorted_rows = sorted(
             [r for r in rows if r.get(score_key) is not None],
@@ -210,7 +251,6 @@ def _ranking_delta(phase9_rows: list[dict], ensemble_rows: list[dict]) -> list[d
     phase9_ranks = rank_list(phase9_rows, "dG")
     ensemble_ranks = rank_list(ensemble_rows, "ensemble_dG")
 
-    # Top 10 Phase 9 actives (by rank, ascending = better)
     top10_actives = sorted(
         [(cid, rank) for cid, rank in phase9_ranks.items()
          if any(r["ligand_id"] == cid and r.get("positive_control") for r in phase9_rows)],
@@ -241,50 +281,45 @@ def run(n_resamples: int = 2000) -> dict:
     if not vina:
         raise RuntimeError("AutoDock Vina not found — set VINA_BIN or install vina")
 
-    # Compounds from Phase 9 (all 100, preserving label + chembl_id)
     compounds = [{"ligand_id": r["ligand_id"], "positive_control": r.get("positive_control"),
                   "smiles": r.get("smiles")} for r in phase9_rows]
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     STRUCTURES_DIR.mkdir(exist_ok=True)
 
-    # Fetch + prep ensemble conformers
     new_scores: dict[str, dict[str, float | None]] = {}
     conformer_status: dict[str, str] = {}
+    conformer_centers: dict[str, list[float]] = {}
     for conf in ENSEMBLE_CONFORMERS:
         label = conf["label"]
         print(f"\nPreparing conformer {label} ({conf['pdb_id']}:{conf['chain']})...")
-        receptor = fetch_and_prep_conformer(conf)
+        receptor, center = fetch_and_prep_conformer(conf)
         if not receptor:
             conformer_status[label] = "prep_failed"
             print(f"  [skip] {label} receptor prep failed — excluded from ensemble")
             continue
         conformer_status[label] = "ok"
-        print(f"  Docking 100 compounds against {label}...")
+        conformer_centers[label] = center
+        print(f"  Docking 100 compounds against {label} (center={center})...")
         new_scores[label] = dock_compounds_against_receptor(
-            compounds, receptor, label, vina
+            compounds, receptor, label, vina, center=center
         )
 
     if not new_scores:
         return _write_blocked(phase9, conformer_status)
 
-    # Merge: best dG per compound across all conformers
     ensemble_rows = merge_ensemble(phase9_rows, new_scores)
     n_excluded = len(phase9_rows) - len(ensemble_rows)
 
-    # Phase 9 enrichment (primary only — from JSON to avoid recompute)
     phase9_bench = phase9.get("benchmark", {})
     phase9_boot = (phase9.get("bootstrap") or {}).get("bootstrap") or {}
 
-    # Ensemble enrichment
     ens_entries = _entries_from_rows(ensemble_rows, "ensemble_dG")
-    ens_primary_entries = _entries_from_rows(phase9_rows, "dG")  # same compounds, primary only
     ens_report = enrichment_report(ens_entries)
     ens_bootstrap = bootstrap_enrichment_report(ens_entries, n_resamples=n_resamples, seed=42)
 
     ranking_delta = _ranking_delta(phase9_rows, ensemble_rows)
 
-    # CI overlap check (non-overlapping CIs = meaningful change)
     def ci_overlap(a_ci: list | None, b_ci: list | None) -> bool | None:
         if not a_ci or not b_ci:
             return None
@@ -300,14 +335,15 @@ def run(n_resamples: int = 2000) -> dict:
         "phase9_structure": "7L11 chain A (primary, holo non-covalent)",
         "ensemble_conformers": [
             {"label": c["label"], "pdb_id": c["pdb_id"], "chain": c["chain"],
-             "note": c["note"], "status": conformer_status.get(c["label"], "not_run")}
+             "note": c["note"], "status": conformer_status.get(c["label"], "not_run"),
+             "box_center": conformer_centers.get(c["label"])}
             for c in ENSEMBLE_CONFORMERS
         ],
         "n_compounds": len(phase9_rows),
         "n_excluded_all_conformers_failed": n_excluded,
         "n_ensemble_docked": len(ensemble_rows),
         "new_conformers_included": list(new_scores.keys()),
-        "mpro_center": MPRO_CENTER,
+        "primary_center_7L11": MPRO_CENTER,
         "vina_seed": VINA_SEED,
         "phase9_benchmark": {
             "bedroc": phase9_bench.get("bedroc"),
@@ -396,7 +432,9 @@ def _write_md(payload: dict) -> None:
         "# Phase 10: Ensemble Docking — Mpro",
         "",
         f"Ensemble: 7L11:A (primary holo) + {', '.join(c['label'] for c in payload['ensemble_conformers'])}.",
-        f"N compounds: {payload['n_compounds']}. Excluded (all conformers failed): {payload['n_excluded_all_conformers_failed']}.",
+        f"N compounds: {payload['n_compounds']}. "
+        f"Excluded (all conformers failed): {payload['n_excluded_all_conformers_failed']}.",
+        "Box centers: per-conformer His41/Cys145 CA midpoint (crystal frames differ).",
         "",
         "## Enrichment comparison",
         "",
