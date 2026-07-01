@@ -188,8 +188,11 @@ from a homolog MSA. Without an MSA, it keeps a neutral `0.5` placeholder and log
 
 Docking:
 `docking_node` runs real Vina when Vina plus RDKit/Meeko preparation are available.
-It caches prepared ligands and writes poses under `structures/`. Without real tools,
-it creates deterministic mock docking records over the ligand library.
+It caches prepared ligands and writes poses under `structures/`. Receptor prep is
+Meeko-first with an OpenBabel fallback (`_prep_receptor`): OpenBabel produces a rigid
+receptor PDBQT for structures Meeko 0.7.1 declines (e.g. every SARS-CoV-2 Mpro chain),
+leaving the working Meeko path untouched. Without real tools, it creates deterministic
+mock docking records over the ligand library.
 
 Contact conservation:
 `conservation_contacts_node` uses real pose contacts to make conservation
@@ -261,6 +264,9 @@ with `pip install -e ../taxonagent` or from a package index.
 
 ## 12. Current Status
 
+- Scientific validation: **Phases 0–9 complete in software** (see Section 15). Phase 9
+  meets its acceptance bar: ≥20 actives, 3 targets, every benchmarkable metric with a 95%
+  CI, an executed parent-vs-active-form comparison, and a frozen benchmark artifact.
 - Real paths: TaxonAgent seam, routing, graph, report generation, ligand library,
   ranking, conservation logic, enrichment metrics, and several tool integration seams.
 - Tool-dependent real paths: RCSB/ESMFold/AlphaFold/Boltz-2, FPocket/P2Rank, Vina,
@@ -289,3 +295,40 @@ metrics:
 - Prefer real scientific tools, but label missing-tool fallbacks honestly.
 - Keep heavy model outputs as annotations until validation justifies ranking changes.
 - Preserve provenance through versions and the audit trail.
+
+## 15. Validation Results (Phases 8–9, current)
+
+The validation is deliberately built to deflate its own inflation. Three targets, every
+benchmarkable metric as median + 95% bootstrap CI. Frozen artifact:
+`outputs/phase9/locked_benchmark.json` (hash-stamped, immutable). Full narrative:
+`docs/phase9_benchmark_maturity.md`; multi-target table:
+`outputs/phase9/multitarget_ci_table.md`.
+
+- **TiLV PB1** (8PSO:B) — underpowered demonstration. 4 actives + 50 property-matched
+  decoys. A 9-ligand gate showed 3/4 controls in top-5; with matched decoys this collapsed
+  to 1/4 and bootstrap CIs are ≈ [0,1]. Reported as a demonstration, not a claim.
+- **HCV NS5B NI** (43 nucleotide/triphosphate actives) — un-benchmarkable by matched decoys
+  (the nucleotide meta-finding). 24/43 actives recover **zero** scaffold-distinct
+  property-matched decoys because triphosphates have no inactive property twins.
+  Matched-decoy validation systematically cannot assess nucleotide-analog antivirals;
+  pipelines that appear to are usually docking the parent prodrug.
+- **SARS-CoV-2 Mpro (non-covalent)** — the powered target. Real AutoDock Vina, 50
+  non-covalent COVID-Moonshot actives vs 50 experimentally measured Moonshot inactives,
+  7L11:A. BEDROC(α=20) 0.68 [0.36, 0.89], logAUC 0.20 [0.14, 0.30], ROC-AUC 0.58
+  [0.47, 0.69], EF1% 2.0 (ceiling-limited at 50/50). Benchmark **design** is
+  publication-grade (real measured inactives, binding-mode stratified, informative CIs —
+  unlike TiLV's [0,1]); the rigid-Vina docking **signal** is modest (ROC-AUC CI crosses
+  0.5) and reported as-is.
+- **Phase 9D (parent vs active-form)** — 17 parent prodrugs vs 26 curated triphosphate
+  active forms docked into NS5B 2XI3:A with experimental Mg²⁺: median ΔG difference only
+  −0.10 kcal/mol (sofosbuvir parent even out-scored its own triphosphate). Poor nucleotide
+  recovery is a genuine Vina scoring limitation, not a prodrug-input artifact.
+- **Gate** — DO NOT PROMOTE. No DL/consensus term beats the Vina baseline at non-overlapping
+  CIs (no DL rescore wired); consensus/DL stays annotation-only, ranking weights unchanged.
+
+Supporting infrastructure: covalent-warhead binding-mode stratification
+(`vta/chem/warheads.py`); Meeko-first receptor prep with OpenBabel fallback
+(`vta/nodes/docking._prep_receptor`); bootstrap + multi-draw CIs in `vta/eval/metrics.py`.
+Phase-9 drivers: `scripts/fetch_mpro_dataset.py`, `scripts/stratify_mpro_binding_mode.py`,
+`scripts/run_mpro_benchmark.py`, `scripts/run_phase9d_active_form.py`,
+`scripts/build_multitarget_summary.py`, `scripts/freeze_benchmark.py`.
