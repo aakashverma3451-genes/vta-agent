@@ -21,6 +21,15 @@ and re-run the gate on a GPU host later.
 
 Auto-detects the `gnina` binary and degrades to a labelled skip (Vina ΔG retained)
 when absent — same don't-crash discipline as structure/pockets/docking/admet.
+
+Phase 11 WI-7 (rescorer-readiness). This node populates `cnn_affinity` on existing poses
+but NEVER promotes it into the ranking on its own. Promotion is decided by the WI-3 gate
+(`scripts/phase11_baselines_gate.py` + `vta/eval/significance.paired_bootstrap_delta`): a
+rescorer is promoted only if its paired-bootstrap Δ vs Vina on BEDROC has a 95% CI strictly
+> 0 on the powered benchmark (Holm-corrected across the metric family). When GNINA is absent,
+or present but no poses are scoreable, the node records `rescore_gate = "DO NOT PROMOTE"` and
+leaves ranking untouched. GNINA 1.3 (McNutt 2025, J. Cheminform. 17:28). `boltzina_score` and
+RTMScore are documented stubs with the identical contract (annotation-only until gated).
 """
 from __future__ import annotations
 
@@ -66,8 +75,10 @@ def rescore_node(state: VTAState) -> VTAState:
     gnina = _gnina_bin()
     if not gnina:
         state["audit_trail"].append(
-            "[skip] DL-rescore: gnina not installed (Vina ΔG retained)")
+            "[skip] DL-rescore: gnina not installed (Vina ΔG retained); "
+            "gate decision: DO NOT PROMOTE (rescorer unavailable)")
         state["versions"]["rescore"] = "skipped"
+        state["rescore_gate"] = "DO NOT PROMOTE (rescorer unavailable)"
         return state
 
     rescored = 0
@@ -91,13 +102,19 @@ def rescore_node(state: VTAState) -> VTAState:
         state["versions"]["rescore"] = "GNINA (CNN)"
         best = max((r for r in rows if "cnn_affinity" in r),
                    key=lambda r: r["cnn_affinity"])
+        # cnn_affinity is populated but promotion is NOT automatic: it must pass the WI-3
+        # paired-bootstrap gate on a labelled benchmark. Ranking stays unchanged here.
+        state["rescore_gate"] = ("cnn_affinity populated; run scripts/phase11_baselines_gate.py "
+                                 "to test promotion (paired-Δ vs Vina, BEDROC, CI>0)")
         state["audit_trail"].append(
             f"DL-rescore: GNINA CNN re-scored {rescored} poses (annotation-only, "
-            f"ranking unchanged); best CNNaffinity {best['cnn_affinity']} "
+            f"ranking unchanged pending WI-3 gate); best CNNaffinity {best['cnn_affinity']} "
             f"({best.get('ligand')})")
     else:
         # gnina present but nothing scoreable (e.g. mock docking, no saved poses).
         state["audit_trail"].append(
-            "[skip] DL-rescore: gnina present but no docked poses to score")
+            "[skip] DL-rescore: gnina present but no docked poses to score; "
+            "gate decision: DO NOT PROMOTE (no scoreable poses)")
         state["versions"]["rescore"] = "skipped (no poses)"
+        state["rescore_gate"] = "DO NOT PROMOTE (no scoreable poses)"
     return state

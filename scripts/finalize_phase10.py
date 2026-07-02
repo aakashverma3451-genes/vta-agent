@@ -32,24 +32,24 @@ def _gate(p10: dict) -> str:
     ens = p10.get("ensemble_benchmark", {})
     p9  = p10.get("phase9_benchmark", {})
     delta = p10.get("delta", {})
-    overlap_bedroc = delta.get("ci_overlap_bedroc")
-    overlap_roc    = delta.get("ci_overlap_roc_auc")
+    # Phase 11 WI-3: significance from the PAIRED bootstrap Δ, not CI overlap.
+    paired = delta.get("paired_bedroc") or {}
+    sig = paired.get("significant")
     n_improved = sum(1 for d in p10.get("ranking_delta_top10_actives", []) if d.get("improved"))
 
-    if overlap_bedroc is None:
-        ci_verdict = "CI comparison unavailable (Phase 10 not yet run or blocked)."
-    elif overlap_bedroc:
+    if sig is None:
+        ci_verdict = "Paired-bootstrap comparison unavailable (Phase 10 not yet run or blocked)."
+    elif not sig:
         ci_verdict = (
-            f"Phase 10 ensemble BEDROC CI {_ci(ens.get('ci_bedroc'))} overlaps "
-            f"Phase 9 BEDROC CI {_ci(p9.get('ci_bedroc'))} — "
-            "conformational sampling does not significantly change enrichment. "
-            "Phase 9 single-structure signal is stable w.r.t. the tested ensemble."
+            f"Paired BEDROC Δ(ensemble−single) = {paired.get('median_delta')}, 95% CI "
+            f"{paired.get('ci95')} includes 0 — conformational sampling does not significantly "
+            "change enrichment; the single-structure signal is stable (paired test, not CI overlap)."
         )
     else:
+        direction = "improves" if paired.get("favours_a") else "worsens"
         ci_verdict = (
-            f"Phase 10 ensemble BEDROC CI {_ci(ens.get('ci_bedroc'))} does NOT overlap "
-            f"Phase 9 BEDROC CI {_ci(p9.get('ci_bedroc'))} — "
-            "ensemble meaningfully changes enrichment. See Phase 10 for details."
+            f"Paired BEDROC Δ(ensemble−single) = {paired.get('median_delta')}, 95% CI "
+            f"{paired.get('ci95')} excludes 0 — the ensemble significantly {direction} enrichment."
         )
 
     lines = [
@@ -89,7 +89,8 @@ def _handoff(p10: dict) -> str:
     ens = p10.get("ensemble_benchmark", {})
     p9  = p10.get("phase9_benchmark", {})
     delta = p10.get("delta", {})
-    overlap = delta.get("ci_overlap_bedroc")
+    pb = delta.get("paired_bedroc") or {}
+    pr = delta.get("paired_roc_auc") or {}
     n_improved = sum(1 for d in p10.get("ranking_delta_top10_actives", []) if d.get("improved"))
     n_conf = len(p10.get("new_conformers_included", []))
     ensemble_list = ", ".join(
@@ -116,14 +117,14 @@ def _handoff(p10: dict) -> str:
         f"N compounds: {p10.get('n_compounds')} (same Phase 9 set).",
         f"New docking runs: {n_conf} conformers × 100 compounds = {n_conf * 100} calls.",
         "",
-        "| Metric | Phase 9 (7L11:A) | Phase 10 (ensemble) | Delta | CI overlap? |",
+        "| Metric | Phase 9 (7L11:A) | Phase 10 (ensemble) | Delta | paired Δ 95% CI (sig?) |",
         "|--------|-----------------|---------------------|-------|-------------|",
         f"| BEDROC(α=20) | {p9.get('bedroc')} {_ci(p9.get('ci_bedroc'))} | "
         f"{ens.get('bedroc')} {_ci(ens.get('ci_bedroc'))} | "
-        f"{delta.get('bedroc', 0):+.4f} | {overlap} |",
+        f"{delta.get('bedroc', 0):+.4f} | {pb.get('ci95')} ({pb.get('significant')}) |",
         f"| ROC-AUC | {p9.get('roc_auc')} {_ci(p9.get('ci_roc_auc'))} | "
         f"{ens.get('roc_auc')} {_ci(ens.get('ci_roc_auc'))} | "
-        f"{delta.get('roc_auc', 0):+.4f} | {delta.get('ci_overlap_roc_auc')} |",
+        f"{delta.get('roc_auc', 0):+.4f} | {pr.get('ci95')} ({pr.get('significant')}) |",
         "",
         f"Top-10 Phase 9 actives with improved ensemble rank: {n_improved}/10.",
         "",

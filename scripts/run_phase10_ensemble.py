@@ -15,7 +15,7 @@ Design:
 - Enrichment computed with bootstrap CIs and compared to Phase 9 single-receptor.
 - Ranking delta: for each top-10 active in Phase 9, record its ensemble rank vs
   single-structure rank (positive = worsened, negative = improved).
-- If CI bands overlap: Phase 9 signal is stable w.r.t. conformational sampling.
+- Significance is a PAIRED bootstrap of Δ(ensemble−single) per compound (WI-3), not CI overlap.
 - Honest about failures: any compound that fails all 3 conformers gets dG=None and
   is excluded from enrichment (labelled skip, same policy as Phase 9).
 """
@@ -320,10 +320,14 @@ def run(n_resamples: int = 2000) -> dict:
 
     ranking_delta = _ranking_delta(phase9_rows, ensemble_rows)
 
-    def ci_overlap(a_ci: list | None, b_ci: list | None) -> bool | None:
-        if not a_ci or not b_ci:
-            return None
-        return a_ci[0] <= b_ci[1] and b_ci[0] <= a_ci[1]
+    # Phase 11 WI-3: significance by PAIRED bootstrap on the shared per-compound scores
+    # (single vs ensemble ΔG), NOT by comparing marginal CI ranges. CIs are still reported.
+    from vta.eval.significance import paired_bootstrap_delta
+    _labels = [1 if r.get("positive_control") else 0 for r in ensemble_rows]
+    _ens_s = [-float(r["ensemble_dG"]) for r in ensemble_rows]
+    _sng_s = [-float(r.get("primary_dG", r["dG"])) for r in ensemble_rows]
+    paired = {m: paired_bootstrap_delta(_ens_s, _sng_s, _labels, m, n=n_resamples, seed=42)
+              for m in ("bedroc", "roc_auc")}
 
     p9_bedroc_ci = (phase9_boot.get("bedroc") or {}).get("ci95")
     ens_bedroc_ci = (ens_bootstrap.get("bootstrap", {}).get("bedroc") or {}).get("ci95")
@@ -366,14 +370,13 @@ def run(n_resamples: int = 2000) -> dict:
                        if ens_report.get("bedroc") and phase9_bench.get("bedroc") else None),
             "roc_auc": (round(ens_report["roc_auc"] - phase9_bench["roc_auc"], 4)
                         if ens_report.get("roc_auc") and phase9_bench.get("roc_auc") else None),
-            "ci_overlap_bedroc": ci_overlap(p9_bedroc_ci, ens_bedroc_ci),
-            "ci_overlap_roc_auc": ci_overlap(p9_roc_ci, ens_roc_ci),
+            "paired_bedroc": paired["bedroc"],      # paired-bootstrap Δ(ensemble−single)
+            "paired_roc_auc": paired["roc_auc"],
         },
         "ranking_delta_top10_actives": ranking_delta,
         "ensemble_bootstrap": ens_bootstrap,
         "ensemble_rows": ensemble_rows,
-        "interpretation": _interpret(phase9_bench, ens_report, ranking_delta,
-                                     p9_bedroc_ci, ens_bedroc_ci),
+        "interpretation": _interpret(phase9_bench, ens_report, ranking_delta, paired["bedroc"]),
     }
     OUT_JSON.write_text(json.dumps(payload, indent=2))
     _write_md(payload)
@@ -381,27 +384,30 @@ def run(n_resamples: int = 2000) -> dict:
     return payload
 
 
-def _interpret(p9: dict, ens: dict, delta: list,
-               p9_ci: list | None, ens_ci: list | None) -> str:
+def _interpret(p9: dict, ens: dict, delta: list, paired_bedroc: dict) -> str:
     bedroc_delta = (ens.get("bedroc", 0) or 0) - (p9.get("bedroc", 0) or 0)
     improved_leads = sum(1 for d in delta if d.get("improved"))
-    if p9_ci and ens_ci:
-        overlap = p9_ci[0] <= ens_ci[1] and ens_ci[0] <= p9_ci[1]
-        ci_msg = (
-            "CI bands overlap — ensemble change is within noise; "
-            "Phase 9 single-structure signal is stable w.r.t. conformational sampling."
-            if overlap else
-            "CI bands do NOT overlap — ensemble meaningfully changes enrichment; "
-            "investigate which conformer drives the change."
-        )
+    # Phase 11 WI-3: verdict from the PAIRED bootstrap Δ (ensemble − single), not CI overlap.
+    sig = paired_bedroc.get("significant")
+    if sig is None:
+        msg = "paired test unavailable."
+    elif sig and paired_bedroc.get("favours_a"):
+        msg = (f"paired BEDROC Δ={paired_bedroc['median_delta']} (95% CI {paired_bedroc['ci95']}) "
+               "is significantly > 0 — the ensemble improves enrichment.")
+    elif sig:
+        msg = (f"paired BEDROC Δ={paired_bedroc['median_delta']} (95% CI {paired_bedroc['ci95']}) "
+               "is significantly < 0 — the ensemble worsens enrichment.")
     else:
-        ci_msg = "CI comparison unavailable."
+        msg = (f"paired BEDROC Δ={paired_bedroc['median_delta']} (95% CI {paired_bedroc['ci95']}) "
+               "includes 0 — no significant ensemble effect; single-structure signal is stable "
+               "under conformational sampling (paired test, not CI overlap).")
     return (
         f"Ensemble (3 conformers) BEDROC {ens.get('bedroc')} vs Phase 9 single-structure "
         f"{p9.get('bedroc')} (delta {round(bedroc_delta, 4):+.4f}). "
-        f"{ci_msg} "
+        f"{msg} "
         f"Top-10 Phase 9 actives: {improved_leads}/10 improved rank in ensemble. "
-        "Gate unchanged: DO NOT PROMOTE without leakage-controlled DL improvement at non-overlapping CIs."
+        "Gate unchanged: DO NOT PROMOTE without a leakage-controlled DL improvement whose "
+        "paired-bootstrap Δ vs Vina has a 95% CI strictly > 0."
     )
 
 
@@ -438,14 +444,16 @@ def _write_md(payload: dict) -> None:
         "",
         "## Enrichment comparison",
         "",
-        "| Metric | Phase 9 (single) | Phase 10 (ensemble) | Delta | CI overlap? |",
+        "| Metric | Phase 9 (single) | Phase 10 (ensemble) | Delta | paired Δ 95% CI (sig?) |",
         "|--------|-----------------|---------------------|-------|-------------|",
         f"| BEDROC(α=20) | {p9.get('bedroc')} {_ci(p9.get('ci_bedroc'))} | "
         f"{ens.get('bedroc')} {_ci(ens.get('ci_bedroc'))} | "
-        f"{delta.get('bedroc'):+.4f} | {delta.get('ci_overlap_bedroc')} |",
+        f"{delta.get('bedroc'):+.4f} | {(delta.get('paired_bedroc') or {}).get('ci95')} "
+        f"({(delta.get('paired_bedroc') or {}).get('significant')}) |",
         f"| ROC-AUC | {p9.get('roc_auc')} {_ci(p9.get('ci_roc_auc'))} | "
         f"{ens.get('roc_auc')} {_ci(ens.get('ci_roc_auc'))} | "
-        f"{delta.get('roc_auc'):+.4f} | {delta.get('ci_overlap_roc_auc')} |",
+        f"{delta.get('roc_auc'):+.4f} | {(delta.get('paired_roc_auc') or {}).get('ci95')} "
+        f"({(delta.get('paired_roc_auc') or {}).get('significant')}) |",
         f"| logAUC | {p9.get('log_auc')} | {ens.get('log_auc')} | "
         f"{round((ens.get('log_auc') or 0) - (p9.get('log_auc') or 0), 4):+.4f} | — |",
         f"| EF1% | {p9.get('EF1%')} | {ens.get('EF1%')} | "
@@ -486,7 +494,8 @@ def main() -> None:
     print(f"\nPhase 9  BEDROC={p9['bedroc']} ROC-AUC={p9['roc_auc']}")
     print(f"Ensemble BEDROC={ens['bedroc']} ROC-AUC={ens['roc_auc']}")
     print(f"Delta    BEDROC={d['bedroc']:+.4f} ROC-AUC={d['roc_auc']:+.4f}")
-    print(f"CI overlap BEDROC={d['ci_overlap_bedroc']} ROC-AUC={d['ci_overlap_roc_auc']}")
+    print(f"paired-Δ BEDROC CI={(d.get('paired_bedroc') or {}).get('ci95')} "
+          f"sig={(d.get('paired_bedroc') or {}).get('significant')}")
     print(f"Top-10 actives improved: "
           f"{sum(1 for x in out['ranking_delta_top10_actives'] if x.get('improved'))}/10")
     print(OUT_JSON)

@@ -15,14 +15,14 @@ Ensemble: 7L11:A (primary holo) + 6Y2E_apo (6Y2E:A), 7K3T_holo (7K3T:A).
 N compounds: 100 (same Phase 9 set).
 New docking runs: 2 conformers × 100 compounds = 200 calls.
 
-| Metric | Phase 9 (7L11:A) | Phase 10 (ensemble) | Delta | CI overlap? |
+| Metric | Phase 9 (7L11:A) | Phase 10 (ensemble) | Delta | paired Δ 95% CI (sig?) |
 |--------|-----------------|---------------------|-------|-------------|
-| BEDROC(α=20) | 0.6767 [0.357, 0.893] | 0.7848 [0.461, 0.932] | +0.1081 | True |
-| ROC-AUC | 0.5796 [0.467, 0.690] | 0.4686 [0.347, 0.578] | -0.1110 | True |
+| BEDROC(α=20) | 0.6767 [0.357, 0.893] | 0.7848 [0.461, 0.932] | +0.1081 | [-0.1678, 0.3751] (False) |
+| ROC-AUC | 0.5796 [0.467, 0.690] | 0.4686 [0.347, 0.578] | -0.1110 | [-0.2095, -0.015] (True) |
 
 Top-10 Phase 9 actives with improved ensemble rank: 3/10.
 
-**Interpretation:** Ensemble (3 conformers) BEDROC 0.7848 vs Phase 9 single-structure 0.6767 (delta +0.1081). CI bands overlap — ensemble change is within noise; Phase 9 single-structure signal is stable w.r.t. conformational sampling. Top-10 Phase 9 actives: 3/10 improved rank in ensemble. Gate unchanged: DO NOT PROMOTE without leakage-controlled DL improvement at non-overlapping CIs.
+**Interpretation:** Ensemble (3 conformers) BEDROC 0.7848 vs Phase 9 single-structure 0.6767 (delta +0.1081). paired BEDROC Δ=0.0908 (95% CI [-0.1678, 0.3751]) includes 0 — no significant ensemble effect; single-structure signal is stable under conformational sampling (paired test, not CI overlap). Top-10 Phase 9 actives: 3/10 improved rank in ensemble. Gate unchanged: DO NOT PROMOTE without a leakage-controlled DL improvement whose paired-bootstrap Δ vs Vina has a 95% CI strictly > 0.
 
 ## Gate (unchanged)
 

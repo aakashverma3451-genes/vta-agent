@@ -205,3 +205,31 @@ def bootstrap_enrichment_report(entries: list[dict], *,
         "skipped": skipped,
         "seed": seed,
     }
+
+
+# ── score-based metric dispatch (Phase 11: baselines + paired bootstrap) ───────
+# "score" convention: higher = more active-like (Vina uses -dG). Given aligned
+# (scores, labels), rank best-first and compute one metric. Shared by baselines.py
+# and significance.py so every method is scored on the identical ranking convention.
+METRIC_NAMES = ("bedroc", "logauc", "roc_auc", "ef1")
+
+
+def score_metric(scores: list[float], labels: list[int], metric: str,
+                 alpha: float = 20.0) -> float:
+    """Compute one enrichment metric from aligned (scores, labels). Higher score = better.
+
+    metric in METRIC_NAMES. All returned metrics are oriented so higher = better ranking.
+    """
+    if len(scores) != len(labels):
+        raise ValueError("scores and labels must be the same length")
+    if metric == "roc_auc":
+        return roc_auc(scores, labels)
+    order = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)
+    ordered = [labels[i] for i in order]
+    if metric == "bedroc":
+        return bedroc(ordered, alpha)
+    if metric == "logauc":
+        return log_auc(ordered)
+    if metric == "ef1":
+        return enrichment_factor(ordered, 0.01)
+    raise ValueError(f"unknown metric: {metric!r} (expected one of {METRIC_NAMES})")

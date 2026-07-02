@@ -263,27 +263,29 @@ def test_dock_compounds_uses_cached_pdbqt(tmp_path, monkeypatch):
     assert called_with[0][0] == "rec.pdbqt"
 
 
-# ── ci_overlap logic ──────────────────────────────────────────────────────────
-def test_interpret_ci_overlap_message():
-    # Two overlapping CIs should mention "stable"
+# ── paired-bootstrap significance (WI-3: replaces CI-overlap logic) ────────────
+def test_interpret_paired_not_significant_message():
+    # Paired Δ CI includes 0 → single-structure signal is "stable" (no significant effect).
     msg = p10._interpret(
         {"bedroc": 0.68, "roc_auc": 0.58},
         {"bedroc": 0.70, "roc_auc": 0.60},
         [],
-        [0.36, 0.89], [0.40, 0.92],
+        {"median_delta": 0.02, "ci95": [-0.17, 0.38], "significant": False, "favours_a": False},
     )
     assert "stable" in msg.lower()
+    assert "includes 0" in msg
 
 
-def test_interpret_ci_non_overlap_message():
-    # Non-overlapping: Phase 9 CI [0.50, 0.60], ensemble CI [0.70, 0.85]
+def test_interpret_paired_significant_message():
+    # Paired Δ CI strictly > 0 and favours ensemble → "improves"; never says "overlap".
     msg = p10._interpret(
         {"bedroc": 0.55, "roc_auc": 0.55},
         {"bedroc": 0.75, "roc_auc": 0.75},
         [],
-        [0.50, 0.60], [0.70, 0.85],
+        {"median_delta": 0.20, "ci95": [0.05, 0.34], "significant": True, "favours_a": True},
     )
-    assert "not overlap" in msg.lower()
+    assert "improves" in msg.lower()
+    assert "overlap" not in msg.lower().replace("not ci overlap", "").replace("paired test, not ci overlap", "")
 
 
 # ── integration: run() with everything mocked ────────────────────────────────

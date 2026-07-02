@@ -4,32 +4,35 @@ Plan Task 2.3 (the ranking half). This is NOT mocked: it encodes the scientific
 judgment (which criteria matter and how much), so it is built for real now and is
 unchanged when real Vina replaces the mock in Phase 2.
 
-Composite score per ligand-pocket record, each criterion min-max normalised to
-[0,1] where 1 = best, then weighted:
+Ranking is by **AutoDock Vina affinity (ΔG)** — the primary and only ranking term.
+Ligand efficiency (LE) and conservation are computed and REPORTED per compound (on every
+record) but are NOT in the ranking.
 
-    score = 0.55 * le'        (ligand efficiency — binding PER HEAVY ATOM; leads)
-          + 0.35 * dG'        (binding affinity — more negative is better)
-          + 0.10 * conservation (target conservation — higher is better)
+Why this changed — a GATED decision, not arbitrary (Phase 11 WI-6):
+Earlier versions led with LE (0.55 LE / 0.35 ΔG / 0.10 conservation), justified by a
+9-ligand control-recovery check that appeared to fail under ΔG-led weights. Phase 8 showed
+that check was INFLATED — control recovery collapsed 3/4 → 1/4 once property-matched decoys
+were used. The Phase 11 gate (`scripts/phase11_baselines_gate.py`) then tested the LE-led
+composite against ΔG-only on the powered Mpro benchmark with a PAIRED bootstrap (not CI
+overlap): the composite did NOT beat ΔG-only on BEDROC (median Δ = −0.27, 95% CI
+[−0.58, +0.06]). Per the WI-6 rule, LE is therefore demoted to a reported secondary
+annotation and ΔG becomes the primary ranking term. This is consistent with Kenny 2019
+(J. Cheminform. 11:8): LE is size- and unit-dependent and has no benchmark basis for leading
+a ranking.
 
-Why LE leads (validated, not arbitrary): raw Vina ΔG scales with molecular size, so
-ΔG-led scoring rewards big greasy non-drugs. The validation gate (scripts/
-validate_controls.py) confirmed this — under ΔG-led weights the known RdRp-inhibitor
-controls ranked LAST. Leading with ligand efficiency removes the size bias; the gate
-then passes (controls rank top). The minimal LE weight that passes was ~0.55 (a finer
-sweep over the real docking data), so we use that rather than pure LE — raw affinity
-still carries real weight.
-
-The RMSD/pose term was dropped: for the single best Vina pose it is 0 by definition,
-a dead weight. Normalisation is min/max once per criterion, applied inline (no
-float-keyed dict). `conservation` is already 0–1 and used directly.
+Normalisation is min/max once per criterion, applied inline; `le` and `conservation` remain
+on each record as reported annotations (weight 0 in the score).
 """
 from __future__ import annotations
 
 from vta.provenance import score_provenance
 from vta.state import VTAState
 
-# LE-led to remove docking size bias — see module docstring / validation gate.
-WEIGHTS = {"le": 0.55, "dG": 0.35, "conservation": 0.10}
+# ΔG-primary after the Phase 11 WI-6 gate: on the powered Mpro benchmark the LE-led composite
+# did not beat ΔG-only (paired-bootstrap Δ BEDROC 95% CI [−0.58, +0.06]). LE and conservation
+# are reported per-compound annotations (weight 0), not ranking terms. Change is gated, with
+# the supporting Δ-CI logged in outputs/phase11/ (do not revert without a new gate result).
+WEIGHTS = {"le": 0.0, "dG": 1.0, "conservation": 0.0}
 TOP_N = 20
 
 

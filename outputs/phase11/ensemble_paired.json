@@ -1,0 +1,97 @@
+{
+  "phase": "11 WI-3b \u2014 ensemble vs single, paired bootstrap",
+  "supersedes": "the CI-overlap significance statement in outputs/phase10/",
+  "n_compounds": 100,
+  "n_actives": 50,
+  "primary_metric": "bedroc",
+  "per_metric_paired_delta": {
+    "bedroc": {
+      "metric": "bedroc",
+      "n_effective": 10000,
+      "median_delta": 0.0881,
+      "ci95": [
+        -0.172,
+        0.3708
+      ],
+      "p_gt0": 0.7666,
+      "median_a": 0.782,
+      "median_b": 0.6809,
+      "significant": false,
+      "favours_a": false,
+      "seed": 41,
+      "n_resamples": 10000
+    },
+    "logauc": {
+      "metric": "logauc",
+      "n_effective": 10000,
+      "median_delta": -0.0035,
+      "ci95": [
+        -0.0944,
+        0.0852
+      ],
+      "p_gt0": 0.4661,
+      "median_a": 0.2036,
+      "median_b": 0.2055,
+      "significant": false,
+      "favours_a": false,
+      "seed": 41,
+      "n_resamples": 10000
+    },
+    "roc_auc": {
+      "metric": "roc_auc",
+      "n_effective": 10000,
+      "median_delta": -0.1112,
+      "ci95": [
+        -0.2118,
+        -0.0136
+      ],
+      "p_gt0": 0.0135,
+      "median_a": 0.4679,
+      "median_b": 0.5803,
+      "significant": true,
+      "favours_a": false,
+      "seed": 41,
+      "n_resamples": 10000
+    },
+    "ef1": {
+      "metric": "ef1",
+      "n_effective": 10000,
+      "median_delta": 0.0,
+      "ci95": [
+        0.0,
+        2.1739
+      ],
+      "p_gt0": 0.0891,
+      "median_a": 2.0,
+      "median_b": 1.9608,
+      "significant": false,
+      "favours_a": false,
+      "seed": 41,
+      "n_resamples": 10000
+    }
+  },
+  "holm_bonferroni": {
+    "bedroc": {
+      "p": 0.23340000000000005,
+      "holm_threshold": 0.0125,
+      "reject": false
+    },
+    "logauc": {
+      "p": 0.5339,
+      "holm_threshold": 0.01667,
+      "reject": false
+    },
+    "ef1": {
+      "p": 0.9109,
+      "holm_threshold": 0.025,
+      "reject": false
+    },
+    "roc_auc": {
+      "p": 0.9865,
+      "holm_threshold": 0.05,
+      "reject": false
+    }
+  },
+  "significant_primary": false,
+  "verdict": "No significant ensemble effect on bedroc: paired \u0394=0.0881, 95% CI [-0.172, 0.3708] includes 0 (P(\u0394>0)=0.7666). Single-structure signal is stable under conformational sampling \u2014 established by a PAIRED test, not CI overlap."
+}
