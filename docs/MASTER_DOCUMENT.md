@@ -332,3 +332,18 @@ Supporting infrastructure: covalent-warhead binding-mode stratification
 Phase-9 drivers: `scripts/fetch_mpro_dataset.py`, `scripts/stratify_mpro_binding_mode.py`,
 `scripts/run_mpro_benchmark.py`, `scripts/run_phase9d_active_form.py`,
 `scripts/build_multitarget_summary.py`, `scripts/freeze_benchmark.py`.
+
+### Phase 11 — validity hardening (the peer-review layer)
+
+The most consequential result: **on the powered Mpro benchmark, AutoDock Vina does NOT beat a
+trivial 2D-similarity baseline** (2D-sim BEDROC 0.92 vs Vina 0.68; paired-bootstrap Δ 95% CI
+[−0.57, +0.06]) — so structure-based enrichment is *not demonstrated* (Wallach & Heifets 2018),
+reported honestly. Diagnostics show this is a ranking/benchmark limit, not a protocol failure:
+Vina redocks the native Mpro ligand to 1.65 Å (pose-reliable), and the 9D parent-vs-active-form
+ΔG gap is only −0.10 kcal/mol. Method upgrades: trivial baselines (`vta/eval/baselines.py`),
+paired-bootstrap significance replacing all CI-overlap logic (`vta/eval/significance.py`), a
+gated **LE→ΔG ranking demotion** (`vta/nodes/rank.py` now ΔG-primary), and a GNINA rescorer
+that no-ops cleanly to DO-NOT-PROMOTE when absent (`vta/nodes/rescore.py`). The nucleotide
+meta-finding was reframed from "impossible" to recipe-specific. Extended docks (Mpro 31:1;
+HCV-NI property-unmatched decoys) close the remaining reviewer objections. A slide-ready
+narrative of all of this lives in `docs/VTA_AGENT_DECK.md`.
