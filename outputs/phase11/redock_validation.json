@@ -1,0 +1,72 @@
+{
+  "phase": "11 WI-2 \u2014 redocking / pose reproduction",
+  "rmsd_method": "RDKit GetBestRMS (symmetry-corrected, heavy-atom); spyrmsd not installed",
+  "rmsd_flag_threshold_A": 2.0,
+  "results": [
+    {
+      "target": "Mpro_7L11",
+      "pdb": "7L11",
+      "receptor_chain": "A",
+      "ligand": "XF1",
+      "ligand_chain": "A",
+      "box_center": [
+        -21.815,
+        -4.216,
+        -27.984
+      ],
+      "receptor_prep": "openbabel_fallback",
+      "redock_dG": -9.317,
+      "rmsd": 1.654,
+      "status": "ok",
+      "pose_reliable": true,
+      "flag": "pose-reliable"
+    },
+    {
+      "target": "HCV_NS5B_2XI3",
+      "pdb": "2XI3",
+      "receptor_chain": "A",
+      "ligand": "GTP",
+      "ligand_chain": "A",
+      "box_center": [
+        12.889,
+        -2.117,
+        17.818
+      ],
+      "receptor_prep": "openbabel_fallback",
+      "redock_dG": -8.5,
+      "rmsd": null,
+      "status": "RMSD computation failed",
+      "pose_reliable": null,
+      "flag": null
+    },
+    {
+      "target": "TiLV_8PSO",
+      "status": "crystal ligand bond-order assignment failed",
+      "rmsd": null,
+      "pose_reliable": null
+    },
+    {
+      "target": "Mpro_6Y2E",
+      "pdb": "6Y2E",
+      "status": "N/A (apo)",
+      "note": "apo Mpro \u2014 no co-crystal ligand",
+      "rmsd": null,
+      "pose_reliable": null
+    },
+    {
+      "target": "Mpro_7K3T",
+      "pdb": "7K3T",
+      "status": "N/A (apo)",
+      "note": "chain A has no organic co-crystal ligand (Zn only)",
+      "rmsd": null,
+      "pose_reliable": null
+    }
+  ],
+  "interpretation": "The powered-benchmark structure Mpro 7L11 redocks its native non-covalent ligand XF1 to 1.654 A (< 2.0 A) \u2014 the production Vina/Meeko+OpenBabel protocol reproduces the crystallographic pose, so the WI-1 result (Vina not beating 2D-similarity) is NOT a gross pose-search failure; it is a ranking/benchmark limitation. RMSD for the triphosphate ligands (2XI3/GTP, 8PSO/CTP) was NOT computed: RDKit bond-order assignment fails on the triphosphate (phosphate valence) and spyrmsd is not installed \u2014 a TOOLING limitation on those two ligands, not evidence of an unreliable pose. 6Y2E and 7K3T(chain A) are apo.",
+  "summary": {
+    "redocked_ok": 1,
+    "pose_reliable": 1,
+    "rmsd_uncomputed_triphosphate": 2,
+    "apo_na": 2
+  }
+}

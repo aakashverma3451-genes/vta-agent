@@ -24,7 +24,16 @@ move to DONE/HANDOFF when finished; commit small on your branch.
 
 ---
 
+## ACTIVE WORK (continued)
+
+- **session-a (fable)** — 2026-06-30 — **Phase 11 WI-2 redocking validation.** LOCKED:
+  `scripts/phase11_redock.py`, `tests/test_phase11_redock.py`, `outputs/phase11/redock_*`.
+  Redocks native co-crystal ligands (7L11/XF1, 2XI3/GTP, 8PSO/CTP) with the production
+  Vina protocol; symmetry-corrected heavy-atom RMSD via RDKit GetBestRMS (spyrmsd absent);
+  6Y2E + 7K3T flagged apo/N-A. Diagnoses the WI-1 finding (does Vina reproduce known poses?).
+
 ## DONE / HANDOFF
+- Phase 11 WI-2 redocking (fable) — Mpro 7L11/XF1 redocks to 1.654 Å (pose-reliable); triphosphate GTP/CTP RMSD uncomputed (RDKit phosphate valence; spyrmsd absent) — labelled tooling limit; 6Y2E/7K3T apo N/A. 231 tests green.
 - Phase 11 Tier-1 (fable session) — WI-1 baselines, WI-3 paired bootstrap + CI-overlap
   purge (incl. Phase-10 scripts), WI-6 LE-demotion (APPLIED: ΔG primary), WI-7 GNINA
   no-op. 228 tests green. DEFERRED: WI-2/4/5 (compute-heavy / DeepCoy absent).
