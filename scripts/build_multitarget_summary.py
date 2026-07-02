@@ -68,9 +68,10 @@ def build_table() -> str:
         zero = sum(1 for v in hcv_p["per_active_counts"].values() if v == 0)
         lines.append(
             f"| HCV NS5B NI | catalytic active site (triphosphate) | {hcv_p['n_actives']} | "
-            f"property-matched decoys IMPOSSIBLE ({zero}/{hcv_p['n_actives']} actives "
-            f"recovered 0 decoys; {hcv_q['decoys_per_active_mean']}/active) | n/a | n/a | n/a "
-            f"| n/a | **un-benchmarkable** (meta-finding) |")
+            f"purchasable-library scaffold-distinct matched decoys fail "
+            f"({zero}/{hcv_p['n_actives']} actives recovered 0; {hcv_q['decoys_per_active_mean']}"
+            f"/active) | n/a | n/a | n/a | n/a | not benchmarkable with THIS decoy recipe "
+            f"(property-unmatched/generative untested) |")
     else:
         lines.append("| HCV NS5B NI | catalytic active site | — | — | — | — | — | — | artifact missing |")
 
@@ -130,7 +131,9 @@ def build_gate() -> str:
     else:
         lines += [
             "- A powered Mpro enrichment result exists, but promotion requires a DL/consensus",
-            "  signal that beats the Vina baseline with NON-OVERLAPPING CIs.",
+            "  signal that beats the Vina baseline by a PAIRED-bootstrap Δ (BEDROC) whose 95% CI",
+            "  is strictly > 0 (Holm-corrected across the metric family) — NOT a CI-overlap test",
+            "  (Phase 11 WI-3).",
             "- `consensus_node` reads `cnn_affinity`/`boltzina_score`, which are not populated",
             "  (no DL rescore is wired), so no DL term can be evaluated against the baseline.",
         ]

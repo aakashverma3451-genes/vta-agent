@@ -187,14 +187,19 @@ the powered enrichment number to a drug-like target with real measured inactives
 
 ### Meta-finding (first-class result): matched-decoy validation cannot assess nucleotide-analog antivirals
 
-Property-matched-decoy validation (DUD-E / DEKOIS style) **systematically cannot assess
-nucleotide-analog antivirals.** Their mechanistically-active species are nucleoside
-**triphosphates**, whose physicochemistry (formal charge near the phosphates, logP ≈ −2,
-6–8 H-bond donors, 9–16 acceptors) has no scaffold-distinct, property-matched neighbours in
-chemical databases. The evidence is direct: for the 43 HCV NS5B NI active-site actives,
-**24/43 recovered zero** matched decoys and the whole set averaged only 3.09 decoys/active
-against a 30/active publication threshold — not a fetch failure, a structural property of
-chemical space (`outputs/phase9/hcv_ns5b_ni_matching_quality.json`).
+Matched-decoy validation **with a purchasable-library, scaffold-distinct, property-matched
+decoy recipe (DUD-E / DEKOIS style) fails for nucleotide-analog antivirals.** Their
+mechanistically-active species are nucleoside **triphosphates**, whose physicochemistry
+(formal charge near the phosphates, logP ≈ −2, 6–8 H-bond donors, 9–16 acceptors) has almost
+no scaffold-distinct, property-matched neighbours reachable by that recipe. The evidence is
+direct: under this recipe, for the 43 HCV NS5B NI active-site actives **24/43 recovered zero**
+matched decoys and the whole set averaged only 3.09 decoys/active against a 30/active
+threshold (`outputs/phase9/hcv_ns5b_ni_matching_quality.json`) — a property of the recipe ×
+chemical space, not a fetch failure. This is tied to the recipe, not asserted as impossible in
+general: **property-unmatched / charge-extrema (DUDE-Z), generative (DeepCoy), or curated real
+inactive nucleotide decoys are the untested alternatives** (WI-4/WI-5). Whether any of those
+yields above-chance enrichment on this class is an open, honest question pending an extended
+NS5B dock; DeepCoy is not installed in this environment.
 
 The corollary is a concrete warning about the field: a pipeline that appears to "validate"
 a nucleotide antiviral by retrospective enrichment is almost always **docking the parent

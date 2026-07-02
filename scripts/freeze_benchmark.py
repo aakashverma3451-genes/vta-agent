@@ -75,10 +75,11 @@ def build() -> dict:
         zero = sum(1 for v in hcv_p["per_active_counts"].values() if v == 0)
         targets.append({
             "target": "HCV NS5B NI (triphosphate)", "structure": "n/a",
-            "control_set": f"matched decoys IMPOSSIBLE ({zero}/{hcv_p['n_actives']} actives "
-                           f"recovered 0 decoys)",
+            "control_set": f"purchasable-library scaffold-distinct matched-decoy recipe fails "
+                           f"({zero}/{hcv_p['n_actives']} actives recovered 0 decoys)",
             "metrics_ci": None,
-            "grade": "un-benchmarkable (nucleotide meta-finding)",
+            "grade": "not benchmarkable with this decoy recipe (property-unmatched/generative "
+                     "decoys or real inactive nucleotides untested — nucleotide meta-finding)",
         })
     if mpro and mpro.get("benchmark"):
         targets.append(_mpro_target(mpro))
@@ -114,7 +115,9 @@ def build() -> dict:
         "caveats": [
             "Mpro benchmark design is publication-grade; rigid-Vina docking signal is modest "
             "(ROC-AUC CI crosses 0.5) and reported as-is.",
-            "HCV NS5B NI is un-benchmarkable by matched decoys (meta-finding).",
+            "HCV NS5B NI is not benchmarkable with a purchasable-library scaffold-distinct "
+            "matched-decoy recipe (3.09 decoys/active); property-unmatched/generative decoys "
+            "or real inactive nucleotides are the untested alternative (meta-finding).",
             "TiLV PB1 is an underpowered demonstration.",
             "No ranking term promoted.",
         ],

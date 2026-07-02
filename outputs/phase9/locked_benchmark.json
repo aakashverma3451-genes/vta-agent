@@ -1,6 +1,6 @@
 {
   "artifact": "VTA-Agent frozen validation benchmark (Phase 9E)",
-  "frozen_at": "2026-06-30",
+  "frozen_at": "2026-07-02",
   "policy": "Immutable: regenerate a NEW dated artifact rather than editing this one.",
   "targets": [
     {
@@ -42,9 +42,9 @@
     {
       "target": "HCV NS5B NI (triphosphate)",
       "structure": "n/a",
-      "control_set": "matched decoys IMPOSSIBLE (24/43 actives recovered 0 decoys)",
+      "control_set": "purchasable-library scaffold-distinct matched-decoy recipe fails (24/43 actives recovered 0 decoys)",
       "metrics_ci": null,
-      "grade": "un-benchmarkable (nucleotide meta-finding)"
+      "grade": "not benchmarkable with this decoy recipe (property-unmatched/generative decoys or real inactive nucleotides untested \u2014 nucleotide meta-finding)"
     },
     {
       "target": "SARS-CoV-2 Mpro (non-covalent)",
@@ -240,9 +240,9 @@
   },
   "caveats": [
     "Mpro benchmark design is publication-grade; rigid-Vina docking signal is modest (ROC-AUC CI crosses 0.5) and reported as-is.",
-    "HCV NS5B NI is un-benchmarkable by matched decoys (meta-finding).",
+    "HCV NS5B NI is not benchmarkable with a purchasable-library scaffold-distinct matched-decoy recipe (3.09 decoys/active); property-unmatched/generative decoys or real inactive nucleotides are the untested alternative (meta-finding).",
     "TiLV PB1 is an underpowered demonstration.",
     "No ranking term promoted."
   ],
-  "content_hash": "c9e94855f28428b9"
+  "content_hash": "fdac0664fe0cea8f"
 }
