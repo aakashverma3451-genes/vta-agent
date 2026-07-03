@@ -5,6 +5,7 @@ import html
 import os
 from typing import Any
 
+from vta.report_envelope import build_envelope
 from vta.report_extra import footer_provenance, scientific_status
 from vta.state import VTAState
 
@@ -50,6 +51,16 @@ pre { font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace; white-space:pr
 .foot { color:var(--mute); font-size:12px; margin-top:24px; border-top:1px solid var(--line);
         padding-top:12px; }
 .empty { color:var(--mute); font-style:italic; }
+.envelope { border:2px solid var(--amber); background:#fffdf5; }
+.envelope h3 { margin:0 0 6px; font-size:15px; color:var(--ink); }
+.envelope .disc { font-weight:600; color:var(--ink); margin:0 0 10px; }
+.envelope .pin { color:var(--mute); font-size:12px; margin:0 0 10px;
+                 font-variant-numeric:tabular-nums; }
+.envelope .verdict-no { color:var(--red); font-weight:600; }
+.envelope .verdict-yes { color:var(--green); font-weight:600; }
+.envelope .ood { color:var(--red); font-weight:600; }
+.envelope ul { margin:8px 0 0; padding-left:18px; }
+.envelope li { color:var(--mute); font-size:13px; margin:3px 0; }
 """
 
 
@@ -160,20 +171,22 @@ def _leads(state: VTAState) -> str:
             f'<td class="num">{bar}</td>{chem_cells}{admet_cells}</tr>'
         )
     notes = [
-        '<p class="note"><b>Ranking:</b> leads are scored by <b>ligand efficiency</b> '
-        '(binding energy per heavy atom), not raw ΔG. A compact, efficient binder can '
-        'therefore outrank a larger molecule with a stronger absolute ΔG — and large '
-        'prodrugs (whose active metabolite is smaller) rank conservatively. This is the '
-        'standard medicinal-chemistry correction for docking\'s size bias.</p>'
+        '<p class="note"><b>Ranking:</b> leads are ranked by <b>AutoDock Vina affinity '
+        '(ΔG)</b> — the primary and only ranking term. Ligand efficiency (LE) and '
+        'conservation are shown per compound but carry <b>weight 0</b>: LE was demoted to a '
+        'reported annotation by the Phase 11 WI-6 paired-test gate (the LE-led composite did '
+        'not beat ΔG-only on the powered Mpro benchmark; Kenny 2019). See the honesty '
+        'envelope above for the benchmark this ranking rests on.</p>'
     ]
     if all((r.get("conservation") == 0.5) for r in leads):
         notes.append('<p class="note"><b>Conservation:</b> shown as a 0.5 placeholder — '
-                     'no homolog MSA was available, so the real JSD score (a 10% term in '
-                     'the score) fell back to neutral for this run.</p>')
+                     'no homolog MSA was available, so the real JSD score fell back to '
+                     'neutral for this run. Annotation only (weight 0 in the ranking).</p>')
     else:
         notes.append('<p class="note"><b>Conservation:</b> real per-pocket Jensen–Shannon '
                      'divergence vs background (Capra &amp; Singh 2007) over a homolog MSA; '
-                     'higher = more evolutionarily conserved (a 10% term in the score).</p>')
+                     'higher = more evolutionarily conserved. Annotation only (weight 0 in '
+                     'the ranking).</p>')
     if has_admet:
         notes.append('<p class="note"><b>ADMET</b> (ADMET-AI): hERG = cardiotoxicity '
                      'probability (lower better; red = >0.5 risk), oral = predicted oral '
@@ -265,6 +278,75 @@ def _footer(state: VTAState) -> str:
             f'{" · ".join(parts)}</p>{footer_provenance(state, _esc)}')
 
 
+def _envelope(state: VTAState) -> str:
+    """The non-removable honesty envelope (D0.5), rendered as the first card of every report.
+
+    Always emitted — deferred, empty, or full run — so no output shows a ranking without its
+    disclaimer, pinned benchmark, trivial-baseline verdict, pose reliability, and caveats.
+    """
+    env = state.get("honesty_envelope") or build_envelope(state)
+    pin = env.get("benchmark_pin") or {}
+    if pin.get("available"):
+        pin_line = (f'benchmark: <b>{_esc(pin.get("artifact"))}</b> · frozen '
+                    f'{_esc(pin.get("frozen_at"))} · hash {_esc(pin.get("content_hash"))} · '
+                    f'gate: {_esc(pin.get("gate_decision"))}')
+    else:
+        pin_line = ('benchmark: <span class="ood">no pinned validation basis — '
+                    'ranking is exploratory</span>')
+
+    basis_rows = []
+    for b in env.get("ranking_basis") or []:
+        tb = b.get("trivial_baseline") or {}
+        pr = b.get("pose_reliability") or {}
+        beats = tb.get("beats_trivial_2d_baseline")
+        if tb.get("available") and beats is not None:
+            vcls = "verdict-yes" if beats else "verdict-no"
+            vtxt = "beats 2D-sim" if beats else "does NOT beat 2D-sim"
+            verdict = f'<span class="{vcls}">{vtxt}</span>'
+        else:
+            verdict = '<span class="mute">untested</span>'
+        mci = b.get("metrics_ci") or {}
+        roc = (mci.get("ROC_AUC") or {})
+        roc_txt = (f'{_esc(roc.get("median"))} {_esc(roc.get("ci95"))}'
+                   if roc else "—")
+        basis_rows.append(
+            f'<tr><td>{_esc(b.get("run_protein"))}</td>'
+            f'<td>{_esc(b.get("benchmark_target"))}</td>'
+            f'<td>{_esc(b.get("grade"))}</td>'
+            f'<td class="num">{roc_txt}</td>'
+            f'<td>{verdict}</td>'
+            f'<td>{_esc(pr.get("status"))}</td></tr>'
+        )
+    basis_table = ""
+    if basis_rows:
+        basis_table = (
+            '<table><tr><th>Run target</th><th>Benchmark</th><th>Grade</th>'
+            '<th class="num">ROC-AUC (95% CI)</th><th>Docking vs trivial baseline</th>'
+            f'<th>Pose</th></tr>{"".join(basis_rows)}</table>')
+
+    ood = env.get("out_of_validated_domain") or []
+    ood_html = ""
+    if ood:
+        ood_html = (f'<p class="ood">⚠ Out-of-validated-domain: {_esc(", ".join(ood))} — '
+                    'no frozen benchmark covers this target; its ranking is exploratory and '
+                    'is NOT backed by a validation grade.</p>')
+
+    caveats = env.get("scoring_caveats") or []
+    caveats_html = ""
+    if caveats:
+        items = "".join(f"<li>{_esc(c)}</li>" for c in caveats)
+        caveats_html = f'<p class="note"><b>Scoring caveats:</b></p><ul>{items}</ul>'
+
+    return (
+        '<div class="card envelope"><h3>Honesty envelope — read before the leads</h3>'
+        f'<p class="disc">{_esc(env.get("disclaimer"))}</p>'
+        f'<p class="pin">{pin_line}</p>'
+        f'{basis_table}{ood_html}'
+        f'<p class="note">{_esc(env.get("ranking_note"))}</p>'
+        f'{caveats_html}</div>'
+    )
+
+
 def render_report(state: VTAState) -> str:
     """Render a VTAState into a single self-contained HTML string (pure, no I/O)."""
     tr = state.get("taxon_result") or {}
@@ -274,6 +356,7 @@ def render_report(state: VTAState) -> str:
         "<meta name='viewport' content='width=device-width,initial-scale=1'>"
         f"<title>VTA-Agent — {title}</title><style>{_CSS}</style></head><body><div class='wrap'>"
         "<h2>Viral Target Assessment</h2>"
+        f"{_envelope(state)}"
         f"{_header(state)}"
         "<h2>Structures</h2>"
         f"{_structures(state)}"

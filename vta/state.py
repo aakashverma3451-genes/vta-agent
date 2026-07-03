@@ -67,6 +67,11 @@ class VTAState(TypedDict, total=False):
     # --- Cross-cutting: audit + reproducibility ---------------------------
     audit_trail: List[str]                     # every decision, appended in order
     versions: Dict[str, str]                   # tool versions, for reproducibility
+    # The non-removable honesty envelope (D0.5): disclaimer + pinned frozen benchmark +
+    # per-target grade/CI + trivial-baseline verdict + pose reliability + scoring caveats.
+    # Set by report_node (via vta.report_envelope.build_envelope) and always rendered; the
+    # future API/run-manifest reads this same object so no path emits a naked ranking.
+    honesty_envelope: Optional[Dict[str, Any]]
 
 
 def new_state(genome_fasta: str, run_id: str) -> VTAState:

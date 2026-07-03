@@ -67,7 +67,7 @@ def rank_node(state: VTAState) -> VTAState:
             4,
         )
         r["score_provenance"] = score_provenance(
-            "VTA rank_node", "LE-led composite v1", inputs={
+            "VTA rank_node", "ΔG-primary (LE demoted, Phase 11 WI-6 gate)", inputs={
                 "weights": WEIGHTS,
                 "ligand": r.get("ligand"),
                 "protein": r.get("protein"),

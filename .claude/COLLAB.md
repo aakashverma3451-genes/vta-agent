@@ -35,6 +35,16 @@ move to DONE/HANDOFF when finished; commit small on your branch.
   re-benchmark. SEPARATE outputs — frozen 1:1 headline + locked_benchmark untouched.
 
 ## DONE / HANDOFF
+- **Deployment D0 — Scientific readiness gate G1 PASS (opus, 2026-07-03).** New
+  `vta/report_envelope.py` — non-removable honesty envelope (disclaimer + pinned frozen
+  benchmark hash + per-target grade/CI + trivial-2D-baseline paired verdict + pose
+  reliability + nucleotide/metal caveats + out-of-domain flag), rendered as the first report
+  card and stored on `state["honesty_envelope"]`. Wired D0.1–D0.4 (baselines/redock/paired/
+  LE-demotion) into the output. Fixed two STALE-honesty defects: report notes still said
+  ranking was LE-based / conservation a "10% term" (both false post-WI-6) → corrected to
+  ΔG-primary, weight-0 annotations; rank.py provenance label fixed. Gate artifact:
+  `outputs/deploy/gate_G1_scientific_readiness.md`. **240 tests green.** No ranking-weight
+  change; no service (D1+) work started — held for user review after G1 per plan.
 - Phase 11 WI-5 reframe (fable) — removed 'IMPOSSIBLE'; HCV-NI finding tied to the purchasable-library scaffold-distinct recipe (property-unmatched/generative/real-nucleotide untested). WI-4 ratio analysis: 30:1 reachable with 30 actives x 900 real inactives (extended dock, not run); DeepCoy absent. 231 tests green.
 - Phase 11 WI-2 redocking (fable) — Mpro 7L11/XF1 redocks to 1.654 Å (pose-reliable); triphosphate GTP/CTP RMSD uncomputed (RDKit phosphate valence; spyrmsd absent) — labelled tooling limit; 6Y2E/7K3T apo N/A. 231 tests green.
 - Phase 11 Tier-1 (fable session) — WI-1 baselines, WI-3 paired bootstrap + CI-overlap
