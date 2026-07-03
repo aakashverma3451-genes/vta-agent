@@ -344,6 +344,24 @@ Vina redocks the native Mpro ligand to 1.65 Å (pose-reliable), and the 9D paren
 paired-bootstrap significance replacing all CI-overlap logic (`vta/eval/significance.py`), a
 gated **LE→ΔG ranking demotion** (`vta/nodes/rank.py` now ΔG-primary), and a GNINA rescorer
 that no-ops cleanly to DO-NOT-PROMOTE when absent (`vta/nodes/rescore.py`). The nucleotide
-meta-finding was reframed from "impossible" to recipe-specific. Extended docks (Mpro 31:1;
-HCV-NI property-unmatched decoys) close the remaining reviewer objections. A slide-ready
-narrative of all of this lives in `docs/VTA_AGENT_DECK.md`.
+meta-finding was reframed from "impossible" to recipe-specific.
+
+**Extended docks (Phase 11 WI-4/WI-5), closing the last reviewer objections:**
+
+- **Job A — Mpro at a non-degenerate 31:1 ratio** (24 non-covalent actives vs 740 real
+  measured Moonshot inactives; EF1% ceiling lifted 2.0 → 31.8;
+  `outputs/phase11/mpro_30to1_benchmark.json`). The "Vina < 2D-similarity" finding does not
+  just survive the honest ratio — it **strengthens into statistical significance**:
+  2D-similarity BEDROC 0.40 [0.24, 0.56] / ROC-AUC 0.82 [0.72, 0.90] vs Vina BEDROC 0.15
+  [0.06, 0.28] / ROC-AUC 0.63 [0.51, 0.75]; paired Δ(Vina−2Dsim) BEDROC −0.24, **95% CI
+  [−0.44, −0.04]** (P=0.01) and ROC-AUC −0.18, **95% CI [−0.31, −0.07]** (P=0.001) — both
+  strictly < 0, so **2D-memorization significantly beats docking**. Vina's EF1% is **0.0**
+  (its top ~1% of ranks contains no actives). At the degenerate 1:1 ratio the loss was
+  borderline (CI touched 0); at 31:1 it is unambiguous. The docking loop was made
+  resumable + hang-capped (180 s/dock) after a few large/flexible inactives stalled Vina.
+- **Job B — HCV NS5B NI with property-UNMATCHED decoys** (`scripts/phase11_hcv_unmatched.py`,
+  640 ChEMBL drug-like phosphate-free decoys; DeepCoy absent): tests whether the nucleotide
+  benchmark runs under a different decoy recipe, and whether any "enrichment" is binding
+  signal or mere charge/size discrimination. **[result pending — dock in progress]**
+
+A slide-ready narrative lives in `docs/VTA_AGENT_DECK.md`.

@@ -26,11 +26,13 @@ move to DONE/HANDOFF when finished; commit small on your branch.
 
 ## ACTIVE WORK (continued)
 
-- **session-a (fable)** — 2026-06-30 — **Phase 11 WI-2 redocking validation.** LOCKED:
-  `scripts/phase11_redock.py`, `tests/test_phase11_redock.py`, `outputs/phase11/redock_*`.
-  Redocks native co-crystal ligands (7L11/XF1, 2XI3/GTP, 8PSO/CTP) with the production
-  Vina protocol; symmetry-corrected heavy-atom RMSD via RDKit GetBestRMS (spyrmsd absent);
-  6Y2E + 7K3T flagged apo/N-A. Diagnoses the WI-1 finding (does Vina reproduce known poses?).
+- **session-a (fable)** — 2026-06-30 — **Phase 11 WI-4 Job A + WI-5 Job B (extended docks).**
+  LOCKED: `scripts/phase11_mpro_30to1.py`, `scripts/phase11_hcv_unmatched.py`,
+  `tests/test_phase11_extended.py`, `outputs/phase11/mpro_30to1_*`,
+  `outputs/phase11/hcv_ni_unmatched_*`, `vta/data/decoys_cache/hcv_ns5b_ni_unmatched.smi`.
+  Job A: 30 actives × 900 real Moonshot inactives (30:1) real-Vina re-dock + baselines/paired.
+  Job B: property-unmatched/charge-extrema decoys for HCV-NI (DeepCoy absent) real-Vina
+  re-benchmark. SEPARATE outputs — frozen 1:1 headline + locked_benchmark untouched.
 
 ## DONE / HANDOFF
 - Phase 11 WI-5 reframe (fable) — removed 'IMPOSSIBLE'; HCV-NI finding tied to the purchasable-library scaffold-distinct recipe (property-unmatched/generative/real-nucleotide untested). WI-4 ratio analysis: 30:1 reachable with 30 actives x 900 real inactives (extended dock, not run); DeepCoy absent. 231 tests green.
