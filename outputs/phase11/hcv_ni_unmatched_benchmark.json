@@ -1,0 +1,8479 @@
+{
+  "phase": "11 WI-5 Job B \u2014 HCV NS5B NI with property-UNMATCHED decoys",
+  "structure": "2XI3 chain A (NS5B + catalytic Mg2+)",
+  "decoy_recipe": "ChEMBL drug-like (MW 250-500, \u22641 Ro5 violation), phosphate-free, scaffold-distinct \u2014 deliberately property-UNMATCHED to the charged triphosphate actives (Stein 2021 DUDE-Z philosophy). DeepCoy absent.",
+  "decoy_provenance": {
+    "source": "ChEMBL molecule API",
+    "seed": 11,
+    "file": "vta/data/decoys_cache/hcv_ns5b_ni_unmatched.smi",
+    "n_decoys_generated": 640
+  },
+  "n_actives": 43,
+  "n_decoys_docked": 638,
+  "ratio": "638:43",
+  "benchmark": {
+    "n": 681,
+    "n_actives": 43,
+    "n_decoys": 638,
+    "roc_auc": 0.7666,
+    "bedroc": 0.0825,
+    "log_auc": 0.2303,
+    "ef": {
+      "EF1%": 0.0,
+      "EF5%": 0.4658,
+      "EF10%": 0.9316,
+      "EF20%": 1.7468
+    },
+    "ranking": [
+      {
+        "rank": 1,
+        "name": "CHEMBL6250",
+        "score": 9.499,
+        "label": "decoy"
+      },
+      {
+        "rank": 2,
+        "name": "CHEMBL6293",
+        "score": 9.277,
+        "label": "decoy"
+      },
+      {
+        "rank": 3,
+        "name": "CHEMBL7029",
+        "score": 9.193,
+        "label": "decoy"
+      },
+      {
+        "rank": 4,
+        "name": "CHEMBL6639",
+        "score": 9.044,
+        "label": "decoy"
+      },
+      {
+        "rank": 5,
+        "name": "CHEMBL6599",
+        "score": 9.014,
+        "label": "decoy"
+      },
+      {
+        "rank": 6,
+        "name": "CHEMBL440084",
+        "score": 9.005,
+        "label": "decoy"
+      },
+      {
+        "rank": 7,
+        "name": "CHEMBL268100",
+        "score": 8.989,
+        "label": "decoy"
+      },
+      {
+        "rank": 8,
+        "name": "CHEMBL265669",
+        "score": 8.911,
+        "label": "decoy"
+      },
+      {
+        "rank": 9,
+        "name": "CHEMBL6558",
+        "score": 8.895,
+        "label": "decoy"
+      },
+      {
+        "rank": 10,
+        "name": "CHEMBL414184",
+        "score": 8.885,
+        "label": "decoy"
+      },
+      {
+        "rank": 11,
+        "name": "CHEMBL6325",
+        "score": 8.858,
+        "label": "decoy"
+      },
+      {
+        "rank": 12,
+        "name": "CHEMBL269341",
+        "score": 8.824,
+        "label": "decoy"
+      },
+      {
+        "rank": 13,
+        "name": "CHEMBL264095",
+        "score": 8.812,
+        "label": "decoy"
+      },
+      {
+        "rank": 14,
+        "name": "CHEMBL3286448",
+        "score": 8.81,
+        "label": "active"
+      },
+      {
+        "rank": 15,
+        "name": "CHEMBL415104",
+        "score": 8.78,
+        "label": "decoy"
+      },
+      {
+        "rank": 16,
+        "name": "CHEMBL269339",
+        "score": 8.776,
+        "label": "decoy"
+      },
+      {
+        "rank": 17,
+        "name": "CHEMBL6358",
+        "score": 8.753,
+        "label": "decoy"
+      },
+      {
+        "rank": 18,
+        "name": "CHEMBL6775",
+        "score": 8.746,
+        "label": "decoy"
+      },
+      {
+        "rank": 19,
+        "name": "CHEMBL6315",
+        "score": 8.737,
+        "label": "decoy"
+      },
+      {
+        "rank": 20,
+        "name": "CHEMBL6252",
+        "score": 8.727,
+        "label": "decoy"
+      },
+      {
+        "rank": 21,
+        "name": "CHEMBL6279",
+        "score": 8.722,
+        "label": "decoy"
+      },
+      {
+        "rank": 22,
+        "name": "CHEMBL266956",
+        "score": 8.721,
+        "label": "decoy"
+      },
+      {
+        "rank": 23,
+        "name": "CHEMBL6357",
+        "score": 8.715,
+        "label": "decoy"
+      },
+      {
+        "rank": 24,
+        "name": "CHEMBL6436",
+        "score": 8.661,
+        "label": "decoy"
+      },
+      {
+        "rank": 25,
+        "name": "CHEMBL268854",
+        "score": 8.639,
+        "label": "decoy"
+      },
+      {
+        "rank": 26,
+        "name": "CHEMBL268340",
+        "score": 8.627,
+        "label": "decoy"
+      },
+      {
+        "rank": 27,
+        "name": "CHEMBL6850",
+        "score": 8.627,
+        "label": "decoy"
+      },
+      {
+        "rank": 28,
+        "name": "CHEMBL266065",
+        "score": 8.625,
+        "label": "decoy"
+      },
+      {
+        "rank": 29,
+        "name": "CHEMBL414010",
+        "score": 8.608,
+        "label": "decoy"
+      },
+      {
+        "rank": 30,
+        "name": "CHEMBL6839",
+        "score": 8.545,
+        "label": "decoy"
+      },
+      {
+        "rank": 31,
+        "name": "CHEMBL267228",
+        "score": 8.54,
+        "label": "decoy"
+      },
+      {
+        "rank": 32,
+        "name": "CHEMBL6663",
+        "score": 8.462,
+        "label": "decoy"
+      },
+      {
+        "rank": 33,
+        "name": "CHEMBL6323",
+        "score": 8.46,
+        "label": "decoy"
+      },
+      {
+        "rank": 34,
+        "name": "CHEMBL6967",
+        "score": 8.399,
+        "label": "decoy"
+      },
+      {
+        "rank": 35,
+        "name": "CHEMBL6348",
+        "score": 8.376,
+        "label": "decoy"
+      },
+      {
+        "rank": 36,
+        "name": "CHEMBL266509",
+        "score": 8.36,
+        "label": "decoy"
+      },
+      {
+        "rank": 37,
+        "name": "CHEMBL269600",
+        "score": 8.358,
+        "label": "decoy"
+      },
+      {
+        "rank": 38,
+        "name": "CHEMBL6499",
+        "score": 8.357,
+        "label": "decoy"
+      },
+      {
+        "rank": 39,
+        "name": "CHEMBL10",
+        "score": 8.341,
+        "label": "decoy"
+      },
+      {
+        "rank": 40,
+        "name": "CHEMBL6632",
+        "score": 8.338,
+        "label": "decoy"
+      },
+      {
+        "rank": 41,
+        "name": "CHEMBL1630001",
+        "score": 8.336,
+        "label": "active"
+      },
+      {
+        "rank": 42,
+        "name": "CHEMBL6314",
+        "score": 8.333,
+        "label": "decoy"
+      },
+      {
+        "rank": 43,
+        "name": "CHEMBL266066",
+        "score": 8.327,
+        "label": "decoy"
+      },
+      {
+        "rank": 44,
+        "name": "CHEMBL7136",
+        "score": 8.327,
+        "label": "decoy"
+      },
+      {
+        "rank": 45,
+        "name": "CHEMBL263882",
+        "score": 8.325,
+        "label": "decoy"
+      },
+      {
+        "rank": 46,
+        "name": "CHEMBL267832",
+        "score": 8.32,
+        "label": "decoy"
+      },
+      {
+        "rank": 47,
+        "name": "CHEMBL414201",
+        "score": 8.293,
+        "label": "decoy"
+      },
+      {
+        "rank": 48,
+        "name": "CHEMBL408",
+        "score": 8.276,
+        "label": "decoy"
+      },
+      {
+        "rank": 49,
+        "name": "CHEMBL267386",
+        "score": 8.262,
+        "label": "decoy"
+      },
+      {
+        "rank": 50,
+        "name": "CHEMBL269704",
+        "score": 8.257,
+        "label": "decoy"
+      },
+      {
+        "rank": 51,
+        "name": "CHEMBL415105",
+        "score": 8.23,
+        "label": "decoy"
+      },
+      {
+        "rank": 52,
+        "name": "CHEMBL6290",
+        "score": 8.229,
+        "label": "decoy"
+      },
+      {
+        "rank": 53,
+        "name": "CHEMBL269342",
+        "score": 8.229,
+        "label": "decoy"
+      },
+      {
+        "rank": 54,
+        "name": "CHEMBL6321",
+        "score": 8.227,
+        "label": "decoy"
+      },
+      {
+        "rank": 55,
+        "name": "CHEMBL6765",
+        "score": 8.197,
+        "label": "decoy"
+      },
+      {
+        "rank": 56,
+        "name": "CHEMBL6220",
+        "score": 8.189,
+        "label": "decoy"
+      },
+      {
+        "rank": 57,
+        "name": "CHEMBL6313",
+        "score": 8.177,
+        "label": "decoy"
+      },
+      {
+        "rank": 58,
+        "name": "CHEMBL6715",
+        "score": 8.175,
+        "label": "decoy"
+      },
+      {
+        "rank": 59,
+        "name": "CHEMBL6332",
+        "score": 8.167,
+        "label": "decoy"
+      },
+      {
+        "rank": 60,
+        "name": "CHEMBL6351",
+        "score": 8.163,
+        "label": "decoy"
+      },
+      {
+        "rank": 61,
+        "name": "CHEMBL6792",
+        "score": 8.146,
+        "label": "decoy"
+      },
+      {
+        "rank": 62,
+        "name": "CHEMBL4635006",
+        "score": 8.144,
+        "label": "active"
+      },
+      {
+        "rank": 63,
+        "name": "CHEMBL451551",
+        "score": 8.144,
+        "label": "decoy"
+      },
+      {
+        "rank": 64,
+        "name": "CHEMBL6342",
+        "score": 8.135,
+        "label": "decoy"
+      },
+      {
+        "rank": 65,
+        "name": "CHEMBL6424",
+        "score": 8.127,
+        "label": "decoy"
+      },
+      {
+        "rank": 66,
+        "name": "CHEMBL6292",
+        "score": 8.12,
+        "label": "decoy"
+      },
+      {
+        "rank": 67,
+        "name": "CHEMBL6729",
+        "score": 8.106,
+        "label": "decoy"
+      },
+      {
+        "rank": 68,
+        "name": "CHEMBL4639840",
+        "score": 8.1,
+        "label": "active"
+      },
+      {
+        "rank": 69,
+        "name": "CHEMBL3422648",
+        "score": 8.095,
+        "label": "active"
+      },
+      {
+        "rank": 70,
+        "name": "CHEMBL269572",
+        "score": 8.095,
+        "label": "decoy"
+      },
+      {
+        "rank": 71,
+        "name": "CHEMBL6218",
+        "score": 8.087,
+        "label": "decoy"
+      },
+      {
+        "rank": 72,
+        "name": "CHEMBL268151",
+        "score": 8.085,
+        "label": "decoy"
+      },
+      {
+        "rank": 73,
+        "name": "CHEMBL263077",
+        "score": 8.078,
+        "label": "decoy"
+      },
+      {
+        "rank": 74,
+        "name": "CHEMBL4215462",
+        "score": 8.072,
+        "label": "active"
+      },
+      {
+        "rank": 75,
+        "name": "CHEMBL268584",
+        "score": 8.061,
+        "label": "decoy"
+      },
+      {
+        "rank": 76,
+        "name": "CHEMBL7102",
+        "score": 8.027,
+        "label": "decoy"
+      },
+      {
+        "rank": 77,
+        "name": "CHEMBL6590",
+        "score": 8.026,
+        "label": "decoy"
+      },
+      {
+        "rank": 78,
+        "name": "CHEMBL6524",
+        "score": 8.025,
+        "label": "decoy"
+      },
+      {
+        "rank": 79,
+        "name": "CHEMBL264097",
+        "score": 8.023,
+        "label": "decoy"
+      },
+      {
+        "rank": 80,
+        "name": "CHEMBL269357",
+        "score": 8.011,
+        "label": "decoy"
+      },
+      {
+        "rank": 81,
+        "name": "CHEMBL6281",
+        "score": 8.003,
+        "label": "decoy"
+      },
+      {
+        "rank": 82,
+        "name": "CHEMBL6496",
+        "score": 7.996,
+        "label": "decoy"
+      },
+      {
+        "rank": 83,
+        "name": "CHEMBL6918",
+        "score": 7.989,
+        "label": "decoy"
+      },
+      {
+        "rank": 84,
+        "name": "CHEMBL6366",
+        "score": 7.98,
+        "label": "decoy"
+      },
+      {
+        "rank": 85,
+        "name": "CHEMBL440267",
+        "score": 7.977,
+        "label": "decoy"
+      },
+      {
+        "rank": 86,
+        "name": "CHEMBL6380",
+        "score": 7.962,
+        "label": "decoy"
+      },
+      {
+        "rank": 87,
+        "name": "CHEMBL267702",
+        "score": 7.96,
+        "label": "decoy"
+      },
+      {
+        "rank": 88,
+        "name": "CHEMBL6237",
+        "score": 7.953,
+        "label": "decoy"
+      },
+      {
+        "rank": 89,
+        "name": "CHEMBL269773",
+        "score": 7.943,
+        "label": "decoy"
+      },
+      {
+        "rank": 90,
+        "name": "CHEMBL268888",
+        "score": 7.93,
+        "label": "decoy"
+      },
+      {
+        "rank": 91,
+        "name": "CHEMBL269368",
+        "score": 7.927,
+        "label": "decoy"
+      },
+      {
+        "rank": 92,
+        "name": "CHEMBL6474",
+        "score": 7.921,
+        "label": "decoy"
+      },
+      {
+        "rank": 93,
+        "name": "CHEMBL267863",
+        "score": 7.916,
+        "label": "decoy"
+      },
+      {
+        "rank": 94,
+        "name": "CHEMBL6849",
+        "score": 7.916,
+        "label": "decoy"
+      },
+      {
+        "rank": 95,
+        "name": "CHEMBL6339",
+        "score": 7.912,
+        "label": "decoy"
+      },
+      {
+        "rank": 96,
+        "name": "CHEMBL268768",
+        "score": 7.91,
+        "label": "decoy"
+      },
+      {
+        "rank": 97,
+        "name": "CHEMBL1259059",
+        "score": 7.897,
+        "label": "active"
+      },
+      {
+        "rank": 98,
+        "name": "CHEMBL6511",
+        "score": 7.877,
+        "label": "decoy"
+      },
+      {
+        "rank": 99,
+        "name": "CHEMBL4632867",
+        "score": 7.867,
+        "label": "active"
+      },
+      {
+        "rank": 100,
+        "name": "CHEMBL6347",
+        "score": 7.859,
+        "label": "decoy"
+      },
+      {
+        "rank": 101,
+        "name": "CHEMBL6291",
+        "score": 7.858,
+        "label": "decoy"
+      },
+      {
+        "rank": 102,
+        "name": "CHEMBL268889",
+        "score": 7.856,
+        "label": "decoy"
+      },
+      {
+        "rank": 103,
+        "name": "CHEMBL6476",
+        "score": 7.856,
+        "label": "decoy"
+      },
+      {
+        "rank": 104,
+        "name": "CHEMBL6812",
+        "score": 7.853,
+        "label": "decoy"
+      },
+      {
+        "rank": 105,
+        "name": "CHEMBL6521",
+        "score": 7.83,
+        "label": "decoy"
+      },
+      {
+        "rank": 106,
+        "name": "CHEMBL266039",
+        "score": 7.822,
+        "label": "decoy"
+      },
+      {
+        "rank": 107,
+        "name": "CHEMBL6991",
+        "score": 7.816,
+        "label": "decoy"
+      },
+      {
+        "rank": 108,
+        "name": "CHEMBL3908994",
+        "score": 7.806,
+        "label": "active"
+      },
+      {
+        "rank": 109,
+        "name": "CHEMBL266508",
+        "score": 7.806,
+        "label": "decoy"
+      },
+      {
+        "rank": 110,
+        "name": "CHEMBL429379",
+        "score": 7.805,
+        "label": "decoy"
+      },
+      {
+        "rank": 111,
+        "name": "CHEMBL266317",
+        "score": 7.797,
+        "label": "decoy"
+      },
+      {
+        "rank": 112,
+        "name": "CHEMBL4127921",
+        "score": 7.785,
+        "label": "active"
+      },
+      {
+        "rank": 113,
+        "name": "CHEMBL3908470",
+        "score": 7.784,
+        "label": "active"
+      },
+      {
+        "rank": 114,
+        "name": "CHEMBL266761",
+        "score": 7.78,
+        "label": "decoy"
+      },
+      {
+        "rank": 115,
+        "name": "CHEMBL6788",
+        "score": 7.774,
+        "label": "decoy"
+      },
+      {
+        "rank": 116,
+        "name": "CHEMBL269059",
+        "score": 7.761,
+        "label": "decoy"
+      },
+      {
+        "rank": 117,
+        "name": "CHEMBL4633686",
+        "score": 7.758,
+        "label": "active"
+      },
+      {
+        "rank": 118,
+        "name": "CHEMBL266025",
+        "score": 7.755,
+        "label": "decoy"
+      },
+      {
+        "rank": 119,
+        "name": "CHEMBL6676",
+        "score": 7.752,
+        "label": "decoy"
+      },
+      {
+        "rank": 120,
+        "name": "CHEMBL7075",
+        "score": 7.752,
+        "label": "decoy"
+      },
+      {
+        "rank": 121,
+        "name": "CHEMBL6417",
+        "score": 7.746,
+        "label": "decoy"
+      },
+      {
+        "rank": 122,
+        "name": "CHEMBL4641646",
+        "score": 7.732,
+        "label": "active"
+      },
+      {
+        "rank": 123,
+        "name": "CHEMBL4113906",
+        "score": 7.732,
+        "label": "active"
+      },
+      {
+        "rank": 124,
+        "name": "CHEMBL266659",
+        "score": 7.726,
+        "label": "decoy"
+      },
+      {
+        "rank": 125,
+        "name": "CHEMBL427969",
+        "score": 7.724,
+        "label": "decoy"
+      },
+      {
+        "rank": 126,
+        "name": "CHEMBL421",
+        "score": 7.717,
+        "label": "decoy"
+      },
+      {
+        "rank": 127,
+        "name": "CHEMBL6519",
+        "score": 7.712,
+        "label": "decoy"
+      },
+      {
+        "rank": 128,
+        "name": "CHEMBL266928",
+        "score": 7.709,
+        "label": "decoy"
+      },
+      {
+        "rank": 129,
+        "name": "CHEMBL6243",
+        "score": 7.703,
+        "label": "decoy"
+      },
+      {
+        "rank": 130,
+        "name": "CHEMBL7074",
+        "score": 7.693,
+        "label": "decoy"
+      },
+      {
+        "rank": 131,
+        "name": "CHEMBL6560",
+        "score": 7.692,
+        "label": "decoy"
+      },
+      {
+        "rank": 132,
+        "name": "CHEMBL266081",
+        "score": 7.646,
+        "label": "decoy"
+      },
+      {
+        "rank": 133,
+        "name": "CHEMBL6487",
+        "score": 7.64,
+        "label": "decoy"
+      },
+      {
+        "rank": 134,
+        "name": "CHEMBL6551",
+        "score": 7.639,
+        "label": "decoy"
+      },
+      {
+        "rank": 135,
+        "name": "CHEMBL4440367",
+        "score": 7.637,
+        "label": "active"
+      },
+      {
+        "rank": 136,
+        "name": "CHEMBL6949",
+        "score": 7.631,
+        "label": "decoy"
+      },
+      {
+        "rank": 137,
+        "name": "CHEMBL267126",
+        "score": 7.63,
+        "label": "decoy"
+      },
+      {
+        "rank": 138,
+        "name": "CHEMBL266484",
+        "score": 7.625,
+        "label": "decoy"
+      },
+      {
+        "rank": 139,
+        "name": "CHEMBL6306",
+        "score": 7.619,
+        "label": "decoy"
+      },
+      {
+        "rank": 140,
+        "name": "CHEMBL1950242",
+        "score": 7.618,
+        "label": "active"
+      },
+      {
+        "rank": 141,
+        "name": "CHEMBL415285",
+        "score": 7.617,
+        "label": "decoy"
+      },
+      {
+        "rank": 142,
+        "name": "CHEMBL4454742",
+        "score": 7.616,
+        "label": "active"
+      },
+      {
+        "rank": 143,
+        "name": "CHEMBL6574",
+        "score": 7.609,
+        "label": "decoy"
+      },
+      {
+        "rank": 144,
+        "name": "CHEMBL6331",
+        "score": 7.604,
+        "label": "decoy"
+      },
+      {
+        "rank": 145,
+        "name": "CHEMBL6933",
+        "score": 7.598,
+        "label": "decoy"
+      },
+      {
+        "rank": 146,
+        "name": "CHEMBL415103",
+        "score": 7.597,
+        "label": "decoy"
+      },
+      {
+        "rank": 147,
+        "name": "CHEMBL4127030",
+        "score": 7.589,
+        "label": "active"
+      },
+      {
+        "rank": 148,
+        "name": "CHEMBL6575",
+        "score": 7.57,
+        "label": "decoy"
+      },
+      {
+        "rank": 149,
+        "name": "CHEMBL4",
+        "score": 7.567,
+        "label": "decoy"
+      },
+      {
+        "rank": 150,
+        "name": "CHEMBL267270",
+        "score": 7.559,
+        "label": "decoy"
+      },
+      {
+        "rank": 151,
+        "name": "CHEMBL4125966",
+        "score": 7.557,
+        "label": "active"
+      },
+      {
+        "rank": 152,
+        "name": "CHEMBL7019",
+        "score": 7.543,
+        "label": "decoy"
+      },
+      {
+        "rank": 153,
+        "name": "CHEMBL428658",
+        "score": 7.542,
+        "label": "decoy"
+      },
+      {
+        "rank": 154,
+        "name": "CHEMBL4462484",
+        "score": 7.537,
+        "label": "active"
+      },
+      {
+        "rank": 155,
+        "name": "CHEMBL4532929",
+        "score": 7.536,
+        "label": "active"
+      },
+      {
+        "rank": 156,
+        "name": "CHEMBL4069349",
+        "score": 7.534,
+        "label": "active"
+      },
+      {
+        "rank": 157,
+        "name": "CHEMBL6825",
+        "score": 7.533,
+        "label": "decoy"
+      },
+      {
+        "rank": 158,
+        "name": "CHEMBL6699",
+        "score": 7.529,
+        "label": "decoy"
+      },
+      {
+        "rank": 159,
+        "name": "CHEMBL521487",
+        "score": 7.526,
+        "label": "active"
+      },
+      {
+        "rank": 160,
+        "name": "CHEMBL3186678",
+        "score": 7.514,
+        "label": "active"
+      },
+      {
+        "rank": 161,
+        "name": "CHEMBL6726",
+        "score": 7.513,
+        "label": "decoy"
+      },
+      {
+        "rank": 162,
+        "name": "CHEMBL268529",
+        "score": 7.509,
+        "label": "decoy"
+      },
+      {
+        "rank": 163,
+        "name": "CHEMBL6261",
+        "score": 7.507,
+        "label": "decoy"
+      },
+      {
+        "rank": 164,
+        "name": "CHEMBL6259",
+        "score": 7.503,
+        "label": "decoy"
+      },
+      {
+        "rank": 165,
+        "name": "CHEMBL268292",
+        "score": 7.498,
+        "label": "decoy"
+      },
+      {
+        "rank": 166,
+        "name": "CHEMBL413593",
+        "score": 7.489,
+        "label": "decoy"
+      },
+      {
+        "rank": 167,
+        "name": "CHEMBL6532",
+        "score": 7.488,
+        "label": "decoy"
+      },
+      {
+        "rank": 168,
+        "name": "CHEMBL6534",
+        "score": 7.477,
+        "label": "decoy"
+      },
+      {
+        "rank": 169,
+        "name": "CHEMBL268388",
+        "score": 7.477,
+        "label": "decoy"
+      },
+      {
+        "rank": 170,
+        "name": "CHEMBL269264",
+        "score": 7.474,
+        "label": "decoy"
+      },
+      {
+        "rank": 171,
+        "name": "CHEMBL6624",
+        "score": 7.474,
+        "label": "decoy"
+      },
+      {
+        "rank": 172,
+        "name": "CHEMBL6245",
+        "score": 7.473,
+        "label": "decoy"
+      },
+      {
+        "rank": 173,
+        "name": "CHEMBL4635910",
+        "score": 7.469,
+        "label": "active"
+      },
+      {
+        "rank": 174,
+        "name": "CHEMBL6610",
+        "score": 7.468,
+        "label": "decoy"
+      },
+      {
+        "rank": 175,
+        "name": "CHEMBL6371",
+        "score": 7.466,
+        "label": "decoy"
+      },
+      {
+        "rank": 176,
+        "name": "CHEMBL6498",
+        "score": 7.464,
+        "label": "decoy"
+      },
+      {
+        "rank": 177,
+        "name": "CHEMBL4127092",
+        "score": 7.463,
+        "label": "active"
+      },
+      {
+        "rank": 178,
+        "name": "CHEMBL269235",
+        "score": 7.46,
+        "label": "decoy"
+      },
+      {
+        "rank": 179,
+        "name": "CHEMBL263084",
+        "score": 7.459,
+        "label": "decoy"
+      },
+      {
+        "rank": 180,
+        "name": "CHEMBL409",
+        "score": 7.453,
+        "label": "decoy"
+      },
+      {
+        "rank": 181,
+        "name": "CHEMBL428334",
+        "score": 7.451,
+        "label": "decoy"
+      },
+      {
+        "rank": 182,
+        "name": "CHEMBL6199",
+        "score": 7.44,
+        "label": "decoy"
+      },
+      {
+        "rank": 183,
+        "name": "CHEMBL6671",
+        "score": 7.436,
+        "label": "decoy"
+      },
+      {
+        "rank": 184,
+        "name": "CHEMBL6374",
+        "score": 7.429,
+        "label": "decoy"
+      },
+      {
+        "rank": 185,
+        "name": "CHEMBL6249",
+        "score": 7.426,
+        "label": "decoy"
+      },
+      {
+        "rank": 186,
+        "name": "CHEMBL6324",
+        "score": 7.421,
+        "label": "decoy"
+      },
+      {
+        "rank": 187,
+        "name": "CHEMBL6598",
+        "score": 7.417,
+        "label": "decoy"
+      },
+      {
+        "rank": 188,
+        "name": "CHEMBL540195",
+        "score": 7.417,
+        "label": "decoy"
+      },
+      {
+        "rank": 189,
+        "name": "CHEMBL6693",
+        "score": 7.411,
+        "label": "decoy"
+      },
+      {
+        "rank": 190,
+        "name": "CHEMBL267427",
+        "score": 7.41,
+        "label": "decoy"
+      },
+      {
+        "rank": 191,
+        "name": "CHEMBL6977",
+        "score": 7.404,
+        "label": "decoy"
+      },
+      {
+        "rank": 192,
+        "name": "CHEMBL4644488",
+        "score": 7.4,
+        "label": "active"
+      },
+      {
+        "rank": 193,
+        "name": "CHEMBL6809",
+        "score": 7.394,
+        "label": "decoy"
+      },
+      {
+        "rank": 194,
+        "name": "CHEMBL373691",
+        "score": 7.391,
+        "label": "active"
+      },
+      {
+        "rank": 195,
+        "name": "CHEMBL267617",
+        "score": 7.381,
+        "label": "decoy"
+      },
+      {
+        "rank": 196,
+        "name": "CHEMBL4642954",
+        "score": 7.38,
+        "label": "active"
+      },
+      {
+        "rank": 197,
+        "name": "CHEMBL6307",
+        "score": 7.377,
+        "label": "decoy"
+      },
+      {
+        "rank": 198,
+        "name": "CHEMBL6238",
+        "score": 7.375,
+        "label": "decoy"
+      },
+      {
+        "rank": 199,
+        "name": "CHEMBL6570",
+        "score": 7.37,
+        "label": "decoy"
+      },
+      {
+        "rank": 200,
+        "name": "CHEMBL4634173",
+        "score": 7.369,
+        "label": "active"
+      },
+      {
+        "rank": 201,
+        "name": "CHEMBL2",
+        "score": 7.365,
+        "label": "decoy"
+      },
+      {
+        "rank": 202,
+        "name": "CHEMBL4213075",
+        "score": 7.364,
+        "label": "active"
+      },
+      {
+        "rank": 203,
+        "name": "CHEMBL6340",
+        "score": 7.361,
+        "label": "decoy"
+      },
+      {
+        "rank": 204,
+        "name": "CHEMBL269153",
+        "score": 7.36,
+        "label": "decoy"
+      },
+      {
+        "rank": 205,
+        "name": "CHEMBL4216962",
+        "score": 7.358,
+        "label": "active"
+      },
+      {
+        "rank": 206,
+        "name": "CHEMBL266801",
+        "score": 7.357,
+        "label": "decoy"
+      },
+      {
+        "rank": 207,
+        "name": "CHEMBL6378",
+        "score": 7.35,
+        "label": "decoy"
+      },
+      {
+        "rank": 208,
+        "name": "CHEMBL6287",
+        "score": 7.348,
+        "label": "decoy"
+      },
+      {
+        "rank": 209,
+        "name": "CHEMBL6296",
+        "score": 7.347,
+        "label": "decoy"
+      },
+      {
+        "rank": 210,
+        "name": "CHEMBL486231",
+        "score": 7.346,
+        "label": "active"
+      },
+      {
+        "rank": 211,
+        "name": "CHEMBL6236",
+        "score": 7.346,
+        "label": "decoy"
+      },
+      {
+        "rank": 212,
+        "name": "CHEMBL6431",
+        "score": 7.346,
+        "label": "decoy"
+      },
+      {
+        "rank": 213,
+        "name": "CHEMBL3954120",
+        "score": 7.345,
+        "label": "active"
+      },
+      {
+        "rank": 214,
+        "name": "CHEMBL406",
+        "score": 7.343,
+        "label": "decoy"
+      },
+      {
+        "rank": 215,
+        "name": "CHEMBL269237",
+        "score": 7.341,
+        "label": "decoy"
+      },
+      {
+        "rank": 216,
+        "name": "CHEMBL7289",
+        "score": 7.34,
+        "label": "decoy"
+      },
+      {
+        "rank": 217,
+        "name": "CHEMBL266483",
+        "score": 7.336,
+        "label": "decoy"
+      },
+      {
+        "rank": 218,
+        "name": "CHEMBL268387",
+        "score": 7.335,
+        "label": "decoy"
+      },
+      {
+        "rank": 219,
+        "name": "CHEMBL266037",
+        "score": 7.334,
+        "label": "decoy"
+      },
+      {
+        "rank": 220,
+        "name": "CHEMBL267740",
+        "score": 7.333,
+        "label": "decoy"
+      },
+      {
+        "rank": 221,
+        "name": "CHEMBL6205",
+        "score": 7.331,
+        "label": "decoy"
+      },
+      {
+        "rank": 222,
+        "name": "CHEMBL6618",
+        "score": 7.327,
+        "label": "decoy"
+      },
+      {
+        "rank": 223,
+        "name": "CHEMBL268887",
+        "score": 7.326,
+        "label": "decoy"
+      },
+      {
+        "rank": 224,
+        "name": "CHEMBL6235",
+        "score": 7.32,
+        "label": "decoy"
+      },
+      {
+        "rank": 225,
+        "name": "CHEMBL267358",
+        "score": 7.312,
+        "label": "decoy"
+      },
+      {
+        "rank": 226,
+        "name": "CHEMBL6845",
+        "score": 7.312,
+        "label": "decoy"
+      },
+      {
+        "rank": 227,
+        "name": "CHEMBL6668",
+        "score": 7.304,
+        "label": "decoy"
+      },
+      {
+        "rank": 228,
+        "name": "CHEMBL441172",
+        "score": 7.303,
+        "label": "decoy"
+      },
+      {
+        "rank": 229,
+        "name": "CHEMBL6447",
+        "score": 7.303,
+        "label": "decoy"
+      },
+      {
+        "rank": 230,
+        "name": "CHEMBL6256",
+        "score": 7.299,
+        "label": "decoy"
+      },
+      {
+        "rank": 231,
+        "name": "CHEMBL4204763",
+        "score": 7.298,
+        "label": "active"
+      },
+      {
+        "rank": 232,
+        "name": "CHEMBL6527",
+        "score": 7.296,
+        "label": "decoy"
+      },
+      {
+        "rank": 233,
+        "name": "CHEMBL265410",
+        "score": 7.291,
+        "label": "decoy"
+      },
+      {
+        "rank": 234,
+        "name": "CHEMBL414006",
+        "score": 7.288,
+        "label": "decoy"
+      },
+      {
+        "rank": 235,
+        "name": "CHEMBL428508",
+        "score": 7.288,
+        "label": "decoy"
+      },
+      {
+        "rank": 236,
+        "name": "CHEMBL6500",
+        "score": 7.284,
+        "label": "decoy"
+      },
+      {
+        "rank": 237,
+        "name": "CHEMBL429244",
+        "score": 7.281,
+        "label": "decoy"
+      },
+      {
+        "rank": 238,
+        "name": "CHEMBL7290",
+        "score": 7.281,
+        "label": "decoy"
+      },
+      {
+        "rank": 239,
+        "name": "CHEMBL268310",
+        "score": 7.28,
+        "label": "decoy"
+      },
+      {
+        "rank": 240,
+        "name": "CHEMBL415288",
+        "score": 7.273,
+        "label": "decoy"
+      },
+      {
+        "rank": 241,
+        "name": "CHEMBL6891",
+        "score": 7.269,
+        "label": "decoy"
+      },
+      {
+        "rank": 242,
+        "name": "CHEMBL4555315",
+        "score": 7.264,
+        "label": "active"
+      },
+      {
+        "rank": 243,
+        "name": "CHEMBL6272",
+        "score": 7.256,
+        "label": "decoy"
+      },
+      {
+        "rank": 244,
+        "name": "CHEMBL7301",
+        "score": 7.242,
+        "label": "decoy"
+      },
+      {
+        "rank": 245,
+        "name": "CHEMBL6815",
+        "score": 7.239,
+        "label": "decoy"
+      },
+      {
+        "rank": 246,
+        "name": "CHEMBL6647",
+        "score": 7.237,
+        "label": "decoy"
+      },
+      {
+        "rank": 247,
+        "name": "CHEMBL6761",
+        "score": 7.23,
+        "label": "decoy"
+      },
+      {
+        "rank": 248,
+        "name": "CHEMBL6265",
+        "score": 7.215,
+        "label": "decoy"
+      },
+      {
+        "rank": 249,
+        "name": "CHEMBL415106",
+        "score": 7.215,
+        "label": "decoy"
+      },
+      {
+        "rank": 250,
+        "name": "CHEMBL6246",
+        "score": 7.209,
+        "label": "decoy"
+      },
+      {
+        "rank": 251,
+        "name": "CHEMBL6276",
+        "score": 7.206,
+        "label": "decoy"
+      },
+      {
+        "rank": 252,
+        "name": "CHEMBL6556",
+        "score": 7.201,
+        "label": "decoy"
+      },
+      {
+        "rank": 253,
+        "name": "CHEMBL4212616",
+        "score": 7.197,
+        "label": "active"
+      },
+      {
+        "rank": 254,
+        "name": "CHEMBL269496",
+        "score": 7.196,
+        "label": "decoy"
+      },
+      {
+        "rank": 255,
+        "name": "CHEMBL267458",
+        "score": 7.188,
+        "label": "decoy"
+      },
+      {
+        "rank": 256,
+        "name": "CHEMBL269537",
+        "score": 7.18,
+        "label": "decoy"
+      },
+      {
+        "rank": 257,
+        "name": "CHEMBL6231",
+        "score": 7.178,
+        "label": "decoy"
+      },
+      {
+        "rank": 258,
+        "name": "CHEMBL266927",
+        "score": 7.177,
+        "label": "decoy"
+      },
+      {
+        "rank": 259,
+        "name": "CHEMBL6226",
+        "score": 7.176,
+        "label": "decoy"
+      },
+      {
+        "rank": 260,
+        "name": "CHEMBL412",
+        "score": 7.176,
+        "label": "decoy"
+      },
+      {
+        "rank": 261,
+        "name": "CHEMBL6762",
+        "score": 7.164,
+        "label": "decoy"
+      },
+      {
+        "rank": 262,
+        "name": "CHEMBL6304",
+        "score": 7.161,
+        "label": "decoy"
+      },
+      {
+        "rank": 263,
+        "name": "CHEMBL415289",
+        "score": 7.159,
+        "label": "decoy"
+      },
+      {
+        "rank": 264,
+        "name": "CHEMBL4640222",
+        "score": 7.151,
+        "label": "active"
+      },
+      {
+        "rank": 265,
+        "name": "CHEMBL6240",
+        "score": 7.146,
+        "label": "decoy"
+      },
+      {
+        "rank": 266,
+        "name": "CHEMBL4644867",
+        "score": 7.142,
+        "label": "active"
+      },
+      {
+        "rank": 267,
+        "name": "CHEMBL4205249",
+        "score": 7.139,
+        "label": "active"
+      },
+      {
+        "rank": 268,
+        "name": "CHEMBL266088",
+        "score": 7.132,
+        "label": "decoy"
+      },
+      {
+        "rank": 269,
+        "name": "CHEMBL6208",
+        "score": 7.127,
+        "label": "decoy"
+      },
+      {
+        "rank": 270,
+        "name": "CHEMBL6297",
+        "score": 7.127,
+        "label": "decoy"
+      },
+      {
+        "rank": 271,
+        "name": "CHEMBL6441",
+        "score": 7.127,
+        "label": "decoy"
+      },
+      {
+        "rank": 272,
+        "name": "CHEMBL6407",
+        "score": 7.123,
+        "label": "decoy"
+      },
+      {
+        "rank": 273,
+        "name": "CHEMBL263075",
+        "score": 7.12,
+        "label": "decoy"
+      },
+      {
+        "rank": 274,
+        "name": "CHEMBL269154",
+        "score": 7.119,
+        "label": "decoy"
+      },
+      {
+        "rank": 275,
+        "name": "CHEMBL6445",
+        "score": 7.115,
+        "label": "decoy"
+      },
+      {
+        "rank": 276,
+        "name": "CHEMBL6262",
+        "score": 7.114,
+        "label": "decoy"
+      },
+      {
+        "rank": 277,
+        "name": "CHEMBL269002",
+        "score": 7.112,
+        "label": "decoy"
+      },
+      {
+        "rank": 278,
+        "name": "CHEMBL6542",
+        "score": 7.101,
+        "label": "decoy"
+      },
+      {
+        "rank": 279,
+        "name": "CHEMBL6463",
+        "score": 7.101,
+        "label": "decoy"
+      },
+      {
+        "rank": 280,
+        "name": "CHEMBL6826",
+        "score": 7.101,
+        "label": "decoy"
+      },
+      {
+        "rank": 281,
+        "name": "CHEMBL266129",
+        "score": 7.101,
+        "label": "decoy"
+      },
+      {
+        "rank": 282,
+        "name": "CHEMBL6740",
+        "score": 7.099,
+        "label": "decoy"
+      },
+      {
+        "rank": 283,
+        "name": "CHEMBL6282",
+        "score": 7.094,
+        "label": "decoy"
+      },
+      {
+        "rank": 284,
+        "name": "CHEMBL6294",
+        "score": 7.09,
+        "label": "decoy"
+      },
+      {
+        "rank": 285,
+        "name": "CHEMBL6289",
+        "score": 7.088,
+        "label": "decoy"
+      },
+      {
+        "rank": 286,
+        "name": "CHEMBL269305",
+        "score": 7.087,
+        "label": "decoy"
+      },
+      {
+        "rank": 287,
+        "name": "CHEMBL6432",
+        "score": 7.082,
+        "label": "decoy"
+      },
+      {
+        "rank": 288,
+        "name": "CHEMBL415286",
+        "score": 7.08,
+        "label": "decoy"
+      },
+      {
+        "rank": 289,
+        "name": "CHEMBL6316",
+        "score": 7.08,
+        "label": "decoy"
+      },
+      {
+        "rank": 290,
+        "name": "CHEMBL6793",
+        "score": 7.072,
+        "label": "decoy"
+      },
+      {
+        "rank": 291,
+        "name": "CHEMBL6701",
+        "score": 7.071,
+        "label": "decoy"
+      },
+      {
+        "rank": 292,
+        "name": "CHEMBL6253",
+        "score": 7.069,
+        "label": "decoy"
+      },
+      {
+        "rank": 293,
+        "name": "CHEMBL6948",
+        "score": 7.058,
+        "label": "decoy"
+      },
+      {
+        "rank": 294,
+        "name": "CHEMBL266315",
+        "score": 7.054,
+        "label": "decoy"
+      },
+      {
+        "rank": 295,
+        "name": "CHEMBL6471",
+        "score": 7.054,
+        "label": "decoy"
+      },
+      {
+        "rank": 296,
+        "name": "CHEMBL267457",
+        "score": 7.051,
+        "label": "decoy"
+      },
+      {
+        "rank": 297,
+        "name": "CHEMBL6411",
+        "score": 7.048,
+        "label": "decoy"
+      },
+      {
+        "rank": 298,
+        "name": "CHEMBL6209",
+        "score": 7.047,
+        "label": "decoy"
+      },
+      {
+        "rank": 299,
+        "name": "CHEMBL265663",
+        "score": 7.046,
+        "label": "decoy"
+      },
+      {
+        "rank": 300,
+        "name": "CHEMBL6312",
+        "score": 7.043,
+        "label": "decoy"
+      },
+      {
+        "rank": 301,
+        "name": "CHEMBL6597",
+        "score": 7.043,
+        "label": "decoy"
+      },
+      {
+        "rank": 302,
+        "name": "CHEMBL6634",
+        "score": 7.035,
+        "label": "decoy"
+      },
+      {
+        "rank": 303,
+        "name": "CHEMBL415287",
+        "score": 7.034,
+        "label": "decoy"
+      },
+      {
+        "rank": 304,
+        "name": "CHEMBL266473",
+        "score": 7.034,
+        "label": "decoy"
+      },
+      {
+        "rank": 305,
+        "name": "CHEMBL267628",
+        "score": 7.03,
+        "label": "decoy"
+      },
+      {
+        "rank": 306,
+        "name": "CHEMBL267913",
+        "score": 7.023,
+        "label": "decoy"
+      },
+      {
+        "rank": 307,
+        "name": "CHEMBL6791",
+        "score": 7.021,
+        "label": "decoy"
+      },
+      {
+        "rank": 308,
+        "name": "CHEMBL266026",
+        "score": 7.02,
+        "label": "decoy"
+      },
+      {
+        "rank": 309,
+        "name": "CHEMBL268769",
+        "score": 7.019,
+        "label": "decoy"
+      },
+      {
+        "rank": 310,
+        "name": "CHEMBL7131",
+        "score": 7.018,
+        "label": "decoy"
+      },
+      {
+        "rank": 311,
+        "name": "CHEMBL6683",
+        "score": 7.014,
+        "label": "decoy"
+      },
+      {
+        "rank": 312,
+        "name": "CHEMBL6421",
+        "score": 7.008,
+        "label": "decoy"
+      },
+      {
+        "rank": 313,
+        "name": "CHEMBL267125",
+        "score": 7.003,
+        "label": "decoy"
+      },
+      {
+        "rank": 314,
+        "name": "CHEMBL6274",
+        "score": 6.997,
+        "label": "decoy"
+      },
+      {
+        "rank": 315,
+        "name": "CHEMBL6627",
+        "score": 6.989,
+        "label": "decoy"
+      },
+      {
+        "rank": 316,
+        "name": "CHEMBL266279",
+        "score": 6.979,
+        "label": "decoy"
+      },
+      {
+        "rank": 317,
+        "name": "CHEMBL6630",
+        "score": 6.979,
+        "label": "decoy"
+      },
+      {
+        "rank": 318,
+        "name": "CHEMBL6569",
+        "score": 6.974,
+        "label": "decoy"
+      },
+      {
+        "rank": 319,
+        "name": "CHEMBL6814",
+        "score": 6.973,
+        "label": "decoy"
+      },
+      {
+        "rank": 320,
+        "name": "CHEMBL6210",
+        "score": 6.972,
+        "label": "decoy"
+      },
+      {
+        "rank": 321,
+        "name": "CHEMBL266460",
+        "score": 6.963,
+        "label": "decoy"
+      },
+      {
+        "rank": 322,
+        "name": "CHEMBL264721",
+        "score": 6.96,
+        "label": "decoy"
+      },
+      {
+        "rank": 323,
+        "name": "CHEMBL6481",
+        "score": 6.955,
+        "label": "decoy"
+      },
+      {
+        "rank": 324,
+        "name": "CHEMBL266170",
+        "score": 6.952,
+        "label": "decoy"
+      },
+      {
+        "rank": 325,
+        "name": "CHEMBL6465",
+        "score": 6.951,
+        "label": "decoy"
+      },
+      {
+        "rank": 326,
+        "name": "CHEMBL6638",
+        "score": 6.946,
+        "label": "decoy"
+      },
+      {
+        "rank": 327,
+        "name": "CHEMBL266706",
+        "score": 6.94,
+        "label": "decoy"
+      },
+      {
+        "rank": 328,
+        "name": "CHEMBL6433",
+        "score": 6.934,
+        "label": "decoy"
+      },
+      {
+        "rank": 329,
+        "name": "CHEMBL6412",
+        "score": 6.933,
+        "label": "decoy"
+      },
+      {
+        "rank": 330,
+        "name": "CHEMBL428674",
+        "score": 6.93,
+        "label": "decoy"
+      },
+      {
+        "rank": 331,
+        "name": "CHEMBL6843",
+        "score": 6.929,
+        "label": "decoy"
+      },
+      {
+        "rank": 332,
+        "name": "CHEMBL427605",
+        "score": 6.926,
+        "label": "decoy"
+      },
+      {
+        "rank": 333,
+        "name": "CHEMBL4522072",
+        "score": 6.925,
+        "label": "active"
+      },
+      {
+        "rank": 334,
+        "name": "CHEMBL266660",
+        "score": 6.92,
+        "label": "decoy"
+      },
+      {
+        "rank": 335,
+        "name": "CHEMBL6766",
+        "score": 6.916,
+        "label": "decoy"
+      },
+      {
+        "rank": 336,
+        "name": "CHEMBL6244",
+        "score": 6.915,
+        "label": "decoy"
+      },
+      {
+        "rank": 337,
+        "name": "CHEMBL6446",
+        "score": 6.915,
+        "label": "decoy"
+      },
+      {
+        "rank": 338,
+        "name": "CHEMBL6619",
+        "score": 6.913,
+        "label": "decoy"
+      },
+      {
+        "rank": 339,
+        "name": "CHEMBL414200",
+        "score": 6.912,
+        "label": "decoy"
+      },
+      {
+        "rank": 340,
+        "name": "CHEMBL6247",
+        "score": 6.91,
+        "label": "decoy"
+      },
+      {
+        "rank": 341,
+        "name": "CHEMBL6609",
+        "score": 6.908,
+        "label": "decoy"
+      },
+      {
+        "rank": 342,
+        "name": "CHEMBL6338",
+        "score": 6.9,
+        "label": "decoy"
+      },
+      {
+        "rank": 343,
+        "name": "CHEMBL268598",
+        "score": 6.899,
+        "label": "decoy"
+      },
+      {
+        "rank": 344,
+        "name": "CHEMBL6916",
+        "score": 6.896,
+        "label": "decoy"
+      },
+      {
+        "rank": 345,
+        "name": "CHEMBL268174",
+        "score": 6.895,
+        "label": "decoy"
+      },
+      {
+        "rank": 346,
+        "name": "CHEMBL266930",
+        "score": 6.895,
+        "label": "decoy"
+      },
+      {
+        "rank": 347,
+        "name": "CHEMBL6346",
+        "score": 6.891,
+        "label": "decoy"
+      },
+      {
+        "rank": 348,
+        "name": "CHEMBL265621",
+        "score": 6.889,
+        "label": "decoy"
+      },
+      {
+        "rank": 349,
+        "name": "CHEMBL6801",
+        "score": 6.888,
+        "label": "decoy"
+      },
+      {
+        "rank": 350,
+        "name": "CHEMBL6606",
+        "score": 6.882,
+        "label": "decoy"
+      },
+      {
+        "rank": 351,
+        "name": "CHEMBL266458",
+        "score": 6.874,
+        "label": "decoy"
+      },
+      {
+        "rank": 352,
+        "name": "CHEMBL268116",
+        "score": 6.874,
+        "label": "decoy"
+      },
+      {
+        "rank": 353,
+        "name": "CHEMBL8",
+        "score": 6.873,
+        "label": "decoy"
+      },
+      {
+        "rank": 354,
+        "name": "CHEMBL6264",
+        "score": 6.872,
+        "label": "decoy"
+      },
+      {
+        "rank": 355,
+        "name": "CHEMBL404992",
+        "score": 6.871,
+        "label": "decoy"
+      },
+      {
+        "rank": 356,
+        "name": "CHEMBL6631",
+        "score": 6.871,
+        "label": "decoy"
+      },
+      {
+        "rank": 357,
+        "name": "CHEMBL6555",
+        "score": 6.867,
+        "label": "decoy"
+      },
+      {
+        "rank": 358,
+        "name": "CHEMBL6566",
+        "score": 6.865,
+        "label": "decoy"
+      },
+      {
+        "rank": 359,
+        "name": "CHEMBL6865",
+        "score": 6.865,
+        "label": "decoy"
+      },
+      {
+        "rank": 360,
+        "name": "CHEMBL269075",
+        "score": 6.862,
+        "label": "decoy"
+      },
+      {
+        "rank": 361,
+        "name": "CHEMBL6439",
+        "score": 6.856,
+        "label": "decoy"
+      },
+      {
+        "rank": 362,
+        "name": "CHEMBL265664",
+        "score": 6.846,
+        "label": "decoy"
+      },
+      {
+        "rank": 363,
+        "name": "CHEMBL266684",
+        "score": 6.845,
+        "label": "decoy"
+      },
+      {
+        "rank": 364,
+        "name": "CHEMBL268339",
+        "score": 6.842,
+        "label": "decoy"
+      },
+      {
+        "rank": 365,
+        "name": "CHEMBL6299",
+        "score": 6.841,
+        "label": "decoy"
+      },
+      {
+        "rank": 366,
+        "name": "CHEMBL6659",
+        "score": 6.832,
+        "label": "decoy"
+      },
+      {
+        "rank": 367,
+        "name": "CHEMBL6429",
+        "score": 6.831,
+        "label": "decoy"
+      },
+      {
+        "rank": 368,
+        "name": "CHEMBL6530",
+        "score": 6.83,
+        "label": "decoy"
+      },
+      {
+        "rank": 369,
+        "name": "CHEMBL6855",
+        "score": 6.83,
+        "label": "decoy"
+      },
+      {
+        "rank": 370,
+        "name": "CHEMBL6425",
+        "score": 6.827,
+        "label": "decoy"
+      },
+      {
+        "rank": 371,
+        "name": "CHEMBL6",
+        "score": 6.826,
+        "label": "decoy"
+      },
+      {
+        "rank": 372,
+        "name": "CHEMBL266957",
+        "score": 6.825,
+        "label": "decoy"
+      },
+      {
+        "rank": 373,
+        "name": "CHEMBL267142",
+        "score": 6.825,
+        "label": "decoy"
+      },
+      {
+        "rank": 374,
+        "name": "CHEMBL6204",
+        "score": 6.824,
+        "label": "decoy"
+      },
+      {
+        "rank": 375,
+        "name": "CHEMBL6382",
+        "score": 6.804,
+        "label": "decoy"
+      },
+      {
+        "rank": 376,
+        "name": "CHEMBL6831",
+        "score": 6.8,
+        "label": "decoy"
+      },
+      {
+        "rank": 377,
+        "name": "CHEMBL269304",
+        "score": 6.799,
+        "label": "decoy"
+      },
+      {
+        "rank": 378,
+        "name": "CHEMBL267036",
+        "score": 6.795,
+        "label": "decoy"
+      },
+      {
+        "rank": 379,
+        "name": "CHEMBL6455",
+        "score": 6.79,
+        "label": "decoy"
+      },
+      {
+        "rank": 380,
+        "name": "CHEMBL6778",
+        "score": 6.789,
+        "label": "decoy"
+      },
+      {
+        "rank": 381,
+        "name": "CHEMBL268412",
+        "score": 6.788,
+        "label": "decoy"
+      },
+      {
+        "rank": 382,
+        "name": "CHEMBL268770",
+        "score": 6.777,
+        "label": "decoy"
+      },
+      {
+        "rank": 383,
+        "name": "CHEMBL269122",
+        "score": 6.777,
+        "label": "decoy"
+      },
+      {
+        "rank": 384,
+        "name": "CHEMBL6335",
+        "score": 6.776,
+        "label": "decoy"
+      },
+      {
+        "rank": 385,
+        "name": "CHEMBL6336",
+        "score": 6.776,
+        "label": "decoy"
+      },
+      {
+        "rank": 386,
+        "name": "CHEMBL269536",
+        "score": 6.773,
+        "label": "decoy"
+      },
+      {
+        "rank": 387,
+        "name": "CHEMBL6311",
+        "score": 6.77,
+        "label": "decoy"
+      },
+      {
+        "rank": 388,
+        "name": "CHEMBL269573",
+        "score": 6.769,
+        "label": "decoy"
+      },
+      {
+        "rank": 389,
+        "name": "CHEMBL6225",
+        "score": 6.762,
+        "label": "decoy"
+      },
+      {
+        "rank": 390,
+        "name": "CHEMBL415292",
+        "score": 6.761,
+        "label": "decoy"
+      },
+      {
+        "rank": 391,
+        "name": "CHEMBL6462",
+        "score": 6.754,
+        "label": "decoy"
+      },
+      {
+        "rank": 392,
+        "name": "CHEMBL6785",
+        "score": 6.747,
+        "label": "decoy"
+      },
+      {
+        "rank": 393,
+        "name": "CHEMBL6654",
+        "score": 6.745,
+        "label": "decoy"
+      },
+      {
+        "rank": 394,
+        "name": "CHEMBL7298",
+        "score": 6.745,
+        "label": "decoy"
+      },
+      {
+        "rank": 395,
+        "name": "CHEMBL267372",
+        "score": 6.745,
+        "label": "decoy"
+      },
+      {
+        "rank": 396,
+        "name": "CHEMBL6273",
+        "score": 6.744,
+        "label": "decoy"
+      },
+      {
+        "rank": 397,
+        "name": "CHEMBL4637964",
+        "score": 6.742,
+        "label": "active"
+      },
+      {
+        "rank": 398,
+        "name": "CHEMBL6440",
+        "score": 6.738,
+        "label": "decoy"
+      },
+      {
+        "rank": 399,
+        "name": "CHEMBL6437",
+        "score": 6.737,
+        "label": "decoy"
+      },
+      {
+        "rank": 400,
+        "name": "CHEMBL6386",
+        "score": 6.735,
+        "label": "decoy"
+      },
+      {
+        "rank": 401,
+        "name": "CHEMBL6901",
+        "score": 6.735,
+        "label": "decoy"
+      },
+      {
+        "rank": 402,
+        "name": "CHEMBL6482",
+        "score": 6.734,
+        "label": "decoy"
+      },
+      {
+        "rank": 403,
+        "name": "CHEMBL6633",
+        "score": 6.734,
+        "label": "decoy"
+      },
+      {
+        "rank": 404,
+        "name": "CHEMBL267164",
+        "score": 6.73,
+        "label": "decoy"
+      },
+      {
+        "rank": 405,
+        "name": "CHEMBL269570",
+        "score": 6.726,
+        "label": "decoy"
+      },
+      {
+        "rank": 406,
+        "name": "CHEMBL268855",
+        "score": 6.724,
+        "label": "decoy"
+      },
+      {
+        "rank": 407,
+        "name": "CHEMBL9",
+        "score": 6.721,
+        "label": "decoy"
+      },
+      {
+        "rank": 408,
+        "name": "CHEMBL6771",
+        "score": 6.72,
+        "label": "decoy"
+      },
+      {
+        "rank": 409,
+        "name": "CHEMBL6714",
+        "score": 6.719,
+        "label": "decoy"
+      },
+      {
+        "rank": 410,
+        "name": "CHEMBL268356",
+        "score": 6.716,
+        "label": "decoy"
+      },
+      {
+        "rank": 411,
+        "name": "CHEMBL6459",
+        "score": 6.713,
+        "label": "decoy"
+      },
+      {
+        "rank": 412,
+        "name": "CHEMBL6588",
+        "score": 6.711,
+        "label": "decoy"
+      },
+      {
+        "rank": 413,
+        "name": "CHEMBL263079",
+        "score": 6.71,
+        "label": "decoy"
+      },
+      {
+        "rank": 414,
+        "name": "CHEMBL3917174",
+        "score": 6.708,
+        "label": "active"
+      },
+      {
+        "rank": 415,
+        "name": "CHEMBL266732",
+        "score": 6.708,
+        "label": "decoy"
+      },
+      {
+        "rank": 416,
+        "name": "CHEMBL263881",
+        "score": 6.707,
+        "label": "decoy"
+      },
+      {
+        "rank": 417,
+        "name": "CHEMBL6546",
+        "score": 6.707,
+        "label": "decoy"
+      },
+      {
+        "rank": 418,
+        "name": "CHEMBL267229",
+        "score": 6.701,
+        "label": "decoy"
+      },
+      {
+        "rank": 419,
+        "name": "CHEMBL407",
+        "score": 6.701,
+        "label": "decoy"
+      },
+      {
+        "rank": 420,
+        "name": "CHEMBL6861",
+        "score": 6.695,
+        "label": "decoy"
+      },
+      {
+        "rank": 421,
+        "name": "CHEMBL6576",
+        "score": 6.694,
+        "label": "decoy"
+      },
+      {
+        "rank": 422,
+        "name": "CHEMBL269703",
+        "score": 6.691,
+        "label": "decoy"
+      },
+      {
+        "rank": 423,
+        "name": "CHEMBL7137",
+        "score": 6.691,
+        "label": "decoy"
+      },
+      {
+        "rank": 424,
+        "name": "CHEMBL6800",
+        "score": 6.687,
+        "label": "decoy"
+      },
+      {
+        "rank": 425,
+        "name": "CHEMBL6655",
+        "score": 6.685,
+        "label": "decoy"
+      },
+      {
+        "rank": 426,
+        "name": "CHEMBL6595",
+        "score": 6.684,
+        "label": "decoy"
+      },
+      {
+        "rank": 427,
+        "name": "CHEMBL268439",
+        "score": 6.683,
+        "label": "decoy"
+      },
+      {
+        "rank": 428,
+        "name": "CHEMBL6400",
+        "score": 6.677,
+        "label": "decoy"
+      },
+      {
+        "rank": 429,
+        "name": "CHEMBL7237",
+        "score": 6.671,
+        "label": "decoy"
+      },
+      {
+        "rank": 430,
+        "name": "CHEMBL268098",
+        "score": 6.669,
+        "label": "decoy"
+      },
+      {
+        "rank": 431,
+        "name": "CHEMBL269705",
+        "score": 6.667,
+        "label": "decoy"
+      },
+      {
+        "rank": 432,
+        "name": "CHEMBL6789",
+        "score": 6.664,
+        "label": "decoy"
+      },
+      {
+        "rank": 433,
+        "name": "CHEMBL268627",
+        "score": 6.652,
+        "label": "decoy"
+      },
+      {
+        "rank": 434,
+        "name": "CHEMBL6460",
+        "score": 6.651,
+        "label": "decoy"
+      },
+      {
+        "rank": 435,
+        "name": "CHEMBL263081",
+        "score": 6.649,
+        "label": "decoy"
+      },
+      {
+        "rank": 436,
+        "name": "CHEMBL16",
+        "score": 6.649,
+        "label": "decoy"
+      },
+      {
+        "rank": 437,
+        "name": "CHEMBL6755",
+        "score": 6.647,
+        "label": "decoy"
+      },
+      {
+        "rank": 438,
+        "name": "CHEMBL267705",
+        "score": 6.645,
+        "label": "decoy"
+      },
+      {
+        "rank": 439,
+        "name": "CHEMBL6589",
+        "score": 6.644,
+        "label": "decoy"
+      },
+      {
+        "rank": 440,
+        "name": "CHEMBL6937",
+        "score": 6.642,
+        "label": "decoy"
+      },
+      {
+        "rank": 441,
+        "name": "CHEMBL6468",
+        "score": 6.638,
+        "label": "decoy"
+      },
+      {
+        "rank": 442,
+        "name": "CHEMBL6824",
+        "score": 6.637,
+        "label": "decoy"
+      },
+      {
+        "rank": 443,
+        "name": "CHEMBL266220",
+        "score": 6.636,
+        "label": "decoy"
+      },
+      {
+        "rank": 444,
+        "name": "CHEMBL6946",
+        "score": 6.632,
+        "label": "decoy"
+      },
+      {
+        "rank": 445,
+        "name": "CHEMBL415108",
+        "score": 6.63,
+        "label": "decoy"
+      },
+      {
+        "rank": 446,
+        "name": "CHEMBL7238",
+        "score": 6.629,
+        "label": "decoy"
+      },
+      {
+        "rank": 447,
+        "name": "CHEMBL6888",
+        "score": 6.628,
+        "label": "decoy"
+      },
+      {
+        "rank": 448,
+        "name": "CHEMBL269497",
+        "score": 6.625,
+        "label": "decoy"
+      },
+      {
+        "rank": 449,
+        "name": "CHEMBL6283",
+        "score": 6.624,
+        "label": "decoy"
+      },
+      {
+        "rank": 450,
+        "name": "CHEMBL263074",
+        "score": 6.623,
+        "label": "decoy"
+      },
+      {
+        "rank": 451,
+        "name": "CHEMBL6233",
+        "score": 6.622,
+        "label": "decoy"
+      },
+      {
+        "rank": 452,
+        "name": "CHEMBL262570",
+        "score": 6.622,
+        "label": "decoy"
+      },
+      {
+        "rank": 453,
+        "name": "CHEMBL266685",
+        "score": 6.621,
+        "label": "decoy"
+      },
+      {
+        "rank": 454,
+        "name": "CHEMBL6309",
+        "score": 6.618,
+        "label": "decoy"
+      },
+      {
+        "rank": 455,
+        "name": "CHEMBL6642",
+        "score": 6.617,
+        "label": "decoy"
+      },
+      {
+        "rank": 456,
+        "name": "CHEMBL6544",
+        "score": 6.606,
+        "label": "decoy"
+      },
+      {
+        "rank": 457,
+        "name": "CHEMBL6277",
+        "score": 6.604,
+        "label": "decoy"
+      },
+      {
+        "rank": 458,
+        "name": "CHEMBL267914",
+        "score": 6.603,
+        "label": "decoy"
+      },
+      {
+        "rank": 459,
+        "name": "CHEMBL428478",
+        "score": 6.603,
+        "label": "decoy"
+      },
+      {
+        "rank": 460,
+        "name": "CHEMBL6221",
+        "score": 6.597,
+        "label": "decoy"
+      },
+      {
+        "rank": 461,
+        "name": "CHEMBL6443",
+        "score": 6.595,
+        "label": "decoy"
+      },
+      {
+        "rank": 462,
+        "name": "CHEMBL6300",
+        "score": 6.594,
+        "label": "decoy"
+      },
+      {
+        "rank": 463,
+        "name": "CHEMBL6504",
+        "score": 6.59,
+        "label": "decoy"
+      },
+      {
+        "rank": 464,
+        "name": "CHEMBL268652",
+        "score": 6.589,
+        "label": "decoy"
+      },
+      {
+        "rank": 465,
+        "name": "CHEMBL267627",
+        "score": 6.585,
+        "label": "decoy"
+      },
+      {
+        "rank": 466,
+        "name": "CHEMBL267498",
+        "score": 6.585,
+        "label": "decoy"
+      },
+      {
+        "rank": 467,
+        "name": "CHEMBL6464",
+        "score": 6.572,
+        "label": "decoy"
+      },
+      {
+        "rank": 468,
+        "name": "CHEMBL6353",
+        "score": 6.57,
+        "label": "decoy"
+      },
+      {
+        "rank": 469,
+        "name": "CHEMBL6399",
+        "score": 6.567,
+        "label": "decoy"
+      },
+      {
+        "rank": 470,
+        "name": "CHEMBL7009",
+        "score": 6.565,
+        "label": "decoy"
+      },
+      {
+        "rank": 471,
+        "name": "CHEMBL6594",
+        "score": 6.564,
+        "label": "decoy"
+      },
+      {
+        "rank": 472,
+        "name": "CHEMBL6442",
+        "score": 6.561,
+        "label": "decoy"
+      },
+      {
+        "rank": 473,
+        "name": "CHEMBL6747",
+        "score": 6.561,
+        "label": "decoy"
+      },
+      {
+        "rank": 474,
+        "name": "CHEMBL268414",
+        "score": 6.556,
+        "label": "decoy"
+      },
+      {
+        "rank": 475,
+        "name": "CHEMBL6721",
+        "score": 6.545,
+        "label": "decoy"
+      },
+      {
+        "rank": 476,
+        "name": "CHEMBL6452",
+        "score": 6.54,
+        "label": "decoy"
+      },
+      {
+        "rank": 477,
+        "name": "CHEMBL6612",
+        "score": 6.539,
+        "label": "decoy"
+      },
+      {
+        "rank": 478,
+        "name": "CHEMBL6275",
+        "score": 6.537,
+        "label": "decoy"
+      },
+      {
+        "rank": 479,
+        "name": "CHEMBL6239",
+        "score": 6.534,
+        "label": "decoy"
+      },
+      {
+        "rank": 480,
+        "name": "CHEMBL6517",
+        "score": 6.53,
+        "label": "decoy"
+      },
+      {
+        "rank": 481,
+        "name": "CHEMBL6543",
+        "score": 6.53,
+        "label": "decoy"
+      },
+      {
+        "rank": 482,
+        "name": "CHEMBL6862",
+        "score": 6.53,
+        "label": "decoy"
+      },
+      {
+        "rank": 483,
+        "name": "CHEMBL6837",
+        "score": 6.521,
+        "label": "decoy"
+      },
+      {
+        "rank": 484,
+        "name": "CHEMBL415293",
+        "score": 6.521,
+        "label": "decoy"
+      },
+      {
+        "rank": 485,
+        "name": "CHEMBL266541",
+        "score": 6.519,
+        "label": "decoy"
+      },
+      {
+        "rank": 486,
+        "name": "CHEMBL269495",
+        "score": 6.518,
+        "label": "decoy"
+      },
+      {
+        "rank": 487,
+        "name": "CHEMBL263080",
+        "score": 6.516,
+        "label": "decoy"
+      },
+      {
+        "rank": 488,
+        "name": "CHEMBL6414",
+        "score": 6.513,
+        "label": "decoy"
+      },
+      {
+        "rank": 489,
+        "name": "CHEMBL269598",
+        "score": 6.512,
+        "label": "decoy"
+      },
+      {
+        "rank": 490,
+        "name": "CHEMBL6367",
+        "score": 6.503,
+        "label": "decoy"
+      },
+      {
+        "rank": 491,
+        "name": "CHEMBL7069",
+        "score": 6.502,
+        "label": "decoy"
+      },
+      {
+        "rank": 492,
+        "name": "CHEMBL6234",
+        "score": 6.499,
+        "label": "decoy"
+      },
+      {
+        "rank": 493,
+        "name": "CHEMBL267639",
+        "score": 6.497,
+        "label": "decoy"
+      },
+      {
+        "rank": 494,
+        "name": "CHEMBL6548",
+        "score": 6.492,
+        "label": "decoy"
+      },
+      {
+        "rank": 495,
+        "name": "CHEMBL6887",
+        "score": 6.488,
+        "label": "decoy"
+      },
+      {
+        "rank": 496,
+        "name": "CHEMBL6389",
+        "score": 6.486,
+        "label": "decoy"
+      },
+      {
+        "rank": 497,
+        "name": "CHEMBL266707",
+        "score": 6.48,
+        "label": "decoy"
+      },
+      {
+        "rank": 498,
+        "name": "CHEMBL268542",
+        "score": 6.48,
+        "label": "decoy"
+      },
+      {
+        "rank": 499,
+        "name": "CHEMBL6201",
+        "score": 6.479,
+        "label": "decoy"
+      },
+      {
+        "rank": 500,
+        "name": "CHEMBL6301",
+        "score": 6.479,
+        "label": "decoy"
+      },
+      {
+        "rank": 501,
+        "name": "CHEMBL6370",
+        "score": 6.476,
+        "label": "decoy"
+      },
+      {
+        "rank": 502,
+        "name": "CHEMBL269046",
+        "score": 6.473,
+        "label": "decoy"
+      },
+      {
+        "rank": 503,
+        "name": "CHEMBL266943",
+        "score": 6.473,
+        "label": "decoy"
+      },
+      {
+        "rank": 504,
+        "name": "CHEMBL6907",
+        "score": 6.472,
+        "label": "decoy"
+      },
+      {
+        "rank": 505,
+        "name": "CHEMBL6564",
+        "score": 6.456,
+        "label": "decoy"
+      },
+      {
+        "rank": 506,
+        "name": "CHEMBL6285",
+        "score": 6.453,
+        "label": "decoy"
+      },
+      {
+        "rank": 507,
+        "name": "CHEMBL268176",
+        "score": 6.442,
+        "label": "decoy"
+      },
+      {
+        "rank": 508,
+        "name": "CHEMBL6552",
+        "score": 6.44,
+        "label": "decoy"
+      },
+      {
+        "rank": 509,
+        "name": "CHEMBL6945",
+        "score": 6.431,
+        "label": "decoy"
+      },
+      {
+        "rank": 510,
+        "name": "CHEMBL6449",
+        "score": 6.43,
+        "label": "decoy"
+      },
+      {
+        "rank": 511,
+        "name": "CHEMBL6384",
+        "score": 6.427,
+        "label": "decoy"
+      },
+      {
+        "rank": 512,
+        "name": "CHEMBL269366",
+        "score": 6.427,
+        "label": "decoy"
+      },
+      {
+        "rank": 513,
+        "name": "CHEMBL268454",
+        "score": 6.419,
+        "label": "decoy"
+      },
+      {
+        "rank": 514,
+        "name": "CHEMBL6369",
+        "score": 6.413,
+        "label": "decoy"
+      },
+      {
+        "rank": 515,
+        "name": "CHEMBL6725",
+        "score": 6.412,
+        "label": "decoy"
+      },
+      {
+        "rank": 516,
+        "name": "CHEMBL427826",
+        "score": 6.409,
+        "label": "decoy"
+      },
+      {
+        "rank": 517,
+        "name": "CHEMBL6278",
+        "score": 6.408,
+        "label": "decoy"
+      },
+      {
+        "rank": 518,
+        "name": "CHEMBL269018",
+        "score": 6.406,
+        "label": "decoy"
+      },
+      {
+        "rank": 519,
+        "name": "CHEMBL6603",
+        "score": 6.394,
+        "label": "decoy"
+      },
+      {
+        "rank": 520,
+        "name": "CHEMBL266429",
+        "score": 6.391,
+        "label": "decoy"
+      },
+      {
+        "rank": 521,
+        "name": "CHEMBL268830",
+        "score": 6.38,
+        "label": "decoy"
+      },
+      {
+        "rank": 522,
+        "name": "CHEMBL6308",
+        "score": 6.38,
+        "label": "decoy"
+      },
+      {
+        "rank": 523,
+        "name": "CHEMBL6827",
+        "score": 6.38,
+        "label": "decoy"
+      },
+      {
+        "rank": 524,
+        "name": "CHEMBL266302",
+        "score": 6.375,
+        "label": "decoy"
+      },
+      {
+        "rank": 525,
+        "name": "CHEMBL266316",
+        "score": 6.371,
+        "label": "decoy"
+      },
+      {
+        "rank": 526,
+        "name": "CHEMBL6469",
+        "score": 6.37,
+        "label": "decoy"
+      },
+      {
+        "rank": 527,
+        "name": "CHEMBL415290",
+        "score": 6.357,
+        "label": "decoy"
+      },
+      {
+        "rank": 528,
+        "name": "CHEMBL6835",
+        "score": 6.356,
+        "label": "decoy"
+      },
+      {
+        "rank": 529,
+        "name": "CHEMBL6723",
+        "score": 6.354,
+        "label": "decoy"
+      },
+      {
+        "rank": 530,
+        "name": "CHEMBL266318",
+        "score": 6.354,
+        "label": "decoy"
+      },
+      {
+        "rank": 531,
+        "name": "CHEMBL6320",
+        "score": 6.352,
+        "label": "decoy"
+      },
+      {
+        "rank": 532,
+        "name": "CHEMBL6286",
+        "score": 6.351,
+        "label": "decoy"
+      },
+      {
+        "rank": 533,
+        "name": "CHEMBL6613",
+        "score": 6.351,
+        "label": "decoy"
+      },
+      {
+        "rank": 534,
+        "name": "CHEMBL6854",
+        "score": 6.349,
+        "label": "decoy"
+      },
+      {
+        "rank": 535,
+        "name": "CHEMBL267678",
+        "score": 6.348,
+        "label": "decoy"
+      },
+      {
+        "rank": 536,
+        "name": "CHEMBL6486",
+        "score": 6.348,
+        "label": "decoy"
+      },
+      {
+        "rank": 537,
+        "name": "CHEMBL6661",
+        "score": 6.347,
+        "label": "decoy"
+      },
+      {
+        "rank": 538,
+        "name": "CHEMBL267626",
+        "score": 6.333,
+        "label": "decoy"
+      },
+      {
+        "rank": 539,
+        "name": "CHEMBL6704",
+        "score": 6.326,
+        "label": "decoy"
+      },
+      {
+        "rank": 540,
+        "name": "CHEMBL266359",
+        "score": 6.325,
+        "label": "decoy"
+      },
+      {
+        "rank": 541,
+        "name": "CHEMBL6797",
+        "score": 6.322,
+        "label": "decoy"
+      },
+      {
+        "rank": 542,
+        "name": "CHEMBL6864",
+        "score": 6.318,
+        "label": "decoy"
+      },
+      {
+        "rank": 543,
+        "name": "CHEMBL6533",
+        "score": 6.315,
+        "label": "decoy"
+      },
+      {
+        "rank": 544,
+        "name": "CHEMBL267938",
+        "score": 6.314,
+        "label": "decoy"
+      },
+      {
+        "rank": 545,
+        "name": "CHEMBL6677",
+        "score": 6.313,
+        "label": "decoy"
+      },
+      {
+        "rank": 546,
+        "name": "CHEMBL266798",
+        "score": 6.308,
+        "label": "decoy"
+      },
+      {
+        "rank": 547,
+        "name": "CHEMBL6787",
+        "score": 6.307,
+        "label": "decoy"
+      },
+      {
+        "rank": 548,
+        "name": "CHEMBL267456",
+        "score": 6.306,
+        "label": "decoy"
+      },
+      {
+        "rank": 549,
+        "name": "CHEMBL266708",
+        "score": 6.306,
+        "label": "decoy"
+      },
+      {
+        "rank": 550,
+        "name": "CHEMBL6267",
+        "score": 6.303,
+        "label": "decoy"
+      },
+      {
+        "rank": 551,
+        "name": "CHEMBL267163",
+        "score": 6.294,
+        "label": "decoy"
+      },
+      {
+        "rank": 552,
+        "name": "CHEMBL268787",
+        "score": 6.293,
+        "label": "decoy"
+      },
+      {
+        "rank": 553,
+        "name": "CHEMBL6404",
+        "score": 6.291,
+        "label": "decoy"
+      },
+      {
+        "rank": 554,
+        "name": "CHEMBL6805",
+        "score": 6.288,
+        "label": "decoy"
+      },
+      {
+        "rank": 555,
+        "name": "CHEMBL7132",
+        "score": 6.288,
+        "label": "decoy"
+      },
+      {
+        "rank": 556,
+        "name": "CHEMBL6817",
+        "score": 6.287,
+        "label": "decoy"
+      },
+      {
+        "rank": 557,
+        "name": "CHEMBL268626",
+        "score": 6.28,
+        "label": "decoy"
+      },
+      {
+        "rank": 558,
+        "name": "CHEMBL268832",
+        "score": 6.28,
+        "label": "decoy"
+      },
+      {
+        "rank": 559,
+        "name": "CHEMBL6413",
+        "score": 6.278,
+        "label": "decoy"
+      },
+      {
+        "rank": 560,
+        "name": "CHEMBL414400",
+        "score": 6.267,
+        "label": "decoy"
+      },
+      {
+        "rank": 561,
+        "name": "CHEMBL6678",
+        "score": 6.262,
+        "label": "decoy"
+      },
+      {
+        "rank": 562,
+        "name": "CHEMBL418",
+        "score": 6.256,
+        "label": "decoy"
+      },
+      {
+        "rank": 563,
+        "name": "CHEMBL6512",
+        "score": 6.255,
+        "label": "decoy"
+      },
+      {
+        "rank": 564,
+        "name": "CHEMBL6720",
+        "score": 6.252,
+        "label": "decoy"
+      },
+      {
+        "rank": 565,
+        "name": "CHEMBL6741",
+        "score": 6.251,
+        "label": "decoy"
+      },
+      {
+        "rank": 566,
+        "name": "CHEMBL6992",
+        "score": 6.24,
+        "label": "decoy"
+      },
+      {
+        "rank": 567,
+        "name": "CHEMBL266198",
+        "score": 6.236,
+        "label": "decoy"
+      },
+      {
+        "rank": 568,
+        "name": "CHEMBL6641",
+        "score": 6.229,
+        "label": "decoy"
+      },
+      {
+        "rank": 569,
+        "name": "CHEMBL6258",
+        "score": 6.225,
+        "label": "decoy"
+      },
+      {
+        "rank": 570,
+        "name": "CHEMBL6461",
+        "score": 6.225,
+        "label": "decoy"
+      },
+      {
+        "rank": 571,
+        "name": "CHEMBL7059",
+        "score": 6.223,
+        "label": "decoy"
+      },
+      {
+        "rank": 572,
+        "name": "CHEMBL267665",
+        "score": 6.217,
+        "label": "decoy"
+      },
+      {
+        "rank": 573,
+        "name": "CHEMBL6284",
+        "score": 6.205,
+        "label": "decoy"
+      },
+      {
+        "rank": 574,
+        "name": "CHEMBL268099",
+        "score": 6.204,
+        "label": "decoy"
+      },
+      {
+        "rank": 575,
+        "name": "CHEMBL6448",
+        "score": 6.2,
+        "label": "decoy"
+      },
+      {
+        "rank": 576,
+        "name": "CHEMBL6523",
+        "score": 6.197,
+        "label": "decoy"
+      },
+      {
+        "rank": 577,
+        "name": "CHEMBL6732",
+        "score": 6.194,
+        "label": "decoy"
+      },
+      {
+        "rank": 578,
+        "name": "CHEMBL268440",
+        "score": 6.194,
+        "label": "decoy"
+      },
+      {
+        "rank": 579,
+        "name": "CHEMBL268567",
+        "score": 6.182,
+        "label": "decoy"
+      },
+      {
+        "rank": 580,
+        "name": "CHEMBL6672",
+        "score": 6.178,
+        "label": "decoy"
+      },
+      {
+        "rank": 581,
+        "name": "CHEMBL268614",
+        "score": 6.177,
+        "label": "decoy"
+      },
+      {
+        "rank": 582,
+        "name": "CHEMBL6334",
+        "score": 6.174,
+        "label": "decoy"
+      },
+      {
+        "rank": 583,
+        "name": "CHEMBL268113",
+        "score": 6.17,
+        "label": "decoy"
+      },
+      {
+        "rank": 584,
+        "name": "CHEMBL266301",
+        "score": 6.166,
+        "label": "decoy"
+      },
+      {
+        "rank": 585,
+        "name": "CHEMBL267833",
+        "score": 6.163,
+        "label": "decoy"
+      },
+      {
+        "rank": 586,
+        "name": "CHEMBL6649",
+        "score": 6.159,
+        "label": "decoy"
+      },
+      {
+        "rank": 587,
+        "name": "CHEMBL6387",
+        "score": 6.159,
+        "label": "decoy"
+      },
+      {
+        "rank": 588,
+        "name": "CHEMBL404",
+        "score": 6.148,
+        "label": "decoy"
+      },
+      {
+        "rank": 589,
+        "name": "CHEMBL6444",
+        "score": 6.148,
+        "label": "decoy"
+      },
+      {
+        "rank": 590,
+        "name": "CHEMBL22",
+        "score": 6.146,
+        "label": "decoy"
+      },
+      {
+        "rank": 591,
+        "name": "CHEMBL267192",
+        "score": 6.143,
+        "label": "decoy"
+      },
+      {
+        "rank": 592,
+        "name": "CHEMBL6251",
+        "score": 6.135,
+        "label": "decoy"
+      },
+      {
+        "rank": 593,
+        "name": "CHEMBL269774",
+        "score": 6.131,
+        "label": "decoy"
+      },
+      {
+        "rank": 594,
+        "name": "CHEMBL269001",
+        "score": 6.13,
+        "label": "decoy"
+      },
+      {
+        "rank": 595,
+        "name": "CHEMBL6485",
+        "score": 6.123,
+        "label": "decoy"
+      },
+      {
+        "rank": 596,
+        "name": "CHEMBL7057",
+        "score": 6.108,
+        "label": "decoy"
+      },
+      {
+        "rank": 597,
+        "name": "CHEMBL6966",
+        "score": 6.105,
+        "label": "decoy"
+      },
+      {
+        "rank": 598,
+        "name": "CHEMBL6587",
+        "score": 6.101,
+        "label": "decoy"
+      },
+      {
+        "rank": 599,
+        "name": "CHEMBL268530",
+        "score": 6.1,
+        "label": "decoy"
+      },
+      {
+        "rank": 600,
+        "name": "CHEMBL6962",
+        "score": 6.099,
+        "label": "decoy"
+      },
+      {
+        "rank": 601,
+        "name": "CHEMBL269057",
+        "score": 6.087,
+        "label": "decoy"
+      },
+      {
+        "rank": 602,
+        "name": "CHEMBL269381",
+        "score": 6.074,
+        "label": "decoy"
+      },
+      {
+        "rank": 603,
+        "name": "CHEMBL267915",
+        "score": 6.072,
+        "label": "decoy"
+      },
+      {
+        "rank": 604,
+        "name": "CHEMBL6528",
+        "score": 6.07,
+        "label": "decoy"
+      },
+      {
+        "rank": 605,
+        "name": "CHEMBL6418",
+        "score": 6.069,
+        "label": "decoy"
+      },
+      {
+        "rank": 606,
+        "name": "CHEMBL6750",
+        "score": 6.067,
+        "label": "decoy"
+      },
+      {
+        "rank": 607,
+        "name": "CHEMBL6752",
+        "score": 6.066,
+        "label": "decoy"
+      },
+      {
+        "rank": 608,
+        "name": "CHEMBL7288",
+        "score": 6.062,
+        "label": "decoy"
+      },
+      {
+        "rank": 609,
+        "name": "CHEMBL269471",
+        "score": 6.051,
+        "label": "decoy"
+      },
+      {
+        "rank": 610,
+        "name": "CHEMBL267037",
+        "score": 6.047,
+        "label": "decoy"
+      },
+      {
+        "rank": 611,
+        "name": "CHEMBL6730",
+        "score": 6.044,
+        "label": "decoy"
+      },
+      {
+        "rank": 612,
+        "name": "CHEMBL266800",
+        "score": 6.041,
+        "label": "decoy"
+      },
+      {
+        "rank": 613,
+        "name": "CHEMBL267667",
+        "score": 6.038,
+        "label": "decoy"
+      },
+      {
+        "rank": 614,
+        "name": "CHEMBL266197",
+        "score": 6.032,
+        "label": "decoy"
+      },
+      {
+        "rank": 615,
+        "name": "CHEMBL6615",
+        "score": 6.013,
+        "label": "decoy"
+      },
+      {
+        "rank": 616,
+        "name": "CHEMBL268831",
+        "score": 5.99,
+        "label": "decoy"
+      },
+      {
+        "rank": 617,
+        "name": "CHEMBL415475",
+        "score": 5.99,
+        "label": "decoy"
+      },
+      {
+        "rank": 618,
+        "name": "CHEMBL6456",
+        "score": 5.974,
+        "label": "decoy"
+      },
+      {
+        "rank": 619,
+        "name": "CHEMBL6430",
+        "score": 5.971,
+        "label": "decoy"
+      },
+      {
+        "rank": 620,
+        "name": "CHEMBL6635",
+        "score": 5.963,
+        "label": "decoy"
+      },
+      {
+        "rank": 621,
+        "name": "CHEMBL7146",
+        "score": 5.962,
+        "label": "decoy"
+      },
+      {
+        "rank": 622,
+        "name": "CHEMBL6381",
+        "score": 5.958,
+        "label": "decoy"
+      },
+      {
+        "rank": 623,
+        "name": "CHEMBL6876",
+        "score": 5.958,
+        "label": "decoy"
+      },
+      {
+        "rank": 624,
+        "name": "CHEMBL267127",
+        "score": 5.95,
+        "label": "decoy"
+      },
+      {
+        "rank": 625,
+        "name": "CHEMBL266087",
+        "score": 5.943,
+        "label": "decoy"
+      },
+      {
+        "rank": 626,
+        "name": "CHEMBL268856",
+        "score": 5.942,
+        "label": "decoy"
+      },
+      {
+        "rank": 627,
+        "name": "CHEMBL6986",
+        "score": 5.941,
+        "label": "decoy"
+      },
+      {
+        "rank": 628,
+        "name": "CHEMBL6889",
+        "score": 5.93,
+        "label": "decoy"
+      },
+      {
+        "rank": 629,
+        "name": "CHEMBL414182",
+        "score": 5.926,
+        "label": "decoy"
+      },
+      {
+        "rank": 630,
+        "name": "CHEMBL414181",
+        "score": 5.919,
+        "label": "decoy"
+      },
+      {
+        "rank": 631,
+        "name": "CHEMBL427797",
+        "score": 5.91,
+        "label": "decoy"
+      },
+      {
+        "rank": 632,
+        "name": "CHEMBL7253",
+        "score": 5.908,
+        "label": "decoy"
+      },
+      {
+        "rank": 633,
+        "name": "CHEMBL263083",
+        "score": 5.899,
+        "label": "decoy"
+      },
+      {
+        "rank": 634,
+        "name": "CHEMBL7203",
+        "score": 5.896,
+        "label": "decoy"
+      },
+      {
+        "rank": 635,
+        "name": "CHEMBL268667",
+        "score": 5.892,
+        "label": "decoy"
+      },
+      {
+        "rank": 636,
+        "name": "CHEMBL263078",
+        "score": 5.892,
+        "label": "decoy"
+      },
+      {
+        "rank": 637,
+        "name": "CHEMBL268691",
+        "score": 5.881,
+        "label": "decoy"
+      },
+      {
+        "rank": 638,
+        "name": "CHEMBL6706",
+        "score": 5.877,
+        "label": "decoy"
+      },
+      {
+        "rank": 639,
+        "name": "CHEMBL6749",
+        "score": 5.856,
+        "label": "decoy"
+      },
+      {
+        "rank": 640,
+        "name": "CHEMBL6988",
+        "score": 5.854,
+        "label": "decoy"
+      },
+      {
+        "rank": 641,
+        "name": "CHEMBL6502",
+        "score": 5.841,
+        "label": "decoy"
+      },
+      {
+        "rank": 642,
+        "name": "CHEMBL269775",
+        "score": 5.837,
+        "label": "decoy"
+      },
+      {
+        "rank": 643,
+        "name": "CHEMBL6229",
+        "score": 5.821,
+        "label": "decoy"
+      },
+      {
+        "rank": 644,
+        "name": "CHEMBL6710",
+        "score": 5.785,
+        "label": "decoy"
+      },
+      {
+        "rank": 645,
+        "name": "CHEMBL266064",
+        "score": 5.781,
+        "label": "decoy"
+      },
+      {
+        "rank": 646,
+        "name": "CHEMBL6427",
+        "score": 5.777,
+        "label": "decoy"
+      },
+      {
+        "rank": 647,
+        "name": "CHEMBL6871",
+        "score": 5.769,
+        "label": "decoy"
+      },
+      {
+        "rank": 648,
+        "name": "CHEMBL267190",
+        "score": 5.741,
+        "label": "decoy"
+      },
+      {
+        "rank": 649,
+        "name": "CHEMBL6248",
+        "score": 5.739,
+        "label": "decoy"
+      },
+      {
+        "rank": 650,
+        "name": "CHEMBL7192",
+        "score": 5.737,
+        "label": "decoy"
+      },
+      {
+        "rank": 651,
+        "name": "CHEMBL441891",
+        "score": 5.733,
+        "label": "decoy"
+      },
+      {
+        "rank": 652,
+        "name": "CHEMBL18",
+        "score": 5.721,
+        "label": "decoy"
+      },
+      {
+        "rank": 653,
+        "name": "CHEMBL266799",
+        "score": 5.715,
+        "label": "decoy"
+      },
+      {
+        "rank": 654,
+        "name": "CHEMBL268072",
+        "score": 5.715,
+        "label": "decoy"
+      },
+      {
+        "rank": 655,
+        "name": "CHEMBL17",
+        "score": 5.713,
+        "label": "decoy"
+      },
+      {
+        "rank": 656,
+        "name": "CHEMBL266240",
+        "score": 5.689,
+        "label": "decoy"
+      },
+      {
+        "rank": 657,
+        "name": "CHEMBL266572",
+        "score": 5.669,
+        "label": "decoy"
+      },
+      {
+        "rank": 658,
+        "name": "CHEMBL6426",
+        "score": 5.665,
+        "label": "decoy"
+      },
+      {
+        "rank": 659,
+        "name": "CHEMBL6838",
+        "score": 5.662,
+        "label": "decoy"
+      },
+      {
+        "rank": 660,
+        "name": "CHEMBL411",
+        "score": 5.628,
+        "label": "decoy"
+      },
+      {
+        "rank": 661,
+        "name": "CHEMBL268177",
+        "score": 5.597,
+        "label": "decoy"
+      },
+      {
+        "rank": 662,
+        "name": "CHEMBL6724",
+        "score": 5.595,
+        "label": "decoy"
+      },
+      {
+        "rank": 663,
+        "name": "CHEMBL267220",
+        "score": 5.559,
+        "label": "decoy"
+      },
+      {
+        "rank": 664,
+        "name": "CHEMBL6712",
+        "score": 5.525,
+        "label": "decoy"
+      },
+      {
+        "rank": 665,
+        "name": "CHEMBL6857",
+        "score": 5.524,
+        "label": "decoy"
+      },
+      {
+        "rank": 666,
+        "name": "CHEMBL266979",
+        "score": 5.452,
+        "label": "decoy"
+      },
+      {
+        "rank": 667,
+        "name": "CHEMBL6620",
+        "score": 5.429,
+        "label": "decoy"
+      },
+      {
+        "rank": 668,
+        "name": "CHEMBL6902",
+        "score": 5.404,
+        "label": "decoy"
+      },
+      {
+        "rank": 669,
+        "name": "CHEMBL7078",
+        "score": 5.396,
+        "label": "decoy"
+      },
+      {
+        "rank": 670,
+        "name": "CHEMBL13",
+        "score": 5.333,
+        "label": "decoy"
+      },
+      {
+        "rank": 671,
+        "name": "CHEMBL6435",
+        "score": 5.263,
+        "label": "decoy"
+      },
+      {
+        "rank": 672,
+        "name": "CHEMBL12",
+        "score": 5.127,
+        "label": "decoy"
+      },
+      {
+        "rank": 673,
+        "name": "CHEMBL415",
+        "score": 4.98,
+        "label": "decoy"
+      },
+      {
+        "rank": 674,
+        "name": "CHEMBL6607",
+        "score": 4.918,
+        "label": "decoy"
+      },
+      {
+        "rank": 675,
+        "name": "CHEMBL6807",
+        "score": 4.91,
+        "label": "decoy"
+      },
+      {
+        "rank": 676,
+        "name": "CHEMBL267144",
+        "score": 4.846,
+        "label": "decoy"
+      },
+      {
+        "rank": 677,
+        "name": "CHEMBL6453",
+        "score": 4.741,
+        "label": "decoy"
+      },
+      {
+        "rank": 678,
+        "name": "CHEMBL6644",
+        "score": 4.694,
+        "label": "decoy"
+      },
+      {
+        "rank": 679,
+        "name": "CHEMBL6616",
+        "score": 4.684,
+        "label": "decoy"
+      },
+      {
+        "rank": 680,
+        "name": "CHEMBL11",
+        "score": 4.552,
+        "label": "decoy"
+      },
+      {
+        "rank": 681,
+        "name": "CHEMBL6368",
+        "score": 4.247,
+        "label": "decoy"
+      }
+    ]
+  },
+  "bootstrap": {
+    "point": {
+      "n": 681,
+      "n_actives": 43,
+      "n_decoys": 638,
+      "roc_auc": 0.7666,
+      "bedroc": 0.0825,
+      "log_auc": 0.2303,
+      "ef": {
+        "EF1%": 0.0,
+        "EF5%": 0.4658,
+        "EF10%": 0.9316,
+        "EF20%": 1.7468
+      },
+      "ranking": [
+        {
+          "rank": 1,
+          "name": "CHEMBL6250",
+          "score": 9.499,
+          "label": "decoy"
+        },
+        {
+          "rank": 2,
+          "name": "CHEMBL6293",
+          "score": 9.277,
+          "label": "decoy"
+        },
+        {
+          "rank": 3,
+          "name": "CHEMBL7029",
+          "score": 9.193,
+          "label": "decoy"
+        },
+        {
+          "rank": 4,
+          "name": "CHEMBL6639",
+          "score": 9.044,
+          "label": "decoy"
+        },
+        {
+          "rank": 5,
+          "name": "CHEMBL6599",
+          "score": 9.014,
+          "label": "decoy"
+        },
+        {
+          "rank": 6,
+          "name": "CHEMBL440084",
+          "score": 9.005,
+          "label": "decoy"
+        },
+        {
+          "rank": 7,
+          "name": "CHEMBL268100",
+          "score": 8.989,
+          "label": "decoy"
+        },
+        {
+          "rank": 8,
+          "name": "CHEMBL265669",
+          "score": 8.911,
+          "label": "decoy"
+        },
+        {
+          "rank": 9,
+          "name": "CHEMBL6558",
+          "score": 8.895,
+          "label": "decoy"
+        },
+        {
+          "rank": 10,
+          "name": "CHEMBL414184",
+          "score": 8.885,
+          "label": "decoy"
+        },
+        {
+          "rank": 11,
+          "name": "CHEMBL6325",
+          "score": 8.858,
+          "label": "decoy"
+        },
+        {
+          "rank": 12,
+          "name": "CHEMBL269341",
+          "score": 8.824,
+          "label": "decoy"
+        },
+        {
+          "rank": 13,
+          "name": "CHEMBL264095",
+          "score": 8.812,
+          "label": "decoy"
+        },
+        {
+          "rank": 14,
+          "name": "CHEMBL3286448",
+          "score": 8.81,
+          "label": "active"
+        },
+        {
+          "rank": 15,
+          "name": "CHEMBL415104",
+          "score": 8.78,
+          "label": "decoy"
+        },
+        {
+          "rank": 16,
+          "name": "CHEMBL269339",
+          "score": 8.776,
+          "label": "decoy"
+        },
+        {
+          "rank": 17,
+          "name": "CHEMBL6358",
+          "score": 8.753,
+          "label": "decoy"
+        },
+        {
+          "rank": 18,
+          "name": "CHEMBL6775",
+          "score": 8.746,
+          "label": "decoy"
+        },
+        {
+          "rank": 19,
+          "name": "CHEMBL6315",
+          "score": 8.737,
+          "label": "decoy"
+        },
+        {
+          "rank": 20,
+          "name": "CHEMBL6252",
+          "score": 8.727,
+          "label": "decoy"
+        },
+        {
+          "rank": 21,
+          "name": "CHEMBL6279",
+          "score": 8.722,
+          "label": "decoy"
+        },
+        {
+          "rank": 22,
+          "name": "CHEMBL266956",
+          "score": 8.721,
+          "label": "decoy"
+        },
+        {
+          "rank": 23,
+          "name": "CHEMBL6357",
+          "score": 8.715,
+          "label": "decoy"
+        },
+        {
+          "rank": 24,
+          "name": "CHEMBL6436",
+          "score": 8.661,
+          "label": "decoy"
+        },
+        {
+          "rank": 25,
+          "name": "CHEMBL268854",
+          "score": 8.639,
+          "label": "decoy"
+        },
+        {
+          "rank": 26,
+          "name": "CHEMBL268340",
+          "score": 8.627,
+          "label": "decoy"
+        },
+        {
+          "rank": 27,
+          "name": "CHEMBL6850",
+          "score": 8.627,
+          "label": "decoy"
+        },
+        {
+          "rank": 28,
+          "name": "CHEMBL266065",
+          "score": 8.625,
+          "label": "decoy"
+        },
+        {
+          "rank": 29,
+          "name": "CHEMBL414010",
+          "score": 8.608,
+          "label": "decoy"
+        },
+        {
+          "rank": 30,
+          "name": "CHEMBL6839",
+          "score": 8.545,
+          "label": "decoy"
+        },
+        {
+          "rank": 31,
+          "name": "CHEMBL267228",
+          "score": 8.54,
+          "label": "decoy"
+        },
+        {
+          "rank": 32,
+          "name": "CHEMBL6663",
+          "score": 8.462,
+          "label": "decoy"
+        },
+        {
+          "rank": 33,
+          "name": "CHEMBL6323",
+          "score": 8.46,
+          "label": "decoy"
+        },
+        {
+          "rank": 34,
+          "name": "CHEMBL6967",
+          "score": 8.399,
+          "label": "decoy"
+        },
+        {
+          "rank": 35,
+          "name": "CHEMBL6348",
+          "score": 8.376,
+          "label": "decoy"
+        },
+        {
+          "rank": 36,
+          "name": "CHEMBL266509",
+          "score": 8.36,
+          "label": "decoy"
+        },
+        {
+          "rank": 37,
+          "name": "CHEMBL269600",
+          "score": 8.358,
+          "label": "decoy"
+        },
+        {
+          "rank": 38,
+          "name": "CHEMBL6499",
+          "score": 8.357,
+          "label": "decoy"
+        },
+        {
+          "rank": 39,
+          "name": "CHEMBL10",
+          "score": 8.341,
+          "label": "decoy"
+        },
+        {
+          "rank": 40,
+          "name": "CHEMBL6632",
+          "score": 8.338,
+          "label": "decoy"
+        },
+        {
+          "rank": 41,
+          "name": "CHEMBL1630001",
+          "score": 8.336,
+          "label": "active"
+        },
+        {
+          "rank": 42,
+          "name": "CHEMBL6314",
+          "score": 8.333,
+          "label": "decoy"
+        },
+        {
+          "rank": 43,
+          "name": "CHEMBL266066",
+          "score": 8.327,
+          "label": "decoy"
+        },
+        {
+          "rank": 44,
+          "name": "CHEMBL7136",
+          "score": 8.327,
+          "label": "decoy"
+        },
+        {
+          "rank": 45,
+          "name": "CHEMBL263882",
+          "score": 8.325,
+          "label": "decoy"
+        },
+        {
+          "rank": 46,
+          "name": "CHEMBL267832",
+          "score": 8.32,
+          "label": "decoy"
+        },
+        {
+          "rank": 47,
+          "name": "CHEMBL414201",
+          "score": 8.293,
+          "label": "decoy"
+        },
+        {
+          "rank": 48,
+          "name": "CHEMBL408",
+          "score": 8.276,
+          "label": "decoy"
+        },
+        {
+          "rank": 49,
+          "name": "CHEMBL267386",
+          "score": 8.262,
+          "label": "decoy"
+        },
+        {
+          "rank": 50,
+          "name": "CHEMBL269704",
+          "score": 8.257,
+          "label": "decoy"
+        },
+        {
+          "rank": 51,
+          "name": "CHEMBL415105",
+          "score": 8.23,
+          "label": "decoy"
+        },
+        {
+          "rank": 52,
+          "name": "CHEMBL6290",
+          "score": 8.229,
+          "label": "decoy"
+        },
+        {
+          "rank": 53,
+          "name": "CHEMBL269342",
+          "score": 8.229,
+          "label": "decoy"
+        },
+        {
+          "rank": 54,
+          "name": "CHEMBL6321",
+          "score": 8.227,
+          "label": "decoy"
+        },
+        {
+          "rank": 55,
+          "name": "CHEMBL6765",
+          "score": 8.197,
+          "label": "decoy"
+        },
+        {
+          "rank": 56,
+          "name": "CHEMBL6220",
+          "score": 8.189,
+          "label": "decoy"
+        },
+        {
+          "rank": 57,
+          "name": "CHEMBL6313",
+          "score": 8.177,
+          "label": "decoy"
+        },
+        {
+          "rank": 58,
+          "name": "CHEMBL6715",
+          "score": 8.175,
+          "label": "decoy"
+        },
+        {
+          "rank": 59,
+          "name": "CHEMBL6332",
+          "score": 8.167,
+          "label": "decoy"
+        },
+        {
+          "rank": 60,
+          "name": "CHEMBL6351",
+          "score": 8.163,
+          "label": "decoy"
+        },
+        {
+          "rank": 61,
+          "name": "CHEMBL6792",
+          "score": 8.146,
+          "label": "decoy"
+        },
+        {
+          "rank": 62,
+          "name": "CHEMBL4635006",
+          "score": 8.144,
+          "label": "active"
+        },
+        {
+          "rank": 63,
+          "name": "CHEMBL451551",
+          "score": 8.144,
+          "label": "decoy"
+        },
+        {
+          "rank": 64,
+          "name": "CHEMBL6342",
+          "score": 8.135,
+          "label": "decoy"
+        },
+        {
+          "rank": 65,
+          "name": "CHEMBL6424",
+          "score": 8.127,
+          "label": "decoy"
+        },
+        {
+          "rank": 66,
+          "name": "CHEMBL6292",
+          "score": 8.12,
+          "label": "decoy"
+        },
+        {
+          "rank": 67,
+          "name": "CHEMBL6729",
+          "score": 8.106,
+          "label": "decoy"
+        },
+        {
+          "rank": 68,
+          "name": "CHEMBL4639840",
+          "score": 8.1,
+          "label": "active"
+        },
+        {
+          "rank": 69,
+          "name": "CHEMBL3422648",
+          "score": 8.095,
+          "label": "active"
+        },
+        {
+          "rank": 70,
+          "name": "CHEMBL269572",
+          "score": 8.095,
+          "label": "decoy"
+        },
+        {
+          "rank": 71,
+          "name": "CHEMBL6218",
+          "score": 8.087,
+          "label": "decoy"
+        },
+        {
+          "rank": 72,
+          "name": "CHEMBL268151",
+          "score": 8.085,
+          "label": "decoy"
+        },
+        {
+          "rank": 73,
+          "name": "CHEMBL263077",
+          "score": 8.078,
+          "label": "decoy"
+        },
+        {
+          "rank": 74,
+          "name": "CHEMBL4215462",
+          "score": 8.072,
+          "label": "active"
+        },
+        {
+          "rank": 75,
+          "name": "CHEMBL268584",
+          "score": 8.061,
+          "label": "decoy"
+        },
+        {
+          "rank": 76,
+          "name": "CHEMBL7102",
+          "score": 8.027,
+          "label": "decoy"
+        },
+        {
+          "rank": 77,
+          "name": "CHEMBL6590",
+          "score": 8.026,
+          "label": "decoy"
+        },
+        {
+          "rank": 78,
+          "name": "CHEMBL6524",
+          "score": 8.025,
+          "label": "decoy"
+        },
+        {
+          "rank": 79,
+          "name": "CHEMBL264097",
+          "score": 8.023,
+          "label": "decoy"
+        },
+        {
+          "rank": 80,
+          "name": "CHEMBL269357",
+          "score": 8.011,
+          "label": "decoy"
+        },
+        {
+          "rank": 81,
+          "name": "CHEMBL6281",
+          "score": 8.003,
+          "label": "decoy"
+        },
+        {
+          "rank": 82,
+          "name": "CHEMBL6496",
+          "score": 7.996,
+          "label": "decoy"
+        },
+        {
+          "rank": 83,
+          "name": "CHEMBL6918",
+          "score": 7.989,
+          "label": "decoy"
+        },
+        {
+          "rank": 84,
+          "name": "CHEMBL6366",
+          "score": 7.98,
+          "label": "decoy"
+        },
+        {
+          "rank": 85,
+          "name": "CHEMBL440267",
+          "score": 7.977,
+          "label": "decoy"
+        },
+        {
+          "rank": 86,
+          "name": "CHEMBL6380",
+          "score": 7.962,
+          "label": "decoy"
+        },
+        {
+          "rank": 87,
+          "name": "CHEMBL267702",
+          "score": 7.96,
+          "label": "decoy"
+        },
+        {
+          "rank": 88,
+          "name": "CHEMBL6237",
+          "score": 7.953,
+          "label": "decoy"
+        },
+        {
+          "rank": 89,
+          "name": "CHEMBL269773",
+          "score": 7.943,
+          "label": "decoy"
+        },
+        {
+          "rank": 90,
+          "name": "CHEMBL268888",
+          "score": 7.93,
+          "label": "decoy"
+        },
+        {
+          "rank": 91,
+          "name": "CHEMBL269368",
+          "score": 7.927,
+          "label": "decoy"
+        },
+        {
+          "rank": 92,
+          "name": "CHEMBL6474",
+          "score": 7.921,
+          "label": "decoy"
+        },
+        {
+          "rank": 93,
+          "name": "CHEMBL267863",
+          "score": 7.916,
+          "label": "decoy"
+        },
+        {
+          "rank": 94,
+          "name": "CHEMBL6849",
+          "score": 7.916,
+          "label": "decoy"
+        },
+        {
+          "rank": 95,
+          "name": "CHEMBL6339",
+          "score": 7.912,
+          "label": "decoy"
+        },
+        {
+          "rank": 96,
+          "name": "CHEMBL268768",
+          "score": 7.91,
+          "label": "decoy"
+        },
+        {
+          "rank": 97,
+          "name": "CHEMBL1259059",
+          "score": 7.897,
+          "label": "active"
+        },
+        {
+          "rank": 98,
+          "name": "CHEMBL6511",
+          "score": 7.877,
+          "label": "decoy"
+        },
+        {
+          "rank": 99,
+          "name": "CHEMBL4632867",
+          "score": 7.867,
+          "label": "active"
+        },
+        {
+          "rank": 100,
+          "name": "CHEMBL6347",
+          "score": 7.859,
+          "label": "decoy"
+        },
+        {
+          "rank": 101,
+          "name": "CHEMBL6291",
+          "score": 7.858,
+          "label": "decoy"
+        },
+        {
+          "rank": 102,
+          "name": "CHEMBL268889",
+          "score": 7.856,
+          "label": "decoy"
+        },
+        {
+          "rank": 103,
+          "name": "CHEMBL6476",
+          "score": 7.856,
+          "label": "decoy"
+        },
+        {
+          "rank": 104,
+          "name": "CHEMBL6812",
+          "score": 7.853,
+          "label": "decoy"
+        },
+        {
+          "rank": 105,
+          "name": "CHEMBL6521",
+          "score": 7.83,
+          "label": "decoy"
+        },
+        {
+          "rank": 106,
+          "name": "CHEMBL266039",
+          "score": 7.822,
+          "label": "decoy"
+        },
+        {
+          "rank": 107,
+          "name": "CHEMBL6991",
+          "score": 7.816,
+          "label": "decoy"
+        },
+        {
+          "rank": 108,
+          "name": "CHEMBL3908994",
+          "score": 7.806,
+          "label": "active"
+        },
+        {
+          "rank": 109,
+          "name": "CHEMBL266508",
+          "score": 7.806,
+          "label": "decoy"
+        },
+        {
+          "rank": 110,
+          "name": "CHEMBL429379",
+          "score": 7.805,
+          "label": "decoy"
+        },
+        {
+          "rank": 111,
+          "name": "CHEMBL266317",
+          "score": 7.797,
+          "label": "decoy"
+        },
+        {
+          "rank": 112,
+          "name": "CHEMBL4127921",
+          "score": 7.785,
+          "label": "active"
+        },
+        {
+          "rank": 113,
+          "name": "CHEMBL3908470",
+          "score": 7.784,
+          "label": "active"
+        },
+        {
+          "rank": 114,
+          "name": "CHEMBL266761",
+          "score": 7.78,
+          "label": "decoy"
+        },
+        {
+          "rank": 115,
+          "name": "CHEMBL6788",
+          "score": 7.774,
+          "label": "decoy"
+        },
+        {
+          "rank": 116,
+          "name": "CHEMBL269059",
+          "score": 7.761,
+          "label": "decoy"
+        },
+        {
+          "rank": 117,
+          "name": "CHEMBL4633686",
+          "score": 7.758,
+          "label": "active"
+        },
+        {
+          "rank": 118,
+          "name": "CHEMBL266025",
+          "score": 7.755,
+          "label": "decoy"
+        },
+        {
+          "rank": 119,
+          "name": "CHEMBL6676",
+          "score": 7.752,
+          "label": "decoy"
+        },
+        {
+          "rank": 120,
+          "name": "CHEMBL7075",
+          "score": 7.752,
+          "label": "decoy"
+        },
+        {
+          "rank": 121,
+          "name": "CHEMBL6417",
+          "score": 7.746,
+          "label": "decoy"
+        },
+        {
+          "rank": 122,
+          "name": "CHEMBL4641646",
+          "score": 7.732,
+          "label": "active"
+        },
+        {
+          "rank": 123,
+          "name": "CHEMBL4113906",
+          "score": 7.732,
+          "label": "active"
+        },
+        {
+          "rank": 124,
+          "name": "CHEMBL266659",
+          "score": 7.726,
+          "label": "decoy"
+        },
+        {
+          "rank": 125,
+          "name": "CHEMBL427969",
+          "score": 7.724,
+          "label": "decoy"
+        },
+        {
+          "rank": 126,
+          "name": "CHEMBL421",
+          "score": 7.717,
+          "label": "decoy"
+        },
+        {
+          "rank": 127,
+          "name": "CHEMBL6519",
+          "score": 7.712,
+          "label": "decoy"
+        },
+        {
+          "rank": 128,
+          "name": "CHEMBL266928",
+          "score": 7.709,
+          "label": "decoy"
+        },
+        {
+          "rank": 129,
+          "name": "CHEMBL6243",
+          "score": 7.703,
+          "label": "decoy"
+        },
+        {
+          "rank": 130,
+          "name": "CHEMBL7074",
+          "score": 7.693,
+          "label": "decoy"
+        },
+        {
+          "rank": 131,
+          "name": "CHEMBL6560",
+          "score": 7.692,
+          "label": "decoy"
+        },
+        {
+          "rank": 132,
+          "name": "CHEMBL266081",
+          "score": 7.646,
+          "label": "decoy"
+        },
+        {
+          "rank": 133,
+          "name": "CHEMBL6487",
+          "score": 7.64,
+          "label": "decoy"
+        },
+        {
+          "rank": 134,
+          "name": "CHEMBL6551",
+          "score": 7.639,
+          "label": "decoy"
+        },
+        {
+          "rank": 135,
+          "name": "CHEMBL4440367",
+          "score": 7.637,
+          "label": "active"
+        },
+        {
+          "rank": 136,
+          "name": "CHEMBL6949",
+          "score": 7.631,
+          "label": "decoy"
+        },
+        {
+          "rank": 137,
+          "name": "CHEMBL267126",
+          "score": 7.63,
+          "label": "decoy"
+        },
+        {
+          "rank": 138,
+          "name": "CHEMBL266484",
+          "score": 7.625,
+          "label": "decoy"
+        },
+        {
+          "rank": 139,
+          "name": "CHEMBL6306",
+          "score": 7.619,
+          "label": "decoy"
+        },
+        {
+          "rank": 140,
+          "name": "CHEMBL1950242",
+          "score": 7.618,
+          "label": "active"
+        },
+        {
+          "rank": 141,
+          "name": "CHEMBL415285",
+          "score": 7.617,
+          "label": "decoy"
+        },
+        {
+          "rank": 142,
+          "name": "CHEMBL4454742",
+          "score": 7.616,
+          "label": "active"
+        },
+        {
+          "rank": 143,
+          "name": "CHEMBL6574",
+          "score": 7.609,
+          "label": "decoy"
+        },
+        {
+          "rank": 144,
+          "name": "CHEMBL6331",
+          "score": 7.604,
+          "label": "decoy"
+        },
+        {
+          "rank": 145,
+          "name": "CHEMBL6933",
+          "score": 7.598,
+          "label": "decoy"
+        },
+        {
+          "rank": 146,
+          "name": "CHEMBL415103",
+          "score": 7.597,
+          "label": "decoy"
+        },
+        {
+          "rank": 147,
+          "name": "CHEMBL4127030",
+          "score": 7.589,
+          "label": "active"
+        },
+        {
+          "rank": 148,
+          "name": "CHEMBL6575",
+          "score": 7.57,
+          "label": "decoy"
+        },
+        {
+          "rank": 149,
+          "name": "CHEMBL4",
+          "score": 7.567,
+          "label": "decoy"
+        },
+        {
+          "rank": 150,
+          "name": "CHEMBL267270",
+          "score": 7.559,
+          "label": "decoy"
+        },
+        {
+          "rank": 151,
+          "name": "CHEMBL4125966",
+          "score": 7.557,
+          "label": "active"
+        },
+        {
+          "rank": 152,
+          "name": "CHEMBL7019",
+          "score": 7.543,
+          "label": "decoy"
+        },
+        {
+          "rank": 153,
+          "name": "CHEMBL428658",
+          "score": 7.542,
+          "label": "decoy"
+        },
+        {
+          "rank": 154,
+          "name": "CHEMBL4462484",
+          "score": 7.537,
+          "label": "active"
+        },
+        {
+          "rank": 155,
+          "name": "CHEMBL4532929",
+          "score": 7.536,
+          "label": "active"
+        },
+        {
+          "rank": 156,
+          "name": "CHEMBL4069349",
+          "score": 7.534,
+          "label": "active"
+        },
+        {
+          "rank": 157,
+          "name": "CHEMBL6825",
+          "score": 7.533,
+          "label": "decoy"
+        },
+        {
+          "rank": 158,
+          "name": "CHEMBL6699",
+          "score": 7.529,
+          "label": "decoy"
+        },
+        {
+          "rank": 159,
+          "name": "CHEMBL521487",
+          "score": 7.526,
+          "label": "active"
+        },
+        {
+          "rank": 160,
+          "name": "CHEMBL3186678",
+          "score": 7.514,
+          "label": "active"
+        },
+        {
+          "rank": 161,
+          "name": "CHEMBL6726",
+          "score": 7.513,
+          "label": "decoy"
+        },
+        {
+          "rank": 162,
+          "name": "CHEMBL268529",
+          "score": 7.509,
+          "label": "decoy"
+        },
+        {
+          "rank": 163,
+          "name": "CHEMBL6261",
+          "score": 7.507,
+          "label": "decoy"
+        },
+        {
+          "rank": 164,
+          "name": "CHEMBL6259",
+          "score": 7.503,
+          "label": "decoy"
+        },
+        {
+          "rank": 165,
+          "name": "CHEMBL268292",
+          "score": 7.498,
+          "label": "decoy"
+        },
+        {
+          "rank": 166,
+          "name": "CHEMBL413593",
+          "score": 7.489,
+          "label": "decoy"
+        },
+        {
+          "rank": 167,
+          "name": "CHEMBL6532",
+          "score": 7.488,
+          "label": "decoy"
+        },
+        {
+          "rank": 168,
+          "name": "CHEMBL6534",
+          "score": 7.477,
+          "label": "decoy"
+        },
+        {
+          "rank": 169,
+          "name": "CHEMBL268388",
+          "score": 7.477,
+          "label": "decoy"
+        },
+        {
+          "rank": 170,
+          "name": "CHEMBL269264",
+          "score": 7.474,
+          "label": "decoy"
+        },
+        {
+          "rank": 171,
+          "name": "CHEMBL6624",
+          "score": 7.474,
+          "label": "decoy"
+        },
+        {
+          "rank": 172,
+          "name": "CHEMBL6245",
+          "score": 7.473,
+          "label": "decoy"
+        },
+        {
+          "rank": 173,
+          "name": "CHEMBL4635910",
+          "score": 7.469,
+          "label": "active"
+        },
+        {
+          "rank": 174,
+          "name": "CHEMBL6610",
+          "score": 7.468,
+          "label": "decoy"
+        },
+        {
+          "rank": 175,
+          "name": "CHEMBL6371",
+          "score": 7.466,
+          "label": "decoy"
+        },
+        {
+          "rank": 176,
+          "name": "CHEMBL6498",
+          "score": 7.464,
+          "label": "decoy"
+        },
+        {
+          "rank": 177,
+          "name": "CHEMBL4127092",
+          "score": 7.463,
+          "label": "active"
+        },
+        {
+          "rank": 178,
+          "name": "CHEMBL269235",
+          "score": 7.46,
+          "label": "decoy"
+        },
+        {
+          "rank": 179,
+          "name": "CHEMBL263084",
+          "score": 7.459,
+          "label": "decoy"
+        },
+        {
+          "rank": 180,
+          "name": "CHEMBL409",
+          "score": 7.453,
+          "label": "decoy"
+        },
+        {
+          "rank": 181,
+          "name": "CHEMBL428334",
+          "score": 7.451,
+          "label": "decoy"
+        },
+        {
+          "rank": 182,
+          "name": "CHEMBL6199",
+          "score": 7.44,
+          "label": "decoy"
+        },
+        {
+          "rank": 183,
+          "name": "CHEMBL6671",
+          "score": 7.436,
+          "label": "decoy"
+        },
+        {
+          "rank": 184,
+          "name": "CHEMBL6374",
+          "score": 7.429,
+          "label": "decoy"
+        },
+        {
+          "rank": 185,
+          "name": "CHEMBL6249",
+          "score": 7.426,
+          "label": "decoy"
+        },
+        {
+          "rank": 186,
+          "name": "CHEMBL6324",
+          "score": 7.421,
+          "label": "decoy"
+        },
+        {
+          "rank": 187,
+          "name": "CHEMBL6598",
+          "score": 7.417,
+          "label": "decoy"
+        },
+        {
+          "rank": 188,
+          "name": "CHEMBL540195",
+          "score": 7.417,
+          "label": "decoy"
+        },
+        {
+          "rank": 189,
+          "name": "CHEMBL6693",
+          "score": 7.411,
+          "label": "decoy"
+        },
+        {
+          "rank": 190,
+          "name": "CHEMBL267427",
+          "score": 7.41,
+          "label": "decoy"
+        },
+        {
+          "rank": 191,
+          "name": "CHEMBL6977",
+          "score": 7.404,
+          "label": "decoy"
+        },
+        {
+          "rank": 192,
+          "name": "CHEMBL4644488",
+          "score": 7.4,
+          "label": "active"
+        },
+        {
+          "rank": 193,
+          "name": "CHEMBL6809",
+          "score": 7.394,
+          "label": "decoy"
+        },
+        {
+          "rank": 194,
+          "name": "CHEMBL373691",
+          "score": 7.391,
+          "label": "active"
+        },
+        {
+          "rank": 195,
+          "name": "CHEMBL267617",
+          "score": 7.381,
+          "label": "decoy"
+        },
+        {
+          "rank": 196,
+          "name": "CHEMBL4642954",
+          "score": 7.38,
+          "label": "active"
+        },
+        {
+          "rank": 197,
+          "name": "CHEMBL6307",
+          "score": 7.377,
+          "label": "decoy"
+        },
+        {
+          "rank": 198,
+          "name": "CHEMBL6238",
+          "score": 7.375,
+          "label": "decoy"
+        },
+        {
+          "rank": 199,
+          "name": "CHEMBL6570",
+          "score": 7.37,
+          "label": "decoy"
+        },
+        {
+          "rank": 200,
+          "name": "CHEMBL4634173",
+          "score": 7.369,
+          "label": "active"
+        },
+        {
+          "rank": 201,
+          "name": "CHEMBL2",
+          "score": 7.365,
+          "label": "decoy"
+        },
+        {
+          "rank": 202,
+          "name": "CHEMBL4213075",
+          "score": 7.364,
+          "label": "active"
+        },
+        {
+          "rank": 203,
+          "name": "CHEMBL6340",
+          "score": 7.361,
+          "label": "decoy"
+        },
+        {
+          "rank": 204,
+          "name": "CHEMBL269153",
+          "score": 7.36,
+          "label": "decoy"
+        },
+        {
+          "rank": 205,
+          "name": "CHEMBL4216962",
+          "score": 7.358,
+          "label": "active"
+        },
+        {
+          "rank": 206,
+          "name": "CHEMBL266801",
+          "score": 7.357,
+          "label": "decoy"
+        },
+        {
+          "rank": 207,
+          "name": "CHEMBL6378",
+          "score": 7.35,
+          "label": "decoy"
+        },
+        {
+          "rank": 208,
+          "name": "CHEMBL6287",
+          "score": 7.348,
+          "label": "decoy"
+        },
+        {
+          "rank": 209,
+          "name": "CHEMBL6296",
+          "score": 7.347,
+          "label": "decoy"
+        },
+        {
+          "rank": 210,
+          "name": "CHEMBL486231",
+          "score": 7.346,
+          "label": "active"
+        },
+        {
+          "rank": 211,
+          "name": "CHEMBL6236",
+          "score": 7.346,
+          "label": "decoy"
+        },
+        {
+          "rank": 212,
+          "name": "CHEMBL6431",
+          "score": 7.346,
+          "label": "decoy"
+        },
+        {
+          "rank": 213,
+          "name": "CHEMBL3954120",
+          "score": 7.345,
+          "label": "active"
+        },
+        {
+          "rank": 214,
+          "name": "CHEMBL406",
+          "score": 7.343,
+          "label": "decoy"
+        },
+        {
+          "rank": 215,
+          "name": "CHEMBL269237",
+          "score": 7.341,
+          "label": "decoy"
+        },
+        {
+          "rank": 216,
+          "name": "CHEMBL7289",
+          "score": 7.34,
+          "label": "decoy"
+        },
+        {
+          "rank": 217,
+          "name": "CHEMBL266483",
+          "score": 7.336,
+          "label": "decoy"
+        },
+        {
+          "rank": 218,
+          "name": "CHEMBL268387",
+          "score": 7.335,
+          "label": "decoy"
+        },
+        {
+          "rank": 219,
+          "name": "CHEMBL266037",
+          "score": 7.334,
+          "label": "decoy"
+        },
+        {
+          "rank": 220,
+          "name": "CHEMBL267740",
+          "score": 7.333,
+          "label": "decoy"
+        },
+        {
+          "rank": 221,
+          "name": "CHEMBL6205",
+          "score": 7.331,
+          "label": "decoy"
+        },
+        {
+          "rank": 222,
+          "name": "CHEMBL6618",
+          "score": 7.327,
+          "label": "decoy"
+        },
+        {
+          "rank": 223,
+          "name": "CHEMBL268887",
+          "score": 7.326,
+          "label": "decoy"
+        },
+        {
+          "rank": 224,
+          "name": "CHEMBL6235",
+          "score": 7.32,
+          "label": "decoy"
+        },
+        {
+          "rank": 225,
+          "name": "CHEMBL267358",
+          "score": 7.312,
+          "label": "decoy"
+        },
+        {
+          "rank": 226,
+          "name": "CHEMBL6845",
+          "score": 7.312,
+          "label": "decoy"
+        },
+        {
+          "rank": 227,
+          "name": "CHEMBL6668",
+          "score": 7.304,
+          "label": "decoy"
+        },
+        {
+          "rank": 228,
+          "name": "CHEMBL441172",
+          "score": 7.303,
+          "label": "decoy"
+        },
+        {
+          "rank": 229,
+          "name": "CHEMBL6447",
+          "score": 7.303,
+          "label": "decoy"
+        },
+        {
+          "rank": 230,
+          "name": "CHEMBL6256",
+          "score": 7.299,
+          "label": "decoy"
+        },
+        {
+          "rank": 231,
+          "name": "CHEMBL4204763",
+          "score": 7.298,
+          "label": "active"
+        },
+        {
+          "rank": 232,
+          "name": "CHEMBL6527",
+          "score": 7.296,
+          "label": "decoy"
+        },
+        {
+          "rank": 233,
+          "name": "CHEMBL265410",
+          "score": 7.291,
+          "label": "decoy"
+        },
+        {
+          "rank": 234,
+          "name": "CHEMBL414006",
+          "score": 7.288,
+          "label": "decoy"
+        },
+        {
+          "rank": 235,
+          "name": "CHEMBL428508",
+          "score": 7.288,
+          "label": "decoy"
+        },
+        {
+          "rank": 236,
+          "name": "CHEMBL6500",
+          "score": 7.284,
+          "label": "decoy"
+        },
+        {
+          "rank": 237,
+          "name": "CHEMBL429244",
+          "score": 7.281,
+          "label": "decoy"
+        },
+        {
+          "rank": 238,
+          "name": "CHEMBL7290",
+          "score": 7.281,
+          "label": "decoy"
+        },
+        {
+          "rank": 239,
+          "name": "CHEMBL268310",
+          "score": 7.28,
+          "label": "decoy"
+        },
+        {
+          "rank": 240,
+          "name": "CHEMBL415288",
+          "score": 7.273,
+          "label": "decoy"
+        },
+        {
+          "rank": 241,
+          "name": "CHEMBL6891",
+          "score": 7.269,
+          "label": "decoy"
+        },
+        {
+          "rank": 242,
+          "name": "CHEMBL4555315",
+          "score": 7.264,
+          "label": "active"
+        },
+        {
+          "rank": 243,
+          "name": "CHEMBL6272",
+          "score": 7.256,
+          "label": "decoy"
+        },
+        {
+          "rank": 244,
+          "name": "CHEMBL7301",
+          "score": 7.242,
+          "label": "decoy"
+        },
+        {
+          "rank": 245,
+          "name": "CHEMBL6815",
+          "score": 7.239,
+          "label": "decoy"
+        },
+        {
+          "rank": 246,
+          "name": "CHEMBL6647",
+          "score": 7.237,
+          "label": "decoy"
+        },
+        {
+          "rank": 247,
+          "name": "CHEMBL6761",
+          "score": 7.23,
+          "label": "decoy"
+        },
+        {
+          "rank": 248,
+          "name": "CHEMBL6265",
+          "score": 7.215,
+          "label": "decoy"
+        },
+        {
+          "rank": 249,
+          "name": "CHEMBL415106",
+          "score": 7.215,
+          "label": "decoy"
+        },
+        {
+          "rank": 250,
+          "name": "CHEMBL6246",
+          "score": 7.209,
+          "label": "decoy"
+        },
+        {
+          "rank": 251,
+          "name": "CHEMBL6276",
+          "score": 7.206,
+          "label": "decoy"
+        },
+        {
+          "rank": 252,
+          "name": "CHEMBL6556",
+          "score": 7.201,
+          "label": "decoy"
+        },
+        {
+          "rank": 253,
+          "name": "CHEMBL4212616",
+          "score": 7.197,
+          "label": "active"
+        },
+        {
+          "rank": 254,
+          "name": "CHEMBL269496",
+          "score": 7.196,
+          "label": "decoy"
+        },
+        {
+          "rank": 255,
+          "name": "CHEMBL267458",
+          "score": 7.188,
+          "label": "decoy"
+        },
+        {
+          "rank": 256,
+          "name": "CHEMBL269537",
+          "score": 7.18,
+          "label": "decoy"
+        },
+        {
+          "rank": 257,
+          "name": "CHEMBL6231",
+          "score": 7.178,
+          "label": "decoy"
+        },
+        {
+          "rank": 258,
+          "name": "CHEMBL266927",
+          "score": 7.177,
+          "label": "decoy"
+        },
+        {
+          "rank": 259,
+          "name": "CHEMBL6226",
+          "score": 7.176,
+          "label": "decoy"
+        },
+        {
+          "rank": 260,
+          "name": "CHEMBL412",
+          "score": 7.176,
+          "label": "decoy"
+        },
+        {
+          "rank": 261,
+          "name": "CHEMBL6762",
+          "score": 7.164,
+          "label": "decoy"
+        },
+        {
+          "rank": 262,
+          "name": "CHEMBL6304",
+          "score": 7.161,
+          "label": "decoy"
+        },
+        {
+          "rank": 263,
+          "name": "CHEMBL415289",
+          "score": 7.159,
+          "label": "decoy"
+        },
+        {
+          "rank": 264,
+          "name": "CHEMBL4640222",
+          "score": 7.151,
+          "label": "active"
+        },
+        {
+          "rank": 265,
+          "name": "CHEMBL6240",
+          "score": 7.146,
+          "label": "decoy"
+        },
+        {
+          "rank": 266,
+          "name": "CHEMBL4644867",
+          "score": 7.142,
+          "label": "active"
+        },
+        {
+          "rank": 267,
+          "name": "CHEMBL4205249",
+          "score": 7.139,
+          "label": "active"
+        },
+        {
+          "rank": 268,
+          "name": "CHEMBL266088",
+          "score": 7.132,
+          "label": "decoy"
+        },
+        {
+          "rank": 269,
+          "name": "CHEMBL6208",
+          "score": 7.127,
+          "label": "decoy"
+        },
+        {
+          "rank": 270,
+          "name": "CHEMBL6297",
+          "score": 7.127,
+          "label": "decoy"
+        },
+        {
+          "rank": 271,
+          "name": "CHEMBL6441",
+          "score": 7.127,
+          "label": "decoy"
+        },
+        {
+          "rank": 272,
+          "name": "CHEMBL6407",
+          "score": 7.123,
+          "label": "decoy"
+        },
+        {
+          "rank": 273,
+          "name": "CHEMBL263075",
+          "score": 7.12,
+          "label": "decoy"
+        },
+        {
+          "rank": 274,
+          "name": "CHEMBL269154",
+          "score": 7.119,
+          "label": "decoy"
+        },
+        {
+          "rank": 275,
+          "name": "CHEMBL6445",
+          "score": 7.115,
+          "label": "decoy"
+        },
+        {
+          "rank": 276,
+          "name": "CHEMBL6262",
+          "score": 7.114,
+          "label": "decoy"
+        },
+        {
+          "rank": 277,
+          "name": "CHEMBL269002",
+          "score": 7.112,
+          "label": "decoy"
+        },
+        {
+          "rank": 278,
+          "name": "CHEMBL6542",
+          "score": 7.101,
+          "label": "decoy"
+        },
+        {
+          "rank": 279,
+          "name": "CHEMBL6463",
+          "score": 7.101,
+          "label": "decoy"
+        },
+        {
+          "rank": 280,
+          "name": "CHEMBL6826",
+          "score": 7.101,
+          "label": "decoy"
+        },
+        {
+          "rank": 281,
+          "name": "CHEMBL266129",
+          "score": 7.101,
+          "label": "decoy"
+        },
+        {
+          "rank": 282,
+          "name": "CHEMBL6740",
+          "score": 7.099,
+          "label": "decoy"
+        },
+        {
+          "rank": 283,
+          "name": "CHEMBL6282",
+          "score": 7.094,
+          "label": "decoy"
+        },
+        {
+          "rank": 284,
+          "name": "CHEMBL6294",
+          "score": 7.09,
+          "label": "decoy"
+        },
+        {
+          "rank": 285,
+          "name": "CHEMBL6289",
+          "score": 7.088,
+          "label": "decoy"
+        },
+        {
+          "rank": 286,
+          "name": "CHEMBL269305",
+          "score": 7.087,
+          "label": "decoy"
+        },
+        {
+          "rank": 287,
+          "name": "CHEMBL6432",
+          "score": 7.082,
+          "label": "decoy"
+        },
+        {
+          "rank": 288,
+          "name": "CHEMBL415286",
+          "score": 7.08,
+          "label": "decoy"
+        },
+        {
+          "rank": 289,
+          "name": "CHEMBL6316",
+          "score": 7.08,
+          "label": "decoy"
+        },
+        {
+          "rank": 290,
+          "name": "CHEMBL6793",
+          "score": 7.072,
+          "label": "decoy"
+        },
+        {
+          "rank": 291,
+          "name": "CHEMBL6701",
+          "score": 7.071,
+          "label": "decoy"
+        },
+        {
+          "rank": 292,
+          "name": "CHEMBL6253",
+          "score": 7.069,
+          "label": "decoy"
+        },
+        {
+          "rank": 293,
+          "name": "CHEMBL6948",
+          "score": 7.058,
+          "label": "decoy"
+        },
+        {
+          "rank": 294,
+          "name": "CHEMBL266315",
+          "score": 7.054,
+          "label": "decoy"
+        },
+        {
+          "rank": 295,
+          "name": "CHEMBL6471",
+          "score": 7.054,
+          "label": "decoy"
+        },
+        {
+          "rank": 296,
+          "name": "CHEMBL267457",
+          "score": 7.051,
+          "label": "decoy"
+        },
+        {
+          "rank": 297,
+          "name": "CHEMBL6411",
+          "score": 7.048,
+          "label": "decoy"
+        },
+        {
+          "rank": 298,
+          "name": "CHEMBL6209",
+          "score": 7.047,
+          "label": "decoy"
+        },
+        {
+          "rank": 299,
+          "name": "CHEMBL265663",
+          "score": 7.046,
+          "label": "decoy"
+        },
+        {
+          "rank": 300,
+          "name": "CHEMBL6312",
+          "score": 7.043,
+          "label": "decoy"
+        },
+        {
+          "rank": 301,
+          "name": "CHEMBL6597",
+          "score": 7.043,
+          "label": "decoy"
+        },
+        {
+          "rank": 302,
+          "name": "CHEMBL6634",
+          "score": 7.035,
+          "label": "decoy"
+        },
+        {
+          "rank": 303,
+          "name": "CHEMBL415287",
+          "score": 7.034,
+          "label": "decoy"
+        },
+        {
+          "rank": 304,
+          "name": "CHEMBL266473",
+          "score": 7.034,
+          "label": "decoy"
+        },
+        {
+          "rank": 305,
+          "name": "CHEMBL267628",
+          "score": 7.03,
+          "label": "decoy"
+        },
+        {
+          "rank": 306,
+          "name": "CHEMBL267913",
+          "score": 7.023,
+          "label": "decoy"
+        },
+        {
+          "rank": 307,
+          "name": "CHEMBL6791",
+          "score": 7.021,
+          "label": "decoy"
+        },
+        {
+          "rank": 308,
+          "name": "CHEMBL266026",
+          "score": 7.02,
+          "label": "decoy"
+        },
+        {
+          "rank": 309,
+          "name": "CHEMBL268769",
+          "score": 7.019,
+          "label": "decoy"
+        },
+        {
+          "rank": 310,
+          "name": "CHEMBL7131",
+          "score": 7.018,
+          "label": "decoy"
+        },
+        {
+          "rank": 311,
+          "name": "CHEMBL6683",
+          "score": 7.014,
+          "label": "decoy"
+        },
+        {
+          "rank": 312,
+          "name": "CHEMBL6421",
+          "score": 7.008,
+          "label": "decoy"
+        },
+        {
+          "rank": 313,
+          "name": "CHEMBL267125",
+          "score": 7.003,
+          "label": "decoy"
+        },
+        {
+          "rank": 314,
+          "name": "CHEMBL6274",
+          "score": 6.997,
+          "label": "decoy"
+        },
+        {
+          "rank": 315,
+          "name": "CHEMBL6627",
+          "score": 6.989,
+          "label": "decoy"
+        },
+        {
+          "rank": 316,
+          "name": "CHEMBL266279",
+          "score": 6.979,
+          "label": "decoy"
+        },
+        {
+          "rank": 317,
+          "name": "CHEMBL6630",
+          "score": 6.979,
+          "label": "decoy"
+        },
+        {
+          "rank": 318,
+          "name": "CHEMBL6569",
+          "score": 6.974,
+          "label": "decoy"
+        },
+        {
+          "rank": 319,
+          "name": "CHEMBL6814",
+          "score": 6.973,
+          "label": "decoy"
+        },
+        {
+          "rank": 320,
+          "name": "CHEMBL6210",
+          "score": 6.972,
+          "label": "decoy"
+        },
+        {
+          "rank": 321,
+          "name": "CHEMBL266460",
+          "score": 6.963,
+          "label": "decoy"
+        },
+        {
+          "rank": 322,
+          "name": "CHEMBL264721",
+          "score": 6.96,
+          "label": "decoy"
+        },
+        {
+          "rank": 323,
+          "name": "CHEMBL6481",
+          "score": 6.955,
+          "label": "decoy"
+        },
+        {
+          "rank": 324,
+          "name": "CHEMBL266170",
+          "score": 6.952,
+          "label": "decoy"
+        },
+        {
+          "rank": 325,
+          "name": "CHEMBL6465",
+          "score": 6.951,
+          "label": "decoy"
+        },
+        {
+          "rank": 326,
+          "name": "CHEMBL6638",
+          "score": 6.946,
+          "label": "decoy"
+        },
+        {
+          "rank": 327,
+          "name": "CHEMBL266706",
+          "score": 6.94,
+          "label": "decoy"
+        },
+        {
+          "rank": 328,
+          "name": "CHEMBL6433",
+          "score": 6.934,
+          "label": "decoy"
+        },
+        {
+          "rank": 329,
+          "name": "CHEMBL6412",
+          "score": 6.933,
+          "label": "decoy"
+        },
+        {
+          "rank": 330,
+          "name": "CHEMBL428674",
+          "score": 6.93,
+          "label": "decoy"
+        },
+        {
+          "rank": 331,
+          "name": "CHEMBL6843",
+          "score": 6.929,
+          "label": "decoy"
+        },
+        {
+          "rank": 332,
+          "name": "CHEMBL427605",
+          "score": 6.926,
+          "label": "decoy"
+        },
+        {
+          "rank": 333,
+          "name": "CHEMBL4522072",
+          "score": 6.925,
+          "label": "active"
+        },
+        {
+          "rank": 334,
+          "name": "CHEMBL266660",
+          "score": 6.92,
+          "label": "decoy"
+        },
+        {
+          "rank": 335,
+          "name": "CHEMBL6766",
+          "score": 6.916,
+          "label": "decoy"
+        },
+        {
+          "rank": 336,
+          "name": "CHEMBL6244",
+          "score": 6.915,
+          "label": "decoy"
+        },
+        {
+          "rank": 337,
+          "name": "CHEMBL6446",
+          "score": 6.915,
+          "label": "decoy"
+        },
+        {
+          "rank": 338,
+          "name": "CHEMBL6619",
+          "score": 6.913,
+          "label": "decoy"
+        },
+        {
+          "rank": 339,
+          "name": "CHEMBL414200",
+          "score": 6.912,
+          "label": "decoy"
+        },
+        {
+          "rank": 340,
+          "name": "CHEMBL6247",
+          "score": 6.91,
+          "label": "decoy"
+        },
+        {
+          "rank": 341,
+          "name": "CHEMBL6609",
+          "score": 6.908,
+          "label": "decoy"
+        },
+        {
+          "rank": 342,
+          "name": "CHEMBL6338",
+          "score": 6.9,
+          "label": "decoy"
+        },
+        {
+          "rank": 343,
+          "name": "CHEMBL268598",
+          "score": 6.899,
+          "label": "decoy"
+        },
+        {
+          "rank": 344,
+          "name": "CHEMBL6916",
+          "score": 6.896,
+          "label": "decoy"
+        },
+        {
+          "rank": 345,
+          "name": "CHEMBL268174",
+          "score": 6.895,
+          "label": "decoy"
+        },
+        {
+          "rank": 346,
+          "name": "CHEMBL266930",
+          "score": 6.895,
+          "label": "decoy"
+        },
+        {
+          "rank": 347,
+          "name": "CHEMBL6346",
+          "score": 6.891,
+          "label": "decoy"
+        },
+        {
+          "rank": 348,
+          "name": "CHEMBL265621",
+          "score": 6.889,
+          "label": "decoy"
+        },
+        {
+          "rank": 349,
+          "name": "CHEMBL6801",
+          "score": 6.888,
+          "label": "decoy"
+        },
+        {
+          "rank": 350,
+          "name": "CHEMBL6606",
+          "score": 6.882,
+          "label": "decoy"
+        },
+        {
+          "rank": 351,
+          "name": "CHEMBL266458",
+          "score": 6.874,
+          "label": "decoy"
+        },
+        {
+          "rank": 352,
+          "name": "CHEMBL268116",
+          "score": 6.874,
+          "label": "decoy"
+        },
+        {
+          "rank": 353,
+          "name": "CHEMBL8",
+          "score": 6.873,
+          "label": "decoy"
+        },
+        {
+          "rank": 354,
+          "name": "CHEMBL6264",
+          "score": 6.872,
+          "label": "decoy"
+        },
+        {
+          "rank": 355,
+          "name": "CHEMBL404992",
+          "score": 6.871,
+          "label": "decoy"
+        },
+        {
+          "rank": 356,
+          "name": "CHEMBL6631",
+          "score": 6.871,
+          "label": "decoy"
+        },
+        {
+          "rank": 357,
+          "name": "CHEMBL6555",
+          "score": 6.867,
+          "label": "decoy"
+        },
+        {
+          "rank": 358,
+          "name": "CHEMBL6566",
+          "score": 6.865,
+          "label": "decoy"
+        },
+        {
+          "rank": 359,
+          "name": "CHEMBL6865",
+          "score": 6.865,
+          "label": "decoy"
+        },
+        {
+          "rank": 360,
+          "name": "CHEMBL269075",
+          "score": 6.862,
+          "label": "decoy"
+        },
+        {
+          "rank": 361,
+          "name": "CHEMBL6439",
+          "score": 6.856,
+          "label": "decoy"
+        },
+        {
+          "rank": 362,
+          "name": "CHEMBL265664",
+          "score": 6.846,
+          "label": "decoy"
+        },
+        {
+          "rank": 363,
+          "name": "CHEMBL266684",
+          "score": 6.845,
+          "label": "decoy"
+        },
+        {
+          "rank": 364,
+          "name": "CHEMBL268339",
+          "score": 6.842,
+          "label": "decoy"
+        },
+        {
+          "rank": 365,
+          "name": "CHEMBL6299",
+          "score": 6.841,
+          "label": "decoy"
+        },
+        {
+          "rank": 366,
+          "name": "CHEMBL6659",
+          "score": 6.832,
+          "label": "decoy"
+        },
+        {
+          "rank": 367,
+          "name": "CHEMBL6429",
+          "score": 6.831,
+          "label": "decoy"
+        },
+        {
+          "rank": 368,
+          "name": "CHEMBL6530",
+          "score": 6.83,
+          "label": "decoy"
+        },
+        {
+          "rank": 369,
+          "name": "CHEMBL6855",
+          "score": 6.83,
+          "label": "decoy"
+        },
+        {
+          "rank": 370,
+          "name": "CHEMBL6425",
+          "score": 6.827,
+          "label": "decoy"
+        },
+        {
+          "rank": 371,
+          "name": "CHEMBL6",
+          "score": 6.826,
+          "label": "decoy"
+        },
+        {
+          "rank": 372,
+          "name": "CHEMBL266957",
+          "score": 6.825,
+          "label": "decoy"
+        },
+        {
+          "rank": 373,
+          "name": "CHEMBL267142",
+          "score": 6.825,
+          "label": "decoy"
+        },
+        {
+          "rank": 374,
+          "name": "CHEMBL6204",
+          "score": 6.824,
+          "label": "decoy"
+        },
+        {
+          "rank": 375,
+          "name": "CHEMBL6382",
+          "score": 6.804,
+          "label": "decoy"
+        },
+        {
+          "rank": 376,
+          "name": "CHEMBL6831",
+          "score": 6.8,
+          "label": "decoy"
+        },
+        {
+          "rank": 377,
+          "name": "CHEMBL269304",
+          "score": 6.799,
+          "label": "decoy"
+        },
+        {
+          "rank": 378,
+          "name": "CHEMBL267036",
+          "score": 6.795,
+          "label": "decoy"
+        },
+        {
+          "rank": 379,
+          "name": "CHEMBL6455",
+          "score": 6.79,
+          "label": "decoy"
+        },
+        {
+          "rank": 380,
+          "name": "CHEMBL6778",
+          "score": 6.789,
+          "label": "decoy"
+        },
+        {
+          "rank": 381,
+          "name": "CHEMBL268412",
+          "score": 6.788,
+          "label": "decoy"
+        },
+        {
+          "rank": 382,
+          "name": "CHEMBL268770",
+          "score": 6.777,
+          "label": "decoy"
+        },
+        {
+          "rank": 383,
+          "name": "CHEMBL269122",
+          "score": 6.777,
+          "label": "decoy"
+        },
+        {
+          "rank": 384,
+          "name": "CHEMBL6335",
+          "score": 6.776,
+          "label": "decoy"
+        },
+        {
+          "rank": 385,
+          "name": "CHEMBL6336",
+          "score": 6.776,
+          "label": "decoy"
+        },
+        {
+          "rank": 386,
+          "name": "CHEMBL269536",
+          "score": 6.773,
+          "label": "decoy"
+        },
+        {
+          "rank": 387,
+          "name": "CHEMBL6311",
+          "score": 6.77,
+          "label": "decoy"
+        },
+        {
+          "rank": 388,
+          "name": "CHEMBL269573",
+          "score": 6.769,
+          "label": "decoy"
+        },
+        {
+          "rank": 389,
+          "name": "CHEMBL6225",
+          "score": 6.762,
+          "label": "decoy"
+        },
+        {
+          "rank": 390,
+          "name": "CHEMBL415292",
+          "score": 6.761,
+          "label": "decoy"
+        },
+        {
+          "rank": 391,
+          "name": "CHEMBL6462",
+          "score": 6.754,
+          "label": "decoy"
+        },
+        {
+          "rank": 392,
+          "name": "CHEMBL6785",
+          "score": 6.747,
+          "label": "decoy"
+        },
+        {
+          "rank": 393,
+          "name": "CHEMBL6654",
+          "score": 6.745,
+          "label": "decoy"
+        },
+        {
+          "rank": 394,
+          "name": "CHEMBL7298",
+          "score": 6.745,
+          "label": "decoy"
+        },
+        {
+          "rank": 395,
+          "name": "CHEMBL267372",
+          "score": 6.745,
+          "label": "decoy"
+        },
+        {
+          "rank": 396,
+          "name": "CHEMBL6273",
+          "score": 6.744,
+          "label": "decoy"
+        },
+        {
+          "rank": 397,
+          "name": "CHEMBL4637964",
+          "score": 6.742,
+          "label": "active"
+        },
+        {
+          "rank": 398,
+          "name": "CHEMBL6440",
+          "score": 6.738,
+          "label": "decoy"
+        },
+        {
+          "rank": 399,
+          "name": "CHEMBL6437",
+          "score": 6.737,
+          "label": "decoy"
+        },
+        {
+          "rank": 400,
+          "name": "CHEMBL6386",
+          "score": 6.735,
+          "label": "decoy"
+        },
+        {
+          "rank": 401,
+          "name": "CHEMBL6901",
+          "score": 6.735,
+          "label": "decoy"
+        },
+        {
+          "rank": 402,
+          "name": "CHEMBL6482",
+          "score": 6.734,
+          "label": "decoy"
+        },
+        {
+          "rank": 403,
+          "name": "CHEMBL6633",
+          "score": 6.734,
+          "label": "decoy"
+        },
+        {
+          "rank": 404,
+          "name": "CHEMBL267164",
+          "score": 6.73,
+          "label": "decoy"
+        },
+        {
+          "rank": 405,
+          "name": "CHEMBL269570",
+          "score": 6.726,
+          "label": "decoy"
+        },
+        {
+          "rank": 406,
+          "name": "CHEMBL268855",
+          "score": 6.724,
+          "label": "decoy"
+        },
+        {
+          "rank": 407,
+          "name": "CHEMBL9",
+          "score": 6.721,
+          "label": "decoy"
+        },
+        {
+          "rank": 408,
+          "name": "CHEMBL6771",
+          "score": 6.72,
+          "label": "decoy"
+        },
+        {
+          "rank": 409,
+          "name": "CHEMBL6714",
+          "score": 6.719,
+          "label": "decoy"
+        },
+        {
+          "rank": 410,
+          "name": "CHEMBL268356",
+          "score": 6.716,
+          "label": "decoy"
+        },
+        {
+          "rank": 411,
+          "name": "CHEMBL6459",
+          "score": 6.713,
+          "label": "decoy"
+        },
+        {
+          "rank": 412,
+          "name": "CHEMBL6588",
+          "score": 6.711,
+          "label": "decoy"
+        },
+        {
+          "rank": 413,
+          "name": "CHEMBL263079",
+          "score": 6.71,
+          "label": "decoy"
+        },
+        {
+          "rank": 414,
+          "name": "CHEMBL3917174",
+          "score": 6.708,
+          "label": "active"
+        },
+        {
+          "rank": 415,
+          "name": "CHEMBL266732",
+          "score": 6.708,
+          "label": "decoy"
+        },
+        {
+          "rank": 416,
+          "name": "CHEMBL263881",
+          "score": 6.707,
+          "label": "decoy"
+        },
+        {
+          "rank": 417,
+          "name": "CHEMBL6546",
+          "score": 6.707,
+          "label": "decoy"
+        },
+        {
+          "rank": 418,
+          "name": "CHEMBL267229",
+          "score": 6.701,
+          "label": "decoy"
+        },
+        {
+          "rank": 419,
+          "name": "CHEMBL407",
+          "score": 6.701,
+          "label": "decoy"
+        },
+        {
+          "rank": 420,
+          "name": "CHEMBL6861",
+          "score": 6.695,
+          "label": "decoy"
+        },
+        {
+          "rank": 421,
+          "name": "CHEMBL6576",
+          "score": 6.694,
+          "label": "decoy"
+        },
+        {
+          "rank": 422,
+          "name": "CHEMBL269703",
+          "score": 6.691,
+          "label": "decoy"
+        },
+        {
+          "rank": 423,
+          "name": "CHEMBL7137",
+          "score": 6.691,
+          "label": "decoy"
+        },
+        {
+          "rank": 424,
+          "name": "CHEMBL6800",
+          "score": 6.687,
+          "label": "decoy"
+        },
+        {
+          "rank": 425,
+          "name": "CHEMBL6655",
+          "score": 6.685,
+          "label": "decoy"
+        },
+        {
+          "rank": 426,
+          "name": "CHEMBL6595",
+          "score": 6.684,
+          "label": "decoy"
+        },
+        {
+          "rank": 427,
+          "name": "CHEMBL268439",
+          "score": 6.683,
+          "label": "decoy"
+        },
+        {
+          "rank": 428,
+          "name": "CHEMBL6400",
+          "score": 6.677,
+          "label": "decoy"
+        },
+        {
+          "rank": 429,
+          "name": "CHEMBL7237",
+          "score": 6.671,
+          "label": "decoy"
+        },
+        {
+          "rank": 430,
+          "name": "CHEMBL268098",
+          "score": 6.669,
+          "label": "decoy"
+        },
+        {
+          "rank": 431,
+          "name": "CHEMBL269705",
+          "score": 6.667,
+          "label": "decoy"
+        },
+        {
+          "rank": 432,
+          "name": "CHEMBL6789",
+          "score": 6.664,
+          "label": "decoy"
+        },
+        {
+          "rank": 433,
+          "name": "CHEMBL268627",
+          "score": 6.652,
+          "label": "decoy"
+        },
+        {
+          "rank": 434,
+          "name": "CHEMBL6460",
+          "score": 6.651,
+          "label": "decoy"
+        },
+        {
+          "rank": 435,
+          "name": "CHEMBL263081",
+          "score": 6.649,
+          "label": "decoy"
+        },
+        {
+          "rank": 436,
+          "name": "CHEMBL16",
+          "score": 6.649,
+          "label": "decoy"
+        },
+        {
+          "rank": 437,
+          "name": "CHEMBL6755",
+          "score": 6.647,
+          "label": "decoy"
+        },
+        {
+          "rank": 438,
+          "name": "CHEMBL267705",
+          "score": 6.645,
+          "label": "decoy"
+        },
+        {
+          "rank": 439,
+          "name": "CHEMBL6589",
+          "score": 6.644,
+          "label": "decoy"
+        },
+        {
+          "rank": 440,
+          "name": "CHEMBL6937",
+          "score": 6.642,
+          "label": "decoy"
+        },
+        {
+          "rank": 441,
+          "name": "CHEMBL6468",
+          "score": 6.638,
+          "label": "decoy"
+        },
+        {
+          "rank": 442,
+          "name": "CHEMBL6824",
+          "score": 6.637,
+          "label": "decoy"
+        },
+        {
+          "rank": 443,
+          "name": "CHEMBL266220",
+          "score": 6.636,
+          "label": "decoy"
+        },
+        {
+          "rank": 444,
+          "name": "CHEMBL6946",
+          "score": 6.632,
+          "label": "decoy"
+        },
+        {
+          "rank": 445,
+          "name": "CHEMBL415108",
+          "score": 6.63,
+          "label": "decoy"
+        },
+        {
+          "rank": 446,
+          "name": "CHEMBL7238",
+          "score": 6.629,
+          "label": "decoy"
+        },
+        {
+          "rank": 447,
+          "name": "CHEMBL6888",
+          "score": 6.628,
+          "label": "decoy"
+        },
+        {
+          "rank": 448,
+          "name": "CHEMBL269497",
+          "score": 6.625,
+          "label": "decoy"
+        },
+        {
+          "rank": 449,
+          "name": "CHEMBL6283",
+          "score": 6.624,
+          "label": "decoy"
+        },
+        {
+          "rank": 450,
+          "name": "CHEMBL263074",
+          "score": 6.623,
+          "label": "decoy"
+        },
+        {
+          "rank": 451,
+          "name": "CHEMBL6233",
+          "score": 6.622,
+          "label": "decoy"
+        },
+        {
+          "rank": 452,
+          "name": "CHEMBL262570",
+          "score": 6.622,
+          "label": "decoy"
+        },
+        {
+          "rank": 453,
+          "name": "CHEMBL266685",
+          "score": 6.621,
+          "label": "decoy"
+        },
+        {
+          "rank": 454,
+          "name": "CHEMBL6309",
+          "score": 6.618,
+          "label": "decoy"
+        },
+        {
+          "rank": 455,
+          "name": "CHEMBL6642",
+          "score": 6.617,
+          "label": "decoy"
+        },
+        {
+          "rank": 456,
+          "name": "CHEMBL6544",
+          "score": 6.606,
+          "label": "decoy"
+        },
+        {
+          "rank": 457,
+          "name": "CHEMBL6277",
+          "score": 6.604,
+          "label": "decoy"
+        },
+        {
+          "rank": 458,
+          "name": "CHEMBL267914",
+          "score": 6.603,
+          "label": "decoy"
+        },
+        {
+          "rank": 459,
+          "name": "CHEMBL428478",
+          "score": 6.603,
+          "label": "decoy"
+        },
+        {
+          "rank": 460,
+          "name": "CHEMBL6221",
+          "score": 6.597,
+          "label": "decoy"
+        },
+        {
+          "rank": 461,
+          "name": "CHEMBL6443",
+          "score": 6.595,
+          "label": "decoy"
+        },
+        {
+          "rank": 462,
+          "name": "CHEMBL6300",
+          "score": 6.594,
+          "label": "decoy"
+        },
+        {
+          "rank": 463,
+          "name": "CHEMBL6504",
+          "score": 6.59,
+          "label": "decoy"
+        },
+        {
+          "rank": 464,
+          "name": "CHEMBL268652",
+          "score": 6.589,
+          "label": "decoy"
+        },
+        {
+          "rank": 465,
+          "name": "CHEMBL267627",
+          "score": 6.585,
+          "label": "decoy"
+        },
+        {
+          "rank": 466,
+          "name": "CHEMBL267498",
+          "score": 6.585,
+          "label": "decoy"
+        },
+        {
+          "rank": 467,
+          "name": "CHEMBL6464",
+          "score": 6.572,
+          "label": "decoy"
+        },
+        {
+          "rank": 468,
+          "name": "CHEMBL6353",
+          "score": 6.57,
+          "label": "decoy"
+        },
+        {
+          "rank": 469,
+          "name": "CHEMBL6399",
+          "score": 6.567,
+          "label": "decoy"
+        },
+        {
+          "rank": 470,
+          "name": "CHEMBL7009",
+          "score": 6.565,
+          "label": "decoy"
+        },
+        {
+          "rank": 471,
+          "name": "CHEMBL6594",
+          "score": 6.564,
+          "label": "decoy"
+        },
+        {
+          "rank": 472,
+          "name": "CHEMBL6442",
+          "score": 6.561,
+          "label": "decoy"
+        },
+        {
+          "rank": 473,
+          "name": "CHEMBL6747",
+          "score": 6.561,
+          "label": "decoy"
+        },
+        {
+          "rank": 474,
+          "name": "CHEMBL268414",
+          "score": 6.556,
+          "label": "decoy"
+        },
+        {
+          "rank": 475,
+          "name": "CHEMBL6721",
+          "score": 6.545,
+          "label": "decoy"
+        },
+        {
+          "rank": 476,
+          "name": "CHEMBL6452",
+          "score": 6.54,
+          "label": "decoy"
+        },
+        {
+          "rank": 477,
+          "name": "CHEMBL6612",
+          "score": 6.539,
+          "label": "decoy"
+        },
+        {
+          "rank": 478,
+          "name": "CHEMBL6275",
+          "score": 6.537,
+          "label": "decoy"
+        },
+        {
+          "rank": 479,
+          "name": "CHEMBL6239",
+          "score": 6.534,
+          "label": "decoy"
+        },
+        {
+          "rank": 480,
+          "name": "CHEMBL6517",
+          "score": 6.53,
+          "label": "decoy"
+        },
+        {
+          "rank": 481,
+          "name": "CHEMBL6543",
+          "score": 6.53,
+          "label": "decoy"
+        },
+        {
+          "rank": 482,
+          "name": "CHEMBL6862",
+          "score": 6.53,
+          "label": "decoy"
+        },
+        {
+          "rank": 483,
+          "name": "CHEMBL6837",
+          "score": 6.521,
+          "label": "decoy"
+        },
+        {
+          "rank": 484,
+          "name": "CHEMBL415293",
+          "score": 6.521,
+          "label": "decoy"
+        },
+        {
+          "rank": 485,
+          "name": "CHEMBL266541",
+          "score": 6.519,
+          "label": "decoy"
+        },
+        {
+          "rank": 486,
+          "name": "CHEMBL269495",
+          "score": 6.518,
+          "label": "decoy"
+        },
+        {
+          "rank": 487,
+          "name": "CHEMBL263080",
+          "score": 6.516,
+          "label": "decoy"
+        },
+        {
+          "rank": 488,
+          "name": "CHEMBL6414",
+          "score": 6.513,
+          "label": "decoy"
+        },
+        {
+          "rank": 489,
+          "name": "CHEMBL269598",
+          "score": 6.512,
+          "label": "decoy"
+        },
+        {
+          "rank": 490,
+          "name": "CHEMBL6367",
+          "score": 6.503,
+          "label": "decoy"
+        },
+        {
+          "rank": 491,
+          "name": "CHEMBL7069",
+          "score": 6.502,
+          "label": "decoy"
+        },
+        {
+          "rank": 492,
+          "name": "CHEMBL6234",
+          "score": 6.499,
+          "label": "decoy"
+        },
+        {
+          "rank": 493,
+          "name": "CHEMBL267639",
+          "score": 6.497,
+          "label": "decoy"
+        },
+        {
+          "rank": 494,
+          "name": "CHEMBL6548",
+          "score": 6.492,
+          "label": "decoy"
+        },
+        {
+          "rank": 495,
+          "name": "CHEMBL6887",
+          "score": 6.488,
+          "label": "decoy"
+        },
+        {
+          "rank": 496,
+          "name": "CHEMBL6389",
+          "score": 6.486,
+          "label": "decoy"
+        },
+        {
+          "rank": 497,
+          "name": "CHEMBL266707",
+          "score": 6.48,
+          "label": "decoy"
+        },
+        {
+          "rank": 498,
+          "name": "CHEMBL268542",
+          "score": 6.48,
+          "label": "decoy"
+        },
+        {
+          "rank": 499,
+          "name": "CHEMBL6201",
+          "score": 6.479,
+          "label": "decoy"
+        },
+        {
+          "rank": 500,
+          "name": "CHEMBL6301",
+          "score": 6.479,
+          "label": "decoy"
+        },
+        {
+          "rank": 501,
+          "name": "CHEMBL6370",
+          "score": 6.476,
+          "label": "decoy"
+        },
+        {
+          "rank": 502,
+          "name": "CHEMBL269046",
+          "score": 6.473,
+          "label": "decoy"
+        },
+        {
+          "rank": 503,
+          "name": "CHEMBL266943",
+          "score": 6.473,
+          "label": "decoy"
+        },
+        {
+          "rank": 504,
+          "name": "CHEMBL6907",
+          "score": 6.472,
+          "label": "decoy"
+        },
+        {
+          "rank": 505,
+          "name": "CHEMBL6564",
+          "score": 6.456,
+          "label": "decoy"
+        },
+        {
+          "rank": 506,
+          "name": "CHEMBL6285",
+          "score": 6.453,
+          "label": "decoy"
+        },
+        {
+          "rank": 507,
+          "name": "CHEMBL268176",
+          "score": 6.442,
+          "label": "decoy"
+        },
+        {
+          "rank": 508,
+          "name": "CHEMBL6552",
+          "score": 6.44,
+          "label": "decoy"
+        },
+        {
+          "rank": 509,
+          "name": "CHEMBL6945",
+          "score": 6.431,
+          "label": "decoy"
+        },
+        {
+          "rank": 510,
+          "name": "CHEMBL6449",
+          "score": 6.43,
+          "label": "decoy"
+        },
+        {
+          "rank": 511,
+          "name": "CHEMBL6384",
+          "score": 6.427,
+          "label": "decoy"
+        },
+        {
+          "rank": 512,
+          "name": "CHEMBL269366",
+          "score": 6.427,
+          "label": "decoy"
+        },
+        {
+          "rank": 513,
+          "name": "CHEMBL268454",
+          "score": 6.419,
+          "label": "decoy"
+        },
+        {
+          "rank": 514,
+          "name": "CHEMBL6369",
+          "score": 6.413,
+          "label": "decoy"
+        },
+        {
+          "rank": 515,
+          "name": "CHEMBL6725",
+          "score": 6.412,
+          "label": "decoy"
+        },
+        {
+          "rank": 516,
+          "name": "CHEMBL427826",
+          "score": 6.409,
+          "label": "decoy"
+        },
+        {
+          "rank": 517,
+          "name": "CHEMBL6278",
+          "score": 6.408,
+          "label": "decoy"
+        },
+        {
+          "rank": 518,
+          "name": "CHEMBL269018",
+          "score": 6.406,
+          "label": "decoy"
+        },
+        {
+          "rank": 519,
+          "name": "CHEMBL6603",
+          "score": 6.394,
+          "label": "decoy"
+        },
+        {
+          "rank": 520,
+          "name": "CHEMBL266429",
+          "score": 6.391,
+          "label": "decoy"
+        },
+        {
+          "rank": 521,
+          "name": "CHEMBL268830",
+          "score": 6.38,
+          "label": "decoy"
+        },
+        {
+          "rank": 522,
+          "name": "CHEMBL6308",
+          "score": 6.38,
+          "label": "decoy"
+        },
+        {
+          "rank": 523,
+          "name": "CHEMBL6827",
+          "score": 6.38,
+          "label": "decoy"
+        },
+        {
+          "rank": 524,
+          "name": "CHEMBL266302",
+          "score": 6.375,
+          "label": "decoy"
+        },
+        {
+          "rank": 525,
+          "name": "CHEMBL266316",
+          "score": 6.371,
+          "label": "decoy"
+        },
+        {
+          "rank": 526,
+          "name": "CHEMBL6469",
+          "score": 6.37,
+          "label": "decoy"
+        },
+        {
+          "rank": 527,
+          "name": "CHEMBL415290",
+          "score": 6.357,
+          "label": "decoy"
+        },
+        {
+          "rank": 528,
+          "name": "CHEMBL6835",
+          "score": 6.356,
+          "label": "decoy"
+        },
+        {
+          "rank": 529,
+          "name": "CHEMBL6723",
+          "score": 6.354,
+          "label": "decoy"
+        },
+        {
+          "rank": 530,
+          "name": "CHEMBL266318",
+          "score": 6.354,
+          "label": "decoy"
+        },
+        {
+          "rank": 531,
+          "name": "CHEMBL6320",
+          "score": 6.352,
+          "label": "decoy"
+        },
+        {
+          "rank": 532,
+          "name": "CHEMBL6286",
+          "score": 6.351,
+          "label": "decoy"
+        },
+        {
+          "rank": 533,
+          "name": "CHEMBL6613",
+          "score": 6.351,
+          "label": "decoy"
+        },
+        {
+          "rank": 534,
+          "name": "CHEMBL6854",
+          "score": 6.349,
+          "label": "decoy"
+        },
+        {
+          "rank": 535,
+          "name": "CHEMBL267678",
+          "score": 6.348,
+          "label": "decoy"
+        },
+        {
+          "rank": 536,
+          "name": "CHEMBL6486",
+          "score": 6.348,
+          "label": "decoy"
+        },
+        {
+          "rank": 537,
+          "name": "CHEMBL6661",
+          "score": 6.347,
+          "label": "decoy"
+        },
+        {
+          "rank": 538,
+          "name": "CHEMBL267626",
+          "score": 6.333,
+          "label": "decoy"
+        },
+        {
+          "rank": 539,
+          "name": "CHEMBL6704",
+          "score": 6.326,
+          "label": "decoy"
+        },
+        {
+          "rank": 540,
+          "name": "CHEMBL266359",
+          "score": 6.325,
+          "label": "decoy"
+        },
+        {
+          "rank": 541,
+          "name": "CHEMBL6797",
+          "score": 6.322,
+          "label": "decoy"
+        },
+        {
+          "rank": 542,
+          "name": "CHEMBL6864",
+          "score": 6.318,
+          "label": "decoy"
+        },
+        {
+          "rank": 543,
+          "name": "CHEMBL6533",
+          "score": 6.315,
+          "label": "decoy"
+        },
+        {
+          "rank": 544,
+          "name": "CHEMBL267938",
+          "score": 6.314,
+          "label": "decoy"
+        },
+        {
+          "rank": 545,
+          "name": "CHEMBL6677",
+          "score": 6.313,
+          "label": "decoy"
+        },
+        {
+          "rank": 546,
+          "name": "CHEMBL266798",
+          "score": 6.308,
+          "label": "decoy"
+        },
+        {
+          "rank": 547,
+          "name": "CHEMBL6787",
+          "score": 6.307,
+          "label": "decoy"
+        },
+        {
+          "rank": 548,
+          "name": "CHEMBL267456",
+          "score": 6.306,
+          "label": "decoy"
+        },
+        {
+          "rank": 549,
+          "name": "CHEMBL266708",
+          "score": 6.306,
+          "label": "decoy"
+        },
+        {
+          "rank": 550,
+          "name": "CHEMBL6267",
+          "score": 6.303,
+          "label": "decoy"
+        },
+        {
+          "rank": 551,
+          "name": "CHEMBL267163",
+          "score": 6.294,
+          "label": "decoy"
+        },
+        {
+          "rank": 552,
+          "name": "CHEMBL268787",
+          "score": 6.293,
+          "label": "decoy"
+        },
+        {
+          "rank": 553,
+          "name": "CHEMBL6404",
+          "score": 6.291,
+          "label": "decoy"
+        },
+        {
+          "rank": 554,
+          "name": "CHEMBL6805",
+          "score": 6.288,
+          "label": "decoy"
+        },
+        {
+          "rank": 555,
+          "name": "CHEMBL7132",
+          "score": 6.288,
+          "label": "decoy"
+        },
+        {
+          "rank": 556,
+          "name": "CHEMBL6817",
+          "score": 6.287,
+          "label": "decoy"
+        },
+        {
+          "rank": 557,
+          "name": "CHEMBL268626",
+          "score": 6.28,
+          "label": "decoy"
+        },
+        {
+          "rank": 558,
+          "name": "CHEMBL268832",
+          "score": 6.28,
+          "label": "decoy"
+        },
+        {
+          "rank": 559,
+          "name": "CHEMBL6413",
+          "score": 6.278,
+          "label": "decoy"
+        },
+        {
+          "rank": 560,
+          "name": "CHEMBL414400",
+          "score": 6.267,
+          "label": "decoy"
+        },
+        {
+          "rank": 561,
+          "name": "CHEMBL6678",
+          "score": 6.262,
+          "label": "decoy"
+        },
+        {
+          "rank": 562,
+          "name": "CHEMBL418",
+          "score": 6.256,
+          "label": "decoy"
+        },
+        {
+          "rank": 563,
+          "name": "CHEMBL6512",
+          "score": 6.255,
+          "label": "decoy"
+        },
+        {
+          "rank": 564,
+          "name": "CHEMBL6720",
+          "score": 6.252,
+          "label": "decoy"
+        },
+        {
+          "rank": 565,
+          "name": "CHEMBL6741",
+          "score": 6.251,
+          "label": "decoy"
+        },
+        {
+          "rank": 566,
+          "name": "CHEMBL6992",
+          "score": 6.24,
+          "label": "decoy"
+        },
+        {
+          "rank": 567,
+          "name": "CHEMBL266198",
+          "score": 6.236,
+          "label": "decoy"
+        },
+        {
+          "rank": 568,
+          "name": "CHEMBL6641",
+          "score": 6.229,
+          "label": "decoy"
+        },
+        {
+          "rank": 569,
+          "name": "CHEMBL6258",
+          "score": 6.225,
+          "label": "decoy"
+        },
+        {
+          "rank": 570,
+          "name": "CHEMBL6461",
+          "score": 6.225,
+          "label": "decoy"
+        },
+        {
+          "rank": 571,
+          "name": "CHEMBL7059",
+          "score": 6.223,
+          "label": "decoy"
+        },
+        {
+          "rank": 572,
+          "name": "CHEMBL267665",
+          "score": 6.217,
+          "label": "decoy"
+        },
+        {
+          "rank": 573,
+          "name": "CHEMBL6284",
+          "score": 6.205,
+          "label": "decoy"
+        },
+        {
+          "rank": 574,
+          "name": "CHEMBL268099",
+          "score": 6.204,
+          "label": "decoy"
+        },
+        {
+          "rank": 575,
+          "name": "CHEMBL6448",
+          "score": 6.2,
+          "label": "decoy"
+        },
+        {
+          "rank": 576,
+          "name": "CHEMBL6523",
+          "score": 6.197,
+          "label": "decoy"
+        },
+        {
+          "rank": 577,
+          "name": "CHEMBL6732",
+          "score": 6.194,
+          "label": "decoy"
+        },
+        {
+          "rank": 578,
+          "name": "CHEMBL268440",
+          "score": 6.194,
+          "label": "decoy"
+        },
+        {
+          "rank": 579,
+          "name": "CHEMBL268567",
+          "score": 6.182,
+          "label": "decoy"
+        },
+        {
+          "rank": 580,
+          "name": "CHEMBL6672",
+          "score": 6.178,
+          "label": "decoy"
+        },
+        {
+          "rank": 581,
+          "name": "CHEMBL268614",
+          "score": 6.177,
+          "label": "decoy"
+        },
+        {
+          "rank": 582,
+          "name": "CHEMBL6334",
+          "score": 6.174,
+          "label": "decoy"
+        },
+        {
+          "rank": 583,
+          "name": "CHEMBL268113",
+          "score": 6.17,
+          "label": "decoy"
+        },
+        {
+          "rank": 584,
+          "name": "CHEMBL266301",
+          "score": 6.166,
+          "label": "decoy"
+        },
+        {
+          "rank": 585,
+          "name": "CHEMBL267833",
+          "score": 6.163,
+          "label": "decoy"
+        },
+        {
+          "rank": 586,
+          "name": "CHEMBL6649",
+          "score": 6.159,
+          "label": "decoy"
+        },
+        {
+          "rank": 587,
+          "name": "CHEMBL6387",
+          "score": 6.159,
+          "label": "decoy"
+        },
+        {
+          "rank": 588,
+          "name": "CHEMBL404",
+          "score": 6.148,
+          "label": "decoy"
+        },
+        {
+          "rank": 589,
+          "name": "CHEMBL6444",
+          "score": 6.148,
+          "label": "decoy"
+        },
+        {
+          "rank": 590,
+          "name": "CHEMBL22",
+          "score": 6.146,
+          "label": "decoy"
+        },
+        {
+          "rank": 591,
+          "name": "CHEMBL267192",
+          "score": 6.143,
+          "label": "decoy"
+        },
+        {
+          "rank": 592,
+          "name": "CHEMBL6251",
+          "score": 6.135,
+          "label": "decoy"
+        },
+        {
+          "rank": 593,
+          "name": "CHEMBL269774",
+          "score": 6.131,
+          "label": "decoy"
+        },
+        {
+          "rank": 594,
+          "name": "CHEMBL269001",
+          "score": 6.13,
+          "label": "decoy"
+        },
+        {
+          "rank": 595,
+          "name": "CHEMBL6485",
+          "score": 6.123,
+          "label": "decoy"
+        },
+        {
+          "rank": 596,
+          "name": "CHEMBL7057",
+          "score": 6.108,
+          "label": "decoy"
+        },
+        {
+          "rank": 597,
+          "name": "CHEMBL6966",
+          "score": 6.105,
+          "label": "decoy"
+        },
+        {
+          "rank": 598,
+          "name": "CHEMBL6587",
+          "score": 6.101,
+          "label": "decoy"
+        },
+        {
+          "rank": 599,
+          "name": "CHEMBL268530",
+          "score": 6.1,
+          "label": "decoy"
+        },
+        {
+          "rank": 600,
+          "name": "CHEMBL6962",
+          "score": 6.099,
+          "label": "decoy"
+        },
+        {
+          "rank": 601,
+          "name": "CHEMBL269057",
+          "score": 6.087,
+          "label": "decoy"
+        },
+        {
+          "rank": 602,
+          "name": "CHEMBL269381",
+          "score": 6.074,
+          "label": "decoy"
+        },
+        {
+          "rank": 603,
+          "name": "CHEMBL267915",
+          "score": 6.072,
+          "label": "decoy"
+        },
+        {
+          "rank": 604,
+          "name": "CHEMBL6528",
+          "score": 6.07,
+          "label": "decoy"
+        },
+        {
+          "rank": 605,
+          "name": "CHEMBL6418",
+          "score": 6.069,
+          "label": "decoy"
+        },
+        {
+          "rank": 606,
+          "name": "CHEMBL6750",
+          "score": 6.067,
+          "label": "decoy"
+        },
+        {
+          "rank": 607,
+          "name": "CHEMBL6752",
+          "score": 6.066,
+          "label": "decoy"
+        },
+        {
+          "rank": 608,
+          "name": "CHEMBL7288",
+          "score": 6.062,
+          "label": "decoy"
+        },
+        {
+          "rank": 609,
+          "name": "CHEMBL269471",
+          "score": 6.051,
+          "label": "decoy"
+        },
+        {
+          "rank": 610,
+          "name": "CHEMBL267037",
+          "score": 6.047,
+          "label": "decoy"
+        },
+        {
+          "rank": 611,
+          "name": "CHEMBL6730",
+          "score": 6.044,
+          "label": "decoy"
+        },
+        {
+          "rank": 612,
+          "name": "CHEMBL266800",
+          "score": 6.041,
+          "label": "decoy"
+        },
+        {
+          "rank": 613,
+          "name": "CHEMBL267667",
+          "score": 6.038,
+          "label": "decoy"
+        },
+        {
+          "rank": 614,
+          "name": "CHEMBL266197",
+          "score": 6.032,
+          "label": "decoy"
+        },
+        {
+          "rank": 615,
+          "name": "CHEMBL6615",
+          "score": 6.013,
+          "label": "decoy"
+        },
+        {
+          "rank": 616,
+          "name": "CHEMBL268831",
+          "score": 5.99,
+          "label": "decoy"
+        },
+        {
+          "rank": 617,
+          "name": "CHEMBL415475",
+          "score": 5.99,
+          "label": "decoy"
+        },
+        {
+          "rank": 618,
+          "name": "CHEMBL6456",
+          "score": 5.974,
+          "label": "decoy"
+        },
+        {
+          "rank": 619,
+          "name": "CHEMBL6430",
+          "score": 5.971,
+          "label": "decoy"
+        },
+        {
+          "rank": 620,
+          "name": "CHEMBL6635",
+          "score": 5.963,
+          "label": "decoy"
+        },
+        {
+          "rank": 621,
+          "name": "CHEMBL7146",
+          "score": 5.962,
+          "label": "decoy"
+        },
+        {
+          "rank": 622,
+          "name": "CHEMBL6381",
+          "score": 5.958,
+          "label": "decoy"
+        },
+        {
+          "rank": 623,
+          "name": "CHEMBL6876",
+          "score": 5.958,
+          "label": "decoy"
+        },
+        {
+          "rank": 624,
+          "name": "CHEMBL267127",
+          "score": 5.95,
+          "label": "decoy"
+        },
+        {
+          "rank": 625,
+          "name": "CHEMBL266087",
+          "score": 5.943,
+          "label": "decoy"
+        },
+        {
+          "rank": 626,
+          "name": "CHEMBL268856",
+          "score": 5.942,
+          "label": "decoy"
+        },
+        {
+          "rank": 627,
+          "name": "CHEMBL6986",
+          "score": 5.941,
+          "label": "decoy"
+        },
+        {
+          "rank": 628,
+          "name": "CHEMBL6889",
+          "score": 5.93,
+          "label": "decoy"
+        },
+        {
+          "rank": 629,
+          "name": "CHEMBL414182",
+          "score": 5.926,
+          "label": "decoy"
+        },
+        {
+          "rank": 630,
+          "name": "CHEMBL414181",
+          "score": 5.919,
+          "label": "decoy"
+        },
+        {
+          "rank": 631,
+          "name": "CHEMBL427797",
+          "score": 5.91,
+          "label": "decoy"
+        },
+        {
+          "rank": 632,
+          "name": "CHEMBL7253",
+          "score": 5.908,
+          "label": "decoy"
+        },
+        {
+          "rank": 633,
+          "name": "CHEMBL263083",
+          "score": 5.899,
+          "label": "decoy"
+        },
+        {
+          "rank": 634,
+          "name": "CHEMBL7203",
+          "score": 5.896,
+          "label": "decoy"
+        },
+        {
+          "rank": 635,
+          "name": "CHEMBL268667",
+          "score": 5.892,
+          "label": "decoy"
+        },
+        {
+          "rank": 636,
+          "name": "CHEMBL263078",
+          "score": 5.892,
+          "label": "decoy"
+        },
+        {
+          "rank": 637,
+          "name": "CHEMBL268691",
+          "score": 5.881,
+          "label": "decoy"
+        },
+        {
+          "rank": 638,
+          "name": "CHEMBL6706",
+          "score": 5.877,
+          "label": "decoy"
+        },
+        {
+          "rank": 639,
+          "name": "CHEMBL6749",
+          "score": 5.856,
+          "label": "decoy"
+        },
+        {
+          "rank": 640,
+          "name": "CHEMBL6988",
+          "score": 5.854,
+          "label": "decoy"
+        },
+        {
+          "rank": 641,
+          "name": "CHEMBL6502",
+          "score": 5.841,
+          "label": "decoy"
+        },
+        {
+          "rank": 642,
+          "name": "CHEMBL269775",
+          "score": 5.837,
+          "label": "decoy"
+        },
+        {
+          "rank": 643,
+          "name": "CHEMBL6229",
+          "score": 5.821,
+          "label": "decoy"
+        },
+        {
+          "rank": 644,
+          "name": "CHEMBL6710",
+          "score": 5.785,
+          "label": "decoy"
+        },
+        {
+          "rank": 645,
+          "name": "CHEMBL266064",
+          "score": 5.781,
+          "label": "decoy"
+        },
+        {
+          "rank": 646,
+          "name": "CHEMBL6427",
+          "score": 5.777,
+          "label": "decoy"
+        },
+        {
+          "rank": 647,
+          "name": "CHEMBL6871",
+          "score": 5.769,
+          "label": "decoy"
+        },
+        {
+          "rank": 648,
+          "name": "CHEMBL267190",
+          "score": 5.741,
+          "label": "decoy"
+        },
+        {
+          "rank": 649,
+          "name": "CHEMBL6248",
+          "score": 5.739,
+          "label": "decoy"
+        },
+        {
+          "rank": 650,
+          "name": "CHEMBL7192",
+          "score": 5.737,
+          "label": "decoy"
+        },
+        {
+          "rank": 651,
+          "name": "CHEMBL441891",
+          "score": 5.733,
+          "label": "decoy"
+        },
+        {
+          "rank": 652,
+          "name": "CHEMBL18",
+          "score": 5.721,
+          "label": "decoy"
+        },
+        {
+          "rank": 653,
+          "name": "CHEMBL266799",
+          "score": 5.715,
+          "label": "decoy"
+        },
+        {
+          "rank": 654,
+          "name": "CHEMBL268072",
+          "score": 5.715,
+          "label": "decoy"
+        },
+        {
+          "rank": 655,
+          "name": "CHEMBL17",
+          "score": 5.713,
+          "label": "decoy"
+        },
+        {
+          "rank": 656,
+          "name": "CHEMBL266240",
+          "score": 5.689,
+          "label": "decoy"
+        },
+        {
+          "rank": 657,
+          "name": "CHEMBL266572",
+          "score": 5.669,
+          "label": "decoy"
+        },
+        {
+          "rank": 658,
+          "name": "CHEMBL6426",
+          "score": 5.665,
+          "label": "decoy"
+        },
+        {
+          "rank": 659,
+          "name": "CHEMBL6838",
+          "score": 5.662,
+          "label": "decoy"
+        },
+        {
+          "rank": 660,
+          "name": "CHEMBL411",
+          "score": 5.628,
+          "label": "decoy"
+        },
+        {
+          "rank": 661,
+          "name": "CHEMBL268177",
+          "score": 5.597,
+          "label": "decoy"
+        },
+        {
+          "rank": 662,
+          "name": "CHEMBL6724",
+          "score": 5.595,
+          "label": "decoy"
+        },
+        {
+          "rank": 663,
+          "name": "CHEMBL267220",
+          "score": 5.559,
+          "label": "decoy"
+        },
+        {
+          "rank": 664,
+          "name": "CHEMBL6712",
+          "score": 5.525,
+          "label": "decoy"
+        },
+        {
+          "rank": 665,
+          "name": "CHEMBL6857",
+          "score": 5.524,
+          "label": "decoy"
+        },
+        {
+          "rank": 666,
+          "name": "CHEMBL266979",
+          "score": 5.452,
+          "label": "decoy"
+        },
+        {
+          "rank": 667,
+          "name": "CHEMBL6620",
+          "score": 5.429,
+          "label": "decoy"
+        },
+        {
+          "rank": 668,
+          "name": "CHEMBL6902",
+          "score": 5.404,
+          "label": "decoy"
+        },
+        {
+          "rank": 669,
+          "name": "CHEMBL7078",
+          "score": 5.396,
+          "label": "decoy"
+        },
+        {
+          "rank": 670,
+          "name": "CHEMBL13",
+          "score": 5.333,
+          "label": "decoy"
+        },
+        {
+          "rank": 671,
+          "name": "CHEMBL6435",
+          "score": 5.263,
+          "label": "decoy"
+        },
+        {
+          "rank": 672,
+          "name": "CHEMBL12",
+          "score": 5.127,
+          "label": "decoy"
+        },
+        {
+          "rank": 673,
+          "name": "CHEMBL415",
+          "score": 4.98,
+          "label": "decoy"
+        },
+        {
+          "rank": 674,
+          "name": "CHEMBL6607",
+          "score": 4.918,
+          "label": "decoy"
+        },
+        {
+          "rank": 675,
+          "name": "CHEMBL6807",
+          "score": 4.91,
+          "label": "decoy"
+        },
+        {
+          "rank": 676,
+          "name": "CHEMBL267144",
+          "score": 4.846,
+          "label": "decoy"
+        },
+        {
+          "rank": 677,
+          "name": "CHEMBL6453",
+          "score": 4.741,
+          "label": "decoy"
+        },
+        {
+          "rank": 678,
+          "name": "CHEMBL6644",
+          "score": 4.694,
+          "label": "decoy"
+        },
+        {
+          "rank": 679,
+          "name": "CHEMBL6616",
+          "score": 4.684,
+          "label": "decoy"
+        },
+        {
+          "rank": 680,
+          "name": "CHEMBL11",
+          "score": 4.552,
+          "label": "decoy"
+        },
+        {
+          "rank": 681,
+          "name": "CHEMBL6368",
+          "score": 4.247,
+          "label": "decoy"
+        }
+      ]
+    },
+    "bootstrap": {
+      "bedroc": {
+        "median": 0.0806,
+        "ci95": [
+          0.0327,
+          0.1548
+        ]
+      },
+      "log_auc": {
+        "median": 0.2305,
+        "ci95": [
+          0.2013,
+          0.2654
+        ]
+      },
+      "roc_auc": {
+        "median": 0.7672,
+        "ci95": [
+          0.723,
+          0.8092
+        ]
+      },
+      "EF1%": {
+        "median": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "n_resamples": 10000,
+    "n_effective": 10000,
+    "skipped": 0,
+    "seed": 42
+  },
+  "baseline_tables": {
+    "random": {
+      "bedroc": {
+        "metric": "bedroc",
+        "median": 0.0847,
+        "ci95": [
+          0.0244,
+          0.1722
+        ],
+        "n_resamples": 10000,
+        "seed": 11
+      },
+      "logauc": {
+        "metric": "logauc",
+        "median": 0.144,
+        "ci95": [
+          0.1044,
+          0.1931
+        ],
+        "n_resamples": 10000,
+        "seed": 11
+      },
+      "roc_auc": {
+        "metric": "roc_auc",
+        "median": 0.5006,
+        "ci95": [
+          0.4114,
+          0.5881
+        ],
+        "n_resamples": 10000,
+        "seed": 11
+      },
+      "ef1": {
+        "metric": "ef1",
+        "median": 0.0,
+        "ci95": [
+          0.0,
+          4.5249
+        ],
+        "n_resamples": 10000,
+        "seed": 11
+      }
+    },
+    "2d_sim": {
+      "bedroc": {
+        "metric": "bedroc",
+        "point": 1.0,
+        "median": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "n_effective": 10000,
+        "seed": 11
+      },
+      "logauc": {
+        "metric": "logauc",
+        "point": 1.0,
+        "median": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "n_effective": 10000,
+        "seed": 11
+      },
+      "roc_auc": {
+        "metric": "roc_auc",
+        "point": 1.0,
+        "median": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "n_effective": 10000,
+        "seed": 11
+      },
+      "ef1": {
+        "metric": "ef1",
+        "point": 15.8372,
+        "median": 15.8372,
+        "ci95": [
+          12.3818,
+          21.9677
+        ],
+        "n_effective": 10000,
+        "seed": 11
+      }
+    },
+    "vina": {
+      "bedroc": {
+        "metric": "bedroc",
+        "point": 0.0825,
+        "median": 0.0807,
+        "ci95": [
+          0.0323,
+          0.1532
+        ],
+        "n_effective": 10000,
+        "seed": 11
+      },
+      "logauc": {
+        "metric": "logauc",
+        "point": 0.2303,
+        "median": 0.2305,
+        "ci95": [
+          0.2004,
+          0.2651
+        ],
+        "n_effective": 10000,
+        "seed": 11
+      },
+      "roc_auc": {
+        "metric": "roc_auc",
+        "point": 0.7666,
+        "median": 0.7675,
+        "ci95": [
+          0.7216,
+          0.8095
+        ],
+        "n_effective": 10000,
+        "seed": 11
+      },
+      "ef1": {
+        "metric": "ef1",
+        "point": 0.0,
+        "median": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n_effective": 10000,
+        "seed": 11
+      }
+    }
+  },
+  "vina_vs_2d_similarity": {
+    "bedroc": {
+      "metric": "bedroc",
+      "n_effective": 10000,
+      "median_delta": -0.9197,
+      "ci95": [
+        -0.9671,
+        -0.8475
+      ],
+      "p_gt0": 0.0,
+      "median_a": 0.0803,
+      "median_b": 1.0,
+      "significant": true,
+      "favours_a": false,
+      "seed": 21,
+      "n_resamples": 10000
+    },
+    "logauc": {
+      "metric": "logauc",
+      "n_effective": 10000,
+      "median_delta": -0.7697,
+      "ci95": [
+        -0.7991,
+        -0.7342
+      ],
+      "p_gt0": 0.0,
+      "median_a": 0.2303,
+      "median_b": 1.0,
+      "significant": true,
+      "favours_a": false,
+      "seed": 21,
+      "n_resamples": 10000
+    },
+    "roc_auc": {
+      "metric": "roc_auc",
+      "n_effective": 10000,
+      "median_delta": -0.2333,
+      "ci95": [
+        -0.2783,
+        -0.1904
+      ],
+      "p_gt0": 0.0,
+      "median_a": 0.7667,
+      "median_b": 1.0,
+      "significant": true,
+      "favours_a": false,
+      "seed": 21,
+      "n_resamples": 10000
+    },
+    "ef1": {
+      "metric": "ef1",
+      "n_effective": 10000,
+      "median_delta": -15.8372,
+      "ci95": [
+        -21.9677,
+        -12.1607
+      ],
+      "p_gt0": 0.0,
+      "median_a": 0.0,
+      "median_b": 15.8372,
+      "significant": true,
+      "favours_a": false,
+      "seed": 21,
+      "n_resamples": 10000
+    }
+  },
+  "holm_bonferroni": {
+    "bedroc": {
+      "p": 1.0,
+      "holm_threshold": 0.0125,
+      "reject": false
+    },
+    "logauc": {
+      "p": 1.0,
+      "holm_threshold": 0.01667,
+      "reject": false
+    },
+    "roc_auc": {
+      "p": 1.0,
+      "holm_threshold": 0.025,
+      "reject": false
+    },
+    "ef1": {
+      "p": 1.0,
+      "holm_threshold": 0.05,
+      "reject": false
+    }
+  },
+  "interpretation": "This benchmark DOES run with a property-unmatched recipe (unlike the property-matched recipe, which could not build a decoy set). Read the numbers with the DUDE-Z caveat: high enrichment against neutral drug-like decoys may reflect charge/size discrimination of the triphosphate actives rather than pocket-specific binding \u2014 the paired Vina-vs-2D-similarity test separates those. Reported as-is."
+}

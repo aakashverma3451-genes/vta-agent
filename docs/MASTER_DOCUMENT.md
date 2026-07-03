@@ -360,8 +360,22 @@ meta-finding was reframed from "impossible" to recipe-specific.
   borderline (CI touched 0); at 31:1 it is unambiguous. The docking loop was made
   resumable + hang-capped (180 s/dock) after a few large/flexible inactives stalled Vina.
 - **Job B — HCV NS5B NI with property-UNMATCHED decoys** (`scripts/phase11_hcv_unmatched.py`,
-  640 ChEMBL drug-like phosphate-free decoys; DeepCoy absent): tests whether the nucleotide
-  benchmark runs under a different decoy recipe, and whether any "enrichment" is binding
-  signal or mere charge/size discrimination. **[result pending — dock in progress]**
+  43 triphosphate actives vs 638 ChEMBL drug-like phosphate-free decoys, ~15:1; DeepCoy
+  absent; `outputs/phase11/hcv_ni_unmatched_benchmark.json`). This completes the nucleotide
+  meta-finding **from the opposite direction**: the property-MATCHED recipe *cannot build a
+  decoy set* (triphosphates have no property twins); the property-UNMATCHED recipe builds one
+  trivially, but the benchmark is then **meaningless** — 2D-similarity scores a **perfect
+  BEDROC 1.0 / ROC-AUC 1.0** because charged triphosphates are trivially separable from neutral
+  drug-like decoys by fingerprint alone. Vina: BEDROC 0.08, ROC-AUC 0.77, **EF1% 0.0**; paired
+  Δ(Vina−2Dsim) BEDROC −0.92 **CI [−0.97, −0.85]** (P≈0). So high "enrichment" here is
+  charge/size discrimination, not pocket binding — exactly the DUDE-Z caveat (Stein 2021).
+  **Conclusion:** matched-decoy validation of nucleotide-analog antivirals fails under *both*
+  recipes — unbuildable when matched, meaningless when unmatched.
+
+**Combined verdict of the extended docks:** across every benchmarkable configuration — Mpro at
+1:1 and 31:1, HCV-NI unmatched — **2D-similarity significantly beats AutoDock Vina and Vina's
+EF1% is 0.0**. Structure-based docking shows no demonstrable structure-based skill over 2D
+memorization on any powered/benchmarkable target here. Reported honestly; the negatives are the
+contribution.
 
 A slide-ready narrative lives in `docs/VTA_AGENT_DECK.md`.
