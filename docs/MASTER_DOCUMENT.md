@@ -264,9 +264,12 @@ with `pip install -e ../taxonagent` or from a package index.
 
 ## 12. Current Status
 
-- Scientific validation: **Phases 0–9 complete in software** (see Section 15). Phase 9
-  meets its acceptance bar: ≥20 actives, 3 targets, every benchmarkable metric with a 95%
-  CI, an executed parent-vs-active-form comparison, and a frozen benchmark artifact.
+- Scientific validation: **Phases 0–11 complete in software**, plus the **deployment D0
+  scientific-readiness gate (G1: PASS)** — see Section 15. Phase 9 met its acceptance bar
+  (≥20 actives, 3 targets, every benchmarkable metric with a 95% CI, an executed
+  parent-vs-active-form comparison, a frozen benchmark artifact); Phase 11 added the
+  peer-review layer (trivial baselines, paired significance, LE→ΔG gate, redocking); G1 wired
+  those into a non-removable per-report honesty envelope. Service work (D1+) is not started.
 - Real paths: TaxonAgent seam, routing, graph, report generation, ligand library,
   ranking, conservation logic, enrichment metrics, and several tool integration seams.
 - Tool-dependent real paths: RCSB/ESMFold/AlphaFold/Boltz-2, FPocket/P2Rank, Vina,
@@ -377,5 +380,40 @@ meta-finding was reframed from "impossible" to recipe-specific.
 EF1% is 0.0**. Structure-based docking shows no demonstrable structure-based skill over 2D
 memorization on any powered/benchmarkable target here. Reported honestly; the negatives are the
 contribution.
+
+### Deployment D0 — Scientific readiness gate (G1: PASS, 2026-07-03)
+
+Before any service/MLOps work, the Phase 11 validation deliverables were wired **into the run
+output itself**, so the honest findings above cannot be lost between the benchmark scripts and
+what a user reads. This is the deployment plan's D0.5 "report-level honesty contract," and it
+is a **release blocker of equal weight to uptime**: you do not deploy a ranking whose headline
+metric hasn't been shown to beat a trivial baseline, because in production you cannot walk that
+claim back.
+
+- **New `vta/report_envelope.py` — a non-removable honesty envelope.** `build_envelope(state)`
+  assembles, from committed artifacts only (no inline-asserted numbers): the
+  hypotheses-not-efficacy **disclaimer**; the **pinned frozen benchmark** (`locked_benchmark.json`
+  artifact + `frozen_at` + `content_hash` `fdac0664fe0cea8f` + gate decision); per-target
+  **grade + metric 95% CI**; the **docking-vs-2D-baseline paired verdict** (Mpro renders
+  "Vina does NOT beat 2D-similarity"); **pose reliability** (Mpro 7L11 → 1.65 Å pose-reliable;
+  HCV NS5B → unknown, RMSD uncomputed); the **nucleotide/metal + modest-signal caveats**; and an
+  **out-of-validated-domain flag** for any target no frozen benchmark covers. Live ranking
+  weights are imported from `vta/nodes/rank.py`, so the envelope can never drift from what
+  actually ranked.
+- **Structural guarantee.** `render_report` renders the envelope as the first card
+  unconditionally, and `report_node` stores the same object on `state["honesty_envelope"]` (one
+  source the future API response and run manifest will read). Tests assert the disclaimer
+  appears for full, deferred, and empty runs — no code path emits a ranking without it.
+- **Two stale-honesty defects fixed.** The report previously *misdescribed its own ranking* —
+  it still said leads were "scored by ligand efficiency, not raw ΔG" and called conservation
+  "a 10% term in the score," both false since the WI-6 gate made ranking ΔG-primary (LE and
+  conservation now weight 0). Corrected to the in-force reality; the stale `rank.py` provenance
+  label was fixed too. No ranking weight changed.
+- **Evidence:** 240 tests pass (+9 hermetic envelope tests). Dated decision in
+  `outputs/deploy/gate_G1_scientific_readiness.md`. D0.1–D0.4 (baselines, redocking, paired
+  significance, LE demotion) were already committed in Phase 11; this pass wired them into the
+  output. **No service (D1+) work started** — held at the gate per plan. G1 does *not* authorize
+  any claim of structure-based skill (there is none) or any ranking/rescorer change (those stay
+  behind the paired-test gate).
 
 A slide-ready narrative lives in `docs/VTA_AGENT_DECK.md`.
