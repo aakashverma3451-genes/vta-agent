@@ -46,8 +46,12 @@ move to DONE/HANDOFF when finished; commit small on your branch.
   claim). Report shows a structural verdict banner + annotation section. Wired additively:
   species_resolution→dossier→triage→dock … admet→annotate_rank→verification→report. **259
   tests** (+15). Gates: `outputs/phaseR/gate_R{1,2,R4R5}*.md`. No docking-weight/scorer
-  change. **DEFERRED:** R3 PlaybookMemory (stubbed "no_precedent" — needs validated-screen
-  corpus + leakage guard), R6 ablation (the proof the workflow is the contribution).
+  change. Plus **R6 component ablation** (`scripts/phaseR_ablation.py` →
+  `outputs/phaseR/ablation.{json,md}` + `gate_R6_ablation.md`): L0 raw 0% decision-accuracy /
+  100% false-confidence → L3 100%/0%; router fixes the out-of-domain targets, verification
+  gate fixes the in-domain-but-loses-to-2D targets, neither alone sufficient
+  (routing-type-dependent). **264 tests.** **DEFERRED:** R3 PlaybookMemory (stubbed
+  "no_precedent" — needs a validated-screen corpus + leakage guard).
 - **Deployment D0 — Scientific readiness gate G1 PASS (opus, 2026-07-03).** New
   `vta/report_envelope.py` — non-removable honesty envelope (disclaimer + pinned frozen
   benchmark hash + per-target grade/CI + trivial-2D-baseline paired verdict + pose
