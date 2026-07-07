@@ -1,0 +1,101 @@
+{
+  "phase": "S \u2014 in-house RF-Score learned rescorer on powered activity cliffs",
+  "method": "RF-Score v1 contact-count features + RandomForest; scaffold-clustered leave-out CV",
+  "n_compounds_featurized": 1109,
+  "n_scaffold_groups": 425,
+  "n_cliff_pairs_scored": 1193,
+  "accuracies": {
+    "rfscore": {
+      "median": 0.3923,
+      "ci95": [
+        0.3646,
+        0.4199
+      ],
+      "point": 0.3923
+    },
+    "twod_knn": {
+      "median": 0.6655,
+      "ci95": [
+        0.6387,
+        0.6924
+      ],
+      "point": 0.6655
+    },
+    "vina": {
+      "median": 0.4183,
+      "ci95": [
+        0.3898,
+        0.4459
+      ],
+      "point": 0.4183
+    },
+    "chance": 0.5
+  },
+  "rfscore_vs_2dknn": {
+    "n_pairs": 1193,
+    "vina_accuracy": {
+      "median": 0.3923,
+      "ci95": [
+        0.3646,
+        0.4199
+      ],
+      "point": 0.3923
+    },
+    "twod_knn_accuracy": {
+      "median": 0.6655,
+      "ci95": [
+        0.6387,
+        0.6924
+      ],
+      "point": 0.6655
+    },
+    "paired_vina_minus_2d": {
+      "median": -0.2733,
+      "ci95": [
+        -0.3127,
+        -0.2339
+      ],
+      "p_gt0": 0.0
+    },
+    "chance": 0.5,
+    "vina_significant_vs_chance": true,
+    "vina_beats_2d": false
+  },
+  "rfscore_vs_vina": {
+    "n_pairs": 1193,
+    "vina_accuracy": {
+      "median": 0.3923,
+      "ci95": [
+        0.3654,
+        0.4208
+      ],
+      "point": 0.3923
+    },
+    "twod_knn_accuracy": {
+      "median": 0.4183,
+      "ci95": [
+        0.3898,
+        0.4459
+      ],
+      "point": 0.4183
+    },
+    "paired_vina_minus_2d": {
+      "median": -0.026,
+      "ci95": [
+        -0.0629,
+        0.0109
+      ],
+      "p_gt0": 0.0777
+    },
+    "chance": 0.5,
+    "vina_significant_vs_chance": true,
+    "vina_beats_2d": false
+  },
+  "rfscore_beats_2d_and_chance": false,
+  "verdict": "The learned RF-Score rescorer does NOT beat both the 2D-kNN QSAR and chance on activity cliffs (scaffold-CV, out-of-fold) \u2014 learned rescoring did not demonstrate cliff-ranking skill over the trivial baseline.",
+  "caveats": [
+    "TARGET-SPECIFIC: RF-Score is trained on Moonshot Mpro itself (out-of-fold under scaffold-clustered CV \u2014 no analog leakage), so this is NOT a general-transfer claim. A PDBbind-pretrained scorer (GNINA/RTMScore) on a native box answers that separately.",
+    "RF-Score v1 (coarse contact counts) is weaker than modern CNN/GNN scorers; a null here is suggestive, not proof that GNINA would also fail on these cliffs.",
+    "Poses are the committed Vina docks; the same 1,193-pair set and 2D-kNN baseline as the powered cliff benchmark, through the identical paired gate."
+  ]
+}

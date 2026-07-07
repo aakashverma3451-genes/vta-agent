@@ -107,6 +107,28 @@ def score_cliff_pairs(pairs, compounds, fps, *, k: int = 3) -> Dict[str, List[in
     return {"vina": vina, "twod": twod, "pairs": kept}
 
 
+def rank_by_predictor(pairs, compounds, score_of, *, restrict=None):
+    """Per cliff pair: 1 if `score_of(compound)` (higher = predicted more potent) ranks the
+    truly more-potent member higher, else 0.
+
+    `score_of` returns a float or None (missing prediction → pair dropped). `restrict`, if given,
+    is a set of (i, j) pairs to score — used to align several methods on ONE common pair set so
+    their accuracies are paired-comparable. Returns (flags, kept_pairs).
+    """
+    flags, kept = [], []
+    for (i, j, _s, _d) in pairs:
+        if restrict is not None and (i, j) not in restrict:
+            continue
+        si, sj = score_of(compounds[i]), score_of(compounds[j])
+        if si is None or sj is None:
+            continue
+        more_potent = i if compounds[i]["pic50"] > compounds[j]["pic50"] else j
+        pick = i if si > sj else j
+        flags.append(1 if pick == more_potent else 0)
+        kept.append((i, j))
+    return flags, kept
+
+
 def _ci(vals: np.ndarray) -> List[float]:
     return [round(float(np.percentile(vals, 2.5)), 4), round(float(np.percentile(vals, 97.5)), 4)]
 

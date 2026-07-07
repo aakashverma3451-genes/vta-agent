@@ -489,6 +489,21 @@ pairwise-similarity test), so it is not disabled by cliffs. No ranking change; t
 benchmark + 1,109-compound docked cache are now a powered yardstick for a learned rescorer
 (GNINA/RTMScore), which must beat both this QSAR and chance on the same pairs.
 
-Gate: `outputs/phaseS/gate_S_activity_cliffs.md`; result `outputs/phaseS/activity_cliffs.{json,md}`.
+**Learned rescorer (does a learned scorer rescue docking on cliffs?).** Every off-the-shelf
+pretrained rescorer is un-installable on this arm64 box — GNINA (10 GB amd64 image + unreliable
+Docker Hub CDN), RTMScore (no `dgl` arm64/torch-2.12 wheel), ODDT/RF-Score (needs the removed
+OpenBabel-2.x `OBElementTable`). So RF-Score's own method (Ballester & Mitchell 2010) was rebuilt
+on the working stack (`vta/eval/rfscore.py`: 36 contact-count features → RandomForest, **scaffold-
+clustered leave-out CV**, no analog leakage) and scored on the same 1,193 cliff pairs. Result
+(`outputs/phaseS/rfscore_cliff.{json,md}`): **RF-Score 0.392 [0.365, 0.420] — also significantly
+below chance**, paired **RF−2D −0.273 [−0.313, −0.234]** (loses to the QSAR), paired **RF−Vina
+−0.026 [−0.063, +0.011]** (statistically indistinguishable from raw Vina). So a learned rescorer
+*also* fails on cliffs — the fair-arena negative is not just about AutoDock Vina. Honest scope:
+this is a TARGET-SPECIFIC model (Moonshot-trained, out-of-fold) and RF-Score v1 is coarser than a
+3D-CNN, so it does not prove a PDBbind-pretrained GNINA would also fail — that transfer question
+is deferred to a native Linux/GPU box.
+
+Gates: `outputs/phaseS/gate_S_activity_cliffs.md`, `outputs/phaseS/gate_S_rfscore.md`; results
+`outputs/phaseS/activity_cliffs.{json,md}`, `outputs/phaseS/rfscore_cliff.{json,md}`.
 
 A slide-ready narrative lives in `docs/VTA_AGENT_DECK.md`.

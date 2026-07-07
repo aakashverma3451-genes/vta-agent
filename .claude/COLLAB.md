@@ -35,6 +35,18 @@ move to DONE/HANDOFF when finished; commit small on your branch.
   re-benchmark. SEPARATE outputs — frozen 1:1 headline + locked_benchmark untouched.
 
 ## DONE / HANDOFF
+- **Phase S — learned rescorer (in-house RF-Score) DONE (opus, 2026-07-07).** Off-the-shelf
+  rescorers all un-installable on arm64 (GNINA: 10GB image + Docker Hub CDN failures; RTMScore:
+  no dgl wheel; ODDT: OpenBabel-2.x `OBElementTable` removed). Rebuilt RF-Score (Ballester &
+  Mitchell 2010) natively: `vta/eval/rfscore.py` (36 contact-count features via direct PDBQT
+  parse + RandomForest + scaffold-clustered leave-out CV, no analog leakage) +
+  `scripts/phaseS_rfscore.py` + `tests/test_rfscore.py`. **Result (1,193 cliff pairs): RF-Score
+  0.392 [0.365,0.420] — also significantly BELOW chance; paired RF−2D −0.273 [−0.313,−0.234]
+  (loses to QSAR); paired RF−Vina −0.026 [−0.063,+0.011] (indistinguishable from raw Vina).**
+  Learned rescoring ALSO fails on cliffs — fair-arena negative isn't just about Vina. Scope:
+  target-specific + RF-Score v1 coarse → does not prove PDBbind-pretrained GNINA would fail
+  (deferred to native Linux/GPU box). 2D (0.666) + Vina (0.418) match the committed benchmark
+  (shared universe). No ranking change. **276 tests.** Gate: `outputs/phaseS/gate_S_rfscore.md`.
 - **Phase S — activity-cliff benchmark DONE & POWERED (opus, 2026-07-07).** New
   `vta/eval/cliffs.py` (cliff mining ECFP4 sim≥0.7 & |ΔpIC50|≥1, kNN-pIC50 neighbourhood-QSAR
   baseline, pair-level bootstrap) + `scripts/phaseS_activity_cliffs.py` (+strict Tanimoto≥0.9

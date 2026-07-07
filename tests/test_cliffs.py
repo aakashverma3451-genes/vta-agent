@@ -68,3 +68,18 @@ def test_bootstrap_paired_deterministic_and_shaped():
 def test_bootstrap_empty_is_labelled():
     out = bootstrap_paired([], [])
     assert out["n_pairs"] == 0
+
+
+def test_rank_by_predictor_generic_and_restrict():
+    from vta.eval.cliffs import rank_by_predictor
+    cpds = _cpds()
+    pairs, _ = find_cliff_pairs(cpds, sim_threshold=0.7, dpic50_threshold=1.0)
+    # a predictor that returns higher for the more-potent member → all correct
+    flags, kept = rank_by_predictor(pairs, cpds, lambda c: c["pic50"])
+    assert flags == [1] and kept == [(0, 1)]
+    # None from either member drops the pair
+    flags2, _ = rank_by_predictor(pairs, cpds, lambda c: None)
+    assert flags2 == []
+    # restrict to a disjoint pair set → nothing scored
+    flags3, _ = rank_by_predictor(pairs, cpds, lambda c: c["pic50"], restrict={(5, 6)})
+    assert flags3 == []
