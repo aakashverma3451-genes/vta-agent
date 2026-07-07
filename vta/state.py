@@ -64,6 +64,18 @@ class VTAState(TypedDict, total=False):
     fep_results: Optional[Dict[str, Dict]]       # {ligand: {delta_g, error, status, ...}}
     fep_validated_leads: Optional[List[Dict]]    # top leads annotated with fep_* fields
 
+    # --- Phase R: reasoning architecture (dossier → triage → verify) ------
+    # HemaGuide-inspired: represent the target, route it to the right method, and gate every
+    # claim behind physics+statistics before it reaches the report. All additive; nodes only
+    # read structure/pocket/species fields already present.
+    target_dossier: Optional[Dict[str, Dict]]   # {protein: {provenance, quality, pocket, class,
+                                                #            metal_dependence, benchmarkability}}
+    triage_decision: Optional[Dict[str, Dict]]  # {protein: {decision, rationale[]}} —
+                                                # full_dock | annotate_only | defer | refuse
+    playbook_prior: Optional[Dict[str, Dict]]   # {protein: {status, ...}} — R3 (stubbed "no
+                                                # precedent" until a validated-screen corpus exists)
+    verification_verdict: Optional[Dict[str, Any]]  # {verdict, gates, per_target} — R4 hard gate
+
     # --- Cross-cutting: audit + reproducibility ---------------------------
     audit_trail: List[str]                     # every decision, appended in order
     versions: Dict[str, str]                   # tool versions, for reproducibility

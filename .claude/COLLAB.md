@@ -8,6 +8,21 @@ move to DONE/HANDOFF when finished; commit small on your branch.
 
 ## ACTIVE WORK
 
+- **session-a (opus)** — 2026-07-07 — **Phase R reasoning architecture (Stages 1–3).**
+  LOCKED (creating/editing): `vta/nodes/dossier.py` (NEW, R1), `vta/nodes/triage.py`
+  (NEW, R2), `vta/nodes/verification.py` (NEW, R4), `vta/nodes/annotate_rank.py` (NEW, R5),
+  `vta/graph.py` (additive node insertions: species_resolution→dossier→triage→dock;
+  admet/md_rerank/fep→verification→report — NO edges removed), `vta/nodes/docking.py`
+  (per-protein triage-skip guard; default full_dock so e2e chain unaffected),
+  `vta/state.py` (add target_dossier / triage_decision / verification_verdict),
+  `vta/report.py` + `vta/report_envelope.py` (surface triage + verification downgrade),
+  `tests/test_dossier.py`, `tests/test_triage.py`, `tests/test_verification.py`,
+  `tests/test_annotate_rank.py` (NEW), `outputs/phaseR/gate_R*.md` (NEW). Triage downgrades
+  ONLY on positive run-available evidence (un_benchmarkable / metal-in-pocket / low
+  binding-site pLDDT / out-of-domain ligand class) — TiLV PB1 stays full_dock so week2
+  chain keeps its 20 docked leads. R3 PlaybookMemory STUBBED ("no precedent"); R6 ablation
+  deferred. No docking-weight/scorer change. Report at end of Stage 3 per plan.
+
 - **session-a (fable)** — 2026-06-30 — **Phase 11 validity hardening (Tier-1 + WI-7).**
   LOCKED (creating/editing): `vta/eval/baselines.py`, `vta/eval/significance.py`,
   `vta/eval/metrics.py` (append-only), `vta/nodes/rescore.py` (WI-7 contract),

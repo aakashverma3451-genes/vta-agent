@@ -23,6 +23,7 @@ from vta.nodes.conservation import conservation_node
 from vta.nodes.conservation_contacts import conservation_contacts_node
 from vta.nodes.consensus import consensus_node
 from vta.nodes.docking import docking_node
+from vta.nodes.dossier import dossier_node
 from vta.nodes.pockets import pockets_node
 from vta.nodes.proteinttt import proteinttt_node
 from vta.nodes.admet import admet_node
@@ -76,6 +77,7 @@ def build_app(include_md: bool = False, include_fep: bool = False):
     g.add_node("pockets", pockets_node)
     g.add_node("conservation", conservation_node)  # real per-pocket JSD conservation (§SPEC#1)
     g.add_node("species_resolution", species_resolution_node)
+    g.add_node("dossier", dossier_node)  # R1: structured target dossier before routing
     g.add_node("dock", docking_node)
     g.add_node("conservation_contacts", conservation_contacts_node)  # ligand-weighted JSD (§SPEC#4)
     g.add_node("rescore", rescore_node)    # GNINA CNN re-score (annotation-only)
@@ -101,7 +103,8 @@ def build_app(include_md: bool = False, include_fep: bool = False):
     g.add_edge("proteinttt", "pockets")
     g.add_edge("pockets", "conservation")   # overwrite 0.5 placeholder w/ real JSD (skips w/o MSA)
     g.add_edge("conservation", "species_resolution")
-    g.add_edge("species_resolution", "dock")
+    g.add_edge("species_resolution", "dossier")  # R1 dossier before docking
+    g.add_edge("dossier", "dock")
     g.add_edge("dock", "conservation_contacts")   # ligand-contact-weight conservation (§SPEC#4)
     g.add_edge("conservation_contacts", "rescore")  # GNINA CNN re-score (skips w/o gnina binary)
     g.add_edge("rescore", "boltzina")  # Boltzina DL affinity (skips w/o package)
