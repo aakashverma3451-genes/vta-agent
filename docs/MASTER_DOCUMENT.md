@@ -445,13 +445,23 @@ docking-weight/scorer change.
   labelled 2-D-similarity annotation with the nucleotide/metal caveat, never a ΔG/enrichment
   number. The report gains a structural verdict **banner** (downgrade in red) + a ligand-based
   annotations section.
+- **R6 component ablation** (`scripts/phaseR_ablation.py` → `outputs/phaseR/ablation.{json,md}`)
+  — the L0→full-agent study, scored on **decision-level correctness** (the emitted claim vs a
+  curated ground-truth disposition), NOT enrichment. Result, routing-type-dependent exactly as
+  HemaGuide predicts: L0 raw = **0% decision accuracy / 100% false-confidence** (it claims
+  structure-based enrichment on every held-out target, warranted on none); +dossier alone
+  changes no decision (legibility without action — an honest null); +triage → 60% (the router
+  fixes the out-of-domain targets NS5B/GPX/GPY → annotate/refuse/defer); +verification → **100%
+  / 0% false-confidence** (the gate fixes the in-domain-but-loses-to-2D targets MPRO/PB1 →
+  downgrade). The router and the gate fix **disjoint** target sets — neither alone is
+  sufficient. That is the evidence that **the integrating architecture, not the docking scorer,
+  is the contribution** — no longer a hypothesis on this held-out set.
 - **Deferred:** R3 PlaybookMemory (target-class/applicability-domain grounding, stubbed
   "no_precedent" — needs a validated-screen corpus + a leakage guard that excludes the query
-  target's own analog series) and **R6 the component ablation** — the L0→full-agent study that
-  is meant to *prove* the workflow (not the docking) is the contribution. Until R6 runs, that
-  remains a hypothesis, not a result.
+  target's own analog series). Its "playbook prior" lever is the one ablation axis not yet
+  exercised.
 
 Gate artifacts: `outputs/phaseR/gate_R1_dossier.md`, `gate_R2_triage.md`,
-`gate_R4R5_verification.md`. 259 tests pass.
+`gate_R4R5_verification.md`, `gate_R6_ablation.md`. 264 tests pass.
 
 A slide-ready narrative lives in `docs/VTA_AGENT_DECK.md`.
