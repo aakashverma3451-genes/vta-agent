@@ -8,21 +8,6 @@ move to DONE/HANDOFF when finished; commit small on your branch.
 
 ## ACTIVE WORK
 
-- **session-a (opus)** — 2026-07-07 — **Phase R reasoning architecture (Stages 1–3).**
-  LOCKED (creating/editing): `vta/nodes/dossier.py` (NEW, R1), `vta/nodes/triage.py`
-  (NEW, R2), `vta/nodes/verification.py` (NEW, R4), `vta/nodes/annotate_rank.py` (NEW, R5),
-  `vta/graph.py` (additive node insertions: species_resolution→dossier→triage→dock;
-  admet/md_rerank/fep→verification→report — NO edges removed), `vta/nodes/docking.py`
-  (per-protein triage-skip guard; default full_dock so e2e chain unaffected),
-  `vta/state.py` (add target_dossier / triage_decision / verification_verdict),
-  `vta/report.py` + `vta/report_envelope.py` (surface triage + verification downgrade),
-  `tests/test_dossier.py`, `tests/test_triage.py`, `tests/test_verification.py`,
-  `tests/test_annotate_rank.py` (NEW), `outputs/phaseR/gate_R*.md` (NEW). Triage downgrades
-  ONLY on positive run-available evidence (un_benchmarkable / metal-in-pocket / low
-  binding-site pLDDT / out-of-domain ligand class) — TiLV PB1 stays full_dock so week2
-  chain keeps its 20 docked leads. R3 PlaybookMemory STUBBED ("no precedent"); R6 ablation
-  deferred. No docking-weight/scorer change. Report at end of Stage 3 per plan.
-
 - **session-a (fable)** — 2026-06-30 — **Phase 11 validity hardening (Tier-1 + WI-7).**
   LOCKED (creating/editing): `vta/eval/baselines.py`, `vta/eval/significance.py`,
   `vta/eval/metrics.py` (append-only), `vta/nodes/rescore.py` (WI-7 contract),
@@ -50,6 +35,19 @@ move to DONE/HANDOFF when finished; commit small on your branch.
   re-benchmark. SEPARATE outputs — frozen 1:1 headline + locked_benchmark untouched.
 
 ## DONE / HANDOFF
+- **Phase R reasoning architecture — Stages 1–3 DONE (opus, 2026-07-07).** HemaGuide-inspired
+  routing layer: **R1** `dossier_node` (structured target dossier: provenance, pocket
+  descriptors incl. metal-in-pocket, benchmarkability), **R2** `triage_router_node` (routes
+  full_dock|annotate_only|defer|refuse; downgrades ONLY on positive evidence, so TiLV PB1
+  stays full_dock & week2 chain intact; docking.py skips non-full_dock targets, labelled),
+  **R4** `verification_node`/`build_verdict` (hard gate: redock<2Å + paired-beats-2D +
+  applicability → pass/downgrade/defer/refuse; Mpro → DOWNGRADE), **R5** `annotate_rank_node`
+  (labelled 2D-similarity annotation for annotate_only targets, nucleotide caveat, no ΔG
+  claim). Report shows a structural verdict banner + annotation section. Wired additively:
+  species_resolution→dossier→triage→dock … admet→annotate_rank→verification→report. **259
+  tests** (+15). Gates: `outputs/phaseR/gate_R{1,2,R4R5}*.md`. No docking-weight/scorer
+  change. **DEFERRED:** R3 PlaybookMemory (stubbed "no_precedent" — needs validated-screen
+  corpus + leakage guard), R6 ablation (the proof the workflow is the contribution).
 - **Deployment D0 — Scientific readiness gate G1 PASS (opus, 2026-07-03).** New
   `vta/report_envelope.py` — non-removable honesty envelope (disclaimer + pinned frozen
   benchmark hash + per-target grade/CI + trivial-2D-baseline paired verdict + pose

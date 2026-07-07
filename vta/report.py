@@ -8,6 +8,7 @@ from typing import Any
 from vta.report_envelope import build_envelope
 from vta.report_extra import footer_provenance, scientific_status
 from vta.state import VTAState
+from vta.nodes.verification import build_verdict
 
 _CSS = """
 :root { --green:#1e8449; --amber:#b9770e; --red:#a93226; --ink:#1c2833; --mute:#5d6d7e;
@@ -61,6 +62,13 @@ pre { font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace; white-space:pr
 .envelope .ood { color:var(--red); font-weight:600; }
 .envelope ul { margin:8px 0 0; padding-left:18px; }
 .envelope li { color:var(--mute); font-size:13px; margin:3px 0; }
+.vbanner { border-radius:10px; padding:14px 18px; margin-bottom:12px; font-weight:600; }
+.vbanner.down { background:#fdecea; border:2px solid var(--red); color:var(--red); }
+.vbanner.pass { background:var(--ctrl); border:1px solid var(--green); color:var(--green); }
+.vbanner.neutral { background:#eef2f4; border:1px solid var(--line); color:var(--mute); }
+.vbanner .sub { color:var(--ink); font-weight:400; font-style:normal; margin-top:6px;
+                font-size:13px; }
+.annot .cav { color:var(--red); font-size:13px; margin:4px 0 0; }
 """
 
 
@@ -347,6 +355,60 @@ def _envelope(state: VTAState) -> str:
     )
 
 
+def _verification_banner(state: VTAState) -> str:
+    """R4 verdict banner — structural, like the envelope: always rendered on a proceed run.
+
+    A `downgrade` verdict tells the reader plainly that the docking ranking below did not clear
+    the physics+statistics gate and is to be read as a ligand-based annotation, not enrichment.
+    """
+    if not (state.get("lead_candidates") or state.get("triage_decision")
+            or state.get("annotation_rankings")):
+        return ""   # deferred/empty run: nothing was ranked, nothing to gate
+    verdict = state.get("verification_verdict") or build_verdict(state)
+    v = verdict.get("verdict")
+    if v == "downgrade":
+        downgraded = sorted(p for p, t in (verdict.get("per_target") or {}).items()
+                            if t.get("verdict") == "downgrade")
+        return (
+            '<div class="vbanner down">⚠ Verification: structure-based enrichment NOT '
+            'demonstrated — docking ranking DOWNGRADED to a ligand-based annotation'
+            f'{(" for " + ", ".join(downgraded)) if downgraded else ""}.'
+            '<div class="sub">The ranking below did not beat a trivial 2D-similarity baseline '
+            'by a paired-bootstrap test (or its pose reliability is unestablished). Treat it as '
+            'an annotation, not validated enrichment.</div></div>')
+    if v == "pass":
+        return ('<div class="vbanner pass">✓ Verification: docking ranking cleared the hard '
+                'gate (beats the 2D baseline by a paired test; pose-reliable).</div>')
+    if v in {"defer", "refuse"}:
+        return (f'<div class="vbanner neutral">Verification: run {v.upper()} — no docking '
+                'enrichment claim is made.</div>')
+    return ""
+
+
+def _annotations(state: VTAState) -> str:
+    """R5 labelled ligand-based annotations for annotate_only targets."""
+    annots = state.get("annotation_rankings") or {}
+    if not annots:
+        return ""
+    blocks = []
+    for protein, a in annots.items():
+        cavs = "".join(f'<p class="cav">⚠ {_esc(c)}</p>' for c in (a.get("caveats") or []))
+        top = a.get("ranking") or []
+        if top:
+            rows = "".join(
+                f'<tr><td class="num">{i}</td><td>{_esc(r.get("ligand"))}</td>'
+                f'<td class="num">{_esc(r.get("similarity_to_actives"))}</td></tr>'
+                for i, r in enumerate(top[:10], 1))
+            body = (f'<p class="meta">{_esc(a.get("method"))}</p>'
+                    f'<table><tr><th>#</th><th>Ligand</th>'
+                    f'<th class="num">2D-sim to actives</th></tr>{rows}</table>')
+        else:
+            body = f'<p class="empty">{_esc(a.get("note"))}</p>'
+        blocks.append(f'<div class="card annot"><span class="prot">{_esc(protein)}</span> '
+                      f'<span class="meta">— {_esc(a.get("status"))}</span>{cavs}{body}</div>')
+    return f'<h2>Ligand-based annotations (docking out-of-domain)</h2>{"".join(blocks)}'
+
+
 def render_report(state: VTAState) -> str:
     """Render a VTAState into a single self-contained HTML string (pure, no I/O)."""
     tr = state.get("taxon_result") or {}
@@ -357,11 +419,13 @@ def render_report(state: VTAState) -> str:
         f"<title>VTA-Agent — {title}</title><style>{_CSS}</style></head><body><div class='wrap'>"
         "<h2>Viral Target Assessment</h2>"
         f"{_envelope(state)}"
+        f"{_verification_banner(state)}"
         f"{_header(state)}"
         "<h2>Structures</h2>"
         f"{_structures(state)}"
         "<h2>Lead candidates</h2>"
         f"{_leads(state)}"
+        f"{_annotations(state)}"
         f"{scientific_status(state, _esc)}"
         f"{_md_section(state)}"
         f"{_fep_section(state)}"

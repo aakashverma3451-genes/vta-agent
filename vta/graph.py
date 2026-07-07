@@ -27,6 +27,7 @@ from vta.nodes.dossier import dossier_node
 from vta.nodes.pockets import pockets_node
 from vta.nodes.proteinttt import proteinttt_node
 from vta.nodes.admet import admet_node
+from vta.nodes.annotate_rank import annotate_rank_node
 from vta.nodes.chemistry import chemistry_node
 from vta.nodes.md_select import md_select_node
 from vta.nodes.md_simulate import md_simulate_node
@@ -51,6 +52,7 @@ from vta.nodes.structure import structure_node
 from vta.nodes.structure_qc import structure_qc_node
 from vta.nodes.target_prioritization import target_prioritization_node
 from vta.nodes.triage import triage_router_node
+from vta.nodes.verification import verification_node
 from vta.state import VTAState
 
 
@@ -90,6 +92,7 @@ def build_app(include_md: bool = False, include_fep: bool = False):
     g.add_node("selectivity", selectivity_node)
     g.add_node("resistance", resistance_node)
     g.add_node("admet", admet_node)
+    g.add_node("verification", verification_node)    # R4: hard physics+stats gate before report
     g.add_node(DEFER_NODE, defer_node)
     g.add_node("report", report_node)
 
@@ -133,11 +136,16 @@ def build_app(include_md: bool = False, include_fep: bool = False):
         if include_fep:
             g.add_node("fep", fep_node)
             g.add_edge("md_rerank", "fep")
-            g.add_edge("fep", "report")
+            g.add_edge("fep", "verification")
         else:
-            g.add_edge("md_rerank", "report")
+            g.add_edge("md_rerank", "verification")
     else:
         # ── Phase A: fast path ───────────────────────────────────────────
-        g.add_edge("admet", "report")
+        g.add_node("annotate_rank", annotate_rank_node)  # R5 labelled ligand-based annotation
+        g.add_edge("admet", "annotate_rank")   # R5 labelled annotation for annotate_only targets
+        g.add_edge("annotate_rank", "verification")  # R4 hard gate
+
+    # R4 verification is the single edge into reporting on every proceed path.
+    g.add_edge("verification", "report")
 
     return g.compile()

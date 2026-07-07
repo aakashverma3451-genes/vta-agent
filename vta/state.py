@@ -77,6 +77,8 @@ class VTAState(TypedDict, total=False):
     playbook_prior: Optional[Dict[str, Dict]]   # {protein: {status, ...}} — R3 (stubbed "no
                                                 # precedent" until a validated-screen corpus exists)
     verification_verdict: Optional[Dict[str, Any]]  # {verdict, gates, per_target} — R4 hard gate
+    annotation_library: Optional[List[Dict]]    # optional [{name, smiles, positive_control}] for R5
+    annotation_rankings: Optional[Dict[str, Dict]]  # {protein: labelled ligand-based annotation}
 
     # --- Cross-cutting: audit + reproducibility ---------------------------
     audit_trail: List[str]                     # every decision, appended in order
