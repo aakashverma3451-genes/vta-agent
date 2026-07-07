@@ -31,15 +31,29 @@ from vta.eval.cliffs import (
 )
 
 JOBA = Path("outputs/phase11/mpro_30to1_benchmark.json")
+JOBA_CACHE = Path("outputs/phase11/.mpro_30to1_dgcache.json")
+PHASES_CACHE = Path("outputs/phaseS/.cliff_dgcache.json")   # Phase-S power docks (this benchmark)
 STRAT = Path("vta/data/mpro/mpro_stratified.json")
 OUT = Path("outputs/phaseS/activity_cliffs.json")
 SIM_THRESHOLD, DPIC50_THRESHOLD, KNN_K, N_BOOT, SEED = 0.7, 1.0, 3, 10000, 0
 
 
+def _merge_cache(dst: Dict[str, float], path: Path) -> None:
+    try:
+        for cid, v in json.loads(path.read_text()).items():
+            if isinstance(v, (int, float)) and cid not in dst:
+                dst[cid] = v
+    except Exception:
+        pass
+
+
 def _load_compounds() -> List[Dict[str, Any]]:
-    """Join committed Vina ΔG (Job A) to measured IC50 + SMILES (stratified) on compound id."""
-    dG_by_id = {c["name"]: c["dG"] for c in json.loads(JOBA.read_text()).get("scored_compounds", [])
-                if c.get("dG") is not None}
+    """Join all committed Vina ΔG (Job A + Phase-S power docks) to measured IC50 + SMILES."""
+    dG_by_id: Dict[str, float] = {c["name"]: c["dG"]
+                                  for c in json.loads(JOBA.read_text()).get("scored_compounds", [])
+                                  if c.get("dG") is not None}
+    _merge_cache(dG_by_id, JOBA_CACHE)     # Job A raw cache (same protocol)
+    _merge_cache(dG_by_id, PHASES_CACHE)   # Phase-S power docks (identical 7L11 receptor + box)
     strat = json.loads(STRAT.read_text())
     info: Dict[str, Dict[str, Any]] = {}
     for key in ("non_covalent_actives", "inactives"):
@@ -60,12 +74,22 @@ def _load_compounds() -> List[Dict[str, Any]]:
     return compounds
 
 
+def _evaluate(compounds, fps_all, sim_threshold: float) -> Dict[str, Any]:
+    """Mine cliffs at a similarity threshold and score Vina vs 2D-kNN with bootstrap CIs."""
+    pairs, _ = find_cliff_pairs(compounds, sim_threshold=sim_threshold,
+                                dpic50_threshold=DPIC50_THRESHOLD)
+    scored = score_cliff_pairs(pairs, compounds, fps_all, k=KNN_K)
+    return bootstrap_paired(scored["vina"], scored["twod"], n=N_BOOT, seed=SEED)
+
+
 def run() -> Dict[str, Any]:
     compounds = _load_compounds()
     pairs, fps = find_cliff_pairs(compounds, sim_threshold=SIM_THRESHOLD,
                                   dpic50_threshold=DPIC50_THRESHOLD)
     scored = score_cliff_pairs(pairs, compounds, fps, k=KNN_K)
     stats = bootstrap_paired(scored["vina"], scored["twod"], n=N_BOOT, seed=SEED)
+    # Strict-cliff variant (Tanimoto ≥ 0.9): purer cliffs where 2D should be closer to chance.
+    strict = _evaluate(compounds, fps, 0.9)
 
     n_pairs = stats.get("n_pairs", 0)
     powered = n_pairs >= 20  # honest power floor; below this, CIs are demonstration-grade only
@@ -102,15 +126,28 @@ def run() -> Dict[str, Any]:
         "n_cliff_pairs": n_pairs,
         "powered": powered,
         "results": stats,
+        "strict_cliff_variant": {
+            "sim_threshold": 0.9,
+            "note": "purer cliffs (near-identical in 2D) — 2D-kNN should trend toward chance",
+            "results": strict,
+        },
         "structure_based_skill_on_cliffs_demonstrated": demonstrated,
         "verdict": verdict,
         "caveats": [
-            "Cliff pairs are limited to compounds that were BOTH docked (have Vina ΔG) AND carry a "
-            "numeric measured IC50 — a subset of Moonshot, so power is bounded by the docked set.",
-            "The 2D baseline is a kNN-pIC50 predictor excluding both pair members (its fairest "
-            "estimate); by construction it is ~chance on true cliffs — that is the point.",
-            "Measures cliff-pair RANKING, not enrichment; a null here does not claim docking is "
-            "useless, only that it shows no marginal ranking skill even where 2D is disabled.",
+            "Vina accuracy is significantly BELOW chance (0.42, CI upper bound < 0.5) — it is "
+            "ANTI-correlated with potency on cliffs, ranking the less-potent analog as the "
+            "stronger binder ~58% of the time. Most likely Vina's known size bias (larger, more "
+            "elaborated but not more potent analogs get more-negative ΔG). Hypothesis, not proven.",
+            "The 2D baseline is a kNN-pIC50 NEIGHBOURHOOD QSAR (excluding both pair members), NOT "
+            "a pairwise-similarity test. It is therefore NOT forced to chance on cliffs — the "
+            "strict Tanimoto≥0.9 variant made it BETTER (0.84), not worse, because Moonshot's "
+            "dense congeneric series carry strong neighbourhood potency signal. So the honest "
+            "claim is 'docking loses to a trivial ligand-based QSAR even on cliffs', not 'docking "
+            "wins where similarity is disabled'. A pairwise-2D baseline would be ~0.5 by design.",
+            "Cliff pairs are limited to compounds with BOTH a docked Vina ΔG AND a numeric measured "
+            "IC50 (1,109 of the measured set); one consistent 7L11 real-Vina protocol.",
+            "Measures cliff-pair RANKING, not enrichment — a null here does not claim docking is "
+            "useless, only that it shows no marginal ranking skill in the fair arena.",
         ],
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
@@ -138,7 +175,16 @@ def _md(p: Dict[str, Any]) -> None:
                   f"Paired Vina − 2D: Δ {r['paired_vina_minus_2d']['median']}, "
                   f"95% CI {r['paired_vina_minus_2d']['ci95']}, "
                   f"P(Δ>0) {r['paired_vina_minus_2d']['p_gt0']}.", ""]
-    lines += [f"**{p['verdict']}**", "", "## Caveats"] + [f"- {c}" for c in p["caveats"]] + [""]
+    sv = p.get("strict_cliff_variant", {}).get("results", {})
+    if sv.get("n_pairs"):
+        lines += ["", f"## Strict-cliff variant (Tanimoto ≥ 0.9, {sv['n_pairs']} pairs)", "",
+                  f"Vina {sv['vina_accuracy']['median']} {sv['vina_accuracy']['ci95']} | "
+                  f"2D-kNN {sv['twod_knn_accuracy']['median']} {sv['twod_knn_accuracy']['ci95']} | "
+                  f"paired Vina−2D {sv['paired_vina_minus_2d']['median']} "
+                  f"{sv['paired_vina_minus_2d']['ci95']}",
+                  "", "_Purer cliffs → 2D closer to chance; the Vina−2D gap is the fair-arena "
+                  "test at its strictest._"]
+    lines += ["", f"**{p['verdict']}**", "", "## Caveats"] + [f"- {c}" for c in p["caveats"]] + [""]
     OUT.with_suffix(".md").write_text("\n".join(lines))
 
 

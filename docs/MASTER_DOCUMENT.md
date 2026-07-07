@@ -464,4 +464,31 @@ docking-weight/scorer change.
 Gate artifacts: `outputs/phaseR/gate_R1_dossier.md`, `gate_R2_triage.md`,
 `gate_R4R5_verification.md`, `gate_R6_ablation.md`. 264 tests pass.
 
+### Phase S — activity-cliff benchmark (the fair-arena test, powered)
+
+Docking losing to 2D on Moonshot enrichment is *expected* — Moonshot is analog-clustered, so 2D
+is near-optimal there by design. The fair test is **activity cliffs**: pairs near-identical in 2D
+but with a large potency gap, where similarity reasoning is weakest and a structure-based ranker
+*could* win (van Tilborg 2022). New `vta/eval/cliffs.py` mines cliffs (ECFP4 Tanimoto ≥ 0.7,
+|ΔpIC50| ≥ 1) and scores whether a method ranks the more-potent analog higher, against a 2D-kNN
+QSAR baseline, through the same paired-bootstrap gate.
+
+To power it, 345 undocked cliff members were docked into the committed 7L11 receptor (one
+consistent protocol; 0 fail / 0 timeout), lifting the pool from 17 → **1,193 cliff pairs**.
+
+**Powered result:** Vina **0.418 [0.391, 0.447]** — *significantly below chance*; 2D-kNN
+**0.666 [0.639, 0.692]**; paired Vina−2D **−0.247 [−0.288, −0.207]** (P≈0). Strict cliffs
+(Tanimoto ≥ 0.9): 2D-kNN rises to **0.84**. **Verdict:** docking shows no structure-based ranking
+skill even in the fair arena — it is *anti-correlated* with potency on cliffs (ranking the
+less-potent analog stronger ~58% of the time, most likely Vina's size bias) and is beaten by a
+trivial ligand-based QSAR. Two honest self-corrections are recorded: (1) a 17-pair pilot had
+shown the *opposite* (Vina 0.65 > 2D 0.35) — a small-sample fluke that powering the benchmark
+reversed, vindicating the decision to power it; (2) the pre-registered expectation that stricter
+cliffs would push 2D toward chance was wrong — the kNN baseline is a neighbourhood QSAR (not a
+pairwise-similarity test), so it is not disabled by cliffs. No ranking change; the cliff
+benchmark + 1,109-compound docked cache are now a powered yardstick for a learned rescorer
+(GNINA/RTMScore), which must beat both this QSAR and chance on the same pairs.
+
+Gate: `outputs/phaseS/gate_S_activity_cliffs.md`; result `outputs/phaseS/activity_cliffs.{json,md}`.
+
 A slide-ready narrative lives in `docs/VTA_AGENT_DECK.md`.

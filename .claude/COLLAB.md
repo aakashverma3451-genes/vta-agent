@@ -35,16 +35,19 @@ move to DONE/HANDOFF when finished; commit small on your branch.
   re-benchmark. SEPARATE outputs — frozen 1:1 headline + locked_benchmark untouched.
 
 ## DONE / HANDOFF
-- **Phase S — activity-cliff benchmark DONE (opus, 2026-07-07).** New `vta/eval/cliffs.py`
-  (pure: cliff mining ECFP4 sim≥0.7 & |ΔpIC50|≥1, kNN-pIC50 2D baseline excluding both pair
-  members, pair-level bootstrap) + `scripts/phaseS_activity_cliffs.py` (joins committed Job A
-  ΔG to stratified IC50/SMILES — no new docking) + `tests/test_cliffs.py`. Result
-  (`outputs/phaseS/activity_cliffs.{json,md}`, `gate_S_activity_cliffs.md`): **17 cliff pairs,
-  UNDERPOWERED. Vina 0.65 [0.41,0.88] vs 2D-kNN 0.35 [0.12,0.59]; paired Vina−2D +0.29
-  [−0.12,0.71] P(Δ>0)=0.92.** SIGN FLIPS vs the enrichment benchmarks (Vina above chance, 2D
-  below) but no CI clears its null → honest null / hypothesis-generating. Next: power the cliff
-  set (ChEMBL congeneric series) + run GNINA/RTMScore on the same pairs. No ranking change.
-  **270 tests.**
+- **Phase S — activity-cliff benchmark DONE & POWERED (opus, 2026-07-07).** New
+  `vta/eval/cliffs.py` (cliff mining ECFP4 sim≥0.7 & |ΔpIC50|≥1, kNN-pIC50 neighbourhood-QSAR
+  baseline, pair-level bootstrap) + `scripts/phaseS_activity_cliffs.py` (+strict Tanimoto≥0.9
+  variant) + `scripts/phaseS_power_cliffs.py` (docked 345 undocked cliff members into cached
+  7L11, 0 fail/0 timeout → cache `outputs/phaseS/.cliff_dgcache.json`) + `tests/test_cliffs.py`.
+  **POWERED result (1,193 cliff pairs): Vina 0.418 [0.391,0.447] — SIGNIFICANTLY BELOW chance;
+  2D-kNN 0.666 [0.639,0.692]; paired Vina−2D −0.247 [−0.288,−0.207] P≈0.** Strict cliffs
+  (≥0.9): 2D rises to 0.84. Docking is anti-correlated with potency on cliffs (likely Vina
+  size bias) and loses to trivial QSAR — powered fair-arena negative. Two self-corrections
+  logged: the 17-pair pilot (Vina 0.65) was a fluke that powering reversed; the pre-registered
+  "strict→2D toward chance" expectation was wrong (kNN is neighbourhood QSAR, not pairwise).
+  No ranking change. Cache + benchmark are the powered yardstick for a GNINA/RTMScore rescorer.
+  **270 tests.** Gate: `outputs/phaseS/gate_S_activity_cliffs.md`.
 - **Phase R reasoning architecture — Stages 1–3 DONE (opus, 2026-07-07).** HemaGuide-inspired
   routing layer: **R1** `dossier_node` (structured target dossier: provenance, pocket
   descriptors incl. metal-in-pocket, benchmarkability), **R2** `triage_router_node` (routes

@@ -14,44 +14,79 @@
     "n_boot": 10000,
     "seed": 0
   },
-  "n_docked_with_potency": 764,
-  "n_cliff_pairs": 17,
-  "powered": false,
+  "n_docked_with_potency": 1109,
+  "n_cliff_pairs": 1193,
+  "powered": true,
   "results": {
-    "n_pairs": 17,
+    "n_pairs": 1193,
     "vina_accuracy": {
-      "median": 0.6471,
+      "median": 0.4183,
       "ci95": [
-        0.4118,
-        0.8824
+        0.3906,
+        0.4468
       ],
-      "point": 0.6471
+      "point": 0.4183
     },
     "twod_knn_accuracy": {
-      "median": 0.3529,
+      "median": 0.6655,
       "ci95": [
-        0.1176,
-        0.5882
+        0.6387,
+        0.6924
       ],
-      "point": 0.3529
+      "point": 0.6655
     },
     "paired_vina_minus_2d": {
-      "median": 0.2941,
+      "median": -0.2473,
       "ci95": [
-        -0.1176,
-        0.7059
+        -0.2875,
+        -0.207
       ],
-      "p_gt0": 0.8866
+      "p_gt0": 0.0
     },
     "chance": 0.5,
-    "vina_significant_vs_chance": false,
+    "vina_significant_vs_chance": true,
     "vina_beats_2d": false
   },
+  "strict_cliff_variant": {
+    "sim_threshold": 0.9,
+    "note": "purer cliffs (near-identical in 2D) \u2014 2D-kNN should trend toward chance",
+    "results": {
+      "n_pairs": 63,
+      "vina_accuracy": {
+        "median": 0.4444,
+        "ci95": [
+          0.3175,
+          0.5714
+        ],
+        "point": 0.4444
+      },
+      "twod_knn_accuracy": {
+        "median": 0.8413,
+        "ci95": [
+          0.746,
+          0.9206
+        ],
+        "point": 0.8413
+      },
+      "paired_vina_minus_2d": {
+        "median": -0.3968,
+        "ci95": [
+          -0.5556,
+          -0.2222
+        ],
+        "p_gt0": 0.0
+      },
+      "chance": 0.5,
+      "vina_significant_vs_chance": false,
+      "vina_beats_2d": false
+    }
+  },
   "structure_based_skill_on_cliffs_demonstrated": false,
-  "verdict": "Structure-based skill NOT demonstrated on activity cliffs: Vina does not beat both chance and the 2D-kNN baseline with non-crossing CIs \u2014 and with only 17 cliff pairs the test is underpowered (demonstration-grade, CIs wide).",
+  "verdict": "Structure-based skill NOT demonstrated on activity cliffs: Vina does not beat both chance and the 2D-kNN baseline with non-crossing CIs on this powered cliff set.",
   "caveats": [
-    "Cliff pairs are limited to compounds that were BOTH docked (have Vina \u0394G) AND carry a numeric measured IC50 \u2014 a subset of Moonshot, so power is bounded by the docked set.",
-    "The 2D baseline is a kNN-pIC50 predictor excluding both pair members (its fairest estimate); by construction it is ~chance on true cliffs \u2014 that is the point.",
-    "Measures cliff-pair RANKING, not enrichment; a null here does not claim docking is useless, only that it shows no marginal ranking skill even where 2D is disabled."
+    "Vina accuracy is significantly BELOW chance (0.42, CI upper bound < 0.5) \u2014 it is ANTI-correlated with potency on cliffs, ranking the less-potent analog as the stronger binder ~58% of the time. Most likely Vina's known size bias (larger, more elaborated but not more potent analogs get more-negative \u0394G). Hypothesis, not proven.",
+    "The 2D baseline is a kNN-pIC50 NEIGHBOURHOOD QSAR (excluding both pair members), NOT a pairwise-similarity test. It is therefore NOT forced to chance on cliffs \u2014 the strict Tanimoto\u22650.9 variant made it BETTER (0.84), not worse, because Moonshot's dense congeneric series carry strong neighbourhood potency signal. So the honest claim is 'docking loses to a trivial ligand-based QSAR even on cliffs', not 'docking wins where similarity is disabled'. A pairwise-2D baseline would be ~0.5 by design.",
+    "Cliff pairs are limited to compounds with BOTH a docked Vina \u0394G AND a numeric measured IC50 (1,109 of the measured set); one consistent 7L11 real-Vina protocol.",
+    "Measures cliff-pair RANKING, not enrichment \u2014 a null here does not claim docking is useless, only that it shows no marginal ranking skill in the fair arena."
   ]
 }

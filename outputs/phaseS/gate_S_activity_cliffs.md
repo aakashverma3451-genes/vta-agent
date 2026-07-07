@@ -1,48 +1,56 @@
-# Phase S — activity-cliff benchmark: DONE (result: directional sign-flip, underpowered)
+# Phase S — activity-cliff benchmark: DONE & POWERED (result: docking loses to trivial QSAR)
 
 **Date:** 2026-07-07 · **Owner:** session-a (opus)
 
-**Goal:** test docking on the one fair arena where a structure-based win is possible — activity
-cliffs (near-identical in 2D, large ΔpIC50), where 2D-similarity is ~chance by design. NOT an
-attempt to beat 2D on the analog-clustered Moonshot set as a whole (unwinnable; Boby 2023).
+**Goal:** test docking on activity cliffs — the fair arena where 2D-similarity reasoning is
+weakest — on a POWERED set, after docking 345 more compounds to lift the cliff pool from 17 to
+1,193 pairs.
 
-## Result (`outputs/phaseS/activity_cliffs.{json,md}`)
-Built from committed data only: Job A 31:1 real-Vina ΔG (764 docked compounds) joined to the
-stratified dataset's measured IC50 + SMILES. Cliff pairs = ECFP4 Tanimoto ≥ 0.7 AND |ΔpIC50| ≥ 1.
+## Powered result (`outputs/phaseS/activity_cliffs.{json,md}`)
+1,109 docked compounds with measured IC50 → **1,193 cliff pairs** (Tanimoto ≥ 0.7, |ΔpIC50| ≥ 1).
+All 345 new docks succeeded (0 fail, 0 timeout), one consistent 7L11 real-Vina protocol.
 
-| Method | cliff-ranking accuracy (median [95% CI]) | vs chance (0.50) |
-|---|---|---|
-| **Vina (−ΔG)** | **0.647 [0.412, 0.882]** | above chance, but CI crosses 0.5 |
-| 2D-kNN pIC50 | 0.353 [0.118, 0.588] | **below** chance (cliff pathology) |
+| Method | cliff-ranking accuracy (median [95% CI]); chance = 0.50 |
+|---|---|
+| **Vina (−ΔG)** | **0.418 [0.391, 0.447]** — significantly **BELOW** chance |
+| 2D-kNN pIC50 | **0.666 [0.639, 0.692]** — significantly above chance |
 
-Paired **Vina − 2D = +0.294**, 95% CI **[−0.118, 0.706]**, P(Δ>0) = 0.92. **n = 17 cliff pairs
-(UNDERPOWERED).**
+Paired **Vina − 2D = −0.247**, 95% CI **[−0.288, −0.207]**, P(Δ>0) = 0. **Powered (n=1,193).**
 
-## Verdict — honest
-- **Not demonstrated:** every CI crosses its null, so no claim clears significance. Reported as
-  the honest null (`structure_based_skill_on_cliffs_demonstrated = false`).
-- **But the sign flips in the fair arena.** On enrichment, 2D crushed Vina (Job A paired Δ
-  BEDROC −0.24, P=0.01). On cliffs, **Vina points *above* chance (0.65) and 2D points *below*
-  (0.35)**, with Vina out-ranking 2D by ~29 points (P(Δ>0)=0.92). This is the first time in the
-  project that docking has pointed the *right* way relative to 2D — consistent with the
-  hypothesis that docking's value, if any, is in congeneric/cliff ranking, not enrichment
-  (van Tilborg 2022). It is a **hypothesis-generating signal, not a result.**
+**Strict variant (Tanimoto ≥ 0.9, 63 pairs):** Vina 0.44 [0.32, 0.57], 2D-kNN **0.84** [0.75, 0.92],
+paired −0.40 [−0.56, −0.22].
 
-## Why underpowered (expected, pre-registered as ~likely)
-Moonshot is analog-clustered but the *docked* subset with a numeric measured IC50 yields only
-17 pairs meeting the cliff criteria — the power is bounded by the docked pool, exactly the
-"demonstration-grade / CIs wide" outcome flagged before running (cf. TiLV).
+## Verdict — powered, and it reverses the earlier fluke
+- **Structure-based skill NOT demonstrated — and worse than that:** Vina is *significantly below
+  chance* (0.42) on cliff-pair ranking, i.e. **anti-correlated with potency** — it ranks the
+  less-potent analog as the stronger binder ~58% of the time. The trivial 2D-kNN QSAR beats it
+  by ~25 points with a tight CI.
+- **This overturns the 17-pair pilot** (which showed Vina 0.65 > 2D 0.35, paired +0.29). That
+  was a small-sample fluke; powering the benchmark reversed the sign decisively. **This is
+  exactly the value of powering** — it caught and corrected a misleading positive.
+
+## Two honest scientific points (both self-corrections)
+1. **Why Vina is *below* chance:** most likely **Vina's known size bias** — larger, more
+   elaborated analogs get more-negative ΔG regardless of true potency, so within a congeneric
+   pair Vina systematically favours the wrong member. Hypothesis, not proven here.
+2. **The pre-registered expectation was WRONG:** I expected stricter cliffs (Tanimoto ≥ 0.9) to
+   push the 2D baseline toward chance. The opposite happened — 2D-kNN got **better (0.84)**. The
+   reason: the kNN baseline is a **neighbourhood QSAR** (excluding both pair members), not a
+   pairwise-similarity test, so on Moonshot's dense congeneric series it exploits strong
+   neighbourhood potency signal and is NOT disabled by cliffs. So the honest headline is
+   **"docking loses to a trivial ligand-based QSAR even on activity cliffs,"** not "docking wins
+   where similarity is disabled." A pairwise-2D baseline would be ~0.5 by construction.
 
 ## What this changes
-- **Evidentiary (guaranteed):** the last "unfair benchmark" objection is closed — there is now
-  a fair-arena test in the ladder, and a reusable cliff-scoring module (`vta/eval/cliffs.py`)
-  that feeds the same paired honesty gate.
-- **A discriminating yardstick now exists** for a learned rescorer: run GNINA/RTMScore on these
-  exact 17 pairs (+ an augmented set) and see whether the directional signal becomes significant.
-- **No ranking change** — the gate keeps docking annotation-grade; nothing here promotes it.
+- The project's core negative is now **powered in the fair arena**: docking shows no
+  structure-based ranking skill on cliffs — it is beaten by trivial QSAR and is itself
+  anti-correlated with potency. Stronger and more defensible than the enrichment result alone.
+- **No ranking change** — the R4 gate keeps docking annotation-grade; nothing here promotes it.
+- The cliff benchmark + 1,109-compound docked cache are now a reusable, powered **yardstick for a
+  rescorer**: GNINA/RTMScore must beat *both* this 2D-kNN QSAR and chance on these exact pairs.
 
-## Next steps (not taken this session)
-1. **Power the cliff set:** augment with ChEMBL Mpro congeneric series (more docked pairs with
-   measured IC50) so the ±0.29 Vina−2D gap can be tested at significance.
-2. **Rescorer on the cliff set:** GNINA CNNaffinity / RTMScore vs the same 2D-kNN baseline on the
-   identical pairs — the honest path to a *powered* structure-based positive.
+## Next step (the honest path to any structure-based positive)
+Run **GNINA CNNaffinity / RTMScore** on these 1,193 cliff pairs vs the same 2D-kNN baseline
+through the paired gate. If a learned rescorer corrects Vina's size-bias anti-correlation and
+beats the QSAR, that is a real, powered, first structure-based win. If not, the honest ceiling
+stands.
