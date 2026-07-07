@@ -173,11 +173,29 @@ def _run_vina(vina: str, receptor: str, ligand: str, center: list, out: str) -> 
     return None
 
 
+# R2 TriageRouter (Phase R): only proteins the router left at `full_dock` are docked. A
+# protein routed to annotate_only/defer/refuse is skipped here with a labelled audit line —
+# the pipeline stops applying rigid docking where the router judged it inappropriate. Absent a
+# triage decision (or full_dock) docking proceeds exactly as before, so the e2e chain is
+# unaffected. This changes WHICH targets dock, never the docking weights/scoring.
+_DOCK_DECISIONS = {"full_dock"}
+
+
+def _triage_skip(state: VTAState, protein: str) -> str | None:
+    dec = ((state.get("triage_decision") or {}).get(protein) or {}).get("decision")
+    return dec if (dec is not None and dec not in _DOCK_DECISIONS) else None
+
+
 def _dock_real(state: VTAState, vina: str) -> VTAState:
     ligands = load_ligands()
     results, n_docked = [], 0
     active_substitutions = parent_surrogates = metal_skips = ensemble_jobs = 0
     for protein, plist in (state.get("pockets") or {}).items():
+        skip = _triage_skip(state, protein)
+        if skip:
+            state["audit_trail"].append(
+                f"Triage[{protein}]: routed to {skip} — rigid docking skipped (labelled)")
+            continue
         struct = (state.get("structures") or {}).get(protein, {})
         if not struct.get("pdb_path") or not plist:
             continue
@@ -274,6 +292,11 @@ def _dock_mock(state: VTAState) -> VTAState:
     results = []
     active_substitutions = parent_surrogates = metal_skips = ensemble_jobs = 0
     for protein, plist in (state.get("pockets") or {}).items():
+        skip = _triage_skip(state, protein)
+        if skip:
+            state["audit_trail"].append(
+                f"Triage[{protein}]: routed to {skip} — rigid docking skipped (labelled)")
+            continue
         struct = (state.get("structures") or {}).get(protein, {})
         conformers = ensemble_conformers(struct)
         ensemble_size = max(1, len(conformers))

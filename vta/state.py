@@ -72,6 +72,8 @@ class VTAState(TypedDict, total=False):
                                                 #            metal_dependence, benchmarkability}}
     triage_decision: Optional[Dict[str, Dict]]  # {protein: {decision, rationale[]}} —
                                                 # full_dock | annotate_only | defer | refuse
+    screened_ligand_class: Optional[Dict[str, str]]  # optional {protein: drug_like|charged|
+                                                # nucleotide|covalent} hint for the router
     playbook_prior: Optional[Dict[str, Dict]]   # {protein: {status, ...}} — R3 (stubbed "no
                                                 # precedent" until a validated-screen corpus exists)
     verification_verdict: Optional[Dict[str, Any]]  # {verdict, gates, per_target} — R4 hard gate

@@ -50,6 +50,7 @@ from vta.nodes.stubs import defer_node
 from vta.nodes.structure import structure_node
 from vta.nodes.structure_qc import structure_qc_node
 from vta.nodes.target_prioritization import target_prioritization_node
+from vta.nodes.triage import triage_router_node
 from vta.state import VTAState
 
 
@@ -78,6 +79,7 @@ def build_app(include_md: bool = False, include_fep: bool = False):
     g.add_node("conservation", conservation_node)  # real per-pocket JSD conservation (§SPEC#1)
     g.add_node("species_resolution", species_resolution_node)
     g.add_node("dossier", dossier_node)  # R1: structured target dossier before routing
+    g.add_node("triage", triage_router_node)  # R2: route full_dock|annotate_only|defer|refuse
     g.add_node("dock", docking_node)
     g.add_node("conservation_contacts", conservation_contacts_node)  # ligand-weighted JSD (§SPEC#4)
     g.add_node("rescore", rescore_node)    # GNINA CNN re-score (annotation-only)
@@ -104,7 +106,8 @@ def build_app(include_md: bool = False, include_fep: bool = False):
     g.add_edge("pockets", "conservation")   # overwrite 0.5 placeholder w/ real JSD (skips w/o MSA)
     g.add_edge("conservation", "species_resolution")
     g.add_edge("species_resolution", "dossier")  # R1 dossier before docking
-    g.add_edge("dossier", "dock")
+    g.add_edge("dossier", "triage")              # R2 route the target
+    g.add_edge("triage", "dock")
     g.add_edge("dock", "conservation_contacts")   # ligand-contact-weight conservation (§SPEC#4)
     g.add_edge("conservation_contacts", "rescore")  # GNINA CNN re-score (skips w/o gnina binary)
     g.add_edge("rescore", "boltzina")  # Boltzina DL affinity (skips w/o package)
