@@ -35,6 +35,16 @@ move to DONE/HANDOFF when finished; commit small on your branch.
   re-benchmark. SEPARATE outputs — frozen 1:1 headline + locked_benchmark untouched.
 
 ## DONE / HANDOFF
+- **Phase S — activity-cliff benchmark DONE (opus, 2026-07-07).** New `vta/eval/cliffs.py`
+  (pure: cliff mining ECFP4 sim≥0.7 & |ΔpIC50|≥1, kNN-pIC50 2D baseline excluding both pair
+  members, pair-level bootstrap) + `scripts/phaseS_activity_cliffs.py` (joins committed Job A
+  ΔG to stratified IC50/SMILES — no new docking) + `tests/test_cliffs.py`. Result
+  (`outputs/phaseS/activity_cliffs.{json,md}`, `gate_S_activity_cliffs.md`): **17 cliff pairs,
+  UNDERPOWERED. Vina 0.65 [0.41,0.88] vs 2D-kNN 0.35 [0.12,0.59]; paired Vina−2D +0.29
+  [−0.12,0.71] P(Δ>0)=0.92.** SIGN FLIPS vs the enrichment benchmarks (Vina above chance, 2D
+  below) but no CI clears its null → honest null / hypothesis-generating. Next: power the cliff
+  set (ChEMBL congeneric series) + run GNINA/RTMScore on the same pairs. No ranking change.
+  **270 tests.**
 - **Phase R reasoning architecture — Stages 1–3 DONE (opus, 2026-07-07).** HemaGuide-inspired
   routing layer: **R1** `dossier_node` (structured target dossier: provenance, pocket
   descriptors incl. metal-in-pocket, benchmarkability), **R2** `triage_router_node` (routes
