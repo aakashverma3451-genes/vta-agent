@@ -264,8 +264,10 @@ with `pip install -e ../taxonagent` or from a package index.
 
 ## 12. Current Status
 
-- Scientific validation: **Phases 0–11 complete in software**, plus the **deployment D0
-  scientific-readiness gate (G1: PASS)** — see Section 15. Phase 9 met its acceptance bar
+- Scientific validation: **Phases 0–11 complete in software**, the **deployment D0
+  scientific-readiness gate (G1: PASS)**, and the **Phase R reasoning architecture Stages 1–3**
+  (dossier → triage → verification; R3 playbook + R6 ablation deferred) — see Section 15.
+  Phase 9 met its acceptance bar
   (≥20 actives, 3 targets, every benchmarkable metric with a 95% CI, an executed
   parent-vs-active-form comparison, a frozen benchmark artifact); Phase 11 added the
   peer-review layer (trivial baselines, paired significance, LE→ΔG gate, redocking); G1 wired
@@ -415,5 +417,41 @@ claim back.
   output. **No service (D1+) work started** — held at the gate per plan. G1 does *not* authorize
   any claim of structure-based skill (there is none) or any ranking/rescorer change (those stay
   behind the paired-test gate).
+
+### Phase R — reasoning architecture (route the target; gate every claim)
+
+The Phase-11 finding — docking doesn't beat a 2D baseline on any powered target here — reframes
+the contribution as the **workflow**, not the scorer. Phase R operationalizes that
+(HemaGuide-inspired: autonomous routing to the right method per case was that system's measured
+"critical integrating element"). Stages 1–3 are committed; all additive to the linear graph, no
+docking-weight/scorer change.
+
+- **R1 DossierBuilder** (`vta/nodes/dossier.py`) — a structured `target_dossier` per protein
+  (structure provenance/quality, pocket descriptors incl. metal-in-pocket, target class, metal
+  dependence, benchmarkability from the frozen benchmark) assembled before any routing. Grades
+  the 3 wired targets: Mpro=powered, HCV NS5B=un_benchmarkable, TiLV PB1=underpowered.
+- **R2 TriageRouter** (`vta/nodes/triage.py`) — the central lesson: routes each target to
+  `full_dock | annotate_only | defer | refuse` and `docking.py` skips (labelled) anything left
+  off `full_dock`. Defaults to `full_dock`; downgrades only on positive run-available evidence
+  (un_benchmarkable / metal-in-pocket / low binding-site pLDDT / out-of-domain ligand class), so
+  Mpro→full_dock, HCV NS5B→annotate_only, TiLV PB1→full_dock (the pipeline stops applying rigid
+  docking where it is inappropriate, without breaking the drug-like demonstration screens).
+- **R4 VerificationNode** (`vta/nodes/verification.py`) — the hard gate on the single edge into
+  reporting: **redock < 2 Å + paired-beats-2D-baseline (the D0.3 gate promoted to a hard
+  pre-report gate) + applicability-domain**. A docking-enrichment claim stands only on `pass`;
+  otherwise the run is `downgrade`/`defer`/`refuse`. **Mpro → DOWNGRADE** (it does not beat 2D);
+  an untested target also downgrades — an unverifiable enrichment claim is never passed.
+- **R5 annotation ranker** (`vta/nodes/annotate_rank.py`) — the `annotate_only` executor:
+  labelled 2-D-similarity annotation with the nucleotide/metal caveat, never a ΔG/enrichment
+  number. The report gains a structural verdict **banner** (downgrade in red) + a ligand-based
+  annotations section.
+- **Deferred:** R3 PlaybookMemory (target-class/applicability-domain grounding, stubbed
+  "no_precedent" — needs a validated-screen corpus + a leakage guard that excludes the query
+  target's own analog series) and **R6 the component ablation** — the L0→full-agent study that
+  is meant to *prove* the workflow (not the docking) is the contribution. Until R6 runs, that
+  remains a hypothesis, not a result.
+
+Gate artifacts: `outputs/phaseR/gate_R1_dossier.md`, `gate_R2_triage.md`,
+`gate_R4R5_verification.md`. 259 tests pass.
 
 A slide-ready narrative lives in `docs/VTA_AGENT_DECK.md`.
