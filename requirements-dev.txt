@@ -1,0 +1,5 @@
+# Development and validation dependencies.
+-r requirements.txt
+
+pytest
+coverage

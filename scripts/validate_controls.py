@@ -8,8 +8,7 @@ suspect and must be debugged before trusting the pipeline.
 
 Requires: FPOCKET_BIN, VINA_BIN, network (RCSB), and the rdkit/meeko prep stack.
 Run from the vta-agent dir:
-    FPOCKET_BIN=... VINA_BIN=... PYTHONPATH=.:../taxonagent/src \
-        ../taxonagent/venv/bin/python scripts/validate_controls.py
+    FPOCKET_BIN=... VINA_BIN=... python scripts/validate_controls.py
 """
 from __future__ import annotations
 
@@ -17,6 +16,7 @@ import json
 
 from vta.nodes.docking import docking_node
 from vta.nodes.conservation import conservation_node
+from vta.nodes.conservation_contacts import conservation_contacts_node
 from vta.nodes.pockets import pockets_node
 from vta.nodes.rank import rank_node
 from vta.nodes.structure import structure_node
@@ -32,6 +32,7 @@ def main() -> None:
     st = pockets_node(st)        # real: FPocket
     st = conservation_node(st)   # real: per-pocket JSD over committed homolog MSA (SPEC #1)
     st = docking_node(st)        # real: Vina over all cached ligands
+    st = conservation_contacts_node(st)  # real: ligand-contact-weighted JSD (SPEC #4)
     st = rank_node(st)
 
     rows = sorted(st["docking_results"], key=lambda r: r["score"], reverse=True)

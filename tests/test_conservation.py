@@ -104,6 +104,23 @@ def test_node_overwrites_placeholder_with_real_score(monkeypatch, tmp_path):
     assert "conservation" in out["versions"]
 
 
+def test_node_persists_per_residue_map(monkeypatch, tmp_path):
+    # SPEC #4 machinery: alongside the pocket aggregate, the node writes a per-residue
+    # JSD map keyed by resseq (consumed later by conservation_contacts). Structure "WA",
+    # both columns fully conserved → JSD reflects background rarity (W rarer than A), so
+    # the values are real and ordered (W > A), not a flat placeholder.
+    lines = (_residue_lines(1, "W", "B", 10, (0, 0, 0))
+             + _residue_lines(3, "A", "B", 11, (1, 0, 0)))
+    st = _state_with_structure(tmp_path, "\n".join(lines) + "\n", center=[0.5, 0, 0])
+    monkeypatch.setattr(C, "fetch_homolog_msa",
+                        lambda seq, taxon=None: ["WA", "WA", "WA"])
+    out = C.conservation_node(st)
+    res_map = out["residue_conservation"]["PB1"]
+    assert set(res_map) == {"10", "11"}                  # keyed by resseq
+    assert all(0.0 <= v <= 1.0 for v in res_map.values())
+    assert res_map["10"] > res_map["11"]                 # conserved-rare W > conserved A
+
+
 def test_node_keeps_placeholder_when_no_msa(monkeypatch, tmp_path):
     lines = _residue_lines(1, "A", "B", 1, (0, 0, 0)) + _residue_lines(3, "C", "B", 2, (1, 0, 0))
     st = _state_with_structure(tmp_path, "\n".join(lines) + "\n", center=[0.5, 0, 0])

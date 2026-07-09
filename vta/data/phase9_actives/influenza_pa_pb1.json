@@ -1,0 +1,36 @@
+{
+  "label": "influenza_pa_pb1",
+  "target": {
+    "target_chembl_id": "CHEMBL3137263",
+    "pref_name": "PA/PB1 Influenza A virus"
+  },
+  "n_actives": 2,
+  "activity_cutoff_nm": 10000,
+  "actives": [
+    {
+      "molecule_chembl_id": "CHEMBL3577821",
+      "canonical_smiles": "Cc1cc(-c2ccccc2)n2nc(C(=O)Nc3sc4c(c3C(N)=O)CCCCC4)nc2n1",
+      "pref_name": "CHEMBL3577821",
+      "best_pchembl": 5.96,
+      "activity_nm": 1100.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL3580290",
+      "document_chembl_id": "CHEMBL3576796",
+      "target_chembl_id": "CHEMBL3137263",
+      "provenance": "ChEMBL activity endpoint"
+    },
+    {
+      "molecule_chembl_id": "CHEMBL3288054",
+      "canonical_smiles": "NC(=O)c1c(NC(=O)c2nc3nc(-c4ccccc4)cc(C(F)(F)F)n3n2)sc2c1CCCC2",
+      "pref_name": "CHEMBL3288054",
+      "best_pchembl": 5.12,
+      "activity_nm": 7500.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL3580290",
+      "document_chembl_id": "CHEMBL3576796",
+      "target_chembl_id": "CHEMBL3137263",
+      "provenance": "ChEMBL activity endpoint"
+    }
+  ],
+  "caveat": "ChEMBL assay actives require assay-type review before publication claims."
+}

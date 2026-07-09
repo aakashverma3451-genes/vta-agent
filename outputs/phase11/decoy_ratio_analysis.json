@@ -1,0 +1,29 @@
+{
+  "phase": "11 WI-4 \u2014 decoy/inactive ratio analysis",
+  "target": "SARS-CoV-2 Mpro (non-covalent)",
+  "available": {
+    "non_covalent_actives": 1945,
+    "measured_inactives": 930
+  },
+  "current_benchmark": {
+    "actives": 50,
+    "inactives": 50,
+    "ratio": "1:1",
+    "caveat": "ratio-degenerate: EF1% ceiling = 2.0 at 1:1 (kept in appendix, labelled)"
+  },
+  "target_ratio": 30,
+  "achievable_with_real_inactives": {
+    "recipe": "reduce actives to 30 and use 900 measured Moonshot inactives (30 x 30 = 900 <= 930 available) \u2014 all experimentally measured, NO fabrication, NO DeepCoy needed",
+    "actives": 30,
+    "inactives": 900,
+    "ratio": "30:1",
+    "feasible": true,
+    "cost": "requires docking ~850 additional real inactives with production Vina (multi-hour real-Vina run; not executed in this pass)"
+  },
+  "synthetic_decoys": {
+    "deepcoy": "NOT installed in this environment \u2014 generative decoys unavailable",
+    "dude_z_property_unmatched": "generatable from ChEMBL without a special tool, but still require docking to enter the benchmark (same multi-hour cost)"
+  },
+  "provenance_rule": "every synthetic decoy would carry tool+version+seed; none generated this pass, so none added \u2014 no unlabelled padding.",
+  "status": "ANALYSIS ONLY \u2014 30:1 is achievable with real inactives (30 actives x 900 real inactives) but needs an extended dock; not executed. Current headline stays 1:1, labelled ratio-degenerate."
+}

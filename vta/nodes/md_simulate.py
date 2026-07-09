@@ -37,6 +37,36 @@ def _check_openmm() -> bool:
         return False
 
 
+def _check_parmed() -> bool:
+    try:
+        import parmed  # noqa: F401
+        return True
+    except ImportError:
+        return False
+
+
+def _save_amber_topology(system, topology, positions, out_dir: str, run_id: str) -> str | None:
+    """Write an Amber complex topology (prmtop + inpcrd) via ParmEd, for MM-GBSA.
+
+    md_analyze's MM-GBSA reads `result["parm"]`, but OpenMM doesn't speak Amber natively,
+    so production runs had no topology to feed it. ParmEd translates the PARAMETERISED
+    OpenMM System (forces set — `_run_simulation` even added the barostat to it) into
+    Amber prmtop/inpcrd. Returns the prmtop path, or None on any failure — the caller
+    then omits `parm` and md_analyze prints its own honest "no topology" note (so we
+    don't duplicate it here).
+    """
+    try:
+        import parmed
+        structure = parmed.openmm.load_topology(topology, system, xyz=positions)
+        prmtop = os.path.join(out_dir, f"{run_id}_complex.prmtop")
+        inpcrd = os.path.join(out_dir, f"{run_id}_complex.inpcrd")
+        structure.save(prmtop, overwrite=True)
+        structure.save(inpcrd, overwrite=True)
+        return prmtop if os.path.exists(prmtop) else None
+    except Exception:
+        return None
+
+
 def _smiles_to_sdf(smiles: str, out_path: str) -> bool:
     try:
         from rdkit import Chem
@@ -144,10 +174,18 @@ def md_simulate_node(state: VTAState) -> VTAState:
                 raise ValueError(f"SMILES→SDF failed for {lid}")
             sys_, top, pos = _build_system(pdb_path, sdf)
             res = _run_simulation(sys_, top, pos, out_dir, run_id)
+            # Emit an Amber topology so md_analyze's MM-GBSA can actually run in
+            # production (it reads result["parm"]). Graceful: ParmEd absent or save
+            # fails → omit `parm`, MD still completes on RMSD/contacts.
+            if _check_parmed():
+                parm = _save_amber_topology(sys_, top, pos, out_dir, run_id)
+                if parm:
+                    res["parm"] = parm
             results[lid] = res
+            parm_note = " + prmtop" if res.get("parm") else ""
             state["audit_trail"].append(
                 f"MD-simulate[{lid}]: {res['duration_ns']} ns completed → "
-                f"{Path(res['trajectory']).name}")
+                f"{Path(res['trajectory']).name}{parm_note}")
         except Exception as e:
             results[lid] = {"status": "failed", "reason": str(e)}
             state["audit_trail"].append(f"MD-simulate[{lid}]: FAILED — {e}")

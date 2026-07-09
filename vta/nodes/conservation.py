@@ -187,6 +187,15 @@ def conservation_node(state: VTAState) -> VTAState:
         jsd = jensen_shannon_conservation(cols)
         col_of = _row0_column_map(msa[0])               # order-index → alignment column
 
+        # Persist the per-residue JSD keyed by resseq (SPEC #4): conservation_contacts
+        # reads this to make conservation ligand-specific. Keyed by resseq so a docked
+        # pose's receptor (same structure PDB) can look residues up by number.
+        res_map = {
+            residues[i]["key"][1]: jsd[col_of[i]]
+            for i in range(min(len(residues), len(col_of)))
+        }
+        state.setdefault("residue_conservation", {})[name] = res_map
+
         for pocket in pocket_list:
             idxs = pocket_residue_indices(residues, pocket["center"])
             scores = [jsd[col_of[i]] for i in idxs if i < len(col_of)]

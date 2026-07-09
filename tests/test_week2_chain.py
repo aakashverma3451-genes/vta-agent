@@ -5,7 +5,7 @@ must yield a descending top-20 lead list. Like the spine test this mocks
 `classify_genome`, so it is fast and offline; the biology mocks are deterministic
 (seeded by run_id), which lets us assert reproducibility.
 
-Run:  PYTHONPATH=.:../taxonagent/src ../taxonagent/venv/bin/python -m pytest tests/ -q
+Run:  python -m pytest tests/ -q
 """
 from __future__ import annotations
 
@@ -56,10 +56,11 @@ def test_full_chain_produces_ranked_leads(monkeypatch, mock_structure_net):
     assert scores == sorted(scores, reverse=True)             # descending
     # records carry the real Vina-shaped fields the ranker scored on
     top = leads[0]
-    assert {"protein", "pocket", "ligand", "dG", "rmsd", "le", "score"} <= set(top)
+    assert {"protein", "pocket", "ligand", "dG", "rmsd", "le", "score",
+            "score_provenance", "chemistry_flags", "active_species"} <= set(top)
 
     trail = "\n".join(final["audit_trail"])
-    for marker in ("TaxonAgent", "Router", "Pockets", "Docking", "Ranking"):
+    for marker in ("TaxonAgent", "Router", "Pockets", "Docking", "Ranking", "Chemistry"):
         assert marker in trail, f"missing audit marker: {marker}"
 
 

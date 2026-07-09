@@ -1,0 +1,1166 @@
+{
+  "source": "vta/data/phase9_actives/hcv_ns5b.json",
+  "target": {
+    "target_chembl_id": "CHEMBL5375",
+    "pref_name": "Hepatitis C virus NS5B RNA-dependent RNA polymerase"
+  },
+  "n_actives": 52,
+  "counts": {
+    "off_target_hcv_drug": 2,
+    "NNI": 6,
+    "indirect_antiviral_assay": 35,
+    "NS5B_site_unknown": 8,
+    "NI": 1
+  },
+  "headline_scope": "NI active-site benchmark only when enough NI actives exist",
+  "pocket_mapping": {
+    "NI": "NS5B catalytic active site",
+    "NNI": "NS5B allosteric thumb/palm pockets; separate benchmark required"
+  },
+  "actives": [
+    {
+      "molecule_chembl_id": "CHEMBL3545363",
+      "canonical_smiles": "CC(C)(C)[C@@H]1NC(=O)O[C@@H]2CCC[C@H]2OC/C=C/C(F)(F)c2nc3ccccc3nc2O[C@@H]2C[C@@H](C(=O)N[C@]3(C(=O)NS(=O)(=O)C4(C)CC4)C[C@H]3C(F)F)N(C2)C1=O",
+      "pref_name": "GLECAPREVIR",
+      "best_pchembl": 10.28,
+      "activity_nm": 0.053,
+      "activity_type": "Ki",
+      "assay_chembl_id": "CHEMBL5539883",
+      "document_chembl_id": "CHEMBL5537165",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "off_target_hcv_drug",
+        "binding_site": "not NS5B benchmark active",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "known HCV drug mechanism is not NS5B: NS3/NS4A protease inhibitor"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL230744",
+      "canonical_smiles": "Cc1cc(C)n2nc(CC3=C(O)CC(CCc4ccc(C(C)(C)C#N)c(F)c4)(C4CCCC4)OC3=O)nc2n1",
+      "pref_name": "CHEMBL230744",
+      "best_pchembl": 8.52,
+      "activity_nm": 3.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL5348065",
+      "document_chembl_id": "CHEMBL5346888",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "NNI",
+        "binding_site": "NS5B allosteric pocket",
+        "benchmark_scope": "allosteric",
+        "confidence": "medium",
+        "evidence": [
+          "Filibuvir/benzofuran NS5B non-nucleoside inhibitor series"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL3039514",
+      "canonical_smiles": "COC(=O)N[C@H](C(=O)N1CCC[C@H]1c1nc(-c2ccc3c(c2)O[C@@H](c2ccccc2)n2c-3cc3cc(-c4c[nH]c([C@@H]5CCCN5C(=O)[C@@H](NC(=O)OC)C(C)C)n4)ccc32)c[nH]1)C(C)C",
+      "pref_name": "ELBASVIR",
+      "best_pchembl": 8.52,
+      "activity_nm": 3.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5537532",
+      "document_chembl_id": "CHEMBL5537114",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "off_target_hcv_drug",
+        "binding_site": "not NS5B benchmark active",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "known HCV drug mechanism is not NS5B: NS5A inhibitor"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL509746",
+      "canonical_smiles": "CCC(C#N)(CC)c1ccc(CCC2(C3CCCC3)CC(O)=C(Cc3nc4nc(C)cc(C)n4n3)C(=O)O2)cc1F",
+      "pref_name": "CHEMBL509746",
+      "best_pchembl": 8.3,
+      "activity_nm": 5.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL5348065",
+      "document_chembl_id": "CHEMBL5346888",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "NNI",
+        "binding_site": "NS5B allosteric pocket",
+        "benchmark_scope": "allosteric",
+        "confidence": "medium",
+        "evidence": [
+          "Filibuvir/benzofuran NS5B non-nucleoside inhibitor series"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5937877",
+      "canonical_smiles": "Cc1ccc(Cn2c(=O)[nH]c3c(N)nc(-c4nc(C5CC5)c[nH]4)nc32)cn1",
+      "pref_name": "CHEMBL5937877",
+      "best_pchembl": 8.3,
+      "activity_nm": 5.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5889149",
+      "canonical_smiles": "Nc1nc(-c2ncc[nH]2)nc2c1[nH]c(=O)n2Cc1cccc(CN2CCCC2)c1",
+      "pref_name": "CHEMBL5889149",
+      "best_pchembl": 8.22,
+      "activity_nm": 6.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL490672",
+      "canonical_smiles": "CCc1cc(CC[C@]2(C3CCCC3)CC(O)=C(Cc3nc4nc(C)cc(C)n4n3)C(=O)O2)cc(CC)n1",
+      "pref_name": "FILIBUVIR",
+      "best_pchembl": 8.15,
+      "activity_nm": 7.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL5348065",
+      "document_chembl_id": "CHEMBL5346888",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "NNI",
+        "binding_site": "NS5B allosteric pocket",
+        "benchmark_scope": "allosteric",
+        "confidence": "high",
+        "evidence": [
+          "known NS5B non-nucleoside inhibitor"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL489295",
+      "canonical_smiles": "CCc1cc(CC[C@@]2(C3CCCC3)CC(O)=C(Cc3nc4nc(C)cc(C)n4n3)C(=O)O2)cc(CC)n1",
+      "pref_name": "CHEMBL489295",
+      "best_pchembl": 7.92,
+      "activity_nm": 12.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL5348065",
+      "document_chembl_id": "CHEMBL5346888",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "NNI",
+        "binding_site": "NS5B allosteric pocket",
+        "benchmark_scope": "allosteric",
+        "confidence": "medium",
+        "evidence": [
+          "Filibuvir/benzofuran NS5B non-nucleoside inhibitor series"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL490671",
+      "canonical_smiles": "CCc1cc(CCC2(C3CCCC3)CC(O)=C(Cc3nc4nc(C)cc(C)n4n3)C(=O)O2)cc(CC)n1",
+      "pref_name": "CHEMBL490671",
+      "best_pchembl": 7.8,
+      "activity_nm": 16.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL5348065",
+      "document_chembl_id": "CHEMBL5346888",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "NNI",
+        "binding_site": "NS5B allosteric pocket",
+        "benchmark_scope": "allosteric",
+        "confidence": "medium",
+        "evidence": [
+          "Filibuvir/benzofuran NS5B non-nucleoside inhibitor series"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5783938",
+      "canonical_smiles": "Nc1nc(-c2nc(C3CC3)c[nH]2)nc2c1[nH]c(=O)n2Cc1ccc2c(c1)CNCC2",
+      "pref_name": "CHEMBL5783938",
+      "best_pchembl": 7.47,
+      "activity_nm": 34.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5788491",
+      "canonical_smiles": "Nc1nc(-c2ncc[nH]2)nc2c1[nH]c(=O)n2Cc1ccc2c(c1)CNCC2",
+      "pref_name": "CHEMBL5788491",
+      "best_pchembl": 7.34,
+      "activity_nm": 46.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5975355",
+      "canonical_smiles": "Nc1nc(-n2cccn2)nc2c1[nH]c(=O)n2Cc1ccccc1",
+      "pref_name": "CHEMBL5975355",
+      "best_pchembl": 7.33,
+      "activity_nm": 47.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5768331",
+      "canonical_smiles": "Cc1ccc(Cn2c(=O)[nH]c3c(N)nc(-c4ncc[nH]4)nc32)cn1",
+      "pref_name": "CHEMBL5768331",
+      "best_pchembl": 7.3,
+      "activity_nm": 50.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL6002866",
+      "canonical_smiles": "CN(C)CCOc1ccc(Cn2c(=O)[nH]c3c(N)nc(-c4nc(C5CC5)c[nH]4)nc32)cn1",
+      "pref_name": "CHEMBL6002866",
+      "best_pchembl": 7.3,
+      "activity_nm": 50.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5815143",
+      "canonical_smiles": "CCc1[nH]c(-c2nc(N)c3[nH]c(=O)n(Cc4ccccc4)c3n2)nc1C1CC1",
+      "pref_name": "CHEMBL5815143",
+      "best_pchembl": 7.28,
+      "activity_nm": 53.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5827189",
+      "canonical_smiles": "Nc1nc(-c2nc(C3CC3)c[nH]2)nc2c1[nH]c(=O)n2Cc1ccccc1",
+      "pref_name": "CHEMBL5827189",
+      "best_pchembl": 7.09,
+      "activity_nm": 81.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5787964",
+      "canonical_smiles": "Nc1nc(-c2ccn[nH]2)nc2c1[nH]c(=O)n2Cc1ccccc1",
+      "pref_name": "CHEMBL5787964",
+      "best_pchembl": 6.89,
+      "activity_nm": 130.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL516051",
+      "canonical_smiles": "Cc1cc(C)n2nc(CC3=C(O)CC(CCc4ccc(C(C)(C)O)c(F)c4)(C4CCCC4)OC3=O)nc2n1",
+      "pref_name": "CHEMBL516051",
+      "best_pchembl": 6.85,
+      "activity_nm": 140.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL5348065",
+      "document_chembl_id": "CHEMBL5346888",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "NNI",
+        "binding_site": "NS5B allosteric pocket",
+        "benchmark_scope": "allosteric",
+        "confidence": "medium",
+        "evidence": [
+          "Filibuvir/benzofuran NS5B non-nucleoside inhibitor series"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5891486",
+      "canonical_smiles": "Nc1nc(-c2ncc[nH]2)nc2c1[nH]c(=O)n2Cc1ccccc1",
+      "pref_name": "CHEMBL5891486",
+      "best_pchembl": 6.8,
+      "activity_nm": 160.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5877246",
+      "canonical_smiles": "Cc1c[nH]c(-c2nc(N)c3[nH]c(=O)n(Cc4ccccc4)c3n2)n1",
+      "pref_name": "CHEMBL5877246",
+      "best_pchembl": 6.77,
+      "activity_nm": 170.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL6059593",
+      "canonical_smiles": "CCc1c[nH]c(-c2nc(N)c3[nH]c(=O)n(Cc4ccccc4)c3n2)n1",
+      "pref_name": "CHEMBL6059593",
+      "best_pchembl": 6.77,
+      "activity_nm": 170.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5739594",
+      "canonical_smiles": "Cc1cnn(-c2nc(N)c3[nH]c(=O)n(Cc4ccccc4)c3n2)c1",
+      "pref_name": "CHEMBL5739594",
+      "best_pchembl": 6.77,
+      "activity_nm": 170.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5896426",
+      "canonical_smiles": "Cc1[nH]c(-c2nc(N)c3[nH]c(=O)n(Cc4ccccc4)c3n2)nc1C1CC1",
+      "pref_name": "CHEMBL5896426",
+      "best_pchembl": 6.7,
+      "activity_nm": 200.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL6168197",
+      "canonical_smiles": "CC1CCC(C(=O)N(C)c2ccc(Oc3ccccc3C(F)(F)F)cc2C(=O)O)CC1",
+      "pref_name": "CHEMBL6168197",
+      "best_pchembl": 6.7,
+      "activity_nm": 200.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL6128809",
+      "document_chembl_id": "CHEMBL6127060",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "NS5B_site_unknown",
+        "binding_site": "unknown NS5B pocket",
+        "benchmark_scope": "ambiguous",
+        "confidence": "low",
+        "evidence": [
+          "Direct inhibition of Hepatitis C virus NS5B polymerase"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5799441",
+      "canonical_smiles": "COCCn1ccnc1-c1nc(N)c2[nH]c(=O)n(Cc3ccccc3)c2n1",
+      "pref_name": "CHEMBL5799441",
+      "best_pchembl": 6.48,
+      "activity_nm": 330.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL6015159",
+      "canonical_smiles": "Nc1nc(-c2nc(-c3ccccc3)c[nH]2)nc2c1[nH]c(=O)n2Cc1ccccc1",
+      "pref_name": "CHEMBL6015159",
+      "best_pchembl": 6.28,
+      "activity_nm": 531.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5839354",
+      "canonical_smiles": "Cn1ccnc1-c1nc(N)c2[nH]c(=O)n(Cc3ccccc3)c2n1",
+      "pref_name": "CHEMBL5839354",
+      "best_pchembl": 6.23,
+      "activity_nm": 590.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5822874",
+      "canonical_smiles": "Cc1nc(-c2nc(N)c3[nH]c(=O)n(Cc4ccccc4)c3n2)[nH]c1C",
+      "pref_name": "CHEMBL5822874",
+      "best_pchembl": 6.19,
+      "activity_nm": 640.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL6057565",
+      "canonical_smiles": "Nc1nc(-c2ccco2)nc2c1[nH]c(=O)n2Cc1ccccc1",
+      "pref_name": "CHEMBL6057565",
+      "best_pchembl": 6.17,
+      "activity_nm": 680.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL6047888",
+      "canonical_smiles": "COCCc1nnc(-c2nc(N)c3[nH]c(=O)n(Cc4ccccc4)c3n2)o1",
+      "pref_name": "CHEMBL6047888",
+      "best_pchembl": 6.16,
+      "activity_nm": 690.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5915428",
+      "canonical_smiles": "Nc1nc(-c2nc(C3CC3)c[nH]2)nc2c1[nH]c(=O)n2CCCCCCN1CCCC1",
+      "pref_name": "CHEMBL5915428",
+      "best_pchembl": 6.16,
+      "activity_nm": 700.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL23458",
+      "canonical_smiles": "O=C(O)[C@H](Cc1ccccc1)N(Cc1cccc([N+](=O)[O-])c1)C(=O)c1ccc(Cl)cc1Cl",
+      "pref_name": "CHEMBL23458",
+      "best_pchembl": 6.16,
+      "activity_nm": 700.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL6128809",
+      "document_chembl_id": "CHEMBL6127060",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "NS5B_site_unknown",
+        "binding_site": "unknown NS5B pocket",
+        "benchmark_scope": "ambiguous",
+        "confidence": "low",
+        "evidence": [
+          "Direct inhibition of Hepatitis C virus NS5B polymerase"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL6009749",
+      "canonical_smiles": "Nc1nc(-c2nc(C3CC3)c[nH]2)nc2c1[nH]c(=O)n2CC1CCOCC1",
+      "pref_name": "CHEMBL6009749",
+      "best_pchembl": 6.14,
+      "activity_nm": 730.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5797438",
+      "canonical_smiles": "Cc1cn[nH]c1-c1nc(N)c2[nH]c(=O)n(Cc3ccccc3)c2n1",
+      "pref_name": "CHEMBL5797438",
+      "best_pchembl": 6.12,
+      "activity_nm": 760.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5741431",
+      "canonical_smiles": "Nc1nc(-c2nccn2CCO)nc2c1[nH]c(=O)n2Cc1ccccc1",
+      "pref_name": "CHEMBL5741431",
+      "best_pchembl": 6.1,
+      "activity_nm": 800.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL25773",
+      "canonical_smiles": "N#Cc1cccc(CN(C(=O)c2ccc(Cl)cc2Cl)[C@@H](Cc2ccccc2)C(=O)O)c1",
+      "pref_name": "CHEMBL25773",
+      "best_pchembl": 6.1,
+      "activity_nm": 800.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL6128809",
+      "document_chembl_id": "CHEMBL6127060",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "NS5B_site_unknown",
+        "binding_site": "unknown NS5B pocket",
+        "benchmark_scope": "ambiguous",
+        "confidence": "low",
+        "evidence": [
+          "Direct inhibition of Hepatitis C virus NS5B polymerase"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5935259",
+      "canonical_smiles": "Cc1noc(-c2nc(N)c3[nH]c(=O)n(Cc4ccccc4)c3n2)n1",
+      "pref_name": "CHEMBL5935259",
+      "best_pchembl": 6.09,
+      "activity_nm": 810.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL6021186",
+      "canonical_smiles": "COC(=O)COc1ccc(Cn2c(=O)[nH]c3c(N)nc(-c4ncc[nH]4)nc32)cn1",
+      "pref_name": "CHEMBL6021186",
+      "best_pchembl": 5.92,
+      "activity_nm": 1210.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5996137",
+      "canonical_smiles": "Nc1nc(-c2nnc[nH]2)nc2c1[nH]c(=O)n2Cc1cccc(C(=O)N2CCCC2)c1",
+      "pref_name": "CHEMBL5996137",
+      "best_pchembl": 5.9,
+      "activity_nm": 1270.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL513181",
+      "canonical_smiles": "[N-]=[N+]=N[C@]1(CO)O[C@@H](n2ccc(N)nc2=O)[C@@H](O)[C@@H]1O",
+      "pref_name": "CHEMBL513181",
+      "best_pchembl": 5.89,
+      "activity_nm": 1280.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL5336280",
+      "document_chembl_id": "CHEMBL5335778",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "NI",
+        "binding_site": "NS5B catalytic active site",
+        "benchmark_scope": "active_site",
+        "confidence": "medium",
+        "evidence": [
+          "known NI or nucleoside/nucleotide-like scaffold"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5988364",
+      "canonical_smiles": "Nc1nc(-c2nc(C(F)(F)F)c[nH]2)nc2c1[nH]c(=O)n2Cc1ccccc1",
+      "pref_name": "CHEMBL5988364",
+      "best_pchembl": 5.89,
+      "activity_nm": 1300.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5900687",
+      "canonical_smiles": "CN1CCN(CCCCCn2c(=O)[nH]c3c(N)nc(-c4ncc[nH]4)nc32)CC1",
+      "pref_name": "CHEMBL5900687",
+      "best_pchembl": 5.87,
+      "activity_nm": 1340.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5858269",
+      "canonical_smiles": "Nc1nc(-c2cnco2)nc2c1[nH]c(=O)n2Cc1ccccc1",
+      "pref_name": "CHEMBL5858269",
+      "best_pchembl": 5.82,
+      "activity_nm": 1510.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL6016994",
+      "canonical_smiles": "CC(C)c1c[nH]c(-c2nc(N)c3[nH]c(=O)n(Cc4ccccc4)c3n2)n1",
+      "pref_name": "CHEMBL6016994",
+      "best_pchembl": 5.78,
+      "activity_nm": 1660.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL24547",
+      "canonical_smiles": "O=C(O)[C@H](Cc1ccccc1)N(Cc1cccc(C(F)(F)F)c1)C(=O)c1ccc(Cl)cc1Cl",
+      "pref_name": "CHEMBL24547",
+      "best_pchembl": 5.77,
+      "activity_nm": 1700.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL6128809",
+      "document_chembl_id": "CHEMBL6127060",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "NS5B_site_unknown",
+        "binding_site": "unknown NS5B pocket",
+        "benchmark_scope": "ambiguous",
+        "confidence": "low",
+        "evidence": [
+          "Direct inhibition of Hepatitis C virus NS5B polymerase"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL109569",
+      "canonical_smiles": "CCOC(=O)c1cc(=O)c(O)c(C(=O)O)o1",
+      "pref_name": "CHEMBL109569",
+      "best_pchembl": 5.65,
+      "activity_nm": 2250.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL5391242",
+      "document_chembl_id": "CHEMBL5390229",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "NS5B_site_unknown",
+        "binding_site": "unknown NS5B pocket",
+        "benchmark_scope": "ambiguous",
+        "confidence": "low",
+        "evidence": [
+          "Direct inhibition of Hepatitis C virus NS5B polymerase"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL6061492",
+      "canonical_smiles": "Nc1nc(-c2ccc[nH]2)nc2c1[nH]c(=O)n2Cc1ccccc1",
+      "pref_name": "CHEMBL6061492",
+      "best_pchembl": 5.59,
+      "activity_nm": 2580.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL181653",
+      "canonical_smiles": "O=C(O)c1nc(-c2cccs2)nc(O)c1O",
+      "pref_name": "CHEMBL181653",
+      "best_pchembl": 5.58,
+      "activity_nm": 2600.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL5391242",
+      "document_chembl_id": "CHEMBL5390229",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "NS5B_site_unknown",
+        "binding_site": "unknown NS5B pocket",
+        "benchmark_scope": "ambiguous",
+        "confidence": "low",
+        "evidence": [
+          "Direct inhibition of Hepatitis C virus NS5B polymerase"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5842255",
+      "canonical_smiles": "Nc1nc(-c2ncc[nH]2)nc2c1[nH]c(=O)n2Cc1ccc(OCC(=O)O)nc1",
+      "pref_name": "CHEMBL5842255",
+      "best_pchembl": 5.56,
+      "activity_nm": 2750.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL19332",
+      "canonical_smiles": "O=C(O)C(=O)CC(=O)c1ccccc1",
+      "pref_name": "CHEMBL19332",
+      "best_pchembl": 5.24,
+      "activity_nm": 5700.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL5391242",
+      "document_chembl_id": "CHEMBL5390229",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "NS5B_site_unknown",
+        "binding_site": "unknown NS5B pocket",
+        "benchmark_scope": "ambiguous",
+        "confidence": "low",
+        "evidence": [
+          "Direct inhibition of Hepatitis C virus NS5B polymerase"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5905169",
+      "canonical_smiles": "Nc1nc(-c2ncc[nH]2)nc2c1[nH]c(=O)n2CC1CCOCC1",
+      "pref_name": "CHEMBL5905169",
+      "best_pchembl": 5.17,
+      "activity_nm": 6720.0,
+      "activity_type": "EC50",
+      "assay_chembl_id": "CHEMBL5733646",
+      "document_chembl_id": "CHEMBL5726900",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "indirect_antiviral_assay",
+        "binding_site": "not assignable to NS5B pocket",
+        "benchmark_scope": "exclude",
+        "confidence": "high",
+        "evidence": [
+          "PBMC interferon-conditioned HCV replicon assay; indirect antiviral effect"
+        ]
+      }
+    },
+    {
+      "molecule_chembl_id": "CHEMBL5639382",
+      "canonical_smiles": "Nc1nc2c(ncn2[C@@H]2O[C@H](COP(=O)(O)OP(=O)(O)OP(=O)(O)O)[C@@H](O)[C@@]23CCO3)c(=O)[nH]1",
+      "pref_name": "CHEMBL5639382",
+      "best_pchembl": 5.0,
+      "activity_nm": 10000.0,
+      "activity_type": "IC50",
+      "assay_chembl_id": "CHEMBL5635900",
+      "document_chembl_id": "CHEMBL5634110",
+      "target_chembl_id": "CHEMBL5375",
+      "provenance": "ChEMBL activity endpoint",
+      "chembl_mechanisms": [],
+      "stratification": {
+        "mechanism_class": "NS5B_site_unknown",
+        "binding_site": "unknown NS5B pocket",
+        "benchmark_scope": "ambiguous",
+        "confidence": "low",
+        "evidence": [
+          "Direct inhibition of Hepatitis C virus NS5B polymerase"
+        ]
+      }
+    }
+  ]
+}

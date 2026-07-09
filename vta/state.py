@@ -28,12 +28,19 @@ class VTAState(TypedDict, total=False):
 
     # --- Routing decision --------------------------------------------------
     route: Optional[str]                       # "proceed" | "flag" | "defer"
+    candidate_targets: Optional[List[Dict]]
+    target_prioritization: Optional[List[Dict]]
 
     # --- Module 2: structure folding --------------------------------------
     structures: Optional[Dict[str, Dict]]      # {name: {pdb_path, mean_plddt}}
 
     # --- Module 2b: pockets (Phase 2; mocked now) -------------------------
     pockets: Optional[Dict[str, List[Dict]]]   # {protein: [{id, center, druggability, ...}]}
+    # Per-residue conservation (JSD) keyed by resseq, written by conservation_node
+    # alongside the pocket aggregate. conservation_contacts_node (SPEC #4) reads it to
+    # weight each ligand by the conservation of the residues ITS pose contacts.
+    residue_conservation: Optional[Dict[str, Dict]]  # {protein: {resseq: jsd}}
+    docking_species: Optional[Dict[str, Dict]]        # {ligand: resolved docking species}
 
     # --- Module 3: docking (mocked in Phase 1) ----------------------------
     # docking records may gain cnn_score/cnn_affinity from the DL-rescore seam
@@ -41,6 +48,10 @@ class VTAState(TypedDict, total=False):
     # is unchanged until the term is calibrated against the validation gate.
     docking_results: Optional[List[Dict]]      # [{ligand, pocket, dG, rmsd, le, ...}]
     lead_candidates: Optional[List[Dict]]      # top-N ranked
+    chemistry_annotations: Optional[Dict[str, Dict]]  # {ligand: {chemistry, active_species}}
+    counter_target_panel: Optional[List[Dict]]
+    resistance_mutants: Optional[List[Dict]]
+    prediction_registry: Optional[Dict[str, Any]]
 
     # --- Phase 4: MD validation (opt-in, include_md=True) ----------------
     # Pocket records gain consensus:bool + detectors:[str] from P2Rank (§3.1).
@@ -49,9 +60,34 @@ class VTAState(TypedDict, total=False):
     md_analysis: Optional[Dict[str, Dict]]      # {ligand: {rmsd, contacts, mmgbsa, verdict}}
     md_validated_leads: Optional[List[Dict]]    # md_rerank output (md_score, md_badge)
 
+    # --- Phase 5: FEP / ABFE validation (opt-in, include_fep=True) --------
+    fep_results: Optional[Dict[str, Dict]]       # {ligand: {delta_g, error, status, ...}}
+    fep_validated_leads: Optional[List[Dict]]    # top leads annotated with fep_* fields
+
+    # --- Phase R: reasoning architecture (dossier → triage → verify) ------
+    # HemaGuide-inspired: represent the target, route it to the right method, and gate every
+    # claim behind physics+statistics before it reaches the report. All additive; nodes only
+    # read structure/pocket/species fields already present.
+    target_dossier: Optional[Dict[str, Dict]]   # {protein: {provenance, quality, pocket, class,
+                                                #            metal_dependence, benchmarkability}}
+    triage_decision: Optional[Dict[str, Dict]]  # {protein: {decision, rationale[]}} —
+                                                # full_dock | annotate_only | defer | refuse
+    screened_ligand_class: Optional[Dict[str, str]]  # optional {protein: drug_like|charged|
+                                                # nucleotide|covalent} hint for the router
+    playbook_prior: Optional[Dict[str, Dict]]   # {protein: {status, ...}} — R3 (stubbed "no
+                                                # precedent" until a validated-screen corpus exists)
+    verification_verdict: Optional[Dict[str, Any]]  # {verdict, gates, per_target} — R4 hard gate
+    annotation_library: Optional[List[Dict]]    # optional [{name, smiles, positive_control}] for R5
+    annotation_rankings: Optional[Dict[str, Dict]]  # {protein: labelled ligand-based annotation}
+
     # --- Cross-cutting: audit + reproducibility ---------------------------
     audit_trail: List[str]                     # every decision, appended in order
     versions: Dict[str, str]                   # tool versions, for reproducibility
+    # The non-removable honesty envelope (D0.5): disclaimer + pinned frozen benchmark +
+    # per-target grade/CI + trivial-baseline verdict + pose reliability + scoring caveats.
+    # Set by report_node (via vta.report_envelope.build_envelope) and always rendered; the
+    # future API/run-manifest reads this same object so no path emits a naked ranking.
+    honesty_envelope: Optional[Dict[str, Any]]
 
 
 def new_state(genome_fasta: str, run_id: str) -> VTAState:

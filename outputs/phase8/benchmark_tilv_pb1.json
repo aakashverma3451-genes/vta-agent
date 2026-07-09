@@ -1,0 +1,94 @@
+{
+  "target": {
+    "name": "TiLV PB1",
+    "structure": "8PSO chain B",
+    "pocket": "NTP catalytic site",
+    "eval_target_id": "TiLV_PB1_8PSO_B"
+  },
+  "benchmark": {
+    "n": 8,
+    "n_actives": 4,
+    "n_decoys": 4,
+    "roc_auc": 0.8125,
+    "bedroc": 0.9938,
+    "log_auc": 0.5753,
+    "ef": {
+      "EF1%": 2.0,
+      "EF5%": 2.0,
+      "EF10%": 2.0,
+      "EF20%": 2.0
+    },
+    "ranking": [
+      {
+        "rank": 1,
+        "name": "Ribavirin",
+        "score": 0.635,
+        "label": "active"
+      },
+      {
+        "rank": 2,
+        "name": "Sofosbuvir",
+        "score": 0.5798,
+        "label": "active"
+      },
+      {
+        "rank": 3,
+        "name": "Lopinavir",
+        "score": 0.5324,
+        "label": "decoy"
+      },
+      {
+        "rank": 4,
+        "name": "Molnupiravir",
+        "score": 0.4448,
+        "label": "active"
+      },
+      {
+        "rank": 5,
+        "name": "Ledipasvir",
+        "score": 0.4355,
+        "label": "decoy"
+      },
+      {
+        "rank": 6,
+        "name": "Remdesivir",
+        "score": 0.419,
+        "label": "active"
+      },
+      {
+        "rank": 7,
+        "name": "Nirmatrelvir",
+        "score": 0.4012,
+        "label": "decoy"
+      },
+      {
+        "rank": 8,
+        "name": "Baloxavir Marboxil",
+        "score": 0.3633,
+        "label": "decoy"
+      }
+    ]
+  },
+  "decoy_provenance": {
+    "name": "demo",
+    "source": "committed demo decoys",
+    "path": "vta/data/decoys_cache/decoys_demo.smi",
+    "property_matched": false,
+    "caveat": "Demonstration-class only; not property-matched.",
+    "license": "repository-local",
+    "available": true
+  },
+  "leakage_audit": {
+    "status": "pass_no_overlap",
+    "overlap": [],
+    "n_training_targets": 0,
+    "n_eval_targets": 1,
+    "promotable": true
+  },
+  "verdict": "demonstration only; property-matched decoys still required",
+  "control_gate": {
+    "controls_in_top": 3,
+    "controls_total": 4,
+    "top_n": 5
+  }
+}

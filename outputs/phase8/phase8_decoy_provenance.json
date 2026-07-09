@@ -1,0 +1,393 @@
+{
+  "source": "ChEMBL molecule API",
+  "method": "property-matched presumed decoys; MW/logP/HBA/HBD windows; scaffold-distinct",
+  "target": "TiLV PB1",
+  "per_active_requested": 20,
+  "pages_requested": 3,
+  "actives": [
+    "Remdesivir",
+    "Ribavirin",
+    "Sofosbuvir",
+    "Molnupiravir"
+  ],
+  "n_decoys": 52,
+  "existing_decoys_preserved": false,
+  "n_failures": 1,
+  "output_smi": "vta/data/decoys_cache/phase8_tilv_pb1_chembl_matched.smi",
+  "caveat": "Presumed decoys are not experimentally verified inactives.",
+  "decoys": [
+    {
+      "name": "CHEMBL266223",
+      "chembl_id": "CHEMBL266223",
+      "smiles": "COC(=O)/C=C/C(=O)Nc1ccc(CCCCC(=O)N2CCN(c3nc(N)c4cc(OC)c(OC)cc4n3)CC2)cc1",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6219",
+      "chembl_id": "CHEMBL6219",
+      "smiles": "COC(=O)/C=C/C(=O)Nc1ccc(/C=C/C(=O)N2CCN(c3nc(N)c4cc(OC)c(OC)cc4n3)CC2)cc1",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6343",
+      "chembl_id": "CHEMBL6343",
+      "smiles": "COc1cc2nc(N3CCN(C(=O)/C=C/c4ccc(NC(=O)CBr)cc4)CC3)nc(N)c2cc1OC",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL266886",
+      "chembl_id": "CHEMBL266886",
+      "smiles": "CCC(C)(C)NC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL269132",
+      "chembl_id": "CHEMBL269132",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NC(C)CC(C)C)C2)cc(OC)c1OC",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL269133",
+      "chembl_id": "CHEMBL269133",
+      "smiles": "CCCC(C)NC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL269134",
+      "chembl_id": "CHEMBL269134",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NCC(C)(C)C)C2)cc(OC)c1OC",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6359",
+      "chembl_id": "CHEMBL6359",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NC(C)(C)C)C2)cc(OC)c1OC",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6217",
+      "chembl_id": "CHEMBL6217",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(C)=O)C2)cc(OC)c1OC",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL265773",
+      "chembl_id": "CHEMBL265773",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)COc3ccc(Cl)cc3)C2)cc(OC)c1OC",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL414696",
+      "chembl_id": "CHEMBL414696",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)COc3ccc(F)cc3)C2)cc(OC)c1OC",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL268597",
+      "chembl_id": "CHEMBL268597",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)C3CCCCC3)C2)cc(OC)c1OC",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6270",
+      "chembl_id": "CHEMBL6270",
+      "smiles": "CCC(CC)C(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6341",
+      "chembl_id": "CHEMBL6341",
+      "smiles": "CCCC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL269131",
+      "chembl_id": "CHEMBL269131",
+      "smiles": "CCCN(CCC)C(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "PMS-601",
+      "chembl_id": "CHEMBL6322",
+      "smiles": "CCN(CC)C(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL380444",
+      "chembl_id": "CHEMBL380444",
+      "smiles": "CCC(CC)NC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL204022",
+      "chembl_id": "CHEMBL204022",
+      "smiles": "CCC(C)CNC(=O)OCC1CN(C(=O)c2cc(OC)c(OC)c(OC)c2)CCN1C(=O)c1cc(OC)c(OC)c(OC)c1",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6202",
+      "chembl_id": "CHEMBL6202",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NCCC(C)C)C2)cc(OC)c1OC",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL258053",
+      "chembl_id": "CHEMBL258053",
+      "smiles": "COc1cc(C(=O)N2CCN(C(=O)c3cc(OC)c(OC)c(OC)c3)C(COC(=O)NC(C)C(C)C)C2)cc(OC)c1OC",
+      "matched_active": "Remdesivir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6290",
+      "chembl_id": "CHEMBL6290",
+      "smiles": "COc1cc2nc(N3CCN(C(=O)/C=C/c4ccc(Br)cc4)CC3)nc(N)c2cc1OC",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6302",
+      "chembl_id": "CHEMBL6302",
+      "smiles": "COc1cc2nc(N3CCN(/C(S)=N/c4ccc(NC(=S)N5CC5)cc4)CC3)nc(N)c2cc1OC",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL414012",
+      "chembl_id": "CHEMBL414012",
+      "smiles": "C#CCN(Cc1cc2c(O)nc(C)nc2cc1C)c1ccc(C(=O)N[C@H](CCC(=O)O)C(=O)O)c(F)c1",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL441173",
+      "chembl_id": "CHEMBL441173",
+      "smiles": "CC1OC(OC2CCC3(C)C(CCC4C3CCC3(C)[C@@H](C5=CC(=O)OC5)C(OC=O)CC43O)C2)CC(O)C1O",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6639",
+      "chembl_id": "CHEMBL6639",
+      "smiles": "C#CCN(Cc1ccc2nc(C)nc(O)c2c1)c1ccc(C(=O)N[C@@H](C(=O)O)c2cccc(O)c2)cc1",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL268629",
+      "chembl_id": "CHEMBL268629",
+      "smiles": "C#CCN(Cc1ccc2nc(C)nc(O)c2c1)c1ccc(C(=O)N[C@H](Cc2ccc([N+](=O)[O-])cc2)C(=O)O)cc1",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6608",
+      "chembl_id": "CHEMBL6608",
+      "smiles": "COc1cccc2c1C(=O)c1c(O)c3c(c(O)c1C2=O)C[C@@](O)(C(=O)CO)C[C@@H]3OC1CC(N)C(O)C(C)O1",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL268915",
+      "chembl_id": "CHEMBL268915",
+      "smiles": "CC(=O)OCC1=C[C@H]2[C@@H]3C(C)(C)[C@]3(OC(=O)Cc3ccccc3)C[C@@H](C)[C@]2(O)C2C=C(C)C(=O)[C@@]2(O)C1",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "EPIRUBICIN",
+      "chembl_id": "CHEMBL417",
+      "smiles": "COc1cccc2c1C(=O)c1c(O)c3c(c(O)c1C2=O)C[C@@](O)(C(=O)CO)C[C@@H]3O[C@H]1C[C@H](N)[C@@H](O)[C@H](C)O1",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL265408",
+      "chembl_id": "CHEMBL265408",
+      "smiles": "CCCCNC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL427616",
+      "chembl_id": "CHEMBL427616",
+      "smiles": "COc1ccc(S(=O)(=O)N2CC[C@H](C(=O)NO)N(S(=O)(=O)c3ccc(OC)cc3)CC2)cc1",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL266448",
+      "chembl_id": "CHEMBL266448",
+      "smiles": "CCCNC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL7753",
+      "chembl_id": "CHEMBL7753",
+      "smiles": "COc1ccc(NC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)NC(Cc2ccccc2)C(=O)O)cc1",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL266089",
+      "chembl_id": "CHEMBL266089",
+      "smiles": "C=C(C)NC(=O)N[C@@H](CCSC)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL7034",
+      "chembl_id": "CHEMBL7034",
+      "smiles": "CSCC[C@H](NC(=O)NC(C)C)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6997",
+      "chembl_id": "CHEMBL6997",
+      "smiles": "CSCC[C@H](NC(=O)Nc1cccc(C)c1)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL266802",
+      "chembl_id": "CHEMBL266802",
+      "smiles": "CSCC[C@H](NC(=O)Nc1ccc(C)cc1)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL268823",
+      "chembl_id": "CHEMBL268823",
+      "smiles": "CSCC[C@H](NC(=O)NCC(C)C)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL7520",
+      "chembl_id": "CHEMBL7520",
+      "smiles": "CSCC[C@H](NC(=O)Nc1ccccc1)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL415299",
+      "chembl_id": "CHEMBL415299",
+      "smiles": "CSCC[C@H](NC(=O)NC(C)(C)C)C(=O)N[C@@H](CC(C)C)C(=O)N[C@@H](Cc1ccccc1)C(=O)O",
+      "matched_active": "Sofosbuvir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6311",
+      "chembl_id": "CHEMBL6311",
+      "smiles": "CC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@@H]12",
+      "matched_active": "Molnupiravir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL267627",
+      "chembl_id": "CHEMBL267627",
+      "smiles": "CON(C)C(=O)/C=C/CC1C(=O)N2[C@@H]1[S+]([O-])C(C)(C)[C@@H]2C(=O)O",
+      "matched_active": "Molnupiravir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6286",
+      "chembl_id": "CHEMBL6286",
+      "smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)C(C/C=C/C=O)[C@H]2S1(=O)=O",
+      "matched_active": "Molnupiravir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6301",
+      "chembl_id": "CHEMBL6301",
+      "smiles": "CC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@H]12",
+      "matched_active": "Molnupiravir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6309",
+      "chembl_id": "CHEMBL6309",
+      "smiles": "COC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@H]12",
+      "matched_active": "Molnupiravir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "TAZOBACTAM",
+      "chembl_id": "CHEMBL404",
+      "smiles": "C[C@]1(Cn2ccnn2)[C@H](C(=O)O)N2C(=O)C[C@H]2S1(=O)=O",
+      "matched_active": "Molnupiravir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6261",
+      "chembl_id": "CHEMBL6261",
+      "smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(CC4CCCN4)nn3)[C@H]2S1(=O)=O",
+      "matched_active": "Molnupiravir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6281",
+      "chembl_id": "CHEMBL6281",
+      "smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(-c4ccc(O)cc4)nn3)[C@H]2S1(=O)=O",
+      "matched_active": "Molnupiravir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL267863",
+      "chembl_id": "CHEMBL267863",
+      "smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(-c4ccc(N)cc4)nn3)[C@H]2S1(=O)=O",
+      "matched_active": "Molnupiravir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6220",
+      "chembl_id": "CHEMBL6220",
+      "smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)[C@@H](Cc3cn(-c4ccccc4)nn3)[C@H]2S1(=O)=O",
+      "matched_active": "Molnupiravir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL267626",
+      "chembl_id": "CHEMBL267626",
+      "smiles": "CC1(C)[C@H](C(=O)O)N2C(=O)C(C/C=C/C#N)[C@@H]2S1(=O)=O",
+      "matched_active": "Molnupiravir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    },
+    {
+      "name": "CHEMBL6221",
+      "chembl_id": "CHEMBL6221",
+      "smiles": "COC(=O)/C=C/CC1C(=O)N2[C@@H](C(=O)O)C(C)(C)S(=O)(=O)[C@@H]12",
+      "matched_active": "Molnupiravir",
+      "property_match_method": "ChEMBL MW/logP/HBA/HBD window; scaffold-distinct"
+    }
+  ],
+  "failures": [
+    {
+      "name": "FETCH_FAILED_Ribavirin",
+      "chembl_id": null,
+      "smiles": null,
+      "matched_active": "Ribavirin",
+      "error": "HTTPError: 500 Server Error: Internal Server Error for url: https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=40&molecule_properties__mw_freebase__gte=124&molecule_properties__mw_freebase__lte=364&format=json&offset=0"
+    }
+  ]
+}

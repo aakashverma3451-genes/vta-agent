@@ -141,48 +141,31 @@ The output is the contract dict from §2.
 ## 4. Inside VTA-Agent (Module 2) — the LangGraph state machine
 
 ```
-                          ┌───────────────┐
-   contract dict  ───────▶│ classify_node │  reads §4.1.1, validate_contract(), fills VTAState
-                          └──────┬────────┘
-                                 ▼
-                       ╔════════════════════╗     route_by_confidence(confidence_pct)
-                       ║ route_by_confidence ║ ───────────────────────────────────────┐
-                       ╚═════════╤══════════╝                                          │
-                ≥95 PROCEED  /    │   \  <85 DEFER                                      │
-            85–95 FLAG ──────┘    │    └───────────────────────────┐                   │
-                                  ▼                                ▼                   │
-                       ┌──────────────────┐               ┌──────────────┐            │
-                       │ structure_node   │  REAL         │ defer_node   │ "I don't   │
-                       │ ESMFold / exp PDB │               │ → top-3 to   │  know" →END│
-                       └────────┬─────────┘               │   a human    │            │
-                                ▼                          └──────┬───────┘            │
-                       ┌──────────────────┐                       │                    │
-                       │ pockets_node     │  REAL (active site /  │                    │
-                       │                  │       FPocket)        │                    │
-                       └────────┬─────────┘                       │                    │
-                                ▼                                 │                    │
-                       ┌──────────────────┐                       │                    │
-                       │ docking_node     │  REAL (AutoDock Vina) │                    │
-                       └────────┬─────────┘                       │                    │
-                                ▼                                 │                    │
-                       ┌──────────────────┐                       │                    │
-                       │ rank_node        │  REAL (LE-led)        │                    │
-                       └────────┬─────────┘                       │                    │
-                                ▼                                 │                    │
-                       ┌──────────────────┐                       │                    │
-                       │ admet_node       │  REAL (ADMET-AI)      │                    │
-                       └────────┬─────────┘                       │                    │
-                                ▼                                 ▼                    │
-                       ┌──────────────────┐               ┌──────────────┐            │
-                       │ report_node      │◀──────────────│ defer path   │            │
-                       │ → HTML report    │               └──────────────┘            │
-                       └────────┬─────────┘                                            │
-                                ▼                                                      ▼
-                               END  ──────────────────────────────────────────  audit_trail
+  contract dict ─▶ classify_node ─▶ route_by_confidence ──(<85 DEFER)──▶ defer_node ─┐
+                                            │                          (top-3 → human) │
+                              (≥95 PROCEED / 85–95 FLAG)                                │
+                                            ▼                                           │
+   structure_node ─▶ proteinttt ─▶ pockets_node ─▶ conservation ─▶ docking_node        │
+   (exp PDB→ESMFold     (refine    (active site/    (per-pocket      (AutoDock Vina     │
+    →AlphaFold→Boltz2)  low pLDDT)  FPocket/P2Rank)  JSD, SPEC #1)    × ChEMBL)         │
+                                                                         │              │
+        ┌────────────────────────────────────────────────────────────────┘            │
+        ▼                                                                               │
+   conservation_contacts ─▶ rescore ─▶ boltzina ─▶ rank_node ─▶ admet_node ─▶ report ◀─┘
+   (ligand-weighted JSD,    (GNINA    (DL affinity  (LE-led      (ADMET-AI    (HTML)
+    SPEC #4)                 CNN*)     *)            top-20)       *)            │
+                                                                                ▼
+        opt-in MD (include_md): admet ─▶ md_select ─▶ md_simulate ─▶ md_analyze ─▶ md_rerank ─▶ report
+                                          (top-N)     (OpenMM 100ns   (RMSD/contacts/  (MD-validated
+                                                       + prmtop #2)    MM-GBSA)          leads)
+                                                                                       END / audit_trail
+   * = annotation-only (writes fields; not folded into ranking until the gate recalibrates)
 ```
 
-**Legend:** every node above is **REAL** in the default `vta run`; each auto-detects
-its tool and degrades to a labelled fallback only if the tool is absent.
+**Legend:** every node on the default path auto-detects its tool and degrades to a
+**labelled** fallback if the tool is absent (real where the tool exists, honest fallback
+where it doesn't). `proteinttt`/`rescore`/`boltzina` are real **seams** that need a GPU
+and are **annotation-only**; the MD phase is opt-in (`include_md=True`).
 
 **Explanation (node by node):**
 
@@ -206,17 +189,37 @@ its tool and degrades to a labelled fallback only if the tool is absent.
   otherwise fold with ESMFold and compute **mean pLDDT** (per-residue confidence).
   Experimental structures carry `mean_plddt = None` meaning *trusted ground truth*,
   not "missing."
+- **`proteinttt_node`** (REAL seam) — refines low-pLDDT (<70) ESMFold folds via test-time
+  training; experimental/AlphaFold/Boltz-2 folds are left untouched. Skips gracefully
+  without the `proteinttt` package (GPU).
 - **`pockets_node`** (REAL) — **experimental-first**: if the protein has a known
   substrate-marked catalytic site (`EXPERIMENTAL_ACTIVE_SITE`, e.g. PB1's NTP site from
-  8PSO's bound CTP), dock there; else run real **FPocket**; else a real-shaped mock.
+  8PSO's bound CTP), dock there; else run real **FPocket** (with **P2Rank** consensus);
+  else a real-shaped mock.
+- **`conservation_node`** (REAL, SPEC #1) — replaces the 0.5 placeholder with real
+  per-pocket **JSD conservation** (Capra & Singh 2007) over a committed homolog MSA;
+  also persists a per-residue map (`residue_conservation`) for SPEC #4. No MSA → labelled
+  0.5 fallback.
 - **`docking_node`** (REAL) — real **AutoDock Vina**: SMILES→3D (RDKit)→PDBQT (Meeko),
-  receptor→PDBQT, dock at the pocket center → ΔG. Degrades to a mock when the engine is
-  absent. Operates over a **real ChEMBL ligand library**.
+  receptor→PDBQT, dock at the pocket center → ΔG, saving the pose. Degrades to a mock when
+  the engine is absent. Operates over a **real ChEMBL ligand library**.
+- **`conservation_contacts_node`** (REAL, SPEC #4) — re-weights each ligand's conservation
+  by the JSD of the residues **its docked pose contacts** (4 Å), so the term is
+  ligand-specific and finally reorders leads. No saved pose / no MSA → keeps the pocket
+  value (mock screens unaffected).
+- **`rescore_node`** / **`boltzina_node`** (REAL seams, **annotation-only**) — GNINA CNN
+  re-score and Boltzina DL affinity write extra fields but are **not** folded into ranking
+  yet (blending them re-opens the gate calibration — see §8). Need a GPU; labelled skip
+  otherwise.
 - **`rank_node`** (REAL) — **LE-led** composite (ligand efficiency 0.55 / ΔG 0.35 /
   conservation 0.10), which removes docking's size bias so known inhibitors rank top
-  (validated by `scripts/validate_controls.py`).
+  (validated by `scripts/validate_controls.py`; quantified by `scripts/
+  benchmark_enrichment.py`, SPEC #5).
 - **`admet_node`** (REAL, opt-in) — annotates each lead with ADMET-AI predictions
   (hERG / oral bioavailability / solubility). Annotation only — does not change ranking.
+- **MD phase** (opt-in, `include_md=True`) — `md_select → md_simulate → md_analyze →
+  md_rerank`: OpenMM 100 ns (emitting an Amber prmtop, SPEC #2) → RMSD/contacts/MM-GBSA →
+  MD-validated re-ranking. Slow/GPU; the default fast path skips it.
 - **`defer_node`** — the honest exit when confidence is too low to proceed.
 
 **Auto-detect + graceful fallback.** Each real node discovers its tool
@@ -273,7 +276,7 @@ vta run path/to/genome.fasta      # or:  python -m vta run …
 ```
 
 - **Self-configuring** — `vta.toolconfig` discovers fpocket/vina (env → PATH → local
-  build); TaxonAgent is auto-located. No env vars, no PYTHONPATH.
+  build); TaxonAgent is imported as an installed package. No runtime PYTHONPATH.
 - **Self-deciding** — the confidence router chooses proceed/flag/defer with no human
   in the loop; low-confidence inputs are deferred, not guessed.
 - **Self-degrading** — any missing tool falls back to a labelled mock; the run never
@@ -290,16 +293,22 @@ Output: a printed lead summary + a self-contained `outputs/{run_id}_report.html`
 | Shared state contract (`VTAState`) | `vta/state.py` | ✅ |
 | Classify (real TaxonAgent + schema) | `vta/nodes/classify.py` | ✅ |
 | Confidence router (node + pure edge) | `vta/nodes/router.py` | ✅ |
-| Structure — experimental-first / ESMFold (≤400 aa) / chain extraction | `vta/nodes/structure.py` | ✅ real |
-| Pockets — experimental active site / real FPocket | `vta/nodes/pockets.py` | ✅ real |
-| Ligand library — real ChEMBL (id + SMILES, cached) | `vta/data/ligands.py` | ✅ real |
-| Docking — real AutoDock Vina (RDKit/Meeko prep, seeded) | `vta/nodes/docking.py` | ✅ real |
+| Structure — exp-first → ESMFold (≤400 aa) → AlphaFold-DB → Boltz-2 → refuse | `vta/nodes/structure.py` | ✅ real |
+| ProteinTTT — refine low-pLDDT folds (GPU seam) | `vta/nodes/proteinttt.py` | ✅ real (seam) |
+| Pockets — experimental active site / real FPocket / P2Rank consensus | `vta/nodes/pockets.py` | ✅ real |
+| Conservation — per-pocket JSD (Capra & Singh) over committed MSA | `vta/nodes/conservation.py` | ✅ real (SPEC #1) |
+| Ligand library — real ChEMBL (id + SMILES, cached; PubChem fallback) | `vta/data/ligands.py` | ✅ real |
+| Docking — real AutoDock Vina (RDKit/Meeko prep, seeded, saves pose) | `vta/nodes/docking.py` | ✅ real |
+| Contact-conservation — ligand-weighted JSD over pose contacts | `vta/nodes/conservation_contacts.py` | ✅ real (SPEC #4) |
+| DL re-score — GNINA CNN / Boltzina (annotation-only, GPU seams) | `vta/nodes/rescore.py`, `boltzina.py` | ✅ real (seam) |
 | Ranking — LE-led composite (validated vs controls) | `vta/nodes/rank.py` | ✅ real |
 | ADMET — drug-likeness/safety annotation (opt-in) | `vta/nodes/admet.py` | ✅ real |
+| MD validation — OpenMM + prmtop / MM-GBSA / RMSD (opt-in) | `vta/nodes/md_*.py` | ✅ real (SPEC #2) |
 | HTML report (auto-emitted both paths) | `vta/report.py` | ✅ |
 | Autonomous CLI / packaging | `vta/cli.py`, `pyproject.toml` | ✅ `vta run` |
 | Validation gate (controls recover) | `scripts/validate_controls.py` | ✅ PASS |
-| Tests (hermetic) | `tests/` | ✅ 21 passed |
+| Enrichment benchmark — EF / BEDROC / ROC-AUC | `vta/eval/metrics.py`, `scripts/benchmark_enrichment.py` | ✅ real (SPEC #5) |
+| Tests (hermetic) | `tests/` | ✅ 125 passed |
 
 The stub nodes (`vta/nodes/stubs.py`) remain only as the deferred-path exit and the
 graceful fallbacks; the default `vta run` uses real tools throughout.
@@ -339,6 +348,62 @@ structural biology before Phase 2 docks PB2.
 
 ---
 
+## 8. Data leakage & evaluation honesty
+
+For a virtual-screening pipeline the failure mode that silently inflates results is not
+a crashed node — it is **data leakage**: information from the answer sneaking into the
+prediction, so the numbers look great and generalise to nothing. There is **no single
+"anti-leakage" node**; leakage is a cross-cutting concern that lives at specific points
+in the graph. We name them explicitly here rather than letting a reviewer find them.
+
+```mermaid
+flowchart TD
+    pockets["pockets<br/>⚠ box = 8PSO bound-CTP site"]:::leak --> conservation["conservation<br/>(MSA row0 = target — standard, not leakage)"]:::ok
+    conservation --> dock["dock — Vina (physics, no training)"]:::ok
+    dock --> rescore["rescore — GNINA CNN<br/>⚠ trained on PDBBind/CrossDocked"]:::leak
+    rescore --> boltzina["boltzina — Boltz-2<br/>⚠ trained on the PDB"]:::leak
+    boltzina --> rank["rank — LE-led<br/>DL terms NOT folded in → leakage quarantined"]:::ok
+    rank -.audited by.-> gate["validate_controls.py<br/>⚠ controls = KNOWN inhibitors (circular sanity check)"]:::leak
+    rank -.benchmarked by.-> bench["enrichment benchmark (SPEC #5)<br/>property-matched decoys + DUD-E/LIT-PCBA caveat<br/>= the real mitigation"]:::fix
+    classDef ok fill:#d5f5e3,stroke:#1e8449,color:#000;
+    classDef leak fill:#fadbd8,stroke:#c0392b,color:#000;
+    classDef fix fill:#d6eaf8,stroke:#2471a3,color:#000,stroke-dasharray:5 3;
+```
+
+**The leakage surfaces, ranked by how much they can fool you:**
+
+1. **Evaluation circularity — the validation gate (highest).** `scripts/
+   validate_controls.py` asks *"do the known RdRp inhibitors rank top?"* The controls are
+   chosen **because** they are known actives, so a PASS is a sanity check, **not** held-out
+   evidence. It is the fast pre-commit guard, not a benchmark — which is exactly why SPEC
+   #5 exists.
+2. **Pocket-definition leakage (high, subtle).** The docking box is centered on the
+   **8PSO bound-CTP / NTP site** (`pockets.py` experimental active site). Defining the box
+   from a co-crystallised *nucleotide* biases docking toward *nucleoside analogs* — which
+   are the very controls. Part of the gate's PASS is template bias, not pure
+   discrimination. Honest, but it must be stated.
+3. **DL-scorer train-on-test (high *potential*, currently quarantined).** GNINA's CNN
+   (PDBBind/CrossDocked) and Boltzina/Boltz-2 (the PDB) were very likely trained on
+   complexes overlapping these targets/ligands. The deliberate defense is that both are
+   **annotation-only** — `rank.py` does **not** fold `cnn_*`/Boltzina into the score — so
+   their leakage **cannot contaminate ranking today**. The moment that term is blended in,
+   this becomes the dominant risk and the gate must be re-validated on held-out data first.
+4. **Benchmark/decoy bias (the SPEC #5 concern itself).** DUD-E has documented analog bias
+   that inflates scores; even LIT-PCBA had leakage found in a 2025 audit. The enrichment
+   benchmark must therefore **print the decoy-bias caveat** in its own output and not
+   over-claim.
+5. **Not leakage:** the conservation MSA carrying the target as row 0 is standard — JSD is
+   computed against a fixed background distribution, not against held-out homologs.
+
+**The architecture's stance today is *quarantine, not cleansing*:** keep every learned or
+biased signal annotation-only until it is validated against held-out data. The real
+mitigation — a retrospective **enrichment benchmark** with property-matched decoys and an
+explicit decoy-bias caveat — is SPEC #5 (`vta/eval/metrics.py` + `scripts/
+benchmark_enrichment.py`), the honest-evaluation layer that turns "controls recover" into
+EF1%/BEDROC/ROC-AUC numbers a reviewer accepts.
+
+---
+
 ## Appendix A — Mermaid diagrams (GitHub / IDE-rendered)
 
 The ASCII diagrams above render anywhere (terminals, plain text). These Mermaid
@@ -375,27 +440,47 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    START([start]) --> classify[classify_node]
-    classify --> router{route_by_confidence}
+    START([start]) --> classify[classify_node]:::real
+    classify --> router{route_by_confidence}:::real
 
     router -->|"≥ 95% → PROCEED"| structure
     router -->|"85–95% → PROCEED + FLAG"| structure
     router -->|"< 85% → DEFER"| defer
 
-    structure["structure_node<br/>ESMFold / experimental PDB"]:::real
-    structure --> pockets["pockets_node"]:::mock
-    pockets --> dock["docking_node"]:::mock
-    dock --> rank["rank_node<br/>top-20 leads"]:::real
-    rank --> END1([end])
+    structure["structure_node<br/>exp PDB → ESMFold → AlphaFold-DB → Boltz-2"]:::real
+    structure --> proteinttt["proteinttt_node<br/>refine low-pLDDT folds"]:::seam
+    proteinttt --> pockets["pockets_node<br/>active site / FPocket / P2Rank"]:::real
+    pockets --> conservation["conservation_node<br/>per-pocket JSD (SPEC #1)"]:::real
+    conservation --> dock["docking_node<br/>AutoDock Vina × ChEMBL"]:::real
+    dock --> ccontacts["conservation_contacts_node<br/>ligand-weighted JSD (SPEC #4)"]:::real
+    ccontacts --> rescore["rescore_node<br/>GNINA CNN — annotation"]:::seam
+    rescore --> boltzina["boltzina_node<br/>DL affinity — annotation"]:::seam
+    boltzina --> rank["rank_node<br/>LE-led top-20"]:::real
+    rank --> admet["admet_node<br/>ADMET-AI annotation"]:::real
+    admet --> report["report_node → HTML"]:::real
+    admet -.->|"opt-in include_md=True"| md_select
+
+    subgraph MD["MD validation — opt-in, GPU-hours"]
+        direction TB
+        md_select[md_select]:::md --> md_simulate["md_simulate<br/>OpenMM 100ns + prmtop (SPEC #2)"]:::md
+        md_simulate --> md_analyze["md_analyze<br/>RMSD · contacts · MM-GBSA"]:::md
+        md_analyze --> md_rerank[md_rerank]:::md
+    end
+    md_rerank -.-> report
 
     defer["defer_node<br/>top-3 → human"]:::real
-    defer --> END2([end])
+    defer --> report
+    report --> END1([end])
 
     classDef real fill:#d5f5e3,stroke:#1e8449,color:#000;
-    classDef mock fill:#fdebd0,stroke:#ca6f1e,color:#000;
+    classDef seam fill:#fdebd0,stroke:#ca6f1e,color:#000;
+    classDef md fill:#e8daef,stroke:#7d3c98,color:#000;
 ```
 
-> Green = real, working code · Orange = real-shaped mock, swapped in Phase 2.
+> Green = real (auto-detects its tool, labelled fallback if absent) · Orange = real seam,
+> **annotation-only** until the validation gate is recalibrated (GNINA/Boltzina/ProteinTTT
+> need a GPU) · Purple = opt-in MD validation phase. Nothing here is a "mock to be swapped"
+> — pockets and dock auto-discover real FPocket/Vina today.
 
 ### A.3 The shared state growing through the run
 
@@ -404,9 +489,12 @@ flowchart LR
     s0["VTAState<br/>{genome_fasta, run_id,<br/>audit_trail[], versions{}}"]
     s0 --> s1["+ taxon_result<br/>+ extracted_proteins<br/>+ classification_confidence<br/>+ classification_basis"]
     s1 --> s2["+ route"]
-    s2 --> s3["+ structures"]
-    s3 --> s4["+ pockets (mock)"]
-    s4 --> s5["+ docking_results (mock)"]
-    s5 --> s6["+ lead_candidates<br/>(top-20)"]
-    s6 --> audit["audit_trail<br/>(appended at every step)"]
+    s2 --> s3["+ structures<br/>(pdb_path, mean_plddt;<br/>proteinttt refines)"]
+    s3 --> s4["+ pockets<br/>(center, druggability,<br/>conservation, detectors)"]
+    s4 --> s4b["+ residue_conservation<br/>{protein:{resseq:jsd}}"]
+    s4b --> s5["+ docking_results<br/>(dG, le, conservation,<br/>pose_path; +cnn_*/boltzina)"]
+    s5 --> s6["+ lead_candidates<br/>(top-20, LE-led)"]
+    s6 --> s7["+ lead.admet<br/>(herg/oral/solubility)"]
+    s7 --> s8["opt-in MD:<br/>+ md_results / md_analysis<br/>(rmsd, contacts, mmgbsa)<br/>+ md_validated_leads"]
+    s8 --> audit["audit_trail<br/>(appended at every step)"]
 ```

@@ -6,22 +6,30 @@ build-backend = "setuptools.build_meta"
 name = "vta-agent"
 version = "0.1.0"
 description = "Autonomous viral target assessment — genome to ranked drug leads"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
+    "fastapi",
+    "pydantic",
+    "networkx",
     "langgraph>=1.0",
     "langchain-core",
     "jsonschema",
     "requests",
+    "biopython",
     "rdkit>=2024.0",
     "meeko>=0.5",
     "gemmi",
+    "taxonagent",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest"]
+dev = ["pytest", "coverage"]
 # ADMET drug-likeness/safety annotation (pulls torch/chemprop — heavy, opt-in).
 # The admet_node auto-detects this and degrades gracefully if absent.
 admet = ["admet-ai>=2.0"]
+md = ["openmm", "mdanalysis", "parmed", "openff-toolkit", "openmmforcefields"]
+kg = ["neo4j", "qdrant-client", "psycopg[binary]"]
+ai = ["openai", "anthropic", "transformers"]
 
 # `pip install -e .` exposes the autonomous entry point:  vta run <genome.fasta>
 [project.scripts]

@@ -1,0 +1,288 @@
+{
+  "phase": "R / R6 \u2014 component ablation (decision-level, not enrichment)",
+  "levels": [
+    "L0_raw",
+    "L1_dossier",
+    "L2_triage",
+    "L3_verification",
+    "L4_full_agent"
+  ],
+  "targets": [
+    {
+      "name": "MPRO",
+      "class": "protease (in-domain, powered)",
+      "truth": "dock_but_downgraded",
+      "truth_reason": "docking is defensible to RUN, but loses to a 2D-similarity baseline on the powered benchmark \u2192 must NOT claim structure-based enrichment (downgrade)."
+    },
+    {
+      "name": "NS5B",
+      "class": "polymerase / nucleotide (out-of-domain)",
+      "truth": "annotate_only",
+      "truth_reason": "un_benchmarkable triphosphate class; matched-decoy validation infeasible \u2192 docking is not defensible; return a labelled ligand-based annotation."
+    },
+    {
+      "name": "PB1",
+      "class": "polymerase (underpowered demonstration)",
+      "truth": "dock_but_downgraded",
+      "truth_reason": "docking runs on drug-like ligands but is underpowered / loses to 2D and its co-crystal pose is not reproduced \u2192 no enrichment claim (downgrade)."
+    },
+    {
+      "name": "GPX",
+      "class": "predicted, very low binding-site pLDDT",
+      "truth": "refuse",
+      "truth_reason": "binding-site pLDDT 45 < 50 \u2192 structure unusable for docking; refuse."
+    },
+    {
+      "name": "GPY",
+      "class": "predicted, borderline binding-site pLDDT",
+      "truth": "defer",
+      "truth_reason": "binding-site pLDDT 60 in [50,70) \u2192 borderline; defer to a human expert."
+    }
+  ],
+  "per_level": {
+    "L0_raw": {
+      "rows": [
+        {
+          "target": "MPRO",
+          "class": "protease (in-domain, powered)",
+          "truth": "dock_but_downgraded",
+          "emitted": "dock_and_claim_enrichment",
+          "correct": false,
+          "false_confidence": true
+        },
+        {
+          "target": "NS5B",
+          "class": "polymerase / nucleotide (out-of-domain)",
+          "truth": "annotate_only",
+          "emitted": "dock_and_claim_enrichment",
+          "correct": false,
+          "false_confidence": true
+        },
+        {
+          "target": "PB1",
+          "class": "polymerase (underpowered demonstration)",
+          "truth": "dock_but_downgraded",
+          "emitted": "dock_and_claim_enrichment",
+          "correct": false,
+          "false_confidence": true
+        },
+        {
+          "target": "GPX",
+          "class": "predicted, very low binding-site pLDDT",
+          "truth": "refuse",
+          "emitted": "dock_and_claim_enrichment",
+          "correct": false,
+          "false_confidence": true
+        },
+        {
+          "target": "GPY",
+          "class": "predicted, borderline binding-site pLDDT",
+          "truth": "defer",
+          "emitted": "dock_and_claim_enrichment",
+          "correct": false,
+          "false_confidence": true
+        }
+      ],
+      "decision_accuracy": 0.0,
+      "false_confidence_rate": 1.0,
+      "ood_flag_recall": 0.0
+    },
+    "L1_dossier": {
+      "rows": [
+        {
+          "target": "MPRO",
+          "class": "protease (in-domain, powered)",
+          "truth": "dock_but_downgraded",
+          "emitted": "dock_and_claim_enrichment",
+          "correct": false,
+          "false_confidence": true
+        },
+        {
+          "target": "NS5B",
+          "class": "polymerase / nucleotide (out-of-domain)",
+          "truth": "annotate_only",
+          "emitted": "dock_and_claim_enrichment",
+          "correct": false,
+          "false_confidence": true
+        },
+        {
+          "target": "PB1",
+          "class": "polymerase (underpowered demonstration)",
+          "truth": "dock_but_downgraded",
+          "emitted": "dock_and_claim_enrichment",
+          "correct": false,
+          "false_confidence": true
+        },
+        {
+          "target": "GPX",
+          "class": "predicted, very low binding-site pLDDT",
+          "truth": "refuse",
+          "emitted": "dock_and_claim_enrichment",
+          "correct": false,
+          "false_confidence": true
+        },
+        {
+          "target": "GPY",
+          "class": "predicted, borderline binding-site pLDDT",
+          "truth": "defer",
+          "emitted": "dock_and_claim_enrichment",
+          "correct": false,
+          "false_confidence": true
+        }
+      ],
+      "decision_accuracy": 0.0,
+      "false_confidence_rate": 1.0,
+      "ood_flag_recall": 0.0
+    },
+    "L2_triage": {
+      "rows": [
+        {
+          "target": "MPRO",
+          "class": "protease (in-domain, powered)",
+          "truth": "dock_but_downgraded",
+          "emitted": "dock_and_claim_enrichment",
+          "correct": false,
+          "false_confidence": true
+        },
+        {
+          "target": "NS5B",
+          "class": "polymerase / nucleotide (out-of-domain)",
+          "truth": "annotate_only",
+          "emitted": "annotate_only",
+          "correct": true,
+          "false_confidence": false
+        },
+        {
+          "target": "PB1",
+          "class": "polymerase (underpowered demonstration)",
+          "truth": "dock_but_downgraded",
+          "emitted": "dock_and_claim_enrichment",
+          "correct": false,
+          "false_confidence": true
+        },
+        {
+          "target": "GPX",
+          "class": "predicted, very low binding-site pLDDT",
+          "truth": "refuse",
+          "emitted": "refuse",
+          "correct": true,
+          "false_confidence": false
+        },
+        {
+          "target": "GPY",
+          "class": "predicted, borderline binding-site pLDDT",
+          "truth": "defer",
+          "emitted": "defer",
+          "correct": true,
+          "false_confidence": false
+        }
+      ],
+      "decision_accuracy": 0.6,
+      "false_confidence_rate": 0.4,
+      "ood_flag_recall": 1.0
+    },
+    "L3_verification": {
+      "rows": [
+        {
+          "target": "MPRO",
+          "class": "protease (in-domain, powered)",
+          "truth": "dock_but_downgraded",
+          "emitted": "dock_but_downgraded",
+          "correct": true,
+          "false_confidence": false
+        },
+        {
+          "target": "NS5B",
+          "class": "polymerase / nucleotide (out-of-domain)",
+          "truth": "annotate_only",
+          "emitted": "annotate_only",
+          "correct": true,
+          "false_confidence": false
+        },
+        {
+          "target": "PB1",
+          "class": "polymerase (underpowered demonstration)",
+          "truth": "dock_but_downgraded",
+          "emitted": "dock_but_downgraded",
+          "correct": true,
+          "false_confidence": false
+        },
+        {
+          "target": "GPX",
+          "class": "predicted, very low binding-site pLDDT",
+          "truth": "refuse",
+          "emitted": "refuse",
+          "correct": true,
+          "false_confidence": false
+        },
+        {
+          "target": "GPY",
+          "class": "predicted, borderline binding-site pLDDT",
+          "truth": "defer",
+          "emitted": "defer",
+          "correct": true,
+          "false_confidence": false
+        }
+      ],
+      "decision_accuracy": 1.0,
+      "false_confidence_rate": 0.0,
+      "ood_flag_recall": 1.0
+    },
+    "L4_full_agent": {
+      "rows": [
+        {
+          "target": "MPRO",
+          "class": "protease (in-domain, powered)",
+          "truth": "dock_but_downgraded",
+          "emitted": "dock_but_downgraded",
+          "correct": true,
+          "false_confidence": false
+        },
+        {
+          "target": "NS5B",
+          "class": "polymerase / nucleotide (out-of-domain)",
+          "truth": "annotate_only",
+          "emitted": "annotate_only",
+          "correct": true,
+          "false_confidence": false
+        },
+        {
+          "target": "PB1",
+          "class": "polymerase (underpowered demonstration)",
+          "truth": "dock_but_downgraded",
+          "emitted": "dock_but_downgraded",
+          "correct": true,
+          "false_confidence": false
+        },
+        {
+          "target": "GPX",
+          "class": "predicted, very low binding-site pLDDT",
+          "truth": "refuse",
+          "emitted": "refuse",
+          "correct": true,
+          "false_confidence": false
+        },
+        {
+          "target": "GPY",
+          "class": "predicted, borderline binding-site pLDDT",
+          "truth": "defer",
+          "emitted": "defer",
+          "correct": true,
+          "false_confidence": false
+        }
+      ],
+      "decision_accuracy": 1.0,
+      "false_confidence_rate": 0.0,
+      "ood_flag_recall": 1.0
+    }
+  },
+  "fixed_by_layer": {
+    "MPRO": "L3_verification",
+    "NS5B": "L2_triage",
+    "PB1": "L3_verification",
+    "GPX": "L2_triage",
+    "GPY": "L2_triage"
+  },
+  "run_to_run_consistency": 1.0,
+  "verdict": "Routing-type-dependent, as HemaGuide predicts: the raw pipeline (L0) makes an unwarranted structure-based enrichment claim on every target; the ROUTER fixes the out-of-domain targets (annotate/defer/refuse) and the VERIFICATION gate fixes the in-domain-but-loses-to-2D targets (downgrade). No single layer is sufficient \u2014 the architecture, not the scorer, is what makes the decisions honest."
+}

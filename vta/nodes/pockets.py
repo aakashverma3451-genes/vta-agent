@@ -40,6 +40,12 @@ _CONSERVATION_PLACEHOLDER = 0.5
 #        nucleotide-analog RdRp inhibitors (remdesivir, sofosbuvir, …) are incorporated.
 EXPERIMENTAL_ACTIVE_SITE = {
     "PB1": {"center": [135.56, 115.60, 123.66], "source": "8PSO:F (bound CTP, NTP site)"},
+    # Mpro catalytic site: centroid of the bound NON-COVALENT inhibitor XF1 in 7L11 chain A
+    # (32 ligand atoms). XF1 sits 3.1 Å from the Cys145 Sγ (catalytic His41/Cys145 dyad),
+    # confirming non-covalent engagement — the box center where Moonshot non-covalent
+    # inhibitors actually bind.
+    "MPRO": {"center": [-21.815, -4.216, -27.984],
+             "source": "7L11:A (bound non-covalent inhibitor XF1 centroid; His41/Cys145 site)"},
 }
 
 

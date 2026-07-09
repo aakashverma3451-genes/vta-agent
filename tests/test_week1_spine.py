@@ -5,7 +5,7 @@ not TaxonAgent itself. So we monkeypatch `taxonagent.classify_genome` with a
 canned §4.1.1 contract — the spine test stays fast and offline (no DIAMOND DB,
 no network), and TaxonAgent has its own suite for the classification itself.
 
-Run:  PYTHONPATH=.:../taxonagent/src ../taxonagent/venv/bin/python -m pytest tests/ -q
+Run:  python -m pytest tests/ -q
 """
 from __future__ import annotations
 

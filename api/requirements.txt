@@ -1,0 +1,7 @@
+# Vercel serverless function deps (api/index.py -> vta.service.openai_adapter).
+# The honest-triage chat path is pure-Python and needs only these light packages —
+# NOT the full project stack (rdkit/meeko/langgraph in the root requirements.txt), which
+# would exceed Vercel's function size limit. Vercel's Python builder installs the
+# requirements.txt adjacent to the entrypoint.
+fastapi
+pydantic

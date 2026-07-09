@@ -1,0 +1,17 @@
+# keep the Vercel upload slim: only the adapter + the small committed benchmark JSONs are needed
+.git/
+taxonagent/
+venv/
+website/
+docs/figures/
+structures/
+*.pdbqt
+*.pdb
+*.sdf
+__pycache__/
+*.pyc
+outputs/**/*.log
+outputs/phaseS/.cliff_dgcache.json
+outputs/phase11/.mpro_30to1_dgcache.json
+tests/
+scripts/

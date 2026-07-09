@@ -35,7 +35,8 @@ def test_render_proceed_has_all_sections():
     assert "Ribavirin" in html and "★ control" in html      # control highlighted
     assert 'class="ctrl"' in html                            # control row styled
     assert 'class="bar"' in html                             # score visual bar
-    assert "ligand efficiency" in html                       # scoring methodology note
+    assert "Vina affinity" in html                           # ΔG-primary ranking note (WI-6)
+    assert "Honesty envelope" in html                        # D0.5 non-removable envelope
     assert "0.5 placeholder" in html                         # conservation footnote (all 0.5)
     assert "AutoDock Vina 1.2.5" in html
     assert "<details>" in html and "Router: PROCEED" in html  # collapsible audit
@@ -61,3 +62,30 @@ def test_write_report_creates_file(tmp_path):
     path = write_report(_proceed_state(), out_dir=str(tmp_path))
     assert path.endswith("rep-proceed_report.html")
     assert "<!doctype html>" in open(path).read()
+
+
+def test_render_fep_section_when_present():
+    st = _proceed_state()
+    st["fep_validated_leads"] = [
+        {"ligand": "Ribavirin", "fep_delta_g": -8.4, "fep_error": 0.7,
+         "fep_badge": "FEP-computed"}
+    ]
+    st["fep_results"] = {
+        "Ribavirin": {"status": "completed", "method": "OpenFE", "delta_g": -8.4}
+    }
+    html = render_report(st)
+    assert "FEP validation" in html
+    assert "FEP-computed" in html
+    assert "OpenFE" in html
+
+
+def test_render_chemistry_annotations_when_present():
+    st = _proceed_state()
+    st["lead_candidates"][0]["active_species"] = {
+        "active_form": "Ribavirin triphosphate", "prodrug": False}
+    st["lead_candidates"][0]["chemistry_flags"] = {
+        "pains": [], "brenk": [], "aggregator": False, "beyond_ro5": False}
+    html = render_report(st)
+    assert "Active species" in html
+    assert "Ribavirin triphosphate" in html
+    assert "Chemistry flags" in html
