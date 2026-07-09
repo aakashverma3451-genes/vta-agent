@@ -15,6 +15,7 @@ top-ranked leads on the TiLV PB1 RdRp target. 25 hermetic tests. 10+ real-world 
 ---
 
 ## Pipeline
+<img width="1704" height="923" alt="ChatGPT Image Jul 9, 2026, 02_46_00 PM" src="https://github.com/user-attachments/assets/ae6dcbd5-c155-47c8-a7e7-5a0d3482f6a3" />
 
 ```
 genome.fasta
