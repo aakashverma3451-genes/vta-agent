@@ -35,6 +35,13 @@ move to DONE/HANDOFF when finished; commit small on your branch.
   re-benchmark. SEPARATE outputs — frozen 1:1 headline + locked_benchmark untouched.
 
 ## DONE / HANDOFF
+- **BGI AI+X pitch deck diagrams (opus, 2026-07-09).** New `scripts/build_pitch_diagrams.py`
+  — 4 matplotlib PNGs (300dpi) in the competition brand palette: problem/innovation
+  overview, 6-node Phase-R pipeline flow, R6 ablation bar+heatmap, activity-cliff +
+  Mpro BEDROC + validation ladder. Values match `docs/figures/vta_figure_set.html`/
+  `docs/PROJECT_DOCUMENT.md` exactly — no new numbers. Output: `docs/figures/pitch/*.png`.
+  Two QA passes fixed real overlap bugs (clipped arrow labels, colliding sub-panel
+  titles, truncated tick labels, ladder overlapping the table) before shipping.
 - **Vercel runtime crash fix (opus, 2026-07-09).** Deployed function 500'd on EVERY request
   (even `/favicon.ico`, which never hits app routing) = import-time crash. Root cause:
   `vta/service/openai_adapter.py` used PEP 604 `str | None` unions; FastAPI evaluates
