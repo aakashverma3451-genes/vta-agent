@@ -35,6 +35,56 @@ move to DONE/HANDOFF when finished; commit small on your branch.
   re-benchmark. SEPARATE outputs — frozen 1:1 headline + locked_benchmark untouched.
 
 ## DONE / HANDOFF
+- **Phase T — per-record viral family classification benchmark (opus, 2026-07-09).** New
+  `scripts/phaseT_sequence_classification.py` + `outputs/phaseT/sequence_classification.json`.
+  Classifies all **267** metagenomic contigs in `~/taxonagent/data/raw/ViralSequences/`
+  (20 ICTV families) INDEPENDENTLY; ground truth = family in filename, prediction = DIAMOND
+  best-hit family vs the VMR exemplar DB. 18 min, 5 workers.
+  **Two blockers found & fixed:** (1) `diamond` was ABSENT from this machine — it is the only
+  step that assigns taxonomy, so every record was returning empty genus/species @ 0.0%
+  confidence; installed via brew (v2.2.3), DB `vmr_exemplars.dmnd` was already present. The
+  script now hard-fails (exit 2) if diamond is missing rather than silently reporting 0%.
+  (2) `classify_genome()`/`run_pipeline()` **concatenate all records** in a multi-record FASTA
+  into one pseudo-genome — correct for their 1-file-1-genome contract, but it would have
+  produced 20 predictions from 267 unrelated contigs. Script splits records first.
+  **Result: 248 correct / 11 wrong / 8 unclassified → 92.9% strict, 95.8% conditional,
+  87.6% macro.** Errors are systematic, not random: 9/11 are Astroviridae→Hepeviridae
+  (family_votes 10:2-3 for Hepeviridae; full-length ~6kb contigs, so not a fragment artifact),
+  plus Tobaniviridae→Coronaviridae (sister families in Nidovirales) and Circoviridae→Poxviridae
+  (weakest hit in the set, e=5.6e-10, 1:1 vote tie). All 11 errors sit at ≤30.0% aa identity
+  vs median 59.7% for correct calls.
+  **VTA-Agent-level finding (`router_analysis` in the JSON):** applying the real
+  `vta.nodes.router` thresholds (imported, not restated), the router defers **11/11 wrong
+  calls** and acts on only 39/267 (14.6%) with **1.0 precision** on that acted-on set. Honest
+  cost, reported beside it: **209/248 correct calls are also deferred.** The router does NOT
+  detect errors — it thresholds identity, and here the errors happen to be the low-identity
+  calls (correlation over 11 events, not a mechanism). Deferral rate is specific to divergent
+  metagenomic contigs and must not be generalised to reference genomes.
+  Rerun summaries cheaply with `--reanalyze` (no re-classification). 284 tests green.
+- **Master document comprehensive update (sonnet, 2026-07-09).** `docs/MASTER_DOCUMENT.md`:
+  refreshed §3 tech stack (service/FastAPI, eval stack, deploy scaffolding), §5 runtime
+  pipeline (current graph wiring incl. dossier→triage…verification gate + MD/FEP edges), §7
+  codebase map (Phase-R nodes, `vta/service/`, `report_envelope.py`, `vta/eval/*`), §12 status
+  (fixed stale "R6 deferred" → R1–R6 done + Phase S + chat service). Added new sections §16
+  Engineering & Software Design (state contract, network seam, tool discovery, honesty envelope
+  as structural guarantee, statistical invariants, testing, multi-session model), §17 Chat
+  Service & Deployment Path, §18 Development History (phase-by-phase build narrative 0→S), §19
+  Presentation & Figure Assets. Docs-only; no code/ranking change; numbers unchanged (traced to
+  committed artifacts).
+- **Cloudflare deploy scaffold (opus, 2026-07-09).** `docs/figures/index.html` (Pages
+  landing page, build output dir = `docs/figures`, no build step) + `cloudflare/worker/`
+  (Worker proxying `/health`+`/v1/*` to the Vercel deployment — Cloudflare's Python
+  runtime doesn't reliably run FastAPI/pydantic, so the real triage logic stays on
+  Vercel). `cloudflare/README.md` has both dashboard + `wrangler` CLI steps. User must
+  set `UPSTREAM_URL` in `wrangler.toml` to their real Vercel URL before deploying — not
+  verified against a live Cloudflare account (no login in this env).
+- **BGI AI+X pitch deck diagrams (opus, 2026-07-09).** New `scripts/build_pitch_diagrams.py`
+  — 4 matplotlib PNGs (300dpi) in the competition brand palette: problem/innovation
+  overview, 6-node Phase-R pipeline flow, R6 ablation bar+heatmap, activity-cliff +
+  Mpro BEDROC + validation ladder. Values match `docs/figures/vta_figure_set.html`/
+  `docs/PROJECT_DOCUMENT.md` exactly — no new numbers. Output: `docs/figures/pitch/*.png`.
+  Two QA passes fixed real overlap bugs (clipped arrow labels, colliding sub-panel
+  titles, truncated tick labels, ladder overlapping the table) before shipping.
 - **Vercel runtime crash fix (opus, 2026-07-09).** Deployed function 500'd on EVERY request
   (even `/favicon.ico`, which never hits app routing) = import-time crash. Root cause:
   `vta/service/openai_adapter.py` used PEP 604 `str | None` unions; FastAPI evaluates

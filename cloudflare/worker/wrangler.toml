@@ -1,0 +1,10 @@
+name = "vta-agent-api"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+
+# Set the real Vercel deployment URL before publishing, e.g.:
+#   https://vta-agent.vercel.app
+# Either edit this default or override with:
+#   wrangler secret put UPSTREAM_URL
+[vars]
+UPSTREAM_URL = "https://REPLACE-WITH-YOUR-VERCEL-DEPLOYMENT.vercel.app"
