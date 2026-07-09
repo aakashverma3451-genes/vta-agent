@@ -35,6 +35,31 @@ move to DONE/HANDOFF when finished; commit small on your branch.
   re-benchmark. SEPARATE outputs — frozen 1:1 headline + locked_benchmark untouched.
 
 ## DONE / HANDOFF
+- **Vercel runtime crash fix (opus, 2026-07-09).** Deployed function 500'd on EVERY request
+  (even `/favicon.ico`, which never hits app routing) = import-time crash. Root cause:
+  `vta/service/openai_adapter.py` used PEP 604 `str | None` unions; FastAPI evaluates
+  annotations at runtime for DI regardless of `from __future__ import annotations`, and
+  that syntax raises `TypeError` on Python < 3.10 (Vercel defaults to 3.9) without
+  `eval_type_backport`. Repro'd in a clean Python 3.9 venv with only fastapi+pydantic
+  (matching `api/requirements.txt`) before and after the fix. Replaced all 4 occurrences
+  with `typing.Optional[str]`. 8/8 adapter tests green.
+- **Mpro through Phase-R + Nature-style Fig. 5 (opus, 2026-07-09).** New
+  `scripts/phaseR_mpro_run.py` — same live dossier/triage/verification run as the TiLV
+  script, for the powered SARS-CoV-2 Mpro target (7L11:A): router `full_dock`
+  (pose-reliable, 1.65 Å), gate `downgrade` (does not beat 2D baseline) — matches the
+  frozen benchmark. Added `Figure 5` to `docs/figures/vta_figure_set.html` (research-
+  article style, matches Figs 1–4) showing both virus targets' live gate outcome side by
+  side + what the report would say with/without the gate. Redeployed as the same claude.ai
+  artifact. Output: `outputs/phaseR/mpro_run.json`.
+- **TiLV PB1 through the new Phase-R workflow (opus, 2026-07-09).** New
+  `scripts/phaseR_tilv_run.py` runs the real R1/R2/R4 nodes (`dossier_node`,
+  `triage_router_node`, `build_verdict`) on TiLV PB1 (8PSO:B) against the committed
+  benchmark artifacts. Router: `full_dock` (in-domain, would let it through). Verification
+  gate: `downgrade` — Vina does not beat the 2D-similarity baseline (paired bootstrap) on
+  this target, pose reliability unestablished → ranking must present as labelled
+  annotation, not an enrichment claim. Confirms the R6 ablation's L2-insufficient/
+  L3-sufficient pattern on a real target. Output: `outputs/phaseR/tilv_pb1_run.json`. No
+  ranking-weight change.
 - **Vercel deploy fix + project document (opus, 2026-07-09).** Root `pyproject.toml`
   (`vta-agent[admet]` extras → local `taxonagent` sibling package, not on PyPI) was breaking
   Vercel's uv resolver. Fixed by extending `.vercelignore` to hide `pyproject.toml`/

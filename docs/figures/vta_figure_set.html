@@ -390,6 +390,40 @@
     <p class="interp"><span class="k">Interpretation</span>The headline number is a <b>negative,</b> reported as-is: docking does not beat memorizing 2-D chemistry. Most screening papers never run that baseline. The ladder is the scientific contribution — a pipeline built to deflate its own inflation.</p>
   </section>
 
+  <!-- FIG 5 -->
+  <section class="fig">
+    <p class="fhd"><span class="n">Figure 5</span><span class="t">The reasoning layer applied live: router says dock, gate says don't claim it</span></p>
+
+    <div class="g2">
+      <div class="p">
+        <p class="plab">a<span class="d">two viruses, run through the real R1&#8211;R4 node code</span></p>
+        <table>
+          <thead><tr><th>Target</th><th>Router (R2)</th><th>Beats 2-D?</th><th>Pose</th><th>Gate (R4)</th></tr></thead>
+          <tbody>
+            <tr><td><b>SARS-CoV-2 M<sup>pro</sup></b><br><span style="color:var(--muted)">7L11 chain A</span></td>
+              <td><span class="g p">full_dock</span></td><td class="n" style="color:var(--bad)">no</td><td>pose-reliable<br><span style="color:var(--muted)">(1.65&nbsp;&#197;)</span></td>
+              <td><span class="g x">downgrade</span></td></tr>
+            <tr><td><b>TiLV PB1</b><br><span style="color:var(--muted)">8PSO chain B</span></td>
+              <td><span class="g p">full_dock</span></td><td class="n" style="color:var(--bad)">no</td><td>unknown<br><span style="color:var(--muted)">(RMSD uncomputed)</span></td>
+              <td><span class="g x">downgrade</span></td></tr>
+          </tbody>
+        </table>
+        <p style="font:11px/1.4 var(--sans);color:var(--muted);margin:9px 2px 0">Both targets are structurally in-domain, so the router lets them through — the gate is the layer that actually stops the claim.</p>
+      </div>
+
+      <div class="p">
+        <p class="plab">b<span class="d">what the report would say without the gate, vs with it</span></p>
+        <div class="routes" style="grid-template-columns:1fr">
+          <div class="rt d"><span class="rk">router only</span><br>"M<sup>pro</sup> and PB1 are in-domain — docking ranking below, ranked by predicted affinity." <b>An enrichment claim neither target earned.</b></div>
+          <div class="rt a"><span class="rk">router + gate</span><br>"Docking ran on both, but neither beats the 2-D-similarity baseline — presented as a labelled ligand annotation, not a ranking claim." <b>Matches the frozen benchmark exactly.</b></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="cap"><span class="lead">Fig. 5 | Live verification-gate outcomes on two virus targets.</span> Produced by <span class="num">scripts/phaseR_mpro_run.py</span> and <span class="num">scripts/phaseR_tilv_run.py</span>, calling the shipped <span class="num">dossier_node</span> &#8594; <span class="num">triage_router_node</span> &#8594; <span class="num">build_verdict</span> functions against the committed gate artifacts (<span class="num">outputs/phase11/baselines_and_gate.json</span>, <span class="num">redock_validation.json</span>) — not a re-implementation for the figure. Both targets take the identical path: routed to <b>full_dock</b>, then <b>downgraded</b> at verification because Vina does not significantly beat the 2-D-similarity baseline on either.</p>
+    <p class="interp"><span class="k">Interpretation</span>This is Figure 2's ablation claim demonstrated on real targets rather than the curated ablation set: the router's job is <i>should we dock</i>, and it correctly says yes to both; the gate's job is <i>may we claim a win</i>, and it correctly says no to both. Removing the gate would silently restore the exact false-confidence failure mode Figure 2 measures.</p>
+  </section>
+
   <div class="methods">
     <div><h4>Reproducibility</h4><p class="big">276</p><p>hermetic tests; every external call behind an injectable seam with a committed cache — degrade honestly, never fabricate.</p></div>
     <div><h4>Statistics</h4><p>Bootstrap 95% CIs (10,000×); <b>paired</b> bootstrap difference test (never CI-overlap); Holm–Bonferroni; binding modes never pooled.</p></div>
@@ -397,6 +431,6 @@
     <div><h4>Honest scope</h4><p>Outputs are ranked, uncertainty-bearing <b>hypotheses</b> — never clinical, efficacy, or safety claims. No wet-lab validation.</p></div>
   </div>
 
-  <p class="foot">Values drawn from committed benchmark artifacts (Phase 9–11 + Phase R + Phase S): R6 ablation <span class="num">outputs/phaseR/ablation</span>; activity cliffs <span class="num">outputs/phaseS/activity_cliffs</span> &amp; <span class="num">rfscore_cliff</span>; powered M<sup>pro</sup> <span class="num">outputs/phase9/locked_benchmark</span>. GPX/GPY are synthetic low-binding-site-pLDDT structures used to exercise the refuse/defer routes. Styled after a research article to make the rigor legible; a hackathon build, not a peer-reviewed publication.</p>
+  <p class="foot">Values drawn from committed benchmark artifacts (Phase 9–11 + Phase R + Phase S): R6 ablation <span class="num">outputs/phaseR/ablation</span>; activity cliffs <span class="num">outputs/phaseS/activity_cliffs</span> &amp; <span class="num">rfscore_cliff</span>; powered M<sup>pro</sup> <span class="num">outputs/phase9/locked_benchmark</span>; live gate runs <span class="num">outputs/phaseR/mpro_run.json</span> &amp; <span class="num">tilv_pb1_run.json</span>. GPX/GPY are synthetic low-binding-site-pLDDT structures used to exercise the refuse/defer routes. Styled after a research article to make the rigor legible; a hackathon build, not a peer-reviewed publication.</p>
 
 </div>

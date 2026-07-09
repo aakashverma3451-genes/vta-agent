@@ -1,0 +1,36 @@
+{
+  "target": "SARS-CoV-2 Mpro (7L11 chain A, non-covalent)",
+  "triage": {
+    "decision": "full_dock",
+    "rationale": [
+      "experimental/adequate structure, in-domain ligands, no downgrade trigger"
+    ]
+  },
+  "verification": {
+    "verdict": "downgrade",
+    "gates": {
+      "redock_rmsd": {
+        "source": "outputs/phase11/redock_validation.json",
+        "available": true
+      },
+      "paired_baseline": {
+        "source": "outputs/phase11/baselines_and_gate.json",
+        "available": true,
+        "rule": "Vina must beat 2D-similarity by paired bootstrap (Holm)"
+      },
+      "applicability_domain": {
+        "rule": "target must be full_dock (in-domain) to make a docking claim"
+      }
+    },
+    "per_target": {
+      "MPRO": {
+        "verdict": "downgrade",
+        "decision": "full_dock",
+        "beats_2d_baseline": false,
+        "pose": "pose-reliable",
+        "rationale": "docking does NOT beat the 2D-similarity baseline (paired test)"
+      }
+    },
+    "note": "A docking-enrichment claim is emitted only on `pass`; otherwise the ranking is downgraded to a labelled ligand-based annotation."
+  }
+}
