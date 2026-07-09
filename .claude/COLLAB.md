@@ -35,6 +35,14 @@ move to DONE/HANDOFF when finished; commit small on your branch.
   re-benchmark. SEPARATE outputs — frozen 1:1 headline + locked_benchmark untouched.
 
 ## DONE / HANDOFF
+- **Vercel runtime crash fix (opus, 2026-07-09).** Deployed function 500'd on EVERY request
+  (even `/favicon.ico`, which never hits app routing) = import-time crash. Root cause:
+  `vta/service/openai_adapter.py` used PEP 604 `str | None` unions; FastAPI evaluates
+  annotations at runtime for DI regardless of `from __future__ import annotations`, and
+  that syntax raises `TypeError` on Python < 3.10 (Vercel defaults to 3.9) without
+  `eval_type_backport`. Repro'd in a clean Python 3.9 venv with only fastapi+pydantic
+  (matching `api/requirements.txt`) before and after the fix. Replaced all 4 occurrences
+  with `typing.Optional[str]`. 8/8 adapter tests green.
 - **Mpro through Phase-R + Nature-style Fig. 5 (opus, 2026-07-09).** New
   `scripts/phaseR_mpro_run.py` — same live dossier/triage/verification run as the TiLV
   script, for the powered SARS-CoV-2 Mpro target (7L11:A): router `full_dock`
