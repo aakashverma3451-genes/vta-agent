@@ -35,6 +35,14 @@ move to DONE/HANDOFF when finished; commit small on your branch.
   re-benchmark. SEPARATE outputs — frozen 1:1 headline + locked_benchmark untouched.
 
 ## DONE / HANDOFF
+- **Mpro through Phase-R + Nature-style Fig. 5 (opus, 2026-07-09).** New
+  `scripts/phaseR_mpro_run.py` — same live dossier/triage/verification run as the TiLV
+  script, for the powered SARS-CoV-2 Mpro target (7L11:A): router `full_dock`
+  (pose-reliable, 1.65 Å), gate `downgrade` (does not beat 2D baseline) — matches the
+  frozen benchmark. Added `Figure 5` to `docs/figures/vta_figure_set.html` (research-
+  article style, matches Figs 1–4) showing both virus targets' live gate outcome side by
+  side + what the report would say with/without the gate. Redeployed as the same claude.ai
+  artifact. Output: `outputs/phaseR/mpro_run.json`.
 - **TiLV PB1 through the new Phase-R workflow (opus, 2026-07-09).** New
   `scripts/phaseR_tilv_run.py` runs the real R1/R2/R4 nodes (`dossier_node`,
   `triage_router_node`, `build_verdict`) on TiLV PB1 (8PSO:B) against the committed
