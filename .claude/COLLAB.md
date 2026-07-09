@@ -35,6 +35,13 @@ move to DONE/HANDOFF when finished; commit small on your branch.
   re-benchmark. SEPARATE outputs — frozen 1:1 headline + locked_benchmark untouched.
 
 ## DONE / HANDOFF
+- **Cloudflare deploy scaffold (opus, 2026-07-09).** `docs/figures/index.html` (Pages
+  landing page, build output dir = `docs/figures`, no build step) + `cloudflare/worker/`
+  (Worker proxying `/health`+`/v1/*` to the Vercel deployment — Cloudflare's Python
+  runtime doesn't reliably run FastAPI/pydantic, so the real triage logic stays on
+  Vercel). `cloudflare/README.md` has both dashboard + `wrangler` CLI steps. User must
+  set `UPSTREAM_URL` in `wrangler.toml` to their real Vercel URL before deploying — not
+  verified against a live Cloudflare account (no login in this env).
 - **BGI AI+X pitch deck diagrams (opus, 2026-07-09).** New `scripts/build_pitch_diagrams.py`
   — 4 matplotlib PNGs (300dpi) in the competition brand palette: problem/innovation
   overview, 6-node Phase-R pipeline flow, R6 ablation bar+heatmap, activity-cliff +
