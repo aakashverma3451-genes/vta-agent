@@ -1,7 +1,21 @@
-# keep the Vercel upload slim: only the adapter + the small committed benchmark JSONs are needed
+# Hide the project's installable metadata so Vercel/uv does NOT try to install
+# vta-agent[admet] (which needs the local `taxonagent` package, not on PyPI).
+# The serverless function installs only api/requirements.txt (fastapi + pydantic)
+# and imports the pure-Python vta source bundled via vercel.json includeFiles.
+/pyproject.toml
+/setup.py
+/setup.cfg
+/uv.lock
+/poetry.lock
+/requirements.txt
+*.egg-info/
+.python-version
+
+# keep the upload slim
 .git/
-taxonagent/
+.venv/
 venv/
+taxonagent/
 website/
 docs/figures/
 structures/

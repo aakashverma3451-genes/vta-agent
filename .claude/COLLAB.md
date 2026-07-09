@@ -35,6 +35,15 @@ move to DONE/HANDOFF when finished; commit small on your branch.
   re-benchmark. SEPARATE outputs — frozen 1:1 headline + locked_benchmark untouched.
 
 ## DONE / HANDOFF
+- **Vercel deploy fix + project document (opus, 2026-07-09).** Root `pyproject.toml`
+  (`vta-agent[admet]` extras → local `taxonagent` sibling package, not on PyPI) was breaking
+  Vercel's uv resolver. Fixed by extending `.vercelignore` to hide `pyproject.toml`/
+  `setup.py`/`setup.cfg`/`uv.lock`/`poetry.lock`/root `requirements.txt`/`*.egg-info` from the
+  Vercel upload, so only `api/requirements.txt` (fastapi+pydantic) is ever seen by the
+  builder. Root `requirements.txt` (full project deps incl. taxonagent) is untouched on disk.
+  Also added `docs/PROJECT_DOCUMENT.md` — full artifact-verified project write-up with 5
+  Mermaid workflow/decision diagrams. Not yet verified against a real Vercel build (no
+  Vercel CLI/login in this env) — user to retry deploy and report back.
 - **Open WebUI integration — OpenAI-compatible adapter (opus, 2026-07-07).** New `vta/service/`
   (`triage_chat.py` run_triage: dossier→triage→build_envelope, offline/no-docking/no-network,
   grounded in committed benchmarks + cliff result; `openai_adapter.py` FastAPI `/v1/models`
