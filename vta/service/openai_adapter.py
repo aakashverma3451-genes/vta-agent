@@ -17,7 +17,7 @@ from __future__ import annotations
 import json
 import os
 import time
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from fastapi import FastAPI, Header, HTTPException
 from fastapi.responses import StreamingResponse
@@ -40,7 +40,7 @@ class ChatRequest(BaseModel):
     stream: bool = False
 
 
-def _check_auth(authorization: str | None) -> None:
+def _check_auth(authorization: Optional[str]) -> None:
     required = os.environ.get("VTA_API_KEY")
     if required and (authorization or "").removeprefix("Bearer ").strip() != required:
         raise HTTPException(status_code=401, detail="invalid api key")
@@ -62,14 +62,14 @@ def health() -> Dict[str, str]:
 
 
 @app.get("/v1/models")
-def list_models(authorization: str | None = Header(default=None)) -> Dict[str, Any]:
+def list_models(authorization: Optional[str] = Header(default=None)) -> Dict[str, Any]:
     _check_auth(authorization)
     return {"object": "list", "data": [{
         "id": MODEL_ID, "object": "model", "created": 0, "owned_by": "vta-agent",
     }]}
 
 
-def _chunk(delta: Dict[str, Any], finish: str | None = None) -> str:
+def _chunk(delta: Dict[str, Any], finish: Optional[str] = None) -> str:
     payload = {"id": "vta-triage", "object": "chat.completion.chunk", "created": int(time.time()),
                "model": MODEL_ID, "choices": [{"index": 0, "delta": delta, "finish_reason": finish}]}
     return f"data: {json.dumps(payload)}\n\n"
@@ -77,7 +77,7 @@ def _chunk(delta: Dict[str, Any], finish: str | None = None) -> str:
 
 @app.post("/v1/chat/completions")
 def chat_completions(req: ChatRequest,
-                     authorization: str | None = Header(default=None)):
+                     authorization: Optional[str] = Header(default=None)):
     _check_auth(authorization)
     result = run_triage(_last_user_text(req.messages))
     # A short, honest "thinking" preamble (the pipeline's own audit lines) then the verdict.
