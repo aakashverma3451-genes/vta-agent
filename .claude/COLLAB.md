@@ -35,6 +35,15 @@ move to DONE/HANDOFF when finished; commit small on your branch.
   re-benchmark. SEPARATE outputs — frozen 1:1 headline + locked_benchmark untouched.
 
 ## DONE / HANDOFF
+- **TiLV PB1 through the new Phase-R workflow (opus, 2026-07-09).** New
+  `scripts/phaseR_tilv_run.py` runs the real R1/R2/R4 nodes (`dossier_node`,
+  `triage_router_node`, `build_verdict`) on TiLV PB1 (8PSO:B) against the committed
+  benchmark artifacts. Router: `full_dock` (in-domain, would let it through). Verification
+  gate: `downgrade` — Vina does not beat the 2D-similarity baseline (paired bootstrap) on
+  this target, pose reliability unestablished → ranking must present as labelled
+  annotation, not an enrichment claim. Confirms the R6 ablation's L2-insufficient/
+  L3-sufficient pattern on a real target. Output: `outputs/phaseR/tilv_pb1_run.json`. No
+  ranking-weight change.
 - **Vercel deploy fix + project document (opus, 2026-07-09).** Root `pyproject.toml`
   (`vta-agent[admet]` extras → local `taxonagent` sibling package, not on PyPI) was breaking
   Vercel's uv resolver. Fixed by extending `.vercelignore` to hide `pyproject.toml`/
