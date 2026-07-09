@@ -8,10 +8,17 @@ The research-article figure set and pitch-deck diagrams are plain static files.
 
 **Via dashboard:** Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git →
 select this repo/branch (`session-a`) →
+- **Root directory:** `docs/figures` — this is the field that matters. Pages auto-detects
+  a language/build step from whatever it finds in the directory it's pointed at; if the
+  root directory is left as `/`, it sees the repo-root `requirements.txt` (full project
+  deps, incl. the local-only `taxonagent` package) and tries to `pip install` it, which
+  fails with `No matching distribution found for taxonagent` — the figures deploy needs
+  **zero** Python, so scope it away entirely rather than trying to satisfy it.
 - **Build command:** (leave empty)
-- **Build output directory:** `docs/figures`
+- **Build output directory:** `/` (relative to the root directory above, i.e. `docs/figures/` itself)
 
-**Via CLI** (needs `npm i -g wrangler` and `wrangler login`):
+**Via CLI** (needs `npm i -g wrangler` and `wrangler login`) — sidesteps the root-directory
+issue entirely, since it only ever uploads the folder you point it at:
 ```bash
 wrangler pages deploy docs/figures --project-name=vta-agent-figures
 ```
