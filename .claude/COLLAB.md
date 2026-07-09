@@ -35,6 +35,20 @@ move to DONE/HANDOFF when finished; commit small on your branch.
   re-benchmark. SEPARATE outputs — frozen 1:1 headline + locked_benchmark untouched.
 
 ## DONE / HANDOFF
+- **Open WebUI integration — OpenAI-compatible adapter (opus, 2026-07-07).** New `vta/service/`
+  (`triage_chat.py` run_triage: dossier→triage→build_envelope, offline/no-docking/no-network,
+  grounded in committed benchmarks + cliff result; `openai_adapter.py` FastAPI `/v1/models`
+  + `/v1/chat/completions` stream+non-stream + `/health`, optional VTA_API_KEY; `__main__.py`
+  launcher `python -m vta.service`) + `tests/test_openai_adapter.py` (TestClient, hermetic) +
+  `docs/openwebui_integration.md`. Open WebUI connects as an OpenAI provider → chats a target →
+  honest routing decision + benchmark grade/CI + "does docking beat 2D" verdict + envelope
+  disclaimer. Raw FASTA deferred (needs full pipeline). **284 tests.** Untracked in git.
+- **Figure set for hackathon/paper (opus, 2026-07-07).** New self-contained
+  `docs/figures/vta_figure_set.html` — research-article-styled figures (inline SVG, no libs)
+  from committed data: Fig1 architecture, Fig2 R6 ablation (money figure), Fig3 activity-cliff
+  benchmark (Vina/RF below chance), Fig4 powered headline + validation ladder. Light "paper"
+  single-theme, serif body + sans figure labels. Also live as a claude.ai artifact. Untracked
+  in git (not committed).
 - **Phase S — learned rescorer (in-house RF-Score) DONE (opus, 2026-07-07).** Off-the-shelf
   rescorers all un-installable on arm64 (GNINA: 10GB image + Docker Hub CDN failures; RTMScore:
   no dgl wheel; ODDT: OpenBabel-2.x `OBElementTable` removed). Rebuilt RF-Score (Ballester &

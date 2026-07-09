@@ -26,3 +26,6 @@ outputs/*_report.html
 # Packaging / run artifacts
 *.egg-info/
 vta_run.log
+
+# transient tool logs
+outputs/**/*.log
