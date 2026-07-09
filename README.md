@@ -1,3 +1,4 @@
+<img width="1536" height="1024" alt="ChatGPT Image Jul 9, 2026, 10_36_53 AM" src="https://github.com/user-attachments/assets/ec704094-b8d8-4cb2-af84-cd172066df88" />
 # VTA-Agent — Autonomous Drug Discovery from Viral Genomes
 
 > One command. Genome in, ranked drug leads out.
